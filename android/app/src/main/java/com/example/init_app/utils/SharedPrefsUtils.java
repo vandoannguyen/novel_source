@@ -71,7 +71,7 @@ public class SharedPrefsUtils {
         return pref.getInt(key, defaultValue);
     }
     public int getInt(String key, int deff) {
-        int defaultValue = 0;
+        int defaultValue = deff;
         return pref.getInt(key, defaultValue);
     }
 

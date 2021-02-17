@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:init_app/common/Common.dart';
 import 'package:init_app/routes/routes.dart';
 import 'package:init_app/screen/bookcase/bookcase_screen.dart';
 import 'package:init_app/screen/bookstore/bookstore_screen.dart';
 import 'package:init_app/screen/home/home_screen.dart';
-import 'package:init_app/screen/load/load_screen.dart';
 import 'package:init_app/screen/personal/personal_screen.dart';
 import 'package:init_app/screen/task/task_screen.dart';
-import 'package:init_app/utils/call_native_utils.dart';
 
 void main() {
-  CallNativeUtils.setChannel(Common.CHANNEL);
   return runApp(MyApp());
 }
 
@@ -25,12 +21,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: Routes.load,
+      initialRoute: Routes.home,
       getPages: [
-        GetPage(
-          name: Routes.load,
-          page: () => LoadScreen(),
-        ),
         GetPage(
           name: Routes.home,
           page: () => HomeScreen(),

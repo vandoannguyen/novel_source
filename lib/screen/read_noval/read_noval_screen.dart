@@ -6,6 +6,7 @@ import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/data/network/NovalModel.dart';
 import 'package:init_app/screen/read_noval/read_noval_controller.dart';
 import 'package:page_turn/page_turn.dart';
+// import 'package:page_turn/page_turn.dart';
 
 class ReadNovalScreen extends BaseWidget<ReadNovalController> {
   NovalModel item;
