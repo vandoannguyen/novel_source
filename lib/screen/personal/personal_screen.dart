@@ -3,7 +3,6 @@ import 'package:init_app/common/common.dart';
 import 'package:init_app/widgets/button_main.dart';
 
 import '../../common/constant.dart';
-import '../../common/constant.dart';
 
 class PersonalScreen extends StatefulWidget {
   static const String routeName = '/personal';

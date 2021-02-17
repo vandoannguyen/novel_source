@@ -24,6 +24,9 @@ class _BookcaseState extends State<BookcaseScreen> {
     "fbhgf",
     "fbhgf",
   ];
+  void clickItem(index, item) {
+    print("object $index");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +92,12 @@ class _BookcaseState extends State<BookcaseScreen> {
                 if (index == list.length)
                   return addBook();
                 else
-                  return itemBookVer(list[index], index);
+                  return itemBookVer(
+                      item: list[index],
+                      index: index,
+                      func: () {
+                        clickItem(index, index);
+                      });
               }),
             ),
           ),

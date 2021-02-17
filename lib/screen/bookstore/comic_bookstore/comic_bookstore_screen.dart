@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/widgets/item_book_hor.dart';
 
-import '../../../common/Common.dart';
+import '../../../common/common.dart';
 import '../../../common/constant.dart';
 
 class ComicBookstoreScreen extends StatefulWidget {
@@ -14,6 +14,10 @@ class ComicBookstoreScreen extends StatefulWidget {
 }
 
 class _ComicBookstoreState extends State<ComicBookstoreScreen> {
+  void clickItem(index, item) {
+    print("object  $index");
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -21,7 +25,12 @@ class _ComicBookstoreState extends State<ComicBookstoreScreen> {
         shrinkWrap: true,
         itemCount: 15,
         itemBuilder: (BuildContext context, int index) {
-          return itemBookHor(index, index);
+          return itemBookHor(
+              item: index,
+              index: index,
+              func: () {
+                clickItem(index, index);
+              });
         });
   }
 }
