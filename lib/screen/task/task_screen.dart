@@ -13,6 +13,7 @@ class TaskScreen extends BaseWidget<TaskController> {
   final Function callBack;
   static const String routeName = '/tasks';
   static const String name = 'NHIỆM VỤ';
+
   TextStyle styleTitle =
       TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
   TextStyle styleName = TextStyle(fontSize: 16.0);

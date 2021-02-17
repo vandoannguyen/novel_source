@@ -89,10 +89,12 @@ class _NovelBookstoreState extends State<NovelBookstoreScreen> {
                         style:
                             TextStyle(color: Color(Constant.colorTxtDefault)),
                       ),
-                      Image.asset(
-                        Common.pathImg + "ic_edit.png",
-                        width: 20.0,
-                        height: 20.0,
+                      Container(
+                        margin: EdgeInsets.all(0.0),
+                        child: Icon(
+                          Icons.navigate_next_rounded,
+                          color: Color(Constant.colorTxtDefault),
+                        ),
                       ),
                     ],
                   ),
