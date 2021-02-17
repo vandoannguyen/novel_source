@@ -27,12 +27,12 @@ dependencies:
   fluttertoast:
   dio:
   shared_preferences:
-  flutter_rating_bar: 
+  flutter_rating_bar:
   carousel_slider: ^3.0.0
   cached_network_image: ^2.5.0
   expandable: ^4.1.4
   flutter_email_sender: ^4.0.0
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
