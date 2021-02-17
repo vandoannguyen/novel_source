@@ -9,7 +9,7 @@ import '../../common/constant.dart';
 
 // ignore: must_be_immutable
 class TaskScreen extends BaseWidget<TaskController> {
-  TaskScreen({Key key, this.callBack});
+  TaskScreen({this.callBack});
   final Function callBack;
   static const String routeName = '/tasks';
   static const String name = 'NHIỆM VỤ';
@@ -37,7 +37,6 @@ class TaskScreen extends BaseWidget<TaskController> {
   // TaskController _controller = Get.find();
   @override
   initState({TaskController controller}) {
-    // TODO: implement initState
     print("initState");
     return super.initState(controller: controller);
   }
@@ -68,146 +67,175 @@ class TaskScreen extends BaseWidget<TaskController> {
       color: Colors.grey[200],
       child: Column(
         children: [
-          GetBuilder<TaskController>(
-              init: TaskController(), // INIT IT ONLY THE FIRST TIME
-              builder: (controller) => controller.checkToday
-                  ? Text("_controller.checkToday")
-                  : Text("_controller.")),
-
-          GestureDetector(
-            onTap: () {
-              controller.checkInToday();
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(Common.pathImg + "bg_btn.jpg"),
-                  fit: BoxFit.fill,
-                ),
-                shape: BoxShape.rectangle,
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(Common.pathImg + "bg_checkin.jpg"),
+                fit: BoxFit.fill,
               ),
-              child: Column(
-                children: [
-                  Container(
-                    height: 80.0,
-                    width: 80.0,
-                    margin: EdgeInsets.only(top: 60.0, bottom: 20.0),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(Common.pathImg + "bg_btn.jpg"),
-                        fit: BoxFit.fill,
-                      ),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Text(
-                      "Điểm danh",
-                      style: TextStyle(
-                        color: Color(Constant.colorTxtPrimary),
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  //
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        width: size.width - 50.0,
-                        height: 5.0,
-                        color: Color(Constant.colorTxtDefault).withOpacity(0.5),
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: coinDaily
-                              .map(
-                                (item) => new Container(
-                                  width: 35.0,
-                                  height: 35.0,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: item["status"]
-                                        ? Color(Constant.colorTxtSecond)
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    border: Border.all(
-                                      width: item["status"] ? 0 : 1,
-                                      color: Color(Constant.colorTxtDefault)
-                                          .withOpacity(0.5),
-                                    ),
+              shape: BoxShape.rectangle,
+            ),
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    controller.checkInToday();
+                  },
+                  child: GetBuilder<TaskController>(
+                    init: TaskController(), // INIT IT ONLY THE FIRST TIME
+                    builder: (controller) => controller.checkToday
+                        ? Container(
+                            height: 80.0,
+                            width: 80.0,
+                            margin: EdgeInsets.only(top: 60.0, bottom: 20.0),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    Common.pathImg + "bg_btn_checkined.jpg"),
+                                fit: BoxFit.fill,
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "Điểm danh",
+                                  style: TextStyle(
+                                    color: Color(Constant.colorTxtPrimary),
                                   ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        item["status"]
-                                            ? Common.pathImg + "ic_coin.png"
-                                            : Common.pathImg +
-                                                "ic_coin_grey.png",
-                                        width: 12.0,
-                                        fit: BoxFit.contain,
-                                      ),
-                                      Text(
-                                        item["name"],
-                                        style: TextStyle(
-                                          fontSize: 10.0,
-                                          color: item["status"]
-                                              ? Colors.white
-                                              : Color(Constant.colorTxtDefault)
-                                                  .withOpacity(0.6),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                              )
-                              .toList(),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: coinDaily
-                          .map((item) => new Text(
-                                item["title"],
-                                style: TextStyle(
-                                  fontSize: 10.0,
-                                  color: Color(Constant.colorTxtDefault)
-                                      .withOpacity(0.6),
-                                ),
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                  //
-                  Container(
-                      margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Điểm danh liên tục 7 ngày được thưởng gấp đôi",
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              color: Color(Constant.colorTxtDefault),
+                                Icon(
+                                  Icons.check_rounded,
+                                  color: Color(Constant.colorTxtPrimary),
+                                  size: 30.0,
+                                )
+                              ],
+                            ))
+                        : Container(
+                            height: 80.0,
+                            width: 80.0,
+                            margin: EdgeInsets.only(top: 60.0, bottom: 20.0),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    Common.pathImg + "bg_btn_checkin.jpg"),
+                                fit: BoxFit.fill,
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Text(
+                              "Điểm danh",
+                              style: TextStyle(
+                                color: Color(Constant.colorTxtPrimary),
+                              ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
-                          Image.asset(
-                            Common.pathImg + "ic_coin.png",
-                            width: 18.0,
-                            height: 18.0,
+                  ),
+                ),
+                // list days
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Container(
+                      width: size.width - 50.0,
+                      height: 5.0,
+                      color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 0.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: coinDaily
+                            .map(
+                              (item) => new Container(
+                                width: 35.0,
+                                height: 35.0,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: item["status"]
+                                      ? Color(Constant.colorTxtSecond)
+                                      : Colors.white,
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  border: Border.all(
+                                    width: item["status"] ? 0 : 1,
+                                    color: Color(Constant.colorTxtDefault)
+                                        .withOpacity(0.5),
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      item["status"]
+                                          ? Common.pathImg + "ic_coin.png"
+                                          : Common.pathImg + "ic_coin_grey.png",
+                                      width: 12.0,
+                                      fit: BoxFit.contain,
+                                    ),
+                                    Text(
+                                      item["name"],
+                                      style: TextStyle(
+                                        fontSize: 10.0,
+                                        color: item["status"]
+                                            ? Colors.white
+                                            : Color(Constant.colorTxtDefault)
+                                                .withOpacity(0.6),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: coinDaily
+                        .map((item) => new Text(
+                              item["title"],
+                              style: TextStyle(
+                                fontSize: 10.0,
+                                color: Color(Constant.colorTxtDefault)
+                                    .withOpacity(0.6),
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                ),
+                //
+                Container(
+                    margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Điểm danh liên tục 7 ngày được thưởng gấp đôi",
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            color: Color(Constant.colorTxtDefault),
                           ),
-                        ],
-                      ))
-                ],
-              ),
+                        ),
+                        Image.asset(
+                          Common.pathImg + "ic_coin.png",
+                          width: 18.0,
+                          height: 18.0,
+                        ),
+                      ],
+                    ))
+              ],
             ),
           ),
+
           Container(
             color: Colors.white,
             width: size.width,
