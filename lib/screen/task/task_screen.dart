@@ -8,11 +8,10 @@ import 'package:init_app/widgets/button_main.dart';
 import '../../common/constant.dart';
 
 class TaskScreen extends BaseWidget<TaskController> {
-  TaskScreen({this.callBack});
+  TaskScreen({Key key, this.callBack});
   final Function callBack;
   static const String routeName = '/tasks';
   static const String name = 'NHIỆM VỤ';
-
   TextStyle styleTitle =
       TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
 
@@ -60,175 +59,146 @@ class TaskScreen extends BaseWidget<TaskController> {
       color: Colors.grey[200],
       child: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(Common.pathImg + "bg_checkin.jpg"),
-                fit: BoxFit.fill,
+          GetBuilder<TaskController>(
+              init: TaskController(), // INIT IT ONLY THE FIRST TIME
+              builder: (controller) => controller.checkToday
+                  ? Text("_controller.checkToday")
+                  : Text("_controller.")),
+
+          GestureDetector(
+            onTap: () {
+              controller.checkInToday();
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(Common.pathImg + "bg_btn.jpg"),
+                  fit: BoxFit.fill,
+                ),
+                shape: BoxShape.rectangle,
               ),
-              shape: BoxShape.rectangle,
-            ),
-            child: Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    controller.checkInToday();
-                  },
-                  child: GetBuilder<TaskController>(
-                    init: TaskController(), // INIT IT ONLY THE FIRST TIME
-                    builder: (controller) => controller.checkToday
-                        ? Container(
-                            height: 80.0,
-                            width: 80.0,
-                            margin: EdgeInsets.only(top: 60.0, bottom: 20.0),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                    Common.pathImg + "bg_btn_checkined.jpg"),
-                                fit: BoxFit.fill,
-                              ),
-                              shape: BoxShape.circle,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text(
-                                  "Điểm danh",
-                                  style: TextStyle(
-                                    color: Color(Constant.colorTxtPrimary),
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Icon(
-                                  Icons.check_rounded,
-                                  color: Color(Constant.colorTxtPrimary),
-                                  size: 30.0,
-                                )
-                              ],
-                            ))
-                        : Container(
-                            height: 80.0,
-                            width: 80.0,
-                            margin: EdgeInsets.only(top: 60.0, bottom: 20.0),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                    Common.pathImg + "bg_btn_checkin.jpg"),
-                                fit: BoxFit.fill,
-                              ),
-                              shape: BoxShape.circle,
-                            ),
-                            child: Text(
-                              "Điểm danh",
-                              style: TextStyle(
-                                color: Color(Constant.colorTxtPrimary),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                  ),
-                ),
-                // list days
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: size.width - 50.0,
-                      height: 5.0,
-                      color: Color(Constant.colorTxtDefault).withOpacity(0.5),
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 0.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: coinDaily
-                            .map(
-                              (item) => new Container(
-                                width: 35.0,
-                                height: 35.0,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: item["status"]
-                                      ? Color(Constant.colorTxtSecond)
-                                      : Colors.white,
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  border: Border.all(
-                                    width: item["status"] ? 0 : 1,
-                                    color: Color(Constant.colorTxtDefault)
-                                        .withOpacity(0.5),
-                                  ),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      item["status"]
-                                          ? Common.pathImg + "ic_coin.png"
-                                          : Common.pathImg + "ic_coin_grey.png",
-                                      width: 12.0,
-                                      fit: BoxFit.contain,
-                                    ),
-                                    Text(
-                                      item["name"],
-                                      style: TextStyle(
-                                        fontSize: 10.0,
-                                        color: item["status"]
-                                            ? Colors.white
-                                            : Color(Constant.colorTxtDefault)
-                                                .withOpacity(0.6),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                            .toList(),
+              child: Column(
+                children: [
+                  Container(
+                    height: 80.0,
+                    width: 80.0,
+                    margin: EdgeInsets.only(top: 60.0, bottom: 20.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(Common.pathImg + "bg_btn.jpg"),
+                        fit: BoxFit.fill,
                       ),
+                      shape: BoxShape.circle,
                     ),
-                  ],
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: coinDaily
-                        .map((item) => new Text(
-                              item["title"],
-                              style: TextStyle(
-                                fontSize: 10.0,
-                                color: Color(Constant.colorTxtDefault)
-                                    .withOpacity(0.6),
-                              ),
-                            ))
-                        .toList(),
+                    child: Text(
+                      "Điểm danh",
+                      style: TextStyle(
+                        color: Color(Constant.colorTxtPrimary),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                ),
-                //
-                Container(
-                    margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
+                  //
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        width: size.width - 50.0,
+                        height: 5.0,
+                        color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 0.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: coinDaily
+                              .map(
+                                (item) => new Container(
+                                  width: 35.0,
+                                  height: 35.0,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: item["status"]
+                                        ? Color(Constant.colorTxtSecond)
+                                        : Colors.white,
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    border: Border.all(
+                                      width: item["status"] ? 0 : 1,
+                                      color: Color(Constant.colorTxtDefault)
+                                          .withOpacity(0.5),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        item["status"]
+                                            ? Common.pathImg + "ic_coin.png"
+                                            : Common.pathImg +
+                                                "ic_coin_grey.png",
+                                        width: 12.0,
+                                        fit: BoxFit.contain,
+                                      ),
+                                      Text(
+                                        item["name"],
+                                        style: TextStyle(
+                                          fontSize: 10.0,
+                                          color: item["status"]
+                                              ? Colors.white
+                                              : Color(Constant.colorTxtDefault)
+                                                  .withOpacity(0.6),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Điểm danh liên tục 7 ngày được thưởng gấp đôi",
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            color: Color(Constant.colorTxtDefault),
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: coinDaily
+                          .map((item) => new Text(
+                                item["title"],
+                                style: TextStyle(
+                                  fontSize: 10.0,
+                                  color: Color(Constant.colorTxtDefault)
+                                      .withOpacity(0.6),
+                                ),
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  //
+                  Container(
+                      margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Điểm danh liên tục 7 ngày được thưởng gấp đôi",
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              color: Color(Constant.colorTxtDefault),
+                            ),
                           ),
-                        ),
-                        Image.asset(
-                          Common.pathImg + "ic_coin.png",
-                          width: 18.0,
-                          height: 18.0,
-                        ),
-                      ],
-                    ))
-              ],
+                          Image.asset(
+                            Common.pathImg + "ic_coin.png",
+                            width: 18.0,
+                            height: 18.0,
+                          ),
+                        ],
+                      ))
+                ],
+              ),
             ),
           ),
-
           Container(
             color: Colors.white,
             width: size.width,
