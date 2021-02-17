@@ -216,9 +216,9 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
             children: List.generate(1, (index) {
               return itemBookVer(
                   index: index,
-                  item: index,
+                  item: Common.myBooks[index],
                   func: () {
-                    controller.clickItem(index, index);
+                    clickItem(index, Common.myBooks[index]);
                   });
             }),
           ),
@@ -234,11 +234,9 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
               itemCount: 5,
               itemBuilder: (BuildContext context, int index) {
                 return itemBookHor(
-                    index: index,
                     item: index,
-                    func: () {
-                      controller.clickItem(index, index);
-                    });
+                    index: index,
+                    func: () => clickItem(index, "item"));
               }),
         ],
       ),
