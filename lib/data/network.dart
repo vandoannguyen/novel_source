@@ -5,8 +5,12 @@ import 'package:dio/dio.dart';
 abstract class IApi {
   // create method call api here
   Future getData();
+
   Future demoa();
+
   Future<String> getDb();
+
+  Future<void> login({email, timestamep});
 }
 
 class ApiImpl implements IApi {
@@ -30,4 +34,12 @@ class ApiImpl implements IApi {
     // TODO: implement demoa
     throw UnimplementedError();
   }
+<<<<<<< HEAD
+=======
+
+  @override
+  Future<void> login({email, timestamep}) {
+    Dio().post("path");
+  }
+>>>>>>> 3e2e173... init 17/2/20
 }

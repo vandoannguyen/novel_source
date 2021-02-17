@@ -39,4 +39,10 @@ class RepositoryImpl implements IRepository {
     // TODO: implement demoa
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> login({email, timestamep}) {
+    // TODO: implement login
+    return _api.login(email: email, timestamep: timestamep);
+  }
 }

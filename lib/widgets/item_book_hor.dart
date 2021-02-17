@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:init_app/common/common.dart';
 
 import '../common/constant.dart';
-import '../common/constant.dart';
-import '../common/constant.dart';
 
 Widget itemBookHor({item, index, func}) {
   return GestureDetector(

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/widgets/item_book_hor.dart';
+
 import './detail_comic_bookstore.dart';
-import '../../../common/common.dart';
-import '../../../common/constant.dart';
 
 class ComicBookstoreScreen extends StatefulWidget {
   static const String routeName = '/ComicBookstore';
