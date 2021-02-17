@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/widgets/item_book_hor.dart';
-
+import './detail_comic_bookstore.dart';
 import '../../../common/common.dart';
 import '../../../common/constant.dart';
 
@@ -15,7 +15,9 @@ class ComicBookstoreScreen extends StatefulWidget {
 
 class _ComicBookstoreState extends State<ComicBookstoreScreen> {
   void clickItem(index, item) {
-    print("object  $index");
+    // print("object  $index");
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => DetailComicBook()));
   }
 
   @override
