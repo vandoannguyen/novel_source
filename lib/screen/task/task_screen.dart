@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
-import 'package:init_app/screen/bookstore/detail_comic/invite_friend.dart';
-import 'package:init_app/screen/bookstore/detail_comic/loaded_coin.dart';
 import 'package:init_app/screen/task/task_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
 
@@ -11,11 +9,10 @@ import '../../common/constant.dart';
 
 // ignore: must_be_immutable
 class TaskScreen extends BaseWidget<TaskController> {
-  TaskScreen({this.callBack});
+  TaskScreen({Key key, this.callBack});
   final Function callBack;
   static const String routeName = '/tasks';
   static const String name = 'NHIỆM VỤ';
-
   TextStyle styleTitle =
       TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
   TextStyle styleName = TextStyle(fontSize: 16.0);
@@ -39,20 +36,19 @@ class TaskScreen extends BaseWidget<TaskController> {
   // TaskController _controller = Get.find();
   @override
   initState({TaskController controller}) {
+    // TODO: implement initState
     print("initState");
     return super.initState(controller: controller);
   }
 
   @override
-  void funcTask(String key, BuildContext context) {
+  void funcTask(String key) {
     switch (key) {
       case "ANSWER":
         break;
       case "INVITE":
-        onClickInviteFriend(context);
         break;
       case "COIN_FOR_FRIEND":
-        onClickCoinFriend(context);
         break;
       case "WATCH_ADS":
         break;
@@ -63,96 +59,55 @@ class TaskScreen extends BaseWidget<TaskController> {
     }
   }
 
-  void onClickCoinFriend(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoadedCoin()));
-  }
-
-  void onClickInviteFriend(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => InviteFriend()));
-  }
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     print("object111");
-    return SingleChildScrollView(
-      child: Container(
-        color: Colors.grey[200],
-        child: Column(
-          children: [
-            Container(
+    return Container(
+      color: Colors.grey[200],
+      child: Column(
+        children: [
+          GetBuilder<TaskController>(
+              init: TaskController(), // INIT IT ONLY THE FIRST TIME
+              builder: (controller) => controller.checkToday
+                  ? Text("_controller.checkToday")
+                  : Text("_controller.")),
+
+          GestureDetector(
+            onTap: () {
+              controller.checkInToday();
+            },
+            child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(Common.pathImg + "bg_checkin.jpg"),
+                  image: AssetImage(Common.pathImg + "bg_btn.jpg"),
                   fit: BoxFit.fill,
                 ),
                 shape: BoxShape.rectangle,
               ),
               child: Column(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      controller.checkInToday();
-                    },
-                    child: GetBuilder<TaskController>(
-                      init: TaskController(), // INIT IT ONLY THE FIRST TIME
-                      builder: (controller) => controller.checkToday
-                          ? Container(
-                              height: 80.0,
-                              width: 80.0,
-                              margin: EdgeInsets.only(top: 60.0, bottom: 20.0),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      Common.pathImg + "bg_btn_checkined.jpg"),
-                                  fit: BoxFit.fill,
-                                ),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    "Điểm danh",
-                                    style: TextStyle(
-                                      color: Color(Constant.colorTxtPrimary),
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Icon(
-                                    Icons.check_rounded,
-                                    color: Color(Constant.colorTxtPrimary),
-                                    size: 30.0,
-                                  )
-                                ],
-                              ))
-                          : Container(
-                              height: 80.0,
-                              width: 80.0,
-                              margin: EdgeInsets.only(top: 60.0, bottom: 20.0),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      Common.pathImg + "bg_btn_checkin.jpg"),
-                                  fit: BoxFit.fill,
-                                ),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Text(
-                                "Điểm danh",
-                                style: TextStyle(
-                                  color: Color(Constant.colorTxtPrimary),
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
+                  Container(
+                    height: 80.0,
+                    width: 80.0,
+                    margin: EdgeInsets.only(top: 60.0, bottom: 20.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(Common.pathImg + "bg_btn.jpg"),
+                        fit: BoxFit.fill,
+                      ),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Text(
+                      "Điểm danh",
+                      style: TextStyle(
+                        color: Color(Constant.colorTxtPrimary),
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  // list days
+                  //
                   Stack(
                     alignment: Alignment.center,
                     children: [
@@ -251,68 +206,67 @@ class TaskScreen extends BaseWidget<TaskController> {
                 ],
               ),
             ),
-
-            Container(
-              color: Colors.white,
-              width: size.width,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Text(
-                "NHIỆM VỤ NGƯỜI MỚI",
-                style: styleTitle,
-              ),
+          ),
+          Container(
+            color: Colors.white,
+            width: size.width,
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            child: Text(
+              "NHIỆM VỤ NGƯỜI MỚI",
+              style: styleTitle,
             ),
-            itemTask(
-                icon: "ic_edit.png",
-                name: "Câu hỏi khảo sát",
-                des: "Thưởng 50",
-                btnName: "Trả lời",
-                func: () {
-                  funcTask("ANSWER", context);
-                }),
-            // Daily Task
-            Container(
-              color: Colors.white,
-              width: size.width,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-              child: Text(
-                "NHIỆM VỤ HẰNG NGÀY",
-                style: styleTitle,
-              ),
+          ),
+          itemTask(
+              icon: "ic_edit.png",
+              name: "Câu hỏi khảo sát",
+              des: "Thưởng 50",
+              btnName: "Trả lời",
+              func: () {
+                funcTask("ANSWER");
+              }),
+          // Daily Task
+          Container(
+            color: Colors.white,
+            width: size.width,
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            child: Text(
+              "NHIỆM VỤ HẰNG NGÀY",
+              style: styleTitle,
             ),
-            itemTask(
-                icon: "ic_edit.png",
-                name: "Mời bạn bè",
-                des: "Mời mỗi bạn thưởng 500",
-                btnName: "Mời",
-                func: () {
-                  funcTask("INVITE", context);
-                }),
-            itemTask(
-                icon: "ic_edit.png",
-                name: "Thay bạn bè nạp xu",
-                des: "Trả lại 20%",
-                btnName: "Load cents",
-                func: () {
-                  funcTask("COIN_FOR_FRIEND", context);
-                }),
-            itemTask(
-                icon: "ic_edit.png",
-                name: "Xem quảng cáo nhận xu",
-                des: "Mỗi lần xem thưởng 200",
-                btnName: "Xem",
-                func: () {
-                  funcTask("WATCH_ADS", context);
-                }),
-            itemTask(
-                icon: "ic_edit.png",
-                name: "Đọc hằng ngày",
-                des: "Đọc 20 phút, thưởng 200",
-                btnName: "Đọc Ngay",
-                func: () {
-                  funcTask("READ_BOOK", context);
-                }),
-          ],
-        ),
+          ),
+          itemTask(
+              icon: "ic_edit.png",
+              name: "Mời bạn bè",
+              des: "Mời mỗi bạn thưởng 500",
+              btnName: "Mời",
+              func: () {
+                funcTask("INVITE");
+              }),
+          itemTask(
+              icon: "ic_edit.png",
+              name: "Thay bạn bè nạp xu",
+              des: "Trả lại 20%",
+              btnName: "Load cents",
+              func: () {
+                funcTask("COIN_FOR_FRIEND");
+              }),
+          itemTask(
+              icon: "ic_edit.png",
+              name: "Xem quảng cáo nhận xu",
+              des: "Mỗi lần xem thưởng 200",
+              btnName: "Xem",
+              func: () {
+                funcTask("WATCH_ADS");
+              }),
+          itemTask(
+              icon: "ic_edit.png",
+              name: "Đọc hằng ngày",
+              des: "Đọc 20 phút, thưởng 200",
+              btnName: "Đọc Ngay",
+              func: () {
+                funcTask("READ_BOOK");
+              }),
+        ],
       ),
     );
   }
@@ -376,7 +330,7 @@ class TaskScreen extends BaseWidget<TaskController> {
               func: func,
               color: Color(Constant.colorTxtPrimary),
             ),
-          ),
+          )
         ],
       ),
     );

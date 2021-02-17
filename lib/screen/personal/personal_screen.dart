@@ -37,134 +37,132 @@ class _PersonalState extends State<PersonalScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      child: Container(
-        color: Colors.grey[200],
-        child: SafeArea(
-          child: Column(
-            children: [
-              Container(
+    return Container(
+      color: Colors.grey[200],
+      child: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              color: Colors.white,
+              width: size.width,
+              padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
+              child: Text(PersonalScreen.name,
+                  style: TextStyle(fontSize: 20.0),
+                  textAlign: TextAlign.center),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 15.0),
+              decoration: BoxDecoration(
                 color: Colors.white,
-                width: size.width,
-                padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
-                child: Text(PersonalScreen.name,
-                    style: TextStyle(fontSize: 20.0),
-                    textAlign: TextAlign.center),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 15.0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Color(Constant.colorTxtDefault).withOpacity(0.5),
-                      width: 0.3,
-                    ),
+                border: Border(
+                  bottom: BorderSide(
+                    color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+                    width: 0.3,
                   ),
                 ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.fromLTRB(10.0, 0, 15.0, 0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100.0),
-                        child: Image.network(
-                          "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
-                          fit: BoxFit.cover,
-                          width: 50.0,
-                          height: 50.0,
-                        ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10.0, 0, 15.0, 0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100.0),
+                      child: Image.network(
+                        "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+                        fit: BoxFit.cover,
+                        width: 50.0,
+                        height: 50.0,
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          padding: EdgeInsets.only(bottom: 5.0),
+                          child: Text(
+                            "name",
+                            style: TextStyle(fontSize: 20.0),
+                          )),
+                      Text(
+                        "id",
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            color: Color(Constant.colorTxtDefault)),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    child: Row(
                       children: [
-                        Container(
-                            padding: EdgeInsets.only(bottom: 5.0),
-                            child: Text(
-                              "name",
-                              style: TextStyle(fontSize: 20.0),
-                            )),
-                        Text(
-                          "id",
-                          style: TextStyle(
-                              fontSize: 15.0,
-                              color: Color(Constant.colorTxtDefault)),
+                        Text("Số dư xu: " + "40.0"),
+                        Image.asset(
+                          Common.pathImg + "ic_coin.png",
+                          fit: BoxFit.contain,
+                          width: 18.0,
+                          height: 18.0,
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  ButtonMain(
+                      name: "Nạp Xu",
+                      func: () {
+                        napXu();
+                      })
+                ],
               ),
-              Container(
-                color: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          Text("Số dư xu: " + "40.0"),
-                          Image.asset(
-                            Common.pathImg + "ic_coin.png",
-                            fit: BoxFit.contain,
-                            width: 18.0,
-                            height: 18.0,
-                          ),
-                        ],
-                      ),
-                    ),
-                    ButtonMain(
-                        name: "Nạp Xu",
-                        func: () {
-                          napXu();
-                        })
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 3.0,
-              ),
-              item(
-                  name: "Chi tiết giao dịch xu",
-                  icon: "ic_edit.png",
-                  func: () {
-                    click("DETAIL_TRANSACTION");
-                  }),
-              item(
-                  name: "Hỗ trợ online",
-                  icon: "ic_edit.png",
-                  func: () {
-                    click("SUPPORT");
-                  }),
-              item(
-                  name: "Trở thành tác giả",
-                  icon: "ic_edit.png",
-                  func: () {
-                    click("COME_AUTHOR");
-                  }),
-              item(
-                  name: "Câu hỏi thường gặp",
-                  icon: "ic_edit.png",
-                  func: () {
-                    click("QUESTION");
-                  }),
-              item(
-                  name: "Ý kiến phản hồi",
-                  icon: "ic_edit.png",
-                  func: () {
-                    click("FEEDBACK");
-                  }),
-              item(
-                  name: "Cài đặt",
-                  icon: "ic_edit.png",
-                  func: () {
-                    click("SETTING");
-                  }),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 3.0,
+            ),
+            item(
+                name: "Chi tiết giao dịch xu",
+                icon: "ic_edit.png",
+                func: () {
+                  click("DETAIL_TRANSACTION");
+                }),
+            item(
+                name: "Hỗ trợ online",
+                icon: "ic_edit.png",
+                func: () {
+                  click("SUPPORT");
+                }),
+            item(
+                name: "Trở thành tác giả",
+                icon: "ic_edit.png",
+                func: () {
+                  click("COME_AUTHOR");
+                }),
+            item(
+                name: "Câu hỏi thường gặp",
+                icon: "ic_edit.png",
+                func: () {
+                  click("QUESTION");
+                }),
+            item(
+                name: "Ý kiến phản hồi",
+                icon: "ic_edit.png",
+                func: () {
+                  click("FEEDBACK");
+                }),
+            item(
+                name: "Cài đặt",
+                icon: "ic_edit.png",
+                func: () {
+                  click("SETTING");
+                }),
+          ],
         ),
       ),
     );
