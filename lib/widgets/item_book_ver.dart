@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/common/common.dart';
 import '../common/constant.dart';
 
 Widget itemBookVer({item, index, func}) {
@@ -22,8 +23,10 @@ Widget itemBookVer({item, index, func}) {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5.0),
-                child: Image.network(
-                  "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+                child: FadeInImage.assetNetwork(
+                  placeholder: Common.pathImg + "ic_edit.png",
+                  image:
+                      "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
                   fit: BoxFit.cover,
                 ),
               ),

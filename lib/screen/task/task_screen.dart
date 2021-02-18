@@ -7,7 +7,6 @@ import 'package:init_app/widgets/button_main.dart';
 
 import '../../common/constant.dart';
 
-// ignore: must_be_immutable
 class TaskScreen extends BaseWidget<TaskController> {
   TaskScreen({this.callBack});
   final Function callBack;
@@ -16,14 +15,7 @@ class TaskScreen extends BaseWidget<TaskController> {
 
   TextStyle styleTitle =
       TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
-  TextStyle styleName = TextStyle(fontSize: 16.0);
-  TextStyle styleDescription =
-      TextStyle(fontSize: 13.0, color: Color(Constant.colorTxtPrimary));
-  String answer = "ANSWER";
-  String invite = "INVITE";
-  String coinForFriend = "COIN_FOR_FRIEND";
-  String readBook = "READ_BOOK";
-  String watchAds = "WATCH_ADS";
+
   List<Map<String, dynamic>> coinDaily = [
     {"title": "1 Ngày", "name": "20", "value": 20, "status": true},
     {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
@@ -62,7 +54,6 @@ class TaskScreen extends BaseWidget<TaskController> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    print("object111");
     return Container(
       color: Colors.grey[200],
       child: Column(
@@ -332,14 +323,16 @@ class TaskScreen extends BaseWidget<TaskController> {
                     padding: EdgeInsets.only(bottom: 5.0),
                     child: Text(
                       name,
-                      style: styleName,
+                      style: TextStyle(fontSize: 16.0),
                     ),
                   ),
                   Row(
                     children: [
                       Text(
                         des,
-                        style: styleDescription,
+                        style: TextStyle(
+                            fontSize: 13.0,
+                            color: Color(Constant.colorTxtPrimary)),
                       ),
                       Image.asset(
                         Common.pathImg + "ic_coin.png",

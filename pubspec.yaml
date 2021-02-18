@@ -27,6 +27,9 @@ dependencies:
   fluttertoast:
   dio:
   shared_preferences:
+  flutter_rating_bar: 
+  carousel_slider: ^3.0.0
+  cached_network_image: ^2.5.0
   
 dev_dependencies:
   flutter_test:
