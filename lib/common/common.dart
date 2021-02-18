@@ -10,4 +10,6 @@ class Common {
   static String token = "";
   static UserModel user = null;
   static List<NovalModel> myBooks = null;
+
+  static var fanpageName;
 }

@@ -32,12 +32,20 @@ Widget itemBookHor({item, index, func}) {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(5.0),
-              child: Image.network(
-                "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+              child: FadeInImage.assetNetwork(
+                placeholder: Common.pathImg + "ic_edit.png",
+                image:
+                    "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
                 fit: BoxFit.cover,
                 width: 80.0,
                 height: 100.0,
               ),
+              // child: Image.network(
+              //   "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+              //   fit: BoxFit.cover,
+              //   width: 80.0,
+              //   height: 100.0,
+              // ),
             ),
           ),
           Expanded(

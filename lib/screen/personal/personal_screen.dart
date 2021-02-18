@@ -1,38 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/screen/personal/personal_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
-
 import '../../common/constant.dart';
 
-class PersonalScreen extends StatefulWidget {
+// ignore: must_be_immutable
+class PersonalScreen extends BaseWidget<PersonalController> {
   static const String routeName = '/personal';
   static const String name = 'CÁ NHÂN';
-  PersonalScreen({Key key}) : super(key: key);
-
-  @override
-  _PersonalState createState() => _PersonalState();
-}
-
-class _PersonalState extends State<PersonalScreen> {
-  void napXu() {}
-
-  void click(key) {
-    switch (key) {
-      case "DETAIL_TRANSACTION":
-        break;
-      case "SUPPORT":
-        break;
-      case "COME_AUTHOR":
-        break;
-      case "QUESTION":
-        break;
-      case "FEEDBACK":
-        break;
-      case "SETTING":
-        break;
-      default:
-    }
-  }
+  PersonalController controller = Get.put(PersonalController());
 
   @override
   Widget build(BuildContext context) {
@@ -75,23 +53,32 @@ class _PersonalState extends State<PersonalScreen> {
                       ),
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
+                  true
+                      ? Container(
                           padding: EdgeInsets.only(bottom: 5.0),
                           child: Text(
-                            "name",
+                            "Đăng nhập",
                             style: TextStyle(fontSize: 20.0),
-                          )),
-                      Text(
-                        "id",
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            color: Color(Constant.colorTxtDefault)),
-                      ),
-                    ],
-                  ),
+                          ),
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(bottom: 5.0),
+                              child: Text(
+                                "name",
+                                style: TextStyle(fontSize: 20.0),
+                              ),
+                            ),
+                            Text(
+                              "id",
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Color(Constant.colorTxtDefault)),
+                            ),
+                          ],
+                        ),
                 ],
               ),
             ),
@@ -118,7 +105,7 @@ class _PersonalState extends State<PersonalScreen> {
                   ButtonMain(
                       name: "Nạp Xu",
                       func: () {
-                        napXu();
+                        controller.napXu();
                       })
                 ],
               ),
@@ -130,37 +117,37 @@ class _PersonalState extends State<PersonalScreen> {
                 name: "Chi tiết giao dịch xu",
                 icon: "ic_edit.png",
                 func: () {
-                  click("DETAIL_TRANSACTION");
+                  controller.click("DETAIL_TRANSACTION");
                 }),
             item(
                 name: "Hỗ trợ online",
                 icon: "ic_edit.png",
                 func: () {
-                  click("SUPPORT");
+                  controller.click("SUPPORT");
                 }),
             item(
                 name: "Trở thành tác giả",
                 icon: "ic_edit.png",
                 func: () {
-                  click("COME_AUTHOR");
+                  controller.click("COME_AUTHOR");
                 }),
             item(
                 name: "Câu hỏi thường gặp",
                 icon: "ic_edit.png",
                 func: () {
-                  click("QUESTION");
+                  controller.click("QUESTION");
                 }),
             item(
                 name: "Ý kiến phản hồi",
                 icon: "ic_edit.png",
                 func: () {
-                  click("FEEDBACK");
+                  controller.click("FEEDBACK");
                 }),
             item(
                 name: "Cài đặt",
                 icon: "ic_edit.png",
                 func: () {
-                  click("SETTING");
+                  controller.click("SETTING");
                 }),
           ],
         ),
