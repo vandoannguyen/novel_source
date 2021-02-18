@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/screen/personal/personal_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
 
 import '../../common/constant.dart';
@@ -100,14 +103,11 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 30.0,
-                    child: ButtonMain(
-                        name: "Nạp Xu",
-                        func: () {
-                          controller.click("BUY_COIN");
-                        }),
-                  )
+                  ButtonMain(
+                      name: "Nạp Xu",
+                      func: () {
+                        controller.napXu();
+                      })
                 ],
               ),
             ),

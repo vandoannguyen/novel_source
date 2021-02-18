@@ -54,7 +54,6 @@ class TaskScreen extends BaseWidget<TaskController> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    print("object111");
     return Container(
       color: Colors.grey[200],
       child: Column(

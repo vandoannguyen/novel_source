@@ -1,4 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:init_app/base/base_widget.dart';
+import 'package:init_app/screen/bookstore/novel_bookstore/novel_book_controller.dart';
 import 'package:init_app/widgets/item_book_hor.dart';
 import 'package:init_app/widgets/item_book_ver.dart';
 
@@ -12,9 +16,8 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
   final CarouselController controllerCarousel = CarouselController();
   final CarouselController controllerCarouselNewest = CarouselController();
 
-  @override
-  initState({NovelBookController controller}) {
-    return super.initState(controller: controller);
+  void clickItem(index, item) {
+    print("object ${item.toJson()}");
   }
 
   @override
@@ -218,25 +221,23 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                   index: index,
                   item: Common.myBooks[index],
                   func: () {
-                    clickItem(index, Common.myBooks[index]);
+                    clickItem(index, index);
                   });
             }),
           ),
           titleWidget(
-              checkAll: true,
-              icon: "ic_edit.png",
-              name: " Sách hot bán chạy",
-              nameAll: "Xem tất cả",
-              funcAll: () {}),
+              checkAll: true, icon: "ic_edit.png", name: " Sách hot bán chạy"),
           ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: 5,
               itemBuilder: (BuildContext context, int index) {
                 return itemBookHor(
-                    item: index,
                     index: index,
-                    func: () => clickItem(index, "item"));
+                    item: index,
+                    func: () {
+                      controller.clickItem(index, index);
+                    });
               }),
         ],
       ),
@@ -248,43 +249,40 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
       onTap: funcAll,
       child: Container(
         margin: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              child: Row(
-                children: [
-                  Image.asset(
-                    Common.pathImg + icon,
-                    width: 20.0,
-                    height: 20.0,
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Container(
+            child: Row(
+              children: [
+                Image.asset(
+                  Common.pathImg + icon,
+                  width: 20.0,
+                  height: 20.0,
+                ),
+                Text(
+                  name,
+                  style: TextStyle(
+                    color: Color(Constant.colorTxtSecond),
                   ),
-                  Text(
-                    name,
-                    style: TextStyle(
-                      color: Color(Constant.colorTxtSecond),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            checkAll
-                ? Row(
-                    children: [
-                      Text(
-                        nameAll,
-                        style:
-                            TextStyle(color: Color(Constant.colorTxtDefault)),
-                      ),
-                      Icon(
-                        Icons.navigate_next_rounded,
-                        color: Color(Constant.colorTxtDefault),
-                      ),
-                    ],
-                  )
-                : Container(),
-          ],
-        ),
+          ),
+          checkAll
+              ? Row(
+                  children: [
+                    Text(
+                      nameAll,
+                      style: TextStyle(color: Color(Constant.colorTxtDefault)),
+                    ),
+                    Icon(
+                      Icons.navigate_next_rounded,
+                      color: Color(Constant.colorTxtDefault),
+                    ),
+                  ],
+                )
+              : Container(),
+        ]),
       ),
     );
   }

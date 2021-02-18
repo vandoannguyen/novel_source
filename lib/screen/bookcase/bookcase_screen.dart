@@ -6,8 +6,6 @@ import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/button_main.dart';
 import 'package:init_app/widgets/item_book_ver.dart';
 
-import '../../common/Common.dart';
-
 class BookcaseScreen extends StatefulWidget {
   static const String routeName = '/bookcase';
   static const String name = 'TỦ SÁCH';
@@ -87,8 +85,8 @@ class _BookcaseState extends State<BookcaseScreen> {
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
               padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 15.0),
-              children: List.generate((list.length + 1), (index) {
-                if (index == list.length)
+              children: List.generate((Common.myBooks.length + 1), (index) {
+                if (index == Common.myBooks.length)
                   return addBook();
                 else
                   return itemBookVer(
