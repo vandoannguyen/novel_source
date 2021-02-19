@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
-import 'package:init_app/screen/feedback/feedback_controller.dart';
+import 'package:init_app/screen/survey_question/survey_question_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
 import '../../common/constant.dart';
 
 // ignore: must_be_immutable
-class FeedbackScreen extends BaseWidget<FeedbackController> {
+class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
   static const String routeName = '/feedback';
-  static const String name = 'Ý kiến phản hồi';
-  FeedbackController controller = Get.put(FeedbackController());
+  static const String name = 'Câu hỏi khảo sát';
+  SurveyQuestionController controller = Get.put(SurveyQuestionController());
   final ctlTextEditContent = TextEditingController();
   final ctlTextEditEmail = TextEditingController();
   @override
-  initState({FeedbackController controller}) {
+  initState({SurveyQuestionController controller}) {
     return super.initState(controller: controller);
   }
 
@@ -40,7 +39,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      FeedbackScreen.name,
+                      SurveyQuestionScreen.name,
                       style: TextStyle(fontSize: 20.0),
                     ),
                   ),
@@ -53,6 +52,17 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                       },
                       icon: Icon(Icons.arrow_back_ios_rounded),
                     ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+              child: Column(
+                children: [
+                  Text(
+                    "1. Bạn ",
+                    style: TextStyle(fontSize: 20.0),
                   ),
                 ],
               ),
@@ -87,8 +97,8 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                 Positioned(
                   right: 18,
                   bottom: 0,
-                  child: GetBuilder<FeedbackController>(
-                    init: FeedbackController(),
+                  child: GetBuilder<SurveyQuestionController>(
+                    init: SurveyQuestionController(),
                     builder: (controller) => Text(
                       (controller.maxCount - controller.count).toString(),
                       style: TextStyle(fontSize: 10.0),

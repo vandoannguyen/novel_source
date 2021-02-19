@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 
-class FeedbackController extends BaseController {
+class SurveyQuestionController extends BaseController {
   // ignore: must_call_super
   int maxCount = 1000;
   int count = 0;
+  List<Map<String, dynamic>> questions = [];
+
   onInit() {
     print(" object CommentController");
     Get.snackbar('Hi', 'i am a modern snackbar');

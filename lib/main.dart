@@ -4,10 +4,15 @@ import 'package:init_app/routes/routes.dart';
 import 'package:init_app/screen/bookcase/bookcase_screen.dart';
 import 'package:init_app/screen/bookstore/bookstore_screen.dart';
 import 'package:init_app/screen/home/home_screen.dart';
+import 'package:init_app/screen/load/load_screen.dart';
 import 'package:init_app/screen/personal/personal_screen.dart';
 import 'package:init_app/screen/task/task_screen.dart';
+import 'package:init_app/utils/call_native_utils.dart';
+
+import 'common/common.dart';
 
 void main() {
+  CallNativeUtils.setChannel(Common.CHANNEL);
   return runApp(MyApp());
 }
 
@@ -15,13 +20,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      enableLog: true,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: Routes.home,
+      initialRoute: Routes.load,
       getPages: [
         GetPage(
           name: Routes.home,
@@ -42,6 +46,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: Routes.personal,
           page: () => PersonalScreen(),
+        ),
+        GetPage(
+          name: Routes.load,
+          page: () => LoadScreen(),
         ),
       ],
       // routes: {

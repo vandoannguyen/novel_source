@@ -22,6 +22,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
 
   @override
   Widget build(BuildContext context) {
+    initState(controller: NovelBookController());
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -221,7 +222,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                   index: index,
                   item: Common.myBooks[index],
                   func: () {
-                    clickItem(index, index);
+                    controller.clickItem(index, index);
                   });
             }),
           ),
@@ -249,40 +250,43 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
       onTap: funcAll,
       child: Container(
         margin: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Container(
-            child: Row(
-              children: [
-                Image.asset(
-                  Common.pathImg + icon,
-                  width: 20.0,
-                  height: 20.0,
-                ),
-                Text(
-                  name,
-                  style: TextStyle(
-                    color: Color(Constant.colorTxtSecond),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              child: Row(
+                children: [
+                  Image.asset(
+                    Common.pathImg + icon,
+                    width: 20.0,
+                    height: 20.0,
                   ),
-                ),
-              ],
+                  Text(
+                    name,
+                    style: TextStyle(
+                      color: Color(Constant.colorTxtSecond),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          checkAll
-              ? Row(
-                  children: [
-                    Text(
-                      nameAll,
-                      style: TextStyle(color: Color(Constant.colorTxtDefault)),
-                    ),
-                    Icon(
-                      Icons.navigate_next_rounded,
-                      color: Color(Constant.colorTxtDefault),
-                    ),
-                  ],
-                )
-              : Container(),
-        ]),
+            checkAll
+                ? Row(
+                    children: [
+                      Text(
+                        nameAll,
+                        style:
+                            TextStyle(color: Color(Constant.colorTxtDefault)),
+                      ),
+                      Icon(
+                        Icons.navigate_next_rounded,
+                        color: Color(Constant.colorTxtDefault),
+                      ),
+                    ],
+                  )
+                : Container(),
+          ],
+        ),
       ),
     );
   }
