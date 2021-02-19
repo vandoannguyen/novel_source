@@ -1,11 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:init_app/base/base_widget.dart';
-import 'package:init_app/screen/bookstore/novel_bookstore/novel_book_controller.dart';
 import 'package:init_app/widgets/item_book_hor.dart';
 import 'package:init_app/widgets/item_book_ver.dart';
+
 import '../../../common/common.dart';
 import '../../../common/constant.dart';
 

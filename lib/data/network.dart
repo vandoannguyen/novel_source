@@ -34,12 +34,9 @@ class ApiImpl implements IApi {
     // TODO: implement demoa
     throw UnimplementedError();
   }
-<<<<<<< HEAD
-=======
 
   @override
   Future<void> login({email, timestamep}) {
     Dio().post("path");
   }
->>>>>>> 3e2e173... init 17/2/20
 }

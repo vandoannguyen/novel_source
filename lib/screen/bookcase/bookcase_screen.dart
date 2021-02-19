@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/common/common.dart';
+import 'package:init_app/data/network/NovalModel.dart';
+import 'package:init_app/screen/read_noval/read_noval_screen.dart';
+import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/button_main.dart';
 import 'package:init_app/widgets/item_book_ver.dart';
-
-import '../../common/Common.dart';
 
 class BookcaseScreen extends StatefulWidget {
   static const String routeName = '/bookcase';
   static const String name = 'TỦ SÁCH';
+
   BookcaseScreen({Key key}) : super(key: key);
 
   @override
@@ -14,18 +17,13 @@ class BookcaseScreen extends StatefulWidget {
 }
 
 class _BookcaseState extends State<BookcaseScreen> {
-  List list = [
-    "fbhgf",
-    "Note for anyone visiting this page in 2020",
-    "fbhgf",
-    "Note for anyone visiting this page in 2020",
-    "fbhgf",
-    "fbhgf",
-    "fbhgf",
-    "fbhgf",
-  ];
-  void clickItem(index, item) {
-    print("object $index");
+  void clickItem(context, index, NovalModel item) {
+    // print(item.id);
+    IntentAnimation.intentNomal(
+        context: context,
+        screen: ReadNovalScreen(item: item),
+        option: IntentAnimationOption.RIGHT_TO_LEFT,
+        duration: Duration(milliseconds: 500));
   }
 
   @override
@@ -88,17 +86,16 @@ class _BookcaseState extends State<BookcaseScreen> {
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
               padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 15.0),
-              children: List.generate((list.length + 1), (index) {
-                if (index == list.length)
+              children: List.generate((Common.myBooks.length + 1), (index) {
+                if (index == Common.myBooks.length)
                   return addBook();
                 else
-                  return itemBookVer(list[index], index);
-                return itemBookVer(
-                    item: list[index],
-                    index: index,
-                    func: () {
-                      clickItem(index, index);
-                    });
+                  return itemBookVer(
+                      item: Common.myBooks[index],
+                      index: index,
+                      func: () {
+                        clickItem(context, index, Common.myBooks[index]);
+                      });
               }),
             ),
           ),
