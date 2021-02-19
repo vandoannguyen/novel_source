@@ -29,6 +29,7 @@ class _InviteFriendState extends State<InviteFriend>
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
+        shadowColor: Colors.white,
       ),
       body: Container(
         child: Column(

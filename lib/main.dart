@@ -9,9 +9,14 @@ import 'package:init_app/screen/personal/personal_screen.dart';
 import 'package:init_app/screen/survey_question/survey_question_screen.dart';
 import 'package:init_app/screen/task/task_screen.dart';
 import 'common/config.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   Common.config = config;
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //   systemNavigationBarColor: Colors.blue, // navigation bar color
+  //   statusBarColor: Colors.transparent, // status bar color
+  // ));
   return runApp(MyApp());
 }
 
