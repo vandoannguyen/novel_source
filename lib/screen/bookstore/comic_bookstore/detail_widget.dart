@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/bookstore/detail/invite_friend.dart';
 import 'package:init_app/screen/bookstore/detail/tutorial_loaded_coin.dart';
 
@@ -10,6 +11,100 @@ class DetailWidget extends StatefulWidget {
 }
 
 class _DetailWidgetState extends State<DetailWidget> {
+  void _onReward() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            height: 200,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: 49,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        Common.pathImg + "ic_coin.png",
+                        width: 18.0,
+                        height: 18.0,
+                      ),
+                      Text(
+                        "15",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: 1,
+                  color: Colors.grey[400],
+                ),
+                Container(
+                  height: 49,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        Common.pathImg + "ic_coin.png",
+                        width: 18.0,
+                        height: 18.0,
+                      ),
+                      Text(
+                        "50",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: 1,
+                  color: Colors.grey[400],
+                ),
+                Container(
+                  height: 49,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        Common.pathImg + "ic_coin.png",
+                        width: 18.0,
+                        height: 18.0,
+                      ),
+                      Text(
+                        "150",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: 1,
+                  color: Colors.grey[400],
+                ),
+                Container(
+                  color: Colors.grey[200],
+                  height: 50,
+                  child: ListTile(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    selectedTileColor: Colors.grey[200],
+                    title: Text(
+                      "Khong",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey[800]),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -148,55 +243,36 @@ class _DetailWidgetState extends State<DetailWidget> {
                     Expanded(child: Divider()),
                   ]),
                   Container(
-                    margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-                    height: 30,
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.all(2),
-                          child: Icon(
-                            Icons.ac_unit,
-                            color: Colors.yellow,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(2),
-                          child: Icon(
-                            Icons.ac_unit,
-                            color: Colors.yellow,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(2),
-                          child: Icon(
-                            Icons.ac_unit,
-                            color: Colors.yellow,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(2),
-                          child: Icon(
-                            Icons.ac_unit,
-                            color: Colors.yellow,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(2),
-                          child: Icon(
-                            Icons.ac_unit,
-                            color: Colors.yellow,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(2),
-                          child: Icon(
-                            Icons.ac_unit,
-                            color: Colors.yellow,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                      height: 30,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 12,
+                        itemBuilder: (context, i) {
+                          return Container(
+                            margin: EdgeInsets.all(3),
+                            child: Image.asset(
+                              Common.pathImg + "ic_user.png",
+                              height: 20,
+                              width: 20,
+                            ),
+                          );
+                        },
+                      )
+                      // child: Row(
+                      //   children: <Widget>[
+                      //     Container(
+                      //       margin: EdgeInsets.all(2),
+                      //       child: Image.asset(
+                      //        Common.pathImg + "ic_user.png", height: 20,
+                      //        width: 20,
+                      //       ),
+                      //     ),
+
+                      //   ],
+                      // ),
+                      ),
                   Container(
                     margin: EdgeInsets.only(bottom: 10),
                     child: Row(
@@ -217,19 +293,24 @@ class _DetailWidgetState extends State<DetailWidget> {
                             ],
                           ),
                         ),
-                        Container(
-                          height: 30,
-                          width: 80,
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.pink,
-                            borderRadius: BorderRadius.circular(32),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Thuong",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(color: Colors.white),
+                        GestureDetector(
+                          onTap: () {
+                            _onReward();
+                          },
+                          child: Container(
+                            height: 30,
+                            width: 80,
+                            margin: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.pink,
+                              borderRadius: BorderRadius.circular(32),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Thuong",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
                           ),
                         ),

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:init_app/common/common.dart';
 
 class LoadedCoin extends StatefulWidget {
   LoadedCoin({Key key}) : super(key: key);
@@ -25,12 +26,11 @@ class _LoadedCoinState extends State<LoadedCoin> {
               Container(
                 margin: EdgeInsets.only(top: 20),
                 height: 120,
-                child: Center(
-                    child: Icon(
-                  Icons.ac_unit,
-                  size: 100,
-                  color: Colors.black,
-                )),
+                child: Image.asset(
+                  Common.pathImg + "ic_user.png",
+                  height: 100,
+                  width: 100,
+                ),
               ),
               // Container(
               //   margin:
@@ -44,7 +44,7 @@ class _LoadedCoinState extends State<LoadedCoin> {
               //   ),
               Container(
                 margin:
-                    EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+                    EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10),
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "Enter your number",

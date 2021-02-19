@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/screen/bookstore/detail/invite_friend.dart';
 import 'package:init_app/screen/bookstore/detail/loaded_coin.dart';
 import 'package:init_app/screen/task/task_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
@@ -48,6 +49,7 @@ class TaskScreen extends BaseWidget<TaskController> {
       case "ANSWER":
         break;
       case "INVITE":
+        onClickInviteFriend(context);
         break;
       case "COIN_FOR_FRIEND":
         onClickCoinFriend(context);
@@ -64,6 +66,11 @@ class TaskScreen extends BaseWidget<TaskController> {
   void onClickCoinFriend(BuildContext context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => LoadedCoin()));
+  }
+
+  void onClickInviteFriend(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => InviteFriend()));
   }
 
   @override

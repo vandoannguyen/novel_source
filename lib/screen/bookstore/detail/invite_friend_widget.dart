@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/common/common.dart';
 
 class InviteFriendWidget extends StatefulWidget {
   InviteFriendWidget({Key key}) : super(key: key);
@@ -27,7 +28,6 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(10),
               child: Text(
                 "Moi ban be nhan xu thuong",
                 textAlign: TextAlign.center,
@@ -35,7 +35,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.only(top: 20, bottom: 10, left: 15, right: 15),
               height: 100,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,7 +43,11 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Icon(Icons.ac_unit),
+                      Image.asset(
+                        Common.pathImg + "facebook.png",
+                        height: 60,
+                        width: 60,
+                      ),
                       Text(
                         "facebook",
                         style: TextStyle(color: Colors.black),
@@ -52,7 +56,11 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                   ),
                   Column(
                     children: <Widget>[
-                      Icon(Icons.ac_unit),
+                      Image.asset(
+                        Common.pathImg + "line.png",
+                        height: 60,
+                        width: 60,
+                      ),
                       Text(
                         "whatsapp",
                         style: TextStyle(color: Colors.black),
@@ -61,7 +69,11 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                   ),
                   Column(
                     children: <Widget>[
-                      Icon(Icons.ac_unit),
+                      Image.asset(
+                        Common.pathImg + "line.png",
+                        height: 60,
+                        width: 60,
+                      ),
                       Text(
                         "line",
                         style: TextStyle(color: Colors.black),
@@ -70,9 +82,12 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                   ),
                   Column(
                     children: <Widget>[
-                      Icon(Icons.content_copy),
+                      Icon(
+                        Icons.content_copy,
+                        size: 60,
+                      ),
                       Text(
-                        "copy Link",
+                        "copy link",
                         style: TextStyle(color: Colors.black),
                       )
                     ],

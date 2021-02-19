@@ -8,6 +8,7 @@ class PilihbadWidget extends StatefulWidget {
 }
 
 class _PilihbadWidgetState extends State<PilihbadWidget> {
+  bool isLock = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +17,7 @@ class _PilihbadWidgetState extends State<PilihbadWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           new Container(
-            margin: EdgeInsets.only(top: 10, bottom: 10),
+            margin: EdgeInsets.only(top: 10),
             height: 20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,18 +46,33 @@ class _PilihbadWidgetState extends State<PilihbadWidget> {
                 itemCount: 70,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          left: 10, right: 10, top: 5, bottom: 5),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(6),
-                          boxShadow: [
-                            BoxShadow(color: Colors.grey, spreadRadius: 1)
-                          ]),
-                      child: Center(
-                        child: Text("Chap $index", textAlign: TextAlign.center),
-                      ),
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(
+                              left: 10, right: 10, top: 5, bottom: 5),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(6),
+                              boxShadow: [
+                                BoxShadow(color: Colors.grey, spreadRadius: 1)
+                              ]),
+                          child: Center(
+                            child: Text("Chap $index",
+                                textAlign: TextAlign.center),
+                          ),
+                        ),
+                        index % 2 == 0
+                            ? Container(
+                                margin: EdgeInsets.only(top: 5, left: 60),
+                                child: Icon(
+                                  Icons.lock,
+                                  color: Colors.grey,
+                                  size: 13,
+                                ),
+                              )
+                            : Container(),
+                      ],
                     ),
                   );
                 }),

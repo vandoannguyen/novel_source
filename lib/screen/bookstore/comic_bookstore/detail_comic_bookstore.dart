@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/login/login_screen.dart';
 import 'detail_widget.dart';
@@ -23,17 +24,17 @@ class _DetailComicBookState extends State<DetailComicBook>
     _controller = new TabController(length: 2, vsync: this);
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    if (index == 0) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginScreen()));
-    } else {
-      _onReward();
-    }
-  }
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //   });
+  //   if (index == 0) {
+  //     Navigator.push(
+  //         context, MaterialPageRoute(builder: (context) => LoginScreen()));
+  //   } else {
+  //     _onReward();
+  //   }
+  // }
 
   void _onReward() {
     showModalBottomSheet(
@@ -47,13 +48,19 @@ class _DetailComicBookState extends State<DetailComicBook>
               children: [
                 Container(
                   height: 49,
-                  child: ListTile(
-                    selectedTileColor: Colors.white,
-                    leading: Icon(Icons.control_point),
-                    title: Text(
-                      "15",
-                      style: TextStyle(color: Colors.black),
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        Common.pathImg + "ic_coin.png",
+                        width: 18.0,
+                        height: 18.0,
+                      ),
+                      Text(
+                        "15",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
                 Divider(
@@ -62,13 +69,19 @@ class _DetailComicBookState extends State<DetailComicBook>
                 ),
                 Container(
                   height: 49,
-                  child: ListTile(
-                    selectedTileColor: Colors.white,
-                    leading: Icon(Icons.control_point),
-                    title: Text(
-                      "50",
-                      style: TextStyle(color: Colors.black),
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        Common.pathImg + "ic_coin.png",
+                        width: 18.0,
+                        height: 18.0,
+                      ),
+                      Text(
+                        "50",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
                 Divider(
@@ -77,13 +90,19 @@ class _DetailComicBookState extends State<DetailComicBook>
                 ),
                 Container(
                   height: 49,
-                  child: ListTile(
-                    selectedTileColor: Colors.white,
-                    leading: Icon(Icons.control_point),
-                    title: Text(
-                      "100",
-                      style: TextStyle(color: Colors.black),
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        Common.pathImg + "ic_coin.png",
+                        width: 18.0,
+                        height: 18.0,
+                      ),
+                      Text(
+                        "150",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
                 Divider(
@@ -91,8 +110,12 @@ class _DetailComicBookState extends State<DetailComicBook>
                   color: Colors.grey[400],
                 ),
                 Container(
+                  color: Colors.grey[200],
                   height: 50,
                   child: ListTile(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                     selectedTileColor: Colors.grey[200],
                     title: Text(
                       "Khong",
@@ -131,7 +154,9 @@ class _DetailComicBookState extends State<DetailComicBook>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
                             child: Container(
                               decoration: BoxDecoration(
                                 color: Colors.grey[300],
@@ -160,10 +185,15 @@ class _DetailComicBookState extends State<DetailComicBook>
                               height: 30,
                               width: 30,
                               child: Center(
-                                child: Icon(
-                                  Icons.share,
-                                  size: 25,
-                                  color: Colors.grey,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.share,
+                                      size: 25,
+                                      color: Colors.grey,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -172,7 +202,7 @@ class _DetailComicBookState extends State<DetailComicBook>
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 30, top: 170),
+                      margin: EdgeInsets.only(left: 30, top: 180),
                       height: 20,
                       child: Text("Name Book",
                           style: TextStyle(color: Colors.white, fontSize: 18)),
@@ -195,6 +225,7 @@ class _DetailComicBookState extends State<DetailComicBook>
               ],
             ),
             Expanded(
+              flex: 1,
               child: new TabBarView(
                 controller: _controller,
                 children: <Widget>[
@@ -203,31 +234,105 @@ class _DetailComicBookState extends State<DetailComicBook>
                 ],
               ),
             ),
+            Container(
+              height: 40,
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    },
+                    child: Container(
+                      height: 40,
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      child: Center(
+                        child: Text("Follow",
+                            style: TextStyle(
+                              color: Colors.pink,
+                            )),
+                      ),
+                    ),
+                  ),
+                  Divider(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                  GestureDetector(
+                    child: Container(
+                      color: Colors.pink,
+                      height: 40,
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      child: Center(
+                        child: Text("Read Now",
+                            style: TextStyle(
+                              color: Colors.white,
+                            )),
+                      ),
+                    ),
+                  ),
+                  Divider(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _onReward();
+                    },
+                    child: Container(
+                      height: 40,
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      child: Center(
+                        child: Text("Coin",
+                            style: TextStyle(
+                              color: Colors.pink,
+                            )),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Text("Follow"),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: Text("Read Now"),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: Text("Coin"),
-            label: "",
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        showSelectedLabels: false,
-        selectedItemColor: Colors.pink,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: false,
-        onTap: _onItemTapped,
-      ),
+
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(
+      //       icon: Text(
+      //         "Follow",
+      //         style: TextStyle(color: Colors.pink),
+      //       ),
+      //       label: "",
+      //     ),
+      //     BottomNavigationBarItem(
+      //       backgroundColor: Colors.pink,
+      //       icon: Text(
+      //         "Read Now",
+      //         style: TextStyle(color: Colors.pink),
+      //       ),
+      //       label: "",
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Text(
+      //         "Coin",
+      //         style: TextStyle(color: Colors.pink),
+      //       ),
+      //       label: "",
+      //     ),
+      //   ],
+      //   currentIndex: _selectedIndex,
+      //   showSelectedLabels: false,
+      //   selectedItemColor: Colors.pink,
+      //   unselectedItemColor: Colors.white,
+      //   showUnselectedLabels: false,
+      //   onTap: _onItemTapped,
+      // ),
     );
   }
 }
