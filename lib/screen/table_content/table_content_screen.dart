@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/table_content/table_content_controller.dart';
+import 'package:init_app/widgets/appbar_second.dart';
 
 // ignore: must_be_immutable
 class TableContentScreen extends BaseWidget<TableContentController> {
@@ -12,42 +13,17 @@ class TableContentScreen extends BaseWidget<TableContentController> {
 
   @override
   initState({TableContentController controller}) {
-    print("initState");
     return super.initState(controller: controller);
   }
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      TableContentScreen.name,
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      padding: EdgeInsets.all(10.0),
-                      onPressed: () {
-                        controller.back();
-                      },
-                      icon: Icon(Icons.arrow_back_ios_rounded),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            appbarSecond(TableContentScreen.name),
             Expanded(
               child: ListView.builder(
                   physics: AlwaysScrollableScrollPhysics(),

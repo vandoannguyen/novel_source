@@ -15,6 +15,8 @@ class FrequentlyQuestionScreen
   static const String name = 'Câu hỏi thường gặp';
   FrequentlyQuestionController controller =
       Get.put(FrequentlyQuestionController());
+  final ctlTextEditContent = TextEditingController();
+  final ctlTextEditEmail = TextEditingController();
   @override
   initState({FrequentlyQuestionController controller}) {
     return super.initState(controller: controller);

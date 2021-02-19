@@ -4,7 +4,6 @@ import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/setting/setting_controller.dart';
-import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_controller.dart';
 import 'package:init_app/widgets/appbar_second.dart';
 import 'package:init_app/widgets/button_main.dart';
 
@@ -17,6 +16,10 @@ class SettingScreen extends BaseWidget<SettingController> {
   @override
   initState({SettingController controller}) {
     return super.initState(controller: controller);
+  }
+
+  void a() {
+    print("object");
   }
 
   @override
