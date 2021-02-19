@@ -5,17 +5,13 @@ import 'package:init_app/routes/routes.dart';
 import 'package:init_app/screen/bookcase/bookcase_screen.dart';
 import 'package:init_app/screen/bookstore/bookstore_screen.dart';
 import 'package:init_app/screen/home/home_screen.dart';
+import 'package:init_app/screen/load/load_screen.dart';
 import 'package:init_app/screen/personal/personal_screen.dart';
 import 'package:init_app/screen/task/task_screen.dart';
-import 'common/config.dart';
-import 'package:flutter/services.dart';
+import 'package:init_app/utils/call_native_utils.dart';
 
 void main() {
-  Common.config = config;
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //   systemNavigationBarColor: Colors.blue, // navigation bar color
-  //   statusBarColor: Colors.transparent, // status bar color
-  // ));
+  CallNativeUtils.setChannel(Common.CHANNEL);
   return runApp(MyApp());
 }
 
@@ -29,8 +25,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: Routes.home,
+      initialRoute: Routes.load,
       getPages: [
+        GetPage(
+          name: Routes.load,
+          page: () => LoadScreen(),
+        ),
         GetPage(
           name: Routes.home,
           page: () => HomeScreen(),

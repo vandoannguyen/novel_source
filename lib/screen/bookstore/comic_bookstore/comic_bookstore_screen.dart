@@ -6,6 +6,7 @@ import './detail_comic_bookstore.dart';
 class ComicBookstoreScreen extends StatefulWidget {
   static const String routeName = '/ComicBookstore';
   static const String name = 'Books Store';
+
   ComicBookstoreScreen({Key key}) : super(key: key);
 
   @override

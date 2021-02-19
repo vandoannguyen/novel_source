@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/data/network/NovalModel.dart';
+
 import '../common/constant.dart';
 
-Widget itemBookVer({item, index, func}) {
+Widget itemBookVer({NovalModel item, index, func}) {
   return GestureDetector(
     onTap: func,
     child: Container(
@@ -21,18 +23,17 @@ Widget itemBookVer({item, index, func}) {
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(5.0),
-                child: Image.network(
-                  "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  borderRadius: BorderRadius.circular(5.0),
+                  child: FadeInImage.assetNetwork(
+                    image: item.bpic,
+                    placeholder: "assets/images/bg_btn_checkin.jpg",
+                  )),
             ),
           ),
           Container(
             height: 45.0,
             alignment: Alignment.center,
-            child: Text("name",
+            child: Text(item.name,
                 style: TextStyle(fontSize: 14.0),
                 maxLines: 2,
                 textAlign: TextAlign.center,

@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/screen/bookstore/free_bookstore/free_bookstore_controller.dart';
 
-class FreeBookstoreScreen extends StatefulWidget {
+import '../../../common/constant.dart';
+
+// ignore: must_be_immutable
+class FreeBookstoreScreen extends BaseWidget<FreeBookstoreController> {
   static const String routeName = '/FreeBookstore';
   static const String name = 'Books Store';
-  FreeBookstoreScreen({Key key}) : super(key: key);
-
-  @override
-  _FreeBookstoreState createState() => _FreeBookstoreState();
-}
-
-class _FreeBookstoreState extends State<FreeBookstoreScreen> {
   void clickItem(item, index) {
     print("fhsdf  $index");
   }

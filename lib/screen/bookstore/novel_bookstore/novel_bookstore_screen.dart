@@ -16,7 +16,7 @@ class NovelBookstoreScreen extends StatefulWidget {
 
 class _NovelBookstoreState extends State<NovelBookstoreScreen> {
   void clickItem(index, item) {
-    print("object $index");
+    print("object ${item.toJson()}");
   }
 
   @override
@@ -38,9 +38,9 @@ class _NovelBookstoreState extends State<NovelBookstoreScreen> {
             children: List.generate(1, (index) {
               return itemBookVer(
                   index: index,
-                  item: index,
+                  item: Common.myBooks[index],
                   func: () {
-                    clickItem(index, index);
+                    clickItem(index, Common.myBooks[index]);
                   });
             }),
           ),
@@ -52,11 +52,9 @@ class _NovelBookstoreState extends State<NovelBookstoreScreen> {
               itemCount: 5,
               itemBuilder: (BuildContext context, int index) {
                 return itemBookHor(
-                    index: index,
                     item: index,
-                    func: () {
-                      clickItem(index, index);
-                    });
+                    index: index,
+                    func: () => clickItem(index, "item"));
               }),
         ],
       ),
@@ -65,7 +63,7 @@ class _NovelBookstoreState extends State<NovelBookstoreScreen> {
 
   Widget titleWidget({icon, name, all}) {
     return Container(
-      margin: EdgeInsets.fromLTRB(10.0, 10.0, 5.0, 10.0),
+      margin: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -87,16 +85,14 @@ class _NovelBookstoreState extends State<NovelBookstoreScreen> {
                   child: Row(
                     children: [
                       Text(
-                        "Xem tất cả",
+                        "Xem tất cả ",
                         style:
                             TextStyle(color: Color(Constant.colorTxtDefault)),
                       ),
-                      Container(
-                        margin: EdgeInsets.all(0.0),
-                        child: Icon(
-                          Icons.navigate_next_rounded,
-                          color: Color(Constant.colorTxtDefault),
-                        ),
+                      Image.asset(
+                        Common.pathImg + "ic_edit.png",
+                        width: 20.0,
+                        height: 20.0,
                       ),
                     ],
                   ),
