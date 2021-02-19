@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/constant.dart';
-import 'package:init_app/screen/table_content/table_content_controller.dart';
+import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_controller.dart';
 import 'package:init_app/widgets/appbar_second.dart';
 
 // ignore: must_be_immutable
-class TableContentScreen extends BaseWidget<TableContentController> {
-  static const String routeName = '/table-content';
-  static const String name = 'Mục lục';
-  TableContentController controller = Get.put(TableContentController());
+class TutorialBuyCoinScreen extends BaseWidget<TutorialBuyCoinController> {
+  static const String routeName = '/tutorial-buy-coin';
+  static const String name = 'Hướng dẫn nạp xu';
+  TutorialBuyCoinController controller = Get.put(TutorialBuyCoinController());
 
   @override
-  initState({TableContentController controller}) {
+  initState({TutorialBuyCoinController controller}) {
     return super.initState(controller: controller);
   }
 
@@ -23,12 +23,12 @@ class TableContentScreen extends BaseWidget<TableContentController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(TableContentScreen.name),
+            appbarSecond(TutorialBuyCoinScreen.name),
             Expanded(
               child: ListView.builder(
                   physics: AlwaysScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 15,
+                  itemCount: controller.tutorials.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       padding: EdgeInsets.all(15.0),
@@ -36,11 +36,11 @@ class TableContentScreen extends BaseWidget<TableContentController> {
                         children: [
                           Expanded(
                             child: Text(
-                              "Chương 1 : Nhắm mắt lại",
+                              "${index + 1}. ${controller.tutorials[index]}",
                             ),
                           ),
                           Icon(
-                            Icons.lock_outline_rounded,
+                            Icons.navigate_next_rounded,
                             size: 20.0,
                             color: Color(Constant.colorTxtDefault),
                           )
