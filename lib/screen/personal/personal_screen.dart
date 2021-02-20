@@ -103,11 +103,14 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                       ],
                     ),
                   ),
-                  ButtonMain(
-                      name: "Nạp Xu",
-                      func: () {
-                        controller.napXu();
-                      })
+                  Container(
+                    height: 30.0,
+                    child: ButtonMain(
+                        name: "Nạp Xu",
+                        func: () {
+                          controller.click("BUY_COIN");
+                        }),
+                  )
                 ],
               ),
             ),

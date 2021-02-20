@@ -8,6 +8,8 @@ import 'package:init_app/screen/frequently_question/frequently_question_screen.d
 import 'package:init_app/screen/setting/setting_screen.dart';
 
 class PersonalController extends BaseController {
+  void napXu() {}
+
   void click(key) {
     switch (key) {
       case "BUY_COIN":
@@ -19,7 +21,7 @@ class PersonalController extends BaseController {
       case "SUPPORT":
         break;
       case "COME_AUTHOR":
-      Get.to(ComeAuthorScreen());
+        Get.to(ComeAuthorScreen());
         break;
       case "QUESTION":
         Get.to(FrequentlyQuestionScreen());

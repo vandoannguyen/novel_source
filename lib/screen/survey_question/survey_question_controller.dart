@@ -1,9 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
-import 'package:init_app/common/common.dart';
-import 'package:init_app/screen/survey_question/survey_question_screen.dart';
 
 class SurveyQuestionController extends BaseController {
   // ignore: must_call_super

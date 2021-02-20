@@ -18,10 +18,6 @@ class SettingScreen extends BaseWidget<SettingController> {
     return super.initState(controller: controller);
   }
 
-  void a() {
-    print("object");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
