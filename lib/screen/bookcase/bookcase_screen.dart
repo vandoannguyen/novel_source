@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/network/NovalModel.dart';
-import 'package:init_app/screen/read_noval/read_noval_screen.dart';
+import 'package:init_app/screen/chapter_list/chappter_list_screen.dart';
 import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/button_main.dart';
 import 'package:init_app/widgets/item_book_ver.dart';
@@ -18,10 +18,10 @@ class BookcaseScreen extends StatefulWidget {
 
 class _BookcaseState extends State<BookcaseScreen> {
   void clickItem(context, index, NovalModel item) {
-    // print(item.id);
+    print("item.id${item.id}");
     IntentAnimation.intentNomal(
         context: context,
-        screen: ReadNovalScreen(item: item),
+        screen: ChapterList(item.id),
         option: IntentAnimationOption.RIGHT_TO_LEFT,
         duration: Duration(milliseconds: 500));
   }

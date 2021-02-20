@@ -31,13 +31,6 @@ class CryptUtils {
     }
   }
 
-  // static String decryptAESCryptoJS(String encrypted, String passphrase) {
-  //   final key = Key.fromUtf8(passphrase);
-  //   final iv = IV.fromLength(16);
-  //   final encrypter = Encrypter(AES(key));
-  //   final decrypted = encrypter.decrypt(Encrypted.fromUtf8(encrypted), iv: iv);
-  //   return decrypted;
-  // }
   static String decryptAESCryptoJS(String encrypted, String passphrase) {
     try {
       Uint8List encryptedBytesWithSalt = base64.decode(encrypted);

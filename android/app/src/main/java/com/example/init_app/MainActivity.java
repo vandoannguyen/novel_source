@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.init_app.utils.InShotAppUtils;
+import com.example.init_app.utils.SharedPrefsUtils;
 import com.oneadx.android.ratedialog.RatingDialog;
 
 import java.io.UnsupportedEncodingException;
@@ -16,11 +17,11 @@ import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
-import com.example.init_app.utils.SharedPrefsUtils;
 
 public class MainActivity extends FlutterActivity implements RatingDialog.RatingDialogInterFace {
     private static final String CHANNEL = "com.example.init_app";
-    private static final String ONEADX_KEY="gmBUYwLTV2VDu5Y8Dg5S9WpuaNDZvRaZ";
+    private static final String ONEADX_KEY = "gmBUYwLTV2VDu5Y8Dg5S9WpuaNDZvRaZ";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,18 +59,27 @@ public class MainActivity extends FlutterActivity implements RatingDialog.Rating
                         }
                         break;
                     }
-                    case "decrpyt":{
+                    case "decrpyt": {
                         String data = methodCall.argument("data");
-                        Log.e("TAG", "onMethodCall: "+ data);
+                        Log.e("TAG", "onMethodCall: " + data);
                         try {
-                            String s =InShotAppUtils.decodeBase64(data);
-                            Log.e("TAG", "onMethodCall: " + s );
+                            String s = InShotAppUtils.decodeBase64(data);
+                            Log.e("TAG", "onMethodCall: " + s);
                             result.success(s);
                         } catch (Exception e) {
-                            Log.e("TAG", "onMethodCall: "+ e);
+                            Log.e("TAG", "onMethodCall: " + e);
                             result.error(e.toString(), null, null);
                             e.printStackTrace();
                         }
+                        break;
+                    }
+                    case "read": {
+                        String title = methodCall.argument("title");
+                        String content = methodCall.argument("content");
+                        Intent intent = new Intent(MainActivity.this, ReadActivity.class);
+                        intent.putExtra("title", title);
+                        intent.putExtra("content", content);
+                        startActivity(intent);
                         break;
                     }
                 }
