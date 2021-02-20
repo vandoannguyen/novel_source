@@ -1,6 +1,3 @@
-import 'package:init_app/data/network/NovalModel.dart';
-import 'package:init_app/data/network/UserModel.dart';
-
 class Common {
   static final String CHANNEL = "com.example.init_app";
   static final String EXTEND_ONEADX_KEY = "";
@@ -12,4 +9,7 @@ class Common {
   static List<NovalModel> myBooks = null;
 
   static var fanpageName;
+  static String appName = "ĐỌc SÁCH";
+  static String fanpageName = "SÁCH";
+  static var config = {};
 }

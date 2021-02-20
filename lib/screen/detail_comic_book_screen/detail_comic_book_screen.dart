@@ -270,18 +270,20 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                 ),
                 Container(
                   color: Colors.white,
+                  width: double.infinity,
                   padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 10.0),
                   child: GetBuilder<DetailComicBookController>(
                     init: DetailComicBookController(),
                     builder: (controller) => controller.textShowFlag
                         ? Text(
-                            "",
+                            "How to push a fullter BottomN r",
                             style: TextStyle(fontSize: 14.0),
                             maxLines: 5,
                             overflow: TextOverflow.ellipsis,
                           )
                         : Text(
-                            "",
+                            // xem full des
+                            "How to push avigationBar-screen page tnBa a full-screen page that stays on top of Flut",
                             style: TextStyle(fontSize: 14.0),
                           ),
                   ),

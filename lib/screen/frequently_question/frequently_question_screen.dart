@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/constant.dart';
-import 'package:init_app/screen/bookstore/free_bookstore/free_bookstore_screen.dart';
 import 'package:init_app/screen/frequently_question/frequently_question_controller.dart';
 import 'package:init_app/widgets/appbar_second.dart';
 
@@ -16,24 +15,15 @@ class FrequentlyQuestionScreen
   static const String name = 'Câu hỏi thường gặp';
   FrequentlyQuestionController controller =
       Get.put(FrequentlyQuestionController());
-  final ctlTextEditContent = TextEditingController();
-  final ctlTextEditEmail = TextEditingController();
   @override
   initState({FrequentlyQuestionController controller}) {
     return super.initState(controller: controller);
   }
 
   @override
-  void dispose() {
-    // super.dispose();
-    ctlTextEditContent.dispose();
-    ctlTextEditEmail.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: Column(
           children: [

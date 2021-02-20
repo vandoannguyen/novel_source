@@ -84,7 +84,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
             ),
             Container(
               color: Colors.white,
-              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -102,11 +102,14 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                       ],
                     ),
                   ),
-                  ButtonMain(
-                      name: "Nạp Xu",
-                      func: () {
-                        controller.napXu();
-                      })
+                  Container(
+                    height: 30.0,
+                    child: ButtonMain(
+                        name: "Nạp Xu",
+                        func: () {
+                          controller.click("BUY_COIN");
+                        }),
+                  )
                 ],
               ),
             ),

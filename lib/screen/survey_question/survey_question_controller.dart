@@ -4,34 +4,17 @@ import 'package:init_app/base/base_controller.dart';
 
 class SurveyQuestionController extends BaseController {
   // ignore: must_call_super
-  int maxCount = 1000;
-  int count = 0;
-  List<Map<String, dynamic>> questions = [];
 
+  List<Map<String, dynamic>> questions = [];
+  List<dynamic> answers = [1, "", 1, "", "", ""];
   onInit() {
     print(" object CommentController");
     Get.snackbar('Hi', 'i am a modern snackbar');
   }
 
-  void countWord(word) {
-    count = word;
+  void changeAnswers(index, value) {
+    answers[index] = value;
+    print("$index $value");
     update();
-  }
-
-  void back() {
-    Get.back();
-  }
-
-  void send(String email, String content) {
-    // Get.snackbar('Hi', 'i am a modern snackbar');
-    if (email.isEmpty || content.isEmpty) {
-      print(email + "dsda");
-    }
-    back();
-  }
-
-  void contactsFB() {
-    // Get.snackbar('Hi', 'i am a modern snackbar');
-    back();
   }
 }

@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import '../common/constant.dart';
 
 class ButtonMain extends StatefulWidget {
-  ButtonMain({
-    Key key,
-    this.color,
-    @required this.name,
-    @required this.func,
-  }) : super(key: key);
+  ButtonMain(
+      {Key key,
+      this.color,
+      @required this.name,
+      @required this.func,
+      this.txtSize})
+      : super(key: key);
   Color color;
   String name;
   Function() func;
-
+  double txtSize;
   @override
   _ButtonMainState createState() => new _ButtonMainState();
 }
@@ -31,7 +32,9 @@ class _ButtonMainState extends State<ButtonMain> {
             ? widget.color
             : Color(Constant.colorTxtPrimary),
         textColor: Colors.white,
-        child: Text(widget.name, style: TextStyle(fontSize: 13.0)),
+        child: Text(widget.name,
+            style: TextStyle(
+                fontSize: widget.txtSize != null ? widget.txtSize : 13.0)),
       ),
     );
     throw UnimplementedError();
