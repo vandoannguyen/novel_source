@@ -1,1 +1,6 @@
-<resources></resources>
+<resources>
+    <string name="nb.mode.night">Night</string>
+    <string name="nb.read.setting">Establish</string>
+    <string name="nb_mode_morning">Light</string>
+    <string name="nb.read.list">List</string>
+</resources>

@@ -17,6 +17,8 @@ class ReadNovalScreen extends BaseWidget<ReadNovalController> {
     // TODO: implement build
     initState(controller: ReadNovalController());
     controller.readNoval(this.item.id);
+    controller.setSizePage(
+        MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
     return Scaffold(
       // body: SafeArea(
       //     child: Container(
@@ -53,26 +55,31 @@ class ReadNovalScreen extends BaseWidget<ReadNovalController> {
         alignment: Alignment.center,
         child: GetBuilder<ReadNovalController>(
           init: controller,
-          builder: (_) => _.read == null
-              ? CircularProgressIndicator()
-              : PageTurn(
-                  backgroundColor: Colors.white,
-                  lastPage: Container(
-                    child: FadeInImage.assetNetwork(
-                        placeholder: "assets/images/bg_btn.jpg",
-                        image: "${item.bpic}"),
-                  ),
-                  initialIndex: 0,
-                  children: [
-                    AlicePage1(),
-                    AlicePage1(),
-                    AlicePage1(),
-                    AlicePage1(),
-                    AlicePage1()
-                  ]
-                  // listPage(_.read))
-                  ,
-                ),
+          builder: (_) {
+            print(
+                "_.read == null || _.pages.length  ${_.read == null || _.pages.length == 0}");
+            return _.read == null || _.pages.length == 0
+                ? CircularProgressIndicator()
+                : PageTurn(
+                    backgroundColor: Colors.white,
+                    lastPage: Container(
+                      child: FadeInImage.assetNetwork(
+                          placeholder: "assets/images/bg_btn.jpg",
+                          image: "${item.bpic}"),
+                    ),
+                    initialIndex: 0,
+                    children: _.pages
+                        .map((e) => PageViewNoval(
+                              title: e.title,
+                              lines: e.lines,
+                              textStyle: e.contentStyle,
+                              titleStyle: e.titleStyle,
+                            ))
+                        .toList()
+                    // listPage(_.read))
+                    ,
+                  );
+          },
         ),
 
         // body: PageTurn(
@@ -103,15 +110,6 @@ class ReadNovalScreen extends BaseWidget<ReadNovalController> {
         //   ],
       ),
     );
-  }
-
-  listPage(String read) {
-    List<Widget> list = new List();
-    list.add(AlicePage1());
-    list.add(AlicePage1());
-    list.add(AlicePage1());
-    list.add(AlicePage1());
-    list.add(AlicePage1());
   }
 }
 
@@ -174,5 +172,72 @@ class AlicePage1 extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class PageViewNoval extends StatelessWidget {
+  String title;
+  List<String> lines;
+  TextStyle textStyle, titleStyle;
+
+  PageViewNoval({this.title, this.lines, this.textStyle, this.titleStyle});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return SafeArea(
+      child: GetBuilder<ReadNovalController>(
+        init: Get.find(),
+        builder: (_) => Container(
+          padding: EdgeInsets.only(
+            left: _.paddingWidth == null ? 0 : _.paddingWidth / 2,
+            top: _.paddingHeight == null ? 0 : _.paddingHeight / 2,
+            right: _.paddingWidth == null ? 0 : _.paddingWidth / 2,
+            bottom: _.paddingHeight == null ? 0 : _.paddingHeight / 2,
+          ),
+          child: CustomPaint(
+            painter: PagePainter(_,
+                lines: lines, textStyle: textStyle, titleStyle: titleStyle),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PagePainter extends CustomPainter {
+  List<String> lines;
+  TextStyle textStyle, titleStyle;
+  ReadNovalController controller;
+
+  PagePainter(this.controller, {this.lines, this.textStyle, this.titleStyle});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // TODO: implement paint
+
+    var p = Paint();
+    p.color = Colors.amber;
+    canvas.drawPaint(p);
+
+    double visibilityHeight = 0;
+    for (int i = 0; i < lines.length; i++) {
+      TextPainter textPainter = TextPainter(textDirection: TextDirection.ltr);
+      textPainter.text = new TextSpan(text: lines[i], style: textStyle);
+      textPainter.layout(
+          minWidth: 0,
+          maxWidth: controller.widthScreen - controller.paddingWidth);
+      textPainter.paint(
+          canvas,
+          Offset(controller.paddingWidth / 2,
+              controller.paddingHeight / 2 + visibilityHeight));
+      visibilityHeight += textPainter.height;
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    // TODO: implement shouldRepaint
+    return false;
   }
 }

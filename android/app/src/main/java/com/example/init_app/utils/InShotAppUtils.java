@@ -41,6 +41,7 @@ public class InShotAppUtils {
         return new String(clearbyte);
     }
 
+
     public static byte[] toByte(String hexString) {
         int len = hexString.length() / 2;
         byte[] result = new byte[len];

@@ -145,6 +145,8 @@ class ApiImpl implements IApi {
     String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
     String token = CryptUtils.genSha256(
         "${Common.EXTEND_ONEADX_KEY}/sections/book/$id?page=$page&limit=$limit&sort=createdAt&timestamp=$timestamp");
+    print(
+        "123456789 $ROOT_API/sections/book/$id?page=$page&limit=$limit&sort=createdAt&timestamp=$timestamp&oneadx_token=$token");
     Dio()
         .get(
             "$ROOT_API/sections/book/$id?page=$page&limit=$limit&sort=createdAt&timestamp=$timestamp&oneadx_token=$token",
