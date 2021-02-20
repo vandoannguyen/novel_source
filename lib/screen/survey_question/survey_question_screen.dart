@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/survey_question/survey_question_controller.dart';
+import 'package:init_app/widgets/appbar_second.dart';
 import 'package:init_app/widgets/button_main.dart';
 import '../../common/constant.dart';
 
 // ignore: must_be_immutable
 class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
-  static const String routeName = '/feedback';
+  static const String routeName = '/survey_question';
   static const String name = 'Câu hỏi khảo sát';
   SurveyQuestionController controller = Get.put(SurveyQuestionController());
   final ctlTextEditContent = TextEditingController();
@@ -19,171 +20,279 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
   }
 
   @override
-  void dispose() {
-    // super.dispose();
-    ctlTextEditContent.dispose();
-    ctlTextEditEmail.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      SurveyQuestionScreen.name,
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      padding: EdgeInsets.all(10.0),
-                      onPressed: () {
-                        controller.back();
-                      },
-                      icon: Icon(Icons.arrow_back_ios_rounded),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
-              child: Column(
-                children: [
-                  Text(
-                    "1. Bạn ",
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                ],
-              ),
-            ),
-            Stack(
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
-                  // padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  child: TextField(
-                    maxLines: 8,
-                    controller: ctlTextEditContent,
-                    onChanged: (text) {
-                      controller.countWord(text.length);
-                    },
-                    decoration: InputDecoration(
-                      hintText:
-                          "Vui lòng gửi ý kiến phản hồi cho chúng tôi ! Nếu có thể xin liên hệ qua FB của fanpage (${Common.fanpageName}), cảm ơn !",
-                      hintStyle: TextStyle(
-                        fontSize: 15.0,
-                        color: Color(Constant.colorTxtDefault).withOpacity(0.8),
+            appbarSecond(SurveyQuestionScreen.name),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(35.0, 30.0, 35.0, 30.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                            width: 3.0,
+                            color: Color(Constant.colorTxtDefault)
+                                .withOpacity(0.5)),
+                        borderRadius: BorderRadius.all(Radius.circular(
+                                5.0) //                 <--- border radius here
+                            ),
                       ),
-                      contentPadding: EdgeInsets.all(10.0),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-                Positioned(
-                  right: 18,
-                  bottom: 0,
-                  child: GetBuilder<SurveyQuestionController>(
-                    init: SurveyQuestionController(),
-                    builder: (controller) => Text(
-                      (controller.maxCount - controller.count).toString(),
-                      style: TextStyle(fontSize: 10.0),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(15.0, 25.0, 15.0, 25.0),
-              // padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              ),
-              child: TextField(
-                maxLines: 1,
-                controller: ctlTextEditContent,
-                onChanged: (text) {
-                  controller.countWord(text.length);
-                },
-                decoration: InputDecoration(
-                  hintText: "Xin nhận email của bạn (Bắt buộc)",
-                  hintStyle: TextStyle(
-                    fontSize: 15.0,
-                    color: Color(Constant.colorTxtDefault).withOpacity(0.8),
-                  ),
-                  contentPadding: EdgeInsets.all(10.0),
-                  border: InputBorder.none,
-                ),
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 25.0),
-              width: double.infinity,
-              height: 40.0,
-              child: ButtonMain(
-                name: "Gửi",
-                color: Color(Constant.colorTxtSecond),
-                func: () {
-                  controller.send(
-                      ctlTextEditEmail.text, ctlTextEditContent.text);
-                },
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 25.0),
-              width: double.infinity,
-              height: 50.0,
-              child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                    side: BorderSide(
-                      color: Colors.black,
-                      width: 0.5,
-                    ),
-                  ),
-                  color: Colors.white,
-                  padding: EdgeInsets.all(0.0),
-                  onPressed: () {
-                    controller.contactsFB();
-                  },
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Liên hệ FB",
-                          style: TextStyle(),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment(-0.98, 0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Image.asset(
-                            Common.pathImg + "ic_edit.png",
-                            fit: BoxFit.cover,
-                            width: 45.0,
-                            height: 45.0,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 15.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            "1. Bạn mỗi ngày dành bao nhiêu thời gian đọc truyện?",
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Color(Constant.colorTxtSecond),
+                            ),
                           ),
-                        ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: controller.answers[0],
+                                onChanged: (value) {
+                                  controller.changeAnswers(0, value);
+                                },
+                                activeColor: Color(Constant.colorTxtSecond),
+                              ),
+                              Text(
+                                "A. Dưới 1 tiếng",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Color(Constant.colorTxtSecond),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 2,
+                                groupValue: controller.answers[0],
+                                onChanged: (value) {
+                                  controller.changeAnswers(0, value);
+                                },
+                              ),
+                              Text(
+                                "B. 2 tiếng",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Color(Constant.colorTxtSecond),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 3,
+                                groupValue: controller.answers[0],
+                                onChanged: (value) {
+                                  controller.changeAnswers(0, value);
+                                },
+                              ),
+                              Text(
+                                "C. 3 tiếng",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Color(Constant.colorTxtSecond),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 4,
+                                groupValue: controller.answers[0],
+                                onChanged: (value) {
+                                  controller.changeAnswers(0, value);
+                                },
+                              ),
+                              Text(
+                                "D. 3 tiếng trở lên",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Color(Constant.colorTxtSecond),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
-                  )),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(35.0, 0.0, 35.0, 30.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                            width: 3.0,
+                            color: Color(Constant.colorTxtDefault)
+                                .withOpacity(0.5)),
+                        borderRadius: BorderRadius.all(Radius.circular(
+                                5.0) //                 <--- border radius here
+                            ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 15.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            "1. Bạn thích nhất truyện nào ở Mê Tình Truyện?",
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Color(Constant.colorTxtSecond),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          TextField(
+                            maxLines: 8,
+                            controller: ctlTextEditContent,
+                            onChanged: (text) {
+                              controller.changeAnswers(2, text);
+                            },
+                            style: TextStyle(
+                                color: Color(Constant.colorTxtSecond),
+                                fontSize: 16.0),
+                            decoration: InputDecoration(
+                              border: new OutlineInputBorder(
+                                  // border: InputBorder.none,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: new BorderSide(
+                                      color: Color(Constant.colorTxtSecond))),
+                              hintText: "Mời nhập vào Truyện bạn thích nhất",
+                              hintStyle: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Color(Constant.colorTxtSecond)
+                                      .withOpacity(0.6)),
+                              contentPadding: EdgeInsets.all(10.0),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(35.0, 0.0, 35.0, 30.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                            width: 3.0,
+                            color: Color(Constant.colorTxtDefault)
+                                .withOpacity(0.5)),
+                        borderRadius: BorderRadius.all(Radius.circular(
+                                5.0) //                 <--- border radius here
+                            ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 15.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            "3. Bạn hi vọng về sau có thể đọc được các thể loại Truyện nào ở Mê Tình Truyện",
+                            style: TextStyle(
+                              fontSize: 18.0,
+                              color: Color(Constant.colorTxtSecond),
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: controller.answers[0],
+                                onChanged: (value) {
+                                  controller.changeAnswers(0, value);
+                                },
+                              ),
+                              Text(
+                                "A. Ngôn tình hiện đại",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Color(Constant.colorTxtSecond),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 2,
+                                groupValue: controller.answers[0],
+                                onChanged: (value) {
+                                  controller.changeAnswers(0, value);
+                                },
+                              ),
+                              Text(
+                                "B. Xuyên không cổ đại",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Color(Constant.colorTxtSecond),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 3,
+                                groupValue: controller.answers[0],
+                                onChanged: (value) {
+                                  controller.changeAnswers(0, value);
+                                },
+                              ),
+                              Text(
+                                "C. Đô thị",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Color(Constant.colorTxtSecond),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 4,
+                                groupValue: controller.answers[0],
+                                onChanged: (value) {
+                                  controller.changeAnswers(0, value);
+                                },
+                              ),
+                              Text(
+                                "D. Khác",
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Color(Constant.colorTxtSecond),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
+                      height: 40.0,
+                      child: ButtonMain(
+                        name: "Đã xong",
+                        color: Color(Constant.colorTxtSecond),
+                        txtSize: 16.0,
+                        func: () {},
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

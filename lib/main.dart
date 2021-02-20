@@ -6,6 +6,7 @@ import 'package:init_app/screen/bookcase/bookcase_screen.dart';
 import 'package:init_app/screen/bookstore/bookstore_screen.dart';
 import 'package:init_app/screen/home/home_screen.dart';
 import 'package:init_app/screen/personal/personal_screen.dart';
+import 'package:init_app/screen/survey_question/survey_question_screen.dart';
 import 'package:init_app/screen/task/task_screen.dart';
 import 'common/config.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      // home: SurveyQuestionScreen(),
       initialRoute: Routes.home,
       getPages: [
         GetPage(
