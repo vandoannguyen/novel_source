@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/common/constant.dart';
-import 'package:init_app/screen/bookstore/detail/invite_friend_widget.dart';
-import 'package:init_app/screen/bookstore/detail/myfriend_widget.dart';
+import 'package:init_app/screen/bookstore/detail_comic/invite_friend_widget.dart';
+import 'package:init_app/screen/bookstore/detail_comic/myfriend_widget.dart';
 
 class InviteFriend extends StatefulWidget {
   InviteFriend({Key key}) : super(key: key);

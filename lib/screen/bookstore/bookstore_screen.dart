@@ -4,6 +4,7 @@ import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/bookstore/novel_bookstore/novel_bookstore_screen.dart';
 import 'package:init_app/screen/bookstore/comic_bookstore/comic_bookstore_screen.dart';
 import 'package:init_app/screen/bookstore/free_bookstore/free_bookstore_screen.dart';
+import 'package:init_app/screen/bookstore/search/search_screen.dart';
 
 class BookstoreScreen extends StatefulWidget {
   static const String routeName = '/bookstore';
@@ -29,7 +30,10 @@ class _BookstoreState extends State<BookstoreScreen>
       child: Column(
         children: [
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SearchScreen()));
+            },
             child: Container(
               margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
               padding: EdgeInsets.symmetric(vertical: 5.0),

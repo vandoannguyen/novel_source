@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
-import 'package:init_app/screen/bookstore/detail/invite_friend.dart';
-import 'package:init_app/screen/bookstore/detail/loaded_coin.dart';
+import 'package:init_app/screen/bookstore/detail_comic/invite_friend.dart';
+import 'package:init_app/screen/bookstore/detail_comic/loaded_coin.dart';
 import 'package:init_app/screen/task/task_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
 

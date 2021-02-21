@@ -32,16 +32,6 @@ class _LoadedCoinState extends State<LoadedCoin> {
                   width: 100,
                 ),
               ),
-              // Container(
-              //   margin:
-              //       EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
-              //   decoration: BoxDecoration(
-              //     color: Colors.white,
-              //     borderRadius: BorderRadius.circular(32),
-              //     boxShadow: [
-              //       BoxShadow(color: Colors.pink, spreadRadius: 2),
-              //     ],
-              //   ),
               Container(
                 margin:
                     EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10),
