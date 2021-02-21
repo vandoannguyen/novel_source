@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/common/common.dart';
-import 'package:init_app/screen/bookstore/detail/invite_friend.dart';
-import 'package:init_app/screen/bookstore/detail/tutorial_loaded_coin.dart';
+import 'package:init_app/screen/bookstore/detail_comic/invite_friend.dart';
+import 'package:init_app/screen/tutorials/tutorial_loaded_coin.dart';
 
 class DetailWidget extends StatefulWidget {
   DetailWidget({Key key}) : super(key: key);
@@ -161,6 +161,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                     margin: EdgeInsets.only(top: 10),
                     child: Text(
                       "Pin của iPhone sử dụng công nghệ lithium-ion. So với các thế hệ công nghệ pin trước đây, pin lithium-ion sạc nhanh hơn, tuổi thọ cao hơn và có mật độ năng lượng lớn hơn giúp tăng thời lượng và giảm trọng lượng. Công nghệ pin sạc lithium-ion hiện nay là công nghệ tốt nhất cho thiết bị của bạn. Tìm hiểu thêm về pin lithium-ion.",
+                      textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 13, color: Colors.grey[800]),
                     ),
                   ),
@@ -188,9 +189,12 @@ class _DetailWidgetState extends State<DetailWidget> {
                       ),
                     ],
                   ),
-                  Divider(
-                    height: 1,
-                    color: Colors.grey[800],
+                  Container(
+                    height: 30,
+                    child: VerticalDivider(
+                      width: 1,
+                      color: Colors.grey[400],
+                    ),
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -207,9 +211,12 @@ class _DetailWidgetState extends State<DetailWidget> {
                       ),
                     ],
                   ),
-                  Divider(
-                    height: 1,
-                    color: Colors.grey[800],
+                  Container(
+                    height: 30,
+                    child: VerticalDivider(
+                      width: 1,
+                      color: Colors.grey[400],
+                    ),
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -235,12 +242,18 @@ class _DetailWidgetState extends State<DetailWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Row(children: <Widget>[
-                    Expanded(child: Divider()),
+                    Expanded(
+                        child: Container(
+                            margin: EdgeInsets.only(left: 10, right: 10),
+                            child: Divider())),
                     Text(
                       "Thuong",
                       style: TextStyle(color: Colors.pink),
                     ),
-                    Expanded(child: Divider()),
+                    Expanded(
+                        child: Container(
+                            margin: EdgeInsets.only(left: 10, right: 10),
+                            child: Divider())),
                   ]),
                   Container(
                       margin: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -372,9 +385,10 @@ class _DetailWidgetState extends State<DetailWidget> {
                     "Binh luan",
                     style: TextStyle(color: Colors.black),
                   ),
-                  Icon(
-                    Icons.comment_rounded,
-                    color: Colors.grey,
+                  Image.asset(
+                    Common.pathImg + "ic_edit.png",
+                    height: 20,
+                    width: 20,
                   ),
                 ],
               ),
@@ -386,10 +400,12 @@ class _DetailWidgetState extends State<DetailWidget> {
             Container(
               margin: EdgeInsets.all(10),
               height: 30,
-              child: Text(
-                "Xem tat ca binh luan",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey),
+              child: Center(
+                child: Text(
+                  "Xem tat ca binh luan",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.grey),
+                ),
               ),
             ),
             Divider(

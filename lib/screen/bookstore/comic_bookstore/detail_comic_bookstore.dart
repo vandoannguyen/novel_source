@@ -235,7 +235,7 @@ class _DetailComicBookState extends State<DetailComicBook>
               ),
             ),
             Container(
-              height: 40,
+              height: 45,
               color: Colors.white,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -248,7 +248,7 @@ class _DetailComicBookState extends State<DetailComicBook>
                               builder: (context) => LoginScreen()));
                     },
                     child: Container(
-                      height: 40,
+                      height: 45,
                       width: MediaQuery.of(context).size.width * 0.3,
                       child: Center(
                         child: Text("Follow",
@@ -265,7 +265,7 @@ class _DetailComicBookState extends State<DetailComicBook>
                   GestureDetector(
                     child: Container(
                       color: Colors.pink,
-                      height: 40,
+                      height: 45,
                       width: MediaQuery.of(context).size.width * 0.3,
                       child: Center(
                         child: Text("Read Now",
@@ -284,7 +284,7 @@ class _DetailComicBookState extends State<DetailComicBook>
                       _onReward();
                     },
                     child: Container(
-                      height: 40,
+                      height: 45,
                       width: MediaQuery.of(context).size.width * 0.3,
                       child: Center(
                         child: Text("Coin",
