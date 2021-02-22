@@ -222,7 +222,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                   index: index,
                   item: Common.myBooks[index],
                   func: () {
-                    controller.clickItem(index, index);
+                    controller.clickItem(index, Common.myBooks[index]);
                   });
             }),
           ),

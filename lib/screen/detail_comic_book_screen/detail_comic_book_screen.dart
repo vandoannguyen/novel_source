@@ -7,7 +7,7 @@ import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
-import 'package:init_app/widgets/item_book_ver.dart';
+
 import '../../common/constant.dart';
 
 // ignore: must_be_immutable
@@ -554,7 +554,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                       child: Container(
                         height: 180.0,
                         margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        child: itemBookVer(item: e, index: null, func: () {}),
+                        // child: itemBookVer(item: e, index: null, func: () {}),
                       ),
                     ))
                 .toList(),
