@@ -9,12 +9,15 @@ import '../../../common/constant.dart';
 class FreeBookstoreScreen extends BaseWidget<FreeBookstoreController> {
   static const String routeName = '/FreeBookstore';
   static const String name = 'Books Store';
+
   void clickItem(item, index) {
     print("fhsdf  $index");
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,
+      {FreeBookstoreController controllerSuper}) {
+    super.build(context, controllerSuper: FreeBookstoreController());
     return ListView.builder(
         physics: AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,

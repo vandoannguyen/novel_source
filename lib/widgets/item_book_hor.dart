@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/common/images.dart';
+import 'package:init_app/data/network/NovelModelHotest.dart';
 
 import '../common/constant.dart';
 
-Widget itemBookHor({item, index, func}) {
+Widget itemBookHor({NovelModelHotest item, index, func}) {
   return GestureDetector(
     onTap: func,
     child: Container(
@@ -33,9 +35,8 @@ Widget itemBookHor({item, index, func}) {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(5.0),
               child: FadeInImage.assetNetwork(
-                placeholder: Common.pathImg + "ic_edit.png",
-                image:
-                    "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+                placeholder: ic_loading,
+                image: item.bpic,
                 fit: BoxFit.cover,
                 width: 80.0,
                 height: 100.0,
@@ -56,7 +57,7 @@ Widget itemBookHor({item, index, func}) {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text("name",
+                  Text("${item.name}",
                       style: TextStyle(
                         fontSize: 18.0,
                       ),
@@ -64,8 +65,7 @@ Widget itemBookHor({item, index, func}) {
                       overflow: TextOverflow.ellipsis),
                   Container(
                     padding: EdgeInsets.only(top: 8.0, bottom: 5.0),
-                    child: Text(
-                        "TS sẽ lì xì luôn 1tr cho tất cả ứng viên trúng tuyển join trong tháng 02 này luôn nhé 😍, quy trình phỏng vấn tinh gọn chỉ  01 vòng ONLINE qua SKYPE thuiii, người nhà ITS dễ xương lắm, gia nhập biệt đội dễ xương LUÔN HÔM NAY, APPLY GỬI CV ĐỂ CÓ CƠ HỘI NHẬN QUÀ NHÉ CÁC DEV",
+                    child: Text("${item.desc}",
                         style: TextStyle(
                           fontSize: 13.0,
                           color: Color(Constant.colorTxtDefault),
@@ -78,7 +78,7 @@ Widget itemBookHor({item, index, func}) {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "tacgia",
+                          "${item.writerName}",
                           style: TextStyle(
                               color: Color(Constant.colorTxtPrimary),
                               fontSize: 13.0),
@@ -87,7 +87,7 @@ Widget itemBookHor({item, index, func}) {
                           child: Row(
                             children: [
                               Text(
-                                "65675",
+                                "${item.id}",
                                 style: TextStyle(
                                     color: Color(0xFF9c9c9c), fontSize: 12.0),
                               ),

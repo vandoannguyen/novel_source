@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/frequently_question/frequently_question_controller.dart';
@@ -13,15 +12,10 @@ class FrequentlyQuestionScreen
     extends BaseWidget<FrequentlyQuestionController> {
   static const String routeName = '/frequently-question';
   static const String name = 'Câu hỏi thường gặp';
-  FrequentlyQuestionController controller =
-      Get.put(FrequentlyQuestionController());
-  @override
-  initState({FrequentlyQuestionController controller}) {
-    return super.initState(controller: controller);
-  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: FrequentlyQuestionController());
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: SafeArea(

@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/feedback/feedback_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
+
 import '../../common/constant.dart';
 
 // ignore: must_be_immutable
 class FeedbackScreen extends BaseWidget<FeedbackController> {
   static const String routeName = '/feedback';
   static const String name = 'Ý kiến phản hồi';
-  FeedbackController controller = Get.put(FeedbackController());
   final ctlTextEditContent = TextEditingController();
   final ctlTextEditEmail = TextEditingController();
-  @override
-  initState({FeedbackController controller}) {
-    return super.initState(controller: controller);
-  }
 
   @override
   void dispose() {
@@ -27,7 +22,8 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: FeedbackController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -88,7 +84,6 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                   right: 18,
                   bottom: 0,
                   child: GetBuilder<FeedbackController>(
-                    init: FeedbackController(),
                     builder: (controller) => Text(
                       (controller.maxCount - controller.count).toString(),
                       style: TextStyle(fontSize: 10.0),

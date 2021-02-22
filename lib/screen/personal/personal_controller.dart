@@ -1,3 +1,4 @@
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/screen/buy_coin/buy_coin_screen.dart';
@@ -7,6 +8,8 @@ import 'package:init_app/screen/frequently_question/frequently_question_screen.d
 import 'package:init_app/screen/setting/setting_screen.dart';
 
 class PersonalController extends BaseController {
+  PersonalController(BuildContext context);
+
   void click(key) {
     switch (key) {
       case "BUY_COIN":

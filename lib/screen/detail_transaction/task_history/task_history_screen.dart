@@ -1,29 +1,21 @@
-import 'dart:math';
-
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/detail_transaction/task_history/task_history_controller.dart';
-import 'package:init_app/widgets/appbar_second.dart';
 
 // ignore: must_be_immutable
 class TaskHistoryScreen extends BaseWidget<TaskHistoryController> {
   static const String routeName = '/task-history';
   static const String name = 'Nhiệm Vụ';
-  TaskHistoryController controller = Get.put(TaskHistoryController());
-  @override
-  initState({TaskHistoryController controller}) {
-    return super.initState(controller: controller);
-  }
 
   @override
   void dispose() {}
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: TaskHistoryController());
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: ListView.builder(

@@ -6,6 +6,8 @@ class DetailTransactionController extends BaseController
     with SingleGetTickerProviderMixin {
   TabController controllerTab;
 
+  DetailTransactionController();
+
   @override
   void onInit() {
     super.onInit();

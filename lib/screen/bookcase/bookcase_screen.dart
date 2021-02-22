@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/common/images.dart';
 import 'package:init_app/data/network/NovalModel.dart';
-import 'package:init_app/screen/chapter_list/chappter_list_screen.dart';
+import 'package:init_app/screen/table_content/table_content_screen.dart';
 import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/button_main.dart';
 import 'package:init_app/widgets/item_book_ver.dart';
@@ -9,6 +10,7 @@ import 'package:init_app/widgets/item_book_ver.dart';
 class BookcaseScreen extends StatefulWidget {
   static const String routeName = '/bookcase';
   static const String name = 'TỦ SÁCH';
+
   BookcaseScreen({Key key}) : super(key: key);
 
   @override
@@ -20,7 +22,7 @@ class _BookcaseState extends State<BookcaseScreen> {
     print("item.id${item.id}");
     IntentAnimation.intentNomal(
         context: context,
-        screen: ChapterList(item.id),
+        screen: TableContentScreen(item.id),
         option: IntentAnimationOption.RIGHT_TO_LEFT,
         duration: Duration(milliseconds: 500));
   }
@@ -87,7 +89,10 @@ class _BookcaseState extends State<BookcaseScreen> {
               padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 15.0),
               children: List.generate((Common.myBooks.length + 1), (index) {
                 if (index == Common.myBooks.length)
-                  return addBook();
+                  return GestureDetector(
+                    onTap: () {},
+                    child: addBook(),
+                  );
                 else
                   return itemBookVer(
                       item: Common.myBooks[index],
@@ -110,11 +115,18 @@ class _BookcaseState extends State<BookcaseScreen> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
-            child: Image.network(
-              "https://blog.hamtruyentranh.com/wp-content/uploads/2019/01/55950935_p0.png",
+              child: Container(
+            decoration: BoxDecoration(
+                color: Colors.black12,
+                borderRadius: BorderRadius.all(Radius.circular(5))),
+            alignment: Alignment.center,
+            child: Image.asset(
+              ic_add,
+              height: 30,
+              width: 30,
               fit: BoxFit.fill,
             ),
-          ),
+          )),
           Container(
             height: 60.0,
           ),

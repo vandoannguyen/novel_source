@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/detail_transaction/detail_transaction_controller.dart';
@@ -9,10 +8,10 @@ import 'package:init_app/widgets/appbar_second.dart';
 class DetailTransactionScreen extends BaseWidget<DetailTransactionController> {
   static const String routeName = '/detail-transaction';
   static const String name = 'Chi tiết giao dịch';
-  DetailTransactionController controller =
-      Get.put(DetailTransactionController());
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: DetailTransactionController());
     return Scaffold(
       body: SafeArea(
         child: Column(

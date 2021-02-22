@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
-import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/survey_question/survey_question_controller.dart';
 import 'package:init_app/widgets/appbar_second.dart';
 import 'package:init_app/widgets/button_main.dart';
+
 import '../../common/constant.dart';
 
 // ignore: must_be_immutable
@@ -14,13 +14,15 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
   SurveyQuestionController controller = Get.put(SurveyQuestionController());
   final ctlTextEditContent = TextEditingController();
   final ctlTextEditEmail = TextEditingController();
+
   @override
   initState({SurveyQuestionController controller}) {
     return super.initState(controller: controller);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: SurveyQuestionController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

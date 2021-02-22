@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/privacy_policy/privacy_policy_controller.dart';
@@ -8,14 +7,10 @@ import 'package:init_app/widgets/appbar_second.dart';
 class PrivacyPolicyScreen extends BaseWidget<PrivacyPolicyController> {
   static const String routeName = '/privacy-policy';
   static const String name = 'CHÍNH SÁCH BẢO MẬT';
-  PrivacyPolicyController controller = Get.put(PrivacyPolicyController());
-  @override
-  initState({PrivacyPolicyController controller}) {
-    return super.initState(controller: controller);
-  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: PrivacyPolicyController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

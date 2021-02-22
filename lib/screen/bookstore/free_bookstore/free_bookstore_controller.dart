@@ -2,6 +2,8 @@ import 'package:init_app/base/base_controller.dart';
 
 class FreeBookstoreController extends BaseController {
   bool checkToday = false;
+
+  FreeBookstoreController();
   // ignore: must_call_super
   onInit() {
     print(" object TaskController");

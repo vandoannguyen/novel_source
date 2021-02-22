@@ -1,3 +1,5 @@
 import 'package:init_app/base/base_controller.dart';
 
-class PrivacyPolicyController extends BaseController {}
+class PrivacyPolicyController extends BaseController {
+  PrivacyPolicyController();
+}

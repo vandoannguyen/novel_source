@@ -72,7 +72,7 @@ class SharePrefImpl extends ISharePref {
     // TODO: implement setMail
     Completer<String> completer = new Completer();
     SharedPreferences.getInstance().then((pref) {
-      return pref.setString(_LANGUAGE, email);
+      return pref.setString(_EMAIL, email);
     }).then((value) {});
     return completer.future;
   }

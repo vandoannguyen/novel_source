@@ -1,14 +1,23 @@
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
+import 'package:init_app/data/network/CommentModle.dart';
+import 'package:init_app/data/network/NovelModelHotest.dart';
+import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/comment/comment_screen.dart';
 import 'package:init_app/screen/comment_all/comment_all_screen.dart';
 import 'package:init_app/screen/table_content/table_content_screen.dart';
+import 'package:init_app/utils/intent_animation.dart';
 
 class DetailComicBookController extends BaseController {
-  bool textShowFlag = false;
+  bool textShowFlag = true;
 
-  // ignore: must_call_super
-  onInit() {
+  DetailComicBookController();
+
+  NovelModelHotest detail;
+
+  List<CommentModle>
+      // ignore: must_call_super
+      onInit() {
     print(" object DetailComicBookController");
   }
 
@@ -25,7 +34,9 @@ class DetailComicBookController extends BaseController {
         print("reda mdoe");
         break;
       case "TABLE_CONTENT":
-        Get.to(TableContentScreen());
+        // Get.to(TableContentScreen());
+        IntentAnimation.intentNomal(
+            context: context, screen: TableContentScreen(value));
         break;
       case "INVITE":
         break;
@@ -40,5 +51,28 @@ class DetailComicBookController extends BaseController {
         break;
       default:
     }
+  }
+
+  void getBookDetail(String idBook) {
+    RepositoryImpl.getInstance().getNovelDetail(idBook: idBook).then((value) {
+      print(value.toJson());
+      this.detail = value;
+      update();
+    }).catchError((err) {
+      detail = null;
+    });
+  }
+
+  void getComments(String idBook) {
+    RepositoryImpl.getInstance()
+        .getComments(idBook: idBook, page: 1, limit: 10, increase: true)
+        .then((value) {})
+        .catchError((err) {});
+  }
+
+  void clickShowMore(bool textShowFlag) {
+    print("clickShowMore");
+    this.textShowFlag = !textShowFlag;
+    update();
   }
 }

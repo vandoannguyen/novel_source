@@ -4,7 +4,6 @@ import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/setting/setting_controller.dart';
-import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_controller.dart';
 import 'package:init_app/widgets/appbar_second.dart';
 import 'package:init_app/widgets/button_main.dart';
 
@@ -12,15 +11,10 @@ import 'package:init_app/widgets/button_main.dart';
 class SettingScreen extends BaseWidget<SettingController> {
   static const String routeName = '/setting';
   static const String name = 'Cài đặt';
-  SettingController controller = Get.put(SettingController());
 
   @override
-  initState({SettingController controller}) {
-    return super.initState(controller: controller);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: SettingController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

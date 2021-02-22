@@ -9,6 +9,7 @@ import '../../common/constant.dart';
 
 class TaskScreen extends BaseWidget<TaskController> {
   TaskScreen({this.callBack});
+
   final Function callBack;
   static const String routeName = '/tasks';
   static const String name = 'NHIỆM VỤ';
@@ -26,6 +27,7 @@ class TaskScreen extends BaseWidget<TaskController> {
     {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
   ];
   TaskController controller = Get.put(TaskController());
+
   // TaskController _controller = Get.find();
   @override
   initState({TaskController controller}) {
@@ -52,7 +54,8 @@ class TaskScreen extends BaseWidget<TaskController> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: TaskController());
     var size = MediaQuery.of(context).size;
     return Container(
       color: Colors.grey[200],

@@ -13,9 +13,9 @@ class ChapterList extends BaseWidget<ChapterListController> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: ChapterListController());
     _controller.addListener(() {});
-    initState(controller: ChapterListController(context));
     controller.getChapterList(id, page: 1);
     return Scaffold(
       body: SafeArea(

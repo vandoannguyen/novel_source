@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/common/images.dart';
 import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
 
@@ -12,21 +13,19 @@ import '../../common/constant.dart';
 
 // ignore: must_be_immutable
 class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
-  DetailComicBookScreen({this.callBack});
-  final Function callBack;
+  String idBook;
+
+  DetailComicBookScreen({this.idBook});
+
   static const String routeName = '/detail-comic-book';
   static const String name = 'Chi tiết sách tiểu thuyết';
 
-  DetailComicBookController controller = Get.put(DetailComicBookController());
   @override
-  initState({DetailComicBookController controller}) {
-    print("initState");
-    return super.initState(controller: controller);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: DetailComicBookController());
     var size = MediaQuery.of(context).size;
+    controller.getBookDetail(idBook);
+    controller.getComments(idBook);
     return Scaffold(
         body: Column(
       children: [
@@ -96,79 +95,100 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                                   ),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(5.0),
-                                    child: Image.network(
-                                      "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
-                                      fit: BoxFit.cover,
-                                      width: 80.0,
-                                      height: 100.0,
+                                    child:
+                                        GetBuilder<DetailComicBookController>(
+                                      init: controller,
+                                      builder: (_) => _.detail == null
+                                          ? Image.asset(
+                                              ic_loading,
+                                              fit: BoxFit.cover,
+                                              width: 80.0,
+                                              height: 100.0,
+                                            )
+                                          : FadeInImage.assetNetwork(
+                                              placeholder: ic_loading,
+                                              image: _.detail.bpic,
+                                              fit: BoxFit.cover,
+                                              width: 80.0,
+                                              height: 100.0,
+                                            ),
                                     ),
                                   ),
                                 ),
                                 Expanded(
-                                  child: Container(
-                                    padding: EdgeInsets.only(left: 10.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text("name",
-                                            style: TextStyle(
-                                              fontSize: 18.0,
+                                  child: GetBuilder<DetailComicBookController>(
+                                    builder: (_) => Container(
+                                      padding: EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(
+                                              _.detail != null
+                                                  ? _.detail.name
+                                                  : "",
+                                              style: TextStyle(
+                                                fontSize: 18.0,
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 5.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  _.detail != null
+                                                      ? _.detail.writerName
+                                                      : "",
+                                                  style:
+                                                      TextStyle(fontSize: 13.0),
+                                                ),
+                                                Container(
+                                                    margin:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 5.0),
+                                                    height: 10.0,
+                                                    width: 1.0,
+                                                    color: Colors.black),
+                                                Text(
+                                                  "FULL",
+                                                  style:
+                                                      TextStyle(fontSize: 12.0),
+                                                ),
+                                              ],
                                             ),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 5.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "tacgia",
-                                                style:
-                                                    TextStyle(fontSize: 13.0),
-                                              ),
-                                              Container(
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 5.0),
-                                                  height: 10.0,
-                                                  width: 1.0,
-                                                  color: Colors.black),
-                                              Text(
-                                                "FULL",
-                                                style:
-                                                    TextStyle(fontSize: 12.0),
-                                              ),
-                                            ],
                                           ),
-                                        ),
-                                        Text(
-                                          "Cập nhật tới ..",
-                                          style: TextStyle(
-                                            fontSize: 13.0,
-                                            color:
-                                                Color(Constant.colorTxtSecond),
+                                          Text(
+                                            "Cập nhật tới ..",
+                                            style: TextStyle(
+                                              fontSize: 13.0,
+                                              color: Color(
+                                                  Constant.colorTxtSecond),
+                                            ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 5.0,
-                                        ),
-                                        RatingBarIndicator(
-                                          rating: 2.75,
-                                          itemBuilder: (context, index) => Icon(
-                                            Icons.star,
-                                            color: Color(Constant.colorStar),
+                                          SizedBox(
+                                            height: 5.0,
                                           ),
-                                          unratedColor: Colors.white,
-                                          itemCount: 5,
-                                          itemSize: 18.0,
-                                          direction: Axis.horizontal,
-                                        ),
-                                      ],
+                                          RatingBarIndicator(
+                                            rating: 2.75,
+                                            itemBuilder: (context, index) =>
+                                                Icon(
+                                              Icons.star,
+                                              color: Color(Constant.colorStar),
+                                            ),
+                                            unratedColor: Colors.white,
+                                            itemCount: 5,
+                                            itemSize: 18.0,
+                                            direction: Axis.horizontal,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -273,17 +293,16 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                   width: double.infinity,
                   padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 10.0),
                   child: GetBuilder<DetailComicBookController>(
-                    init: DetailComicBookController(),
-                    builder: (controller) => controller.textShowFlag
+                    builder: (_) => _.textShowFlag
                         ? Text(
-                            "How to push a fullter BottomN r",
+                            _.detail != null ? _.detail.desc : "",
                             style: TextStyle(fontSize: 14.0),
-                            maxLines: 5,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           )
                         : Text(
                             // xem full des
-                            "How to push avigationBar-screen page tnBa a full-screen page that stays on top of Flut",
+                            _.detail != null ? _.detail.desc : "",
                             style: TextStyle(fontSize: 14.0),
                           ),
                   ),
@@ -294,38 +313,44 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                   alignment: Alignment.centerRight,
                   child: InkWell(
                     onTap: () {
-                      controller.callBack("READ_MORE", null);
+                      controller.clickShowMore(controller.textShowFlag);
                     },
                     child: GetBuilder<DetailComicBookController>(
-                      init: DetailComicBookController(),
-                      builder: (controller) => controller.textShowFlag
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  "Xem thêm",
-                                  style: TextStyle(
-                                      color: Color(Constant.colorTxtSecond)),
-                                ),
-                                Icon(Icons.keyboard_arrow_down_rounded,
-                                    color: Color(Constant.colorTxtSecond))
-                              ],
-                            )
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  "Rút gọn",
-                                  style: TextStyle(
-                                      color: Color(Constant.colorTxtSecond)),
-                                ),
-                                Icon(Icons.keyboard_arrow_up_rounded,
-                                    color: Color(Constant.colorTxtSecond))
-                              ],
-                            ),
-                    ),
+                        builder: (_) => Container(
+                              padding: EdgeInsets.all(10),
+                              color: Colors.transparent,
+                              child: _.textShowFlag
+                                  ? Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "Xem thêm",
+                                          style: TextStyle(
+                                              color: Color(
+                                                  Constant.colorTxtSecond)),
+                                        ),
+                                        Icon(Icons.keyboard_arrow_down_rounded,
+                                            color:
+                                                Color(Constant.colorTxtSecond))
+                                      ],
+                                    )
+                                  : Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "Rút gọn",
+                                          style: TextStyle(
+                                              color: Color(
+                                                  Constant.colorTxtSecond)),
+                                        ),
+                                        Icon(Icons.keyboard_arrow_up_rounded,
+                                            color:
+                                                Color(Constant.colorTxtSecond))
+                                      ],
+                                    ),
+                            )),
                   ),
                 ),
                 //
@@ -337,7 +362,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                 //TABLE_CONTENT
                 GestureDetector(
                   onTap: () {
-                    controller.callBack("TABLE_CONTENT", null);
+                    controller.callBack("TABLE_CONTENT", idBook);
                   },
                   child: Container(
                     color: Colors.white,

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 
@@ -6,6 +5,8 @@ class FeedbackController extends BaseController {
   // ignore: must_call_super
   int maxCount = 1000;
   int count = 0;
+
+  FeedbackController();
   onInit() {
     print(" object CommentController");
     Get.snackbar('Hi', 'i am a modern snackbar');

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:init_app/common/common.dart';
+import 'package:init_app/common/images.dart';
 import 'package:init_app/data/network/NovalModel.dart';
 
 import '../common/constant.dart';
@@ -26,7 +26,7 @@ Widget itemBookVer({NovalModel item, index, func}) {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5.0),
                 child: FadeInImage.assetNetwork(
-                  placeholder: Common.pathImg + "ic_edit.png",
+                  placeholder: ic_loading,
                   image: item.bpic,
                   fit: BoxFit.cover,
                 ),
