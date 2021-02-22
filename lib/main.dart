@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      // home: SurveyQuestionScreen(),
-      initialRoute: Routes.home,
+      home: SurveyQuestionScreen(),
+      // initialRoute: Routes.home,
       getPages: [
         GetPage(
           name: Routes.home,

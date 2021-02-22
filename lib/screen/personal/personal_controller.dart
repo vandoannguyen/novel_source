@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/screen/buy_coin/buy_coin_screen.dart';
+import 'package:init_app/screen/come_author/come_author_screen.dart';
 import 'package:init_app/screen/detail_transaction/detail_transaction_screen.dart';
 import 'package:init_app/screen/feedback/feedback_screen.dart';
 import 'package:init_app/screen/frequently_question/frequently_question_screen.dart';
@@ -18,6 +19,7 @@ class PersonalController extends BaseController {
       case "SUPPORT":
         break;
       case "COME_AUTHOR":
+      Get.to(ComeAuthorScreen());
         break;
       case "QUESTION":
         Get.to(FrequentlyQuestionScreen());
