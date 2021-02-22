@@ -1,5 +1,8 @@
+import 'package:init_app/data/network/BannerNovelModel.dart';
 import 'package:init_app/data/network/NovalModel.dart';
+import 'package:init_app/data/network/NovelModelHotest.dart';
 
+import 'network/NovalChapterModel.dart';
 import 'network/network.dart';
 import 'share_pref.dart';
 
@@ -91,8 +94,88 @@ class RepositoryImpl implements IRepository {
   }
 
   @override
-  Future chapByNoval({id, limit, page}) {
+  Future<List<NovalChapterModel>> chapByNoval({id, limit, page}) {
     // TODO: implement chapByNoval
     return _api.chapByNoval(id: id, limit: limit, page: page);
+  }
+
+  @override
+  Future addBookIntoMyBooks({idBook}) {
+    // TODO: implement addBookIntoMyBooks
+    return _api.addBookIntoMyBooks(idBook: idBook);
+  }
+
+  @override
+  Future getComments({idBook, page, limit, bool increase = true}) {
+    // TODO: implement getComments
+    return _api.getComments(
+        idBook: idBook, page: page, limit: limit, increase: increase);
+  }
+
+  @override
+  Future<NovelModelHotest> getNovelDetail({idBook}) {
+    // TODO: implement getNovelDetail
+    return _api.getNovelDetail(idBook: idBook);
+  }
+
+  @override
+  Future<List<NovelModelHotest>> getNovelNewest(
+      {language, page, limitPerPage, bool increase = true}) {
+    // TODO: implement getNovelNewest
+    return _api.getNovelNewest(
+        language: language, limitPerPage: limitPerPage, increase: increase);
+  }
+
+  @override
+  Future getUserProfile() {
+    // TODO: implement getUserProfile
+    return _api.getUserProfile();
+  }
+
+  @override
+  Future historyBuy({page, limit, bool increase = true}) {
+    // TODO: implement historyBuy
+    _api.historyBuy(page: page, limit: limit, increase: increase);
+  }
+
+  @override
+  Future loginWithFaceBook({access_token}) {
+    // TODO: implement loginWithFaceBook
+    return _api.loginWithFaceBook(access_token: access_token);
+  }
+
+  @override
+  Future loginWithGoogle({access_token}) {
+    // TODO: implement loginWithGoogle
+    return _api.loginWithGoogle(access_token: access_token);
+  }
+
+  @override
+  Future postComment({idBook, contentComment}) {
+    // TODO: implement postComment
+    return _api.postComment(idBook: idBook, contentComment: contentComment);
+  }
+
+  @override
+  Future removeBookFromMyBook({idBook}) {
+    // TODO: implement removeBookFromMyBook
+    return _api.removeBookFromMyBook(idBook: idBook);
+  }
+
+  @override
+  Future<List<BannerNovelModel>> getBanner({language}) {
+    // TODO: implement getBanner
+    return _api.getBanner(language: language);
+  }
+
+  @override
+  Future<List<NovelModelHotest>> getNovelHotest(
+      {language, page, limitPerPage, bool increase = true}) {
+    // TODO: implement getNovelHotest
+    return _api.getNovelHotest(
+        language: language,
+        page: page,
+        limitPerPage: limitPerPage,
+        increase: increase);
   }
 }

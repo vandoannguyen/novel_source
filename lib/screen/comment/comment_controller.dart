@@ -5,6 +5,8 @@ class CommentController extends BaseController {
   // ignore: must_call_super
   int maxCount = 1000;
   int count = 0;
+
+  CommentController();
   onInit() {
     print(" object CommentController");
   }

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
-import 'package:init_app/screen/setting/setting_screen.dart';
 import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_screen.dart';
 
 class BuyCoinController extends BaseController {
@@ -58,6 +57,8 @@ class BuyCoinController extends BaseController {
     },
   ];
   Map<String, String> value;
+
+  BuyCoinController();
   onInit() {
     print(" object BuyCoinController");
     value = paymentMethods[0];

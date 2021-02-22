@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/data/network/BannerNovelModel.dart';
+import 'package:init_app/data/network/NovelModelHotest.dart';
 import 'package:init_app/utils/crypt_utils.dart';
 
+import 'NovalChapterModel.dart';
 import 'NovalModel.dart';
 
 abstract class IApi {
@@ -22,7 +25,33 @@ abstract class IApi {
 
   Future readNoval({id});
 
-  Future chapByNoval({id, limit, page});
+  Future<List<NovalChapterModel>> chapByNoval({id, limit, page});
+
+  Future addBookIntoMyBooks({idBook});
+
+  Future removeBookFromMyBook({idBook});
+
+  Future<List<BannerNovelModel>> getBanner({language});
+
+  Future<List<NovelModelHotest>> getNovelHotest(
+      {language, page, limitPerPage, bool increase = true});
+
+  Future<List<NovelModelHotest>> getNovelNewest(
+      {language, page, limitPerPage, bool increase = true});
+
+  Future<NovelModelHotest> getNovelDetail({idBook});
+
+  Future postComment({idBook, contentComment});
+
+  Future getComments({idBook, page, limit, bool increase = true});
+
+  Future historyBuy({page, limit, bool increase = true});
+
+  Future loginWithGoogle({access_token});
+
+  Future loginWithFaceBook({access_token});
+
+  Future getUserProfile();
 }
 
 class ApiImpl implements IApi {
@@ -139,42 +168,357 @@ class ApiImpl implements IApi {
   }
 
   @override
-  Future chapByNoval({id, limit, page}) {
-    Completer completer = new Completer();
+  Future<List<NovalChapterModel>> chapByNoval({id, limit, page}) {
+    Completer<List<NovalChapterModel>> completer = new Completer();
     // TODO: implement chapByNoval
     String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
     String token = CryptUtils.genSha256(
         "${Common.EXTEND_ONEADX_KEY}/sections/book/$id?page=$page&limit=$limit&sort=createdAt&timestamp=$timestamp");
-    print(
-        "123456789 $ROOT_API/sections/book/$id?page=$page&limit=$limit&sort=createdAt&timestamp=$timestamp&oneadx_token=$token");
     Dio()
         .get(
             "$ROOT_API/sections/book/$id?page=$page&limit=$limit&sort=createdAt&timestamp=$timestamp&oneadx_token=$token",
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      if (value.data["code"] == 1)
-        completer.complete(value.data["result"]);
-      else
+      if (value.data["code"] == 1) {
+        List<NovalChapterModel> list = (value.data["result"] as List)
+            .map((e) => NovalChapterModel.fromJson(e))
+            .toList();
+        completer.complete(list);
+      } else
         completer.complete([]);
     });
-    // CallNativeUtils.invokeMethod(method: "encrypt", aguments: {
-    //   "data":
-    //       "/sections/book/6017f25f935d8d2bbeedb8ee?page=1&limit=10&sort=createdAt&timestamp=1612586520"
-    // }).then((token) {
-    // print(
-    //     "$ROOT_API/sections/book/6017f25f935d8d2bbeedb8ee?page=1&limit=10&sort=createdAt&timestamp=1612586520&oneadx_token=$token");
-    // print(Common.token);
+    return completer.future;
+  }
+
+  @override
+  Future addBookIntoMyBooks({idBook}) {
+    Completer completer = Completer();
+    String timeStamp = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/racks/$idBook?timestamp=${timeStamp}");
+    Dio()
+        .post(
+            "$ROOT_API/racks/$idBook?timestamp=${timeStamp}&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      completer.complete(value);
+    }).catchError((err) {
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future removeBookFromMyBook({idBook}) {
+    // TODO: implement removeBookFromMyBook
+    Completer completer = Completer();
+    String timeStamp = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/racks/$idBook?timestamp=${timeStamp}");
+    Dio()
+        .delete(
+            "$ROOT_API/racks/$idBook?timestamp=${timeStamp}&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      completer.complete(value);
+    }).catchError((err) {
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future<List<BannerNovelModel>> getBanner({language}) {
+    print("language$language");
+    Completer<List<BannerNovelModel>> completer = new Completer();
+    String timestamp = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/banners?language=$language&timestamp=$timestamp");
+    Dio()
+        .get(
+            "$ROOT_API/banners?language=$language&timestamp=$timestamp&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      print("data $value");
+      if (value.data["code"] == 1)
+        return value.data["result"];
+      else
+        return null;
+    }).then((value) {
+      if (value != null) {
+        List<BannerNovelModel> list =
+            (value as List).map((e) => BannerNovelModel.fromJson(e)).toList();
+        completer.complete(list);
+      } else {
+        throw ("null err");
+      }
+    }).catchError((err) {
+      print(err);
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future getComments({idBook, page, limit, bool increase = true}) {
+    Completer completer = new Completer();
+    String timeStamp = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/comments/book/$idBook?"
+        "page=$page"
+        "&limit=$limit"
+        "&sort=${increase ? "createdAt" : "-createdAt"}"
+        "&timestamp=$timeStamp");
+    Dio()
+        .get(
+            "$ROOT_API/comments/book/$idBook?"
+            "page=$page"
+            "&limit=$limit"
+            "&sort=${increase ? "createdAt" : "-createdAt"}"
+            "&timestamp=$timeStamp"
+            "&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      if (value.data["code"] == 1)
+        return value.data["result"];
+      else
+        throw ("data null");
+    }).then((value) {
+      print(value);
+      completer.complete(value);
+    }).catchError((err) {
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future<NovelModelHotest> getNovelDetail({idBook}) {
+    print("getBookDetail1");
+    Completer<NovelModelHotest> completer = new Completer();
+    String timeStamp = _getTimeStamp();
+    String token = CryptUtils.genSha256("${Common.EXTEND_ONEADX_KEY}"
+        "/books/$idBook"
+        "?timestamp=$timeStamp");
+    print("${ROOT_API}"
+        "/books/$idBook"
+        "?timestamp=$timeStamp"
+        "&oneadx_token=$token");
+    Dio()
+        .get(
+            "${ROOT_API}"
+            "/books/$idBook"
+            "?timestamp=$timeStamp"
+            "&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      if (value.data["code"] == 1)
+        return value.data["result"];
+      else
+        throw ("data null");
+    }).then((value) {
+      completer.complete(NovelModelHotest.fromJson(value));
+    }).catchError((err) {
+      print(err);
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future<List<NovelModelHotest>> getNovelHotest(
+      {language, page, limitPerPage, bool increase = true}) {
+    Completer<List<NovelModelHotest>> completer = new Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256("${Common.EXTEND_ONEADX_KEY}"
+        "/books/language/$language"
+        "?page=$page"
+        "&limit=$limitPerPage"
+        "&sort=${increase ? "-booknum" : "booknum"}"
+        "&timestamp=$time");
+    Dio()
+        .get(
+            "${ROOT_API}/books/language/$language"
+            "?page=$page"
+            "&limit=$limitPerPage"
+            "&sort=${increase ? "-booknum" : "booknum"}"
+            "&timestamp=$time"
+            "&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      if (value.data["code"] == 1) {
+        return value.data["result"];
+      } else {
+        return null;
+      }
+    }).then((value) {
+      if (value == null)
+        throw ("null data");
+      else {
+        List<NovelModelHotest> list =
+            (value as List).map((e) => NovelModelHotest.fromJson(e)).toList();
+        completer.complete(list);
+      }
+    }).catchError((err) {
+      completer.completeError((err));
+    });
+    return completer.future;
+  }
+
+  @override
+  Future<List<NovelModelHotest>> getNovelNewest(
+      {language, page, limitPerPage, bool increase = true}) {
+    Completer<List<NovelModelHotest>> completer = new Completer();
+    String time = _getTimeStamp();
+    // String token = CryptUtils.genSha256("${Common.EXTEND_ONEADX_KEY}"
+    //     "/books/language/$language?page=$page&limit=$limitPerPage&sort=createdAt&timestamp=$time");
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time");
     // Dio()
     //     .get(
-    //         "$ROOT_API/sections/book/6017f25f935d8d2bbeedb8ee?page=1&limit=10&sort=createdAt&timestamp=1612586520&oneadx_token=$token",
+    //         "${ROOT_API}/books/language/$language"
+    //         "?page=$page"
+    //         "&limit=$limitPerPage"
+    //         "&sort=createdAt"
+    //         "&timestamp=$time"
+    //         "&oneadx_token=$token",
     //         options:
     //             Options(headers: {"Authorization": "Bearer ${Common.token}"}))
-    //     .then((value) {
-    //   print(value.data);
-    // });
-    // });
-
+    // print(
+    //     "${ROOT_API}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time"
+    //     "&oneadx_token=$token");
+    // print(Common.token);
+    Dio()
+        .get(
+            "${ROOT_API}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time"
+            "&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      if (value.data["code"] == 1) {
+        return value.data["result"];
+      } else
+        return null;
+    }).then((value) {
+      if (value != null) {
+        List<NovelModelHotest> list =
+            (value as List).map((e) => NovelModelHotest.fromJson(e)).toList();
+        completer.complete(list);
+      } else
+        throw ("data null");
+    }).catchError((err) {
+      print(err);
+      completer.completeError(("getNovelNewest$err"));
+    });
     return completer.future;
+  }
+
+  @override
+  Future getUserProfile() {
+    Completer completer = new Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256("${Common.EXTEND_ONEADX_KEY}/users/me?"
+        "timestamp=$time");
+    Dio()
+        .get(
+            "${ROOT_API}/users/me?"
+            "timestamp=$time"
+            "&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      completer.complete(value);
+    }).catchError((err) {
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future historyBuy({page, limit, bool increase = true}) {
+    Completer completer = new Completer();
+    String time = _getTimeStamp();
+    String token =
+        CryptUtils.genSha256("${Common.EXTEND_ONEADX_KEY}/payments/me"
+            "?page=$page"
+            "&limit=$limit"
+            "&sort=${increase ? "createdAt" : "-createdAt"}"
+            "&timestamp=$time");
+    Dio()
+        .get(
+            "$ROOT_API/payments/me"
+            "?page=$page"
+            "&limit=$limit"
+            "&sort=${increase ? "createdAt" : "-createdAt"}"
+            "&timestamp=$time"
+            "&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      completer.complete(value);
+    }).catchError((err) {
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future loginWithFaceBook({access_token}) {
+    Completer completer = new Completer();
+    // String time = _getTimeStamp();
+    // String token = CryptUtils.genSha256(
+    //     "${Common.EXTEND_ONEADX_KEY}/auth/google?timestamp=$time");
+    // Dio().post("$ROOT_API/auth/google?timestamp=$time&oneadx_token=$token",
+    //     data: {"access_token": access_token}).then((value) {
+    //   completer.complete(value);
+    // }).catchError((err) {
+    //   completer.completeError(err);
+    // });
+    return completer.future;
+  }
+
+  @override
+  Future loginWithGoogle({access_token}) {
+    Completer completer = new Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/auth/google?timestamp=$time");
+    Dio().post("$ROOT_API/auth/google?timestamp=$time&oneadx_token=$token",
+        data: {"access_token": access_token}).then((value) {
+      completer.complete(value);
+    }).catchError((err) {
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future postComment({idBook, contentComment}) {
+    Completer completer = new Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/comments/book/$idBook?timestamp=$time&oneadx_token=f2da7879ab4084eb");
+    Dio().post(
+        "$ROOT_API/comments/book/$idBook?timestamp=$time&oneadx_token=$token",
+        data: {"content": contentComment}).then((value) {
+      completer.complete(value);
+    }).catchError((err) {
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  _getTimeStamp() {
+    int time = (DateTime.now().millisecondsSinceEpoch / 1000).round();
+    print(time.round());
+
+    return "1612586520";
   }
 }

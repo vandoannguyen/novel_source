@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
@@ -34,6 +33,8 @@ class FrequentlyQuestionController extends BaseController {
       "answer": "Thứ 2 đến thứ 6 hằng tuần, mỗi ngày đều ra chương mới"
     },
   ];
+
+  FrequentlyQuestionController();
 
   onInit() {}
 

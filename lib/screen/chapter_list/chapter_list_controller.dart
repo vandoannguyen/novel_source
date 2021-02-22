@@ -18,9 +18,7 @@ class ChapterListController extends BaseController {
     RepositoryImpl.getInstance()
         .chapByNoval(id: id, limit: 20, page: page)
         .then((value) {
-      List<NovalChapterModel> list =
-          (value as List).map((e) => NovalChapterModel.fromJson(e)).toList();
-      this.list.addAll(list);
+      this.list.addAll(value);
       print(this.list);
       update();
     }).catchError((err) {
@@ -28,7 +26,7 @@ class ChapterListController extends BaseController {
     });
   }
 
-  ChapterListController(context) {
+  ChapterListController() {
     this.context = context;
     list = new List();
   }

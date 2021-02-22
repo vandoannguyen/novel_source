@@ -14,9 +14,9 @@ class ReadNovalScreen extends BaseWidget<ReadNovalController> {
   ReadNovalScreen({@required NovalModel this.item});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
     // TODO: implement build
-    initState(controller: ReadNovalController());
+    super.build(context, controllerSuper: ReadNovalController());
     controller.readNoval(this.item.id);
     controller.setSizePage(
         MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);

@@ -28,7 +28,7 @@ class _ComicBookstoreState extends State<ComicBookstoreScreen> {
         itemCount: 15,
         itemBuilder: (BuildContext context, int index) {
           return itemBookHor(
-              item: index,
+              item: null,
               index: index,
               func: () {
                 clickItem(index, index);

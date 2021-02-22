@@ -5,21 +5,16 @@ import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/buy_coin/buy_coin_controller.dart';
 import 'package:init_app/widgets/appbar_second.dart';
-import 'package:init_app/widgets/button_main.dart';
 
 // ignore: must_be_immutable
 class BuyCoinScreen extends BaseWidget<BuyCoinController> {
   static const String routeName = '/buy-coin';
   static const String name = 'Chọn phương thức thanh toán';
-  BuyCoinController controller = Get.put(BuyCoinController());
   BuildContext dialogContext;
-  @override
-  initState({BuyCoinController controller}) {
-    return super.initState(controller: controller);
-  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {BuyCoinController controllerSuper}) {
+    super.build(context, controllerSuper: BuyCoinController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

@@ -4,6 +4,8 @@ import 'package:init_app/screen/privacy_policy/privacy_policy_screen.dart';
 
 class AboutUsController extends BaseController {
   String version = "123";
+
+  AboutUsController();
   @override
   void onInit() {
     // TODO: implement onInit

@@ -15,10 +15,13 @@ class LoadController extends BaseController {
 
   bool _isGetCountrySuccess = false;
 
+  LoadController();
+
   void login(context) async {
     String email = await getRandomEmail();
-    String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-    print(email);
+    String timestamp =
+        (DateTime.now().millisecondsSinceEpoch / 1000).round().toString();
+    // login
     RepositoryImpl.getInstance()
         .login(email: email, timestamep: timestamp)
         .then((value) {
@@ -37,6 +40,7 @@ class LoadController extends BaseController {
 
   Future getRandomEmail() async {
     String email = await RepositoryImpl.getInstance().getMail();
+    // kiểm tra xem mail tạo chưa
     if (email == null) {
       isCreateEmail = true;
       email = "";
@@ -71,7 +75,7 @@ class LoadController extends BaseController {
 
   void getMyBookLib() {
     RepositoryImpl.getInstance().getMyBooks(
-        timestamp: DateTime.now().millisecondsSinceEpoch.toString());
+        timestamp: (DateTime.now().millisecondsSinceEpoch / 1000).toString());
   }
 
   void _getData(context) {
@@ -79,11 +83,13 @@ class LoadController extends BaseController {
       if (isCreateEmail) {
         RepositoryImpl.getInstance()
             .createMyBooks(
-                timestamp: DateTime.now().millisecondsSinceEpoch.toString())
+                timestamp:
+                    (DateTime.now().millisecondsSinceEpoch / 1000).toString())
             .then((value) {
           RepositoryImpl.getInstance()
               .getMyBooks(
-                  timestamp: DateTime.now().millisecondsSinceEpoch.toString())
+                  timestamp:
+                      (DateTime.now().millisecondsSinceEpoch / 1000).toString())
               .then((value) {
             print("value2222$value");
             Common.myBooks = value;
@@ -93,7 +99,8 @@ class LoadController extends BaseController {
       } else {
         RepositoryImpl.getInstance()
             .getMyBooks(
-                timestamp: DateTime.now().millisecondsSinceEpoch.toString())
+                timestamp:
+                    (DateTime.now().millisecondsSinceEpoch / 1000).toString())
             .then((value) {
           Common.myBooks = value;
           print(value);
@@ -107,7 +114,7 @@ class LoadController extends BaseController {
 
   void intentToHome(context) {
     print("okokok");
-    IntentAnimation.intentNomal(
+    IntentAnimation.intentPushReplacement(
         context: context,
         screen: HomeScreen(),
         option: IntentAnimationOption.RIGHT_TO_LEFT,

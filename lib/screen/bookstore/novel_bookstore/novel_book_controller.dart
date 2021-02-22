@@ -1,7 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
+import 'package:init_app/common/common.dart';
+import 'package:init_app/data/network/BannerNovelModel.dart';
+import 'package:init_app/data/network/NovelModelHotest.dart';
+import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_screen.dart';
+import 'package:init_app/utils/intent_animation.dart';
 
 class NovelBookController extends BaseController {
   int currentCarousel = 0;
@@ -15,6 +19,14 @@ class NovelBookController extends BaseController {
     'https://images.unsplash.com/photo-1586951144438-26d4e072b891?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
     'https://images.unsplash.com/photo-1586953983027-d7508a64f4bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
   ];
+  List<BannerNovelModel> listBanner;
+
+  List<NovelModelHotest> listHotest;
+
+  List<NovelModelHotest> listNewest;
+
+  NovelBookController();
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -36,9 +48,13 @@ class NovelBookController extends BaseController {
     update();
   }
 
-  void clickItem(index, item) {
-    print("object $index");
-    Get.to(DetailComicBookScreen());
+  void clickItem(index, NovelModelHotest item) {
+    print(item.id);
+    IntentAnimation.intentNomal(
+        context: context,
+        screen: DetailComicBookScreen(idBook: item.id),
+        option: IntentAnimationOption.RIGHT_TO_LEFT,
+        duration: Duration(milliseconds: 800));
   }
 
   void callBack(key, value) {
@@ -50,5 +66,36 @@ class NovelBookController extends BaseController {
         break;
       default:
     }
+  }
+
+  void getBanner() {
+    RepositoryImpl.getInstance()
+        .getBanner(language: Common.language)
+        .then((value) {
+      listBanner = new List();
+      listBanner.addAll(value);
+      update();
+    }).catchError((err) {
+      listBanner = null;
+      update();
+    });
+  }
+
+  void getNewest() {
+    RepositoryImpl.getInstance()
+        .getNovelNewest(language: Common.language, page: 1, limitPerPage: 10)
+        .then((value) {
+      listNewest = value;
+      update();
+    }).catchError((err) {});
+  }
+
+  void getHotest() {
+    RepositoryImpl.getInstance()
+        .getNovelHotest(language: Common.language, page: 1, limitPerPage: 10)
+        .then((value) {
+      listHotest = value;
+      update();
+    }).catchError((err) {});
   }
 }

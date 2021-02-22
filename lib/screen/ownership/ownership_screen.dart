@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/ownership/ownership_controller.dart';
@@ -8,14 +7,10 @@ import 'package:init_app/widgets/appbar_second.dart';
 class OwnershipScreen extends BaseWidget<OwnershipController> {
   static const String routeName = '/ownership';
   static const String name = 'Quyền sở hữu';
-  OwnershipController controller = Get.put(OwnershipController());
-  @override
-  initState({OwnershipController controller}) {
-    return super.initState(controller: controller);
-  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: OwnershipController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

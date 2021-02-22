@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/screen/comment_all/comment_all_controller.dart';
+
 import '../../common/constant.dart';
 
 // ignore: must_be_immutable
 class CommentAllScreen extends BaseWidget<CommentAllController> {
   static const String routeName = '/comment';
   static const String name = 'Bình luận';
-  CommentAllController controller = Get.put(CommentAllController());
 
   @override
-  initState({CommentAllController controller}) {
-    print("initState");
-    return super.initState(controller: controller);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: CommentAllController());
     var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,

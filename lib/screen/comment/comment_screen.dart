@@ -2,22 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
-import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/comment/comment_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
+
 import '../../common/constant.dart';
 
 // ignore: must_be_immutable
 class CommentScreen extends BaseWidget<CommentController> {
   static const String routeName = '/comment';
   static const String name = 'Bình luận';
-  CommentController controller = Get.put(CommentController());
   final controllerTextEdit = TextEditingController();
-  @override
-  initState({CommentController controller}) {
-    print("initState");
-    return super.initState(controller: controller);
-  }
 
   @override
   void dispose() {
@@ -26,7 +20,8 @@ class CommentScreen extends BaseWidget<CommentController> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: CommentController());
     var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -115,7 +110,6 @@ class CommentScreen extends BaseWidget<CommentController> {
                   right: 18,
                   bottom: 15,
                   child: GetBuilder<CommentController>(
-                    init: CommentController(),
                     builder: (controller) => Text(
                       (controller.maxCount - controller.count).toString(),
                       style: TextStyle(fontSize: 10.0),

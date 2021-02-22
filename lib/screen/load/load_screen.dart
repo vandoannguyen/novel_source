@@ -8,8 +8,8 @@ class LoadScreen extends BaseWidget<LoadController> {
   static const String routeName = "/load";
 
   @override
-  Widget build(BuildContext context) {
-    initState(controller: LoadController());
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: LoadController());
     controller.login(context);
     Future.delayed(Duration(seconds: 2), controller.getLaguage(context));
     return Scaffold(
@@ -49,6 +49,4 @@ class LoadScreen extends BaseWidget<LoadController> {
       ),
     );
   }
-
-  void showDialogLanguage() {}
 }

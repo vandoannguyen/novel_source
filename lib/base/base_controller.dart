@@ -3,6 +3,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 abstract class BaseController extends GetxController {
+  BuildContext context;
+
+  BaseController();
+
   void showMess(String mess, TypeMess type) {
     Fluttertoast.showToast(
         msg: mess,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/personal/personal_controller.dart';
@@ -11,10 +10,10 @@ import '../../common/constant.dart';
 class PersonalScreen extends BaseWidget<PersonalController> {
   static const String routeName = '/personal';
   static const String name = 'CÁ NHÂN';
-  PersonalController controller = Get.put(PersonalController());
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: PersonalController(context));
     var size = MediaQuery.of(context).size;
     return Container(
       color: Colors.grey[200],

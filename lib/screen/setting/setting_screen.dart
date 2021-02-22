@@ -11,15 +11,10 @@ import 'package:init_app/widgets/button_main.dart';
 class SettingScreen extends BaseWidget<SettingController> {
   static const String routeName = '/setting';
   static const String name = 'Cài đặt';
-  SettingController controller = Get.put(SettingController());
 
   @override
-  initState({SettingController controller}) {
-    return super.initState(controller: controller);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: SettingController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(

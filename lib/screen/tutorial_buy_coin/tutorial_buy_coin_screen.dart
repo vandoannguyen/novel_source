@@ -17,7 +17,8 @@ class TutorialBuyCoinScreen extends BaseWidget<TutorialBuyCoinController> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, {controllerSuper}) {
+    super.build(context, controllerSuper: TutorialBuyCoinController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
