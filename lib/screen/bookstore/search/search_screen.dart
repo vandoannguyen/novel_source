@@ -12,6 +12,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  TextEditingController _controller = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,38 +39,49 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   Container(
                     height: 30,
-                    width: MediaQuery.of(context).size.width * 0.7,
+                    width: MediaQuery.of(context).size.width * 0.72,
                     margin: EdgeInsets.only(top: 6, bottom: 6),
+                    //margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
+                    //padding: EdgeInsets.symmetric(vertical: 5.0),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                    ),
                     child: Center(
                       child: TextField(
+                        controller: _controller,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(top: 3),
                           fillColor: Colors.grey[400],
-                          hintText: "Search book, tacgia",
+                          hintText: "Search book, author",
                           hintStyle: TextStyle(
-                            color: Colors.grey[800],
+                            color: Colors.grey[400],
                             fontSize: 12,
                           ),
                           border: new OutlineInputBorder(
                             borderRadius: BorderRadius.circular(32),
                           ),
                         ),
-                        // keyboardType: TextInputType.number,
-                        // inputFormatters: <TextInputFormatter>[
-                        //   FilteringTextInputFormatter.digitsOnly
-                        // ], // Only numbers can be entered
                       ),
                     ),
                   ),
-                  Container(
-                      margin: EdgeInsets.all(10),
-                      child: Center(
-                          child: Text(
-                        "Khong",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 12),
-                      ))),
+                  GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        _controller.clear();
+                        FocusScope.of(context).requestFocus(new FocusNode());
+                      });
+                    },
+                    child: Container(
+                        margin: EdgeInsets.all(10),
+                        child: Center(
+                            child: Text(
+                          "No",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 12),
+                        ))),
+                  ),
                 ],
               ),
             ),
@@ -81,9 +93,12 @@ class _SearchScreenState extends State<SearchScreen> {
                     Icons.ac_unit,
                     color: Colors.red,
                   ),
-                  Text(
-                    "HOT NHAT",
-                    style: TextStyle(color: Colors.red),
+                  Container(
+                    margin: EdgeInsets.only(left: 5.0),
+                    child: Text(
+                      "HOTTEST",
+                      style: TextStyle(color: Colors.pink),
+                    ),
                   ),
                 ],
               ),
@@ -101,6 +116,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   itemCount: 4,
                   itemBuilder: (BuildContext context, int index) {
+                    int ind = index + 1;
                     return GestureDetector(
                       child: Container(
                         margin: EdgeInsets.only(left: 10),
@@ -111,15 +127,16 @@ class _SearchScreenState extends State<SearchScreen> {
                               width: 20,
                               color: Colors.red,
                               child: Center(
-                                child: Text("$index"),
+                                child: Text("$ind", style: TextStyle(color: Colors.white)),
                               ),
                             ),
                             Container(
+                              margin: EdgeInsets.only(left: 5.0),
                               child: Center(
                                 child: Text(
-                                  "Truyen hay so 1",
+                                  "Truyen hay so ${ind}",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(color: Colors.grey[800]),
                                 ),
                               ),
                             ),
@@ -130,16 +147,19 @@ class _SearchScreenState extends State<SearchScreen> {
                   }),
             ),
             Container(
-              margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+              margin: EdgeInsets.only(top: 10, left: 10),
               child: Row(
                 children: [
                   Icon(
                     Icons.ac_unit,
                     color: Colors.red,
                   ),
-                  Text(
-                    "Danh sach hot ban chay",
-                    style: TextStyle(color: Colors.red),
+                  Container(
+                    margin: EdgeInsets.only(left: 5.0),
+                    child: Text(
+                      "Sach hot ban chay",
+                      style: TextStyle(color: Colors.pink),
+                    ),
                   ),
                 ],
               ),
@@ -158,6 +178,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   itemCount: 6,
                   itemBuilder: (BuildContext context, int index) {
+                    int ind = index + 1;
                     return GestureDetector(
                       child: Container(
                         margin: EdgeInsets.only(left: 10, right: 10),
@@ -168,11 +189,13 @@ class _SearchScreenState extends State<SearchScreen> {
                               Common.pathImg + "bg_checkin.jpg",
                             ),
                             Container(
+                              margin: EdgeInsets.only(top: 5.0),
                               child: Center(
                                 child: Text(
-                                  "1. Truyen hay so 1",
+                                  "Truyen hay so ${ind} 12345",
+                                  overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(color: Colors.grey[800]),
                                 ),
                               ),
                             ),

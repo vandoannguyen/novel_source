@@ -6,7 +6,7 @@ import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/login/login_screen.dart';
 import 'detail_widget.dart';
 import 'pilihbad_widget.dart';
-
+import 'package:flutter_share/flutter_share.dart';
 class DetailComicBook extends StatefulWidget {
   DetailComicBook({Key key}) : super(key: key);
 
@@ -18,12 +18,12 @@ class _DetailComicBookState extends State<DetailComicBook>
     with SingleTickerProviderStateMixin {
   TabController _controller;
   int _selectedIndex = 0;
+  bool isFollow = false;
   @override
   void initState() {
     super.initState();
     _controller = new TabController(length: 2, vsync: this);
   }
-
   // void _onItemTapped(int index) {
   //   setState(() {
   //     _selectedIndex = index;
@@ -35,7 +35,13 @@ class _DetailComicBookState extends State<DetailComicBook>
   //     _onReward();
   //   }
   // }
-
+  Future<void> share() async {
+    await FlutterShare.share(
+        title: 'Example share',
+        text: 'Example share text',
+        linkUrl: 'https://flutter.dev/',
+        chooserTitle: 'Example Chooser Title');
+  }
   void _onReward() {
     showModalBottomSheet(
         context: context,
@@ -118,7 +124,7 @@ class _DetailComicBookState extends State<DetailComicBook>
                     },
                     selectedTileColor: Colors.grey[200],
                     title: Text(
-                      "Khong",
+                      "No",
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.grey[800]),
                     ),
@@ -135,170 +141,196 @@ class _DetailComicBookState extends State<DetailComicBook>
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            new Container(
-                width: double.infinity,
-                height: 220,
-                child: Stack(
-                  children: <Widget>[
-                    Image.network(
-                      "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
-                      fit: BoxFit.fitWidth,
-                      height: 220,
-                      width: width,
-                    ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius: BorderRadius.circular(60),
-                              ),
-                              margin: EdgeInsets.fromLTRB(20, 30, 0, 10),
-                              height: 30,
-                              width: 30,
-                              child: Center(
-                                child: Icon(
-                                  Icons.arrow_back_ios,
-                                  size: 25,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius: BorderRadius.circular(60),
-                              ),
-                              margin: EdgeInsets.fromLTRB(0, 30, 20, 10),
-                              height: 30,
-                              width: 30,
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.share,
-                                      size: 25,
-                                      color: Colors.grey,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 30, top: 180),
-                      height: 20,
-                      child: Text("Name Book",
-                          style: TextStyle(color: Colors.white, fontSize: 18)),
-                    ),
-                  ],
-                )),
-            new TabBar(
-              controller: _controller,
-              indicatorColor: Color(Constant.colorTxtPrimary),
-              indicatorSize: TabBarIndicatorSize.label,
-              unselectedLabelColor: Color(Constant.colorTxtDefault),
-              labelColor: Color(Constant.colorTxtPrimary),
-              tabs: [
-                new Tab(
-                  text: 'Detail',
+      body:DefaultTabController(
+        length: 2,
+      child: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              leading: GestureDetector(
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: 15, left: 25),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.grey[200])
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: 8, left: 5),
+                          child: Icon(Icons.arrow_back_ios, color: Colors.grey,)),
+                    ],
+                  ),
                 ),
-                new Tab(
-                  text: 'Pilih Bad',
+              ),
+              expandedHeight: 220.0,
+              floating: false,
+              pinned: true,
+
+              flexibleSpace: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    child: Image(image: NetworkImage(
+                      "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+
+                    ), fit: BoxFit.fill,),
+                  ),
+                  FlexibleSpaceBar(
+                      centerTitle: true,
+                      title: Text("Name book",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.0,
+                          )),
+                      background: Image.network(
+                        "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+                        fit: BoxFit.cover,
+                      )),
+                ],
+
+              ),
+              actions: [
+                Container(
+                  margin: EdgeInsets.only(top: 15, right: 25),
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.grey[200])
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: 8, left: 3, right: 3),
+                          child: Icon(Icons.share, color: Colors.grey,)),
+                    ],
+                  ),
                 ),
               ],
             ),
-            Expanded(
-              flex: 1,
-              child: new TabBarView(
-                controller: _controller,
-                children: <Widget>[
-                  DetailWidget(),
-                  PilihbadWidget(),
-                ],
+            SliverPersistentHeader(
+              delegate: _SliverAppBarDelegate(
+                TabBar(
+                  controller: _controller,
+                    indicatorColor: Color(Constant.colorTxtPrimary),
+                    indicatorSize: TabBarIndicatorSize.label,
+                    unselectedLabelColor: Color(Constant.colorTxtDefault),
+                    labelColor: Color(Constant.colorTxtPrimary),
+                    tabs: [
+                      new Tab(
+                        text: 'Detail',
+                      ),
+                      new Tab(
+                        text: 'Pilih Bad',
+                      ),
+                  ],
+                ),
+              ),
+              pinned: true,
+            ),
+          ];
+        },
+        body: Column(
+      children: [
+      // new TabBar(
+      //   controller: _controller,
+      //   indicatorColor: Color(Constant.colorTxtPrimary),
+      //   indicatorSize: TabBarIndicatorSize.label,
+      //   unselectedLabelColor: Color(Constant.colorTxtDefault),
+      //   labelColor: Color(Constant.colorTxtPrimary),
+      //   tabs: [
+      //     new Tab(
+      //       text: 'Detail',
+      //     ),
+      //     new Tab(
+      //       text: 'Pilih Bad',
+      //     ),
+      //   ],
+      // ),
+      Expanded(
+        flex: 1,
+        child: new TabBarView(
+          controller: _controller,
+          children: <Widget>[
+            DetailWidget(),
+            PilihbadWidget(),
+          ],
+        ),
+      ),
+      Container(
+        height: 45,
+        color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  isFollow = !isFollow;
+                });
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => LoginScreen()));
+              },
+              child: Container(
+                height: 45,
+                width: width * 0.3,
+                child: Center(
+                  child: Text(isFollow? "Bookcase" : "Follow",
+                      style: TextStyle(
+                        color: Colors.pink,
+                      )),
+                ),
               ),
             ),
-            Container(
-              height: 45,
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()));
-                    },
-                    child: Container(
-                      height: 45,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      child: Center(
-                        child: Text("Follow",
-                            style: TextStyle(
-                              color: Colors.pink,
-                            )),
-                      ),
-                    ),
-                  ),
-                  Divider(
-                    height: 1,
-                    color: Colors.grey,
-                  ),
-                  GestureDetector(
-                    child: Container(
-                      color: Colors.pink,
-                      height: 45,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      child: Center(
-                        child: Text("Read Now",
-                            style: TextStyle(
-                              color: Colors.white,
-                            )),
-                      ),
-                    ),
-                  ),
-                  Divider(
-                    height: 1,
-                    color: Colors.grey,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _onReward();
-                    },
-                    child: Container(
-                      height: 45,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      child: Center(
-                        child: Text("Coin",
-                            style: TextStyle(
-                              color: Colors.pink,
-                            )),
-                      ),
-                    ),
-                  ),
-                ],
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            GestureDetector(
+              child: Container(
+                color: Colors.pink,
+                height: 45,
+                width: width * 0.3,
+                child: Center(
+                  child: Text("Read Now",
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                ),
+              ),
+            ),
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            GestureDetector(
+              onTap: () {
+                _onReward();
+              },
+              child: Container(
+                height: 45,
+                width: width * 0.3,
+                child: Center(
+                  child: Text("Coin",
+                      style: TextStyle(
+                        color: Colors.pink,
+                      )),
+                ),
               ),
             ),
           ],
         ),
+
+      ),
+      ],
+    ),
+
       ),
 
       // bottomNavigationBar: BottomNavigationBar(
@@ -333,6 +365,31 @@ class _DetailComicBookState extends State<DetailComicBook>
       //   showUnselectedLabels: false,
       //   onTap: _onItemTapped,
       // ),
+      ),
     );
+  }
+}
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate(this._tabBar);
+
+  final TabBar _tabBar;
+
+  @override
+  double get minExtent => _tabBar.preferredSize.height;
+  @override
+  double get maxExtent => _tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return new Container(
+      color: Colors.white,
+      child: _tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
   }
 }

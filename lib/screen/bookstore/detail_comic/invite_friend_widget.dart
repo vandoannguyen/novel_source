@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:init_app/common/common.dart';
 
 class InviteFriendWidget extends StatefulWidget {
@@ -9,6 +10,33 @@ class InviteFriendWidget extends StatefulWidget {
 }
 
 class _InviteFriendWidgetState extends State<InviteFriendWidget> {
+
+  @override
+  void setState(fn) {
+    // TODO: implement setState
+    super.setState(fn);
+  }
+  //copylink
+  void _copyLink(String text){
+    Clipboard.setData(new ClipboardData(text: text)).then((_){
+      Scaffold.of(context).showSnackBar(
+          SnackBar(content:Text("Link copied to clipboard")));
+    });
+  }
+  //shareface
+  // void shareOnFacebook() async {
+  //   String result = await FlutterSocialContentShare.share(
+  //       type: ShareType.facebookWithoutImage,
+  //       url: "https://www.apple.com",
+  //       quote: "captions");
+  //   print(result);
+  // }
+  //sharewhats
+  // void shareWhatsapp() async {
+  //   String result = await FlutterSocialContentShare.shareOnWhatsapp(
+  //       number: "xxxxxx", text: "Text appears here");
+  //   print(result);
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +47,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                "Chia se cho ban be",
+                "Share for friend",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 13,
@@ -43,10 +71,15 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      Image.asset(
-                        Common.pathImg + "facebook.png",
-                        height: 60,
-                        width: 60,
+                      GestureDetector(
+                        onTap: (){},
+                        child: Container(
+                          child: Image.asset(
+                            Common.pathImg + "facebook.png",
+                            height: 60,
+                            width: 60,
+                          ),
+                        ),
                       ),
                       Text(
                         "facebook",
@@ -57,7 +90,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                   Column(
                     children: <Widget>[
                       Image.asset(
-                        Common.pathImg + "line.png",
+                        Common.pathImg + "whatsapp.png",
                         height: 60,
                         width: 60,
                       ),
@@ -82,9 +115,10 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                   ),
                   Column(
                     children: <Widget>[
-                      Icon(
-                        Icons.content_copy,
-                        size: 60,
+                      Image.asset(
+                        Common.pathImg + "copy.png",
+                        height: 60,
+                        width: 60,
                       ),
                       Text(
                         "copy link",
@@ -110,26 +144,26 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                     style: TextStyle(color: Colors.black),
                   ),
                   Text(
-                    "1.Moi 1 ban thuong 10 xu",
+                    "1. Moi 1 ban thuong 10 xu",
                     style: TextStyle(color: Colors.black),
                   ),
                   Text(
-                    "2.Moi lan ban be nap xu se duoc huong 10% xu ma ban be nap.",
+                    "2. Moi lan ban be nap xu se duoc huong 10% xu ma ban be nap.",
                     style: TextStyle(color: Colors.black),
                   ),
                   SizedBox(
                     height: 30,
                   ),
                   Text(
-                    "Nhac nho",
+                    "Remind",
                     style: TextStyle(color: Colors.black),
                   ),
                   Text(
-                    "1.Mot so dien thoai chi co the moi mot lan",
+                    "1. Mot so dien thoai chi co the moi mot lan",
                     style: TextStyle(color: Colors.black),
                   ),
                   Text(
-                    "2.Ban be cua ban dang nhap thanh cong moi duoc nhan thuong xu.",
+                    "2. Ban be cua ban dang nhap thanh cong moi duoc nhan thuong xu.",
                     style: TextStyle(color: Colors.black),
                   ),
                 ],

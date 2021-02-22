@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/bookstore/detail_comic/invite_friend.dart';
 import 'package:init_app/screen/tutorials/tutorial_loaded_coin.dart';
+import 'package:init_app/widgets/description_text.dart';
 
 class DetailWidget extends StatefulWidget {
   DetailWidget({Key key}) : super(key: key);
@@ -93,7 +94,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                     },
                     selectedTileColor: Colors.grey[200],
                     title: Text(
-                      "Khong",
+                      "No",
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.grey[800]),
                     ),
@@ -112,7 +113,7 @@ class _DetailWidgetState extends State<DetailWidget> {
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.only(top: 20, bottom: 10),
               height: 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -120,28 +121,34 @@ class _DetailWidgetState extends State<DetailWidget> {
                   Column(
                     children: <Widget>[
                       Text(
-                        "Tac gia",
+                        "Author",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 13, color: Colors.grey[400]),
                       ),
-                      Text(
-                        "Hoa Hoa",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 13, color: Colors.grey[800]),
+                      Container(
+                        margin: EdgeInsets.only(top: 5.0),
+                        child: Text(
+                          "Hoa Hoa",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 13, color: Colors.grey[800]),
+                        ),
                       ),
                     ],
                   ),
                   Column(
                     children: <Widget>[
                       Text(
-                        "Trang thai",
+                        "Status",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 13, color: Colors.grey[400]),
                       ),
-                      Text(
-                        "Dang cap nhat",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 13, color: Colors.grey[800]),
+                      Container(
+                        margin: EdgeInsets.only(top: 5.0),
+                        child: Text(
+                          "Updating",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 13, color: Colors.grey[800]),
+                        ),
                       ),
                     ],
                   ),
@@ -149,21 +156,19 @@ class _DetailWidgetState extends State<DetailWidget> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    "Gioi thieu",
-                    style: TextStyle(fontSize: 13, color: Colors.grey[400]),
+                  Container(
+                    margin: EdgeInsets.only(right: 265),
+                    child: Text(
+                      "Introduce",
+                      style: TextStyle(fontSize: 13, color: Colors.grey[400]),
+                    ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: Text(
-                      "Pin của iPhone sử dụng công nghệ lithium-ion. So với các thế hệ công nghệ pin trước đây, pin lithium-ion sạc nhanh hơn, tuổi thọ cao hơn và có mật độ năng lượng lớn hơn giúp tăng thời lượng và giảm trọng lượng. Công nghệ pin sạc lithium-ion hiện nay là công nghệ tốt nhất cho thiết bị của bạn. Tìm hiểu thêm về pin lithium-ion.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 13, color: Colors.grey[800]),
-                    ),
+                    margin: EdgeInsets.only(left: 10, right: 10),
+                    child: DescriptionTextWidget(text: "Pin của iPhone sử dụng công nghệ lithium-ion. So với các thế hệ công nghệ pin trước đây, pin lithium-ion sạc nhanh hơn, tuổi thọ cao hơn và có mật độ năng lượng lớn hơn giúp tăng thời lượng và giảm trọng lượng. Công nghệ pin sạc lithium-ion hiện nay là công nghệ tốt nhất cho thiết bị của bạn. Tìm hiểu thêm về pin lithium-ion."),
                   ),
                 ],
               ),
@@ -183,7 +188,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                         style: TextStyle(fontSize: 13, color: Colors.pink),
                       ),
                       Text(
-                        "Luot doc",
+                        "Reads",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 13, color: Colors.grey[800]),
                       ),
@@ -205,7 +210,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                         style: TextStyle(fontSize: 13, color: Colors.pink),
                       ),
                       Text(
-                        "Thich",
+                        "Like",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 13, color: Colors.grey[800]),
                       ),
@@ -227,7 +232,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                         style: TextStyle(fontSize: 13, color: Colors.pink),
                       ),
                       Text(
-                        "Da o tu sach",
+                        "Bookcase",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 13, color: Colors.grey[800]),
                       ),
@@ -247,7 +252,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                             margin: EdgeInsets.only(left: 10, right: 10),
                             child: Divider())),
                     Text(
-                      "Thuong",
+                      "Reward",
                       style: TextStyle(color: Colors.pink),
                     ),
                     Expanded(
@@ -272,19 +277,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                             ),
                           );
                         },
-                      )
-                      // child: Row(
-                      //   children: <Widget>[
-                      //     Container(
-                      //       margin: EdgeInsets.all(2),
-                      //       child: Image.asset(
-                      //        Common.pathImg + "ic_user.png", height: 20,
-                      //        width: 20,
-                      //       ),
-                      //     ),
-
-                      //   ],
-                      // ),
+                      ),
                       ),
                   Container(
                     margin: EdgeInsets.only(bottom: 10),
@@ -295,10 +288,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                           margin: EdgeInsets.all(10),
                           child: Row(
                             children: <Widget>[
-                              Icon(
-                                Icons.ac_unit,
-                                color: Colors.yellow,
-                              ),
+                              Image.asset(Common.pathImg + "ic_coin.png", height: 20, width: 20,),
                               Text("3720",
                                   style: TextStyle(
                                     color: Colors.pink,
@@ -320,7 +310,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                             ),
                             child: Center(
                               child: Text(
-                                "Thuong",
+                                "Reward",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: Colors.white),
                               ),
@@ -343,7 +333,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                     MaterialPageRoute(builder: (context) => InviteFriend()));
               },
               title: Text(
-                "Moi ban be se nhan duoc xu",
+                "Invite friends to receive coins",
                 style: TextStyle(color: Colors.black),
               ),
               trailing: Icon(
@@ -363,7 +353,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                         builder: (context) => TutorialLoadedCoin()));
               },
               title: Text(
-                "Lam sao de nap xu",
+                "How to make a coin?",
                 style: TextStyle(color: Colors.black),
               ),
               trailing: Icon(
@@ -377,12 +367,12 @@ class _DetailWidgetState extends State<DetailWidget> {
             ),
             Container(
               margin: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
-              height: 60,
+              height: 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    "Binh luan",
+                    "Comment",
                     style: TextStyle(color: Colors.black),
                   ),
                   Image.asset(
@@ -402,23 +392,25 @@ class _DetailWidgetState extends State<DetailWidget> {
               height: 30,
               child: Center(
                 child: Text(
-                  "Xem tat ca binh luan",
+                  "Watch all to comment",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.grey),
                 ),
               ),
             ),
-            Divider(
-              height: 1,
-              color: Colors.grey[400],
+            SizedBox(
+              height: 20,
+              child:Container(
+                color : Colors.grey[200],
+              ),
             ),
             Container(
               height: 60,
-              margin: EdgeInsets.only(top: 20, left: 20),
+              margin: EdgeInsets.only(top: 20, right: 260),
               child: Text(
-                "HOT NHAT",
+                "HOTTEST",
                 textAlign: TextAlign.start,
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black, fontSize: 16.0),
               ),
             ),
           ],

@@ -44,13 +44,13 @@ Widget itemBookHor({item, index, func}) {
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.only(left: 10.0),
+              padding: EdgeInsets.only(left: 10.0, bottom: 10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text("name",
+                  Text("name book",
                       style: TextStyle(
                         fontSize: 18.0,
                       ),
@@ -68,6 +68,7 @@ Widget itemBookHor({item, index, func}) {
                         overflow: TextOverflow.ellipsis),
                   ),
                   Container(
+                    margin: EdgeInsets.only(top:10.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

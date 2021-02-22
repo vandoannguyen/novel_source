@@ -27,7 +27,8 @@ dependencies:
         fluttertoast:
         dio:
         shared_preferences:
-
+        flutter_line_login: ^0.2.0
+        flutter_share: ^1.0.5
 dev_dependencies:
         flutter_test:
                 sdk: flutter
