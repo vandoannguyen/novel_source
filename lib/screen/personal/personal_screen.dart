@@ -9,7 +9,7 @@ import '../../common/constant.dart';
 // ignore: must_be_immutable
 class PersonalScreen extends BaseWidget<PersonalController> {
   static const String routeName = '/personal';
-  static const String name = 'CÁ NHÂN';
+  static const String name = 'Personal';
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
@@ -57,7 +57,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                       ? Container(
                           padding: EdgeInsets.only(bottom: 5.0),
                           child: Text(
-                            "Đăng nhập",
+                            "Login",
                             style: TextStyle(fontSize: 20.0),
                           ),
                         )
@@ -92,7 +92,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                   Container(
                     child: Row(
                       children: [
-                        Text("Số dư xu: " + "40.0"),
+                        Text("Coin balance: " + "40.0"),
                         Image.asset(
                           Common.pathImg + "ic_coin.png",
                           fit: BoxFit.contain,
@@ -105,7 +105,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                   Container(
                     height: 30.0,
                     child: ButtonMain(
-                        name: "Nạp Xu",
+                        name: "Deposit coins",
                         func: () {
                           controller.click("BUY_COIN");
                         }),
@@ -116,39 +116,40 @@ class PersonalScreen extends BaseWidget<PersonalController> {
             SizedBox(
               height: 3.0,
             ),
+            // financial-transaction
             item(
-                name: "Chi tiết giao dịch xu",
-                icon: "ic_edit.png",
+                name: "Detail transaction",
+                icon: "ic_transaction.png",
                 func: () {
                   controller.click("DETAIL_TRANSACTION");
                 }),
             item(
-                name: "Hỗ trợ online",
-                icon: "ic_edit.png",
+                name: "Support online",
+                icon: "ic_support.png",
                 func: () {
                   controller.click("SUPPORT");
                 }),
             item(
-                name: "Trở thành tác giả",
-                icon: "ic_edit.png",
+                name: "Come author",
+                icon: "ic_author.png",
                 func: () {
                   controller.click("COME_AUTHOR");
                 }),
             item(
-                name: "Câu hỏi thường gặp",
-                icon: "ic_edit.png",
+                name: "Frequently question",
+                icon: "ic_question.png",
                 func: () {
                   controller.click("QUESTION");
                 }),
             item(
-                name: "Ý kiến phản hồi",
-                icon: "ic_edit.png",
+                name: "Feedback",
+                icon: "ic_policy.png",
                 func: () {
                   controller.click("FEEDBACK");
                 }),
             item(
-                name: "Cài đặt",
-                icon: "ic_edit.png",
+                name: "Settings",
+                icon: "ic_setting.png",
                 func: () {
                   controller.click("SETTING");
                 }),
