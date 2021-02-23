@@ -13,7 +13,6 @@ abstract class BaseWidget<C extends BaseController> extends GetWidget<C> {
   Widget build(BuildContext context, {C controllerSuper}) {
     controllerSuper.context = context;
     initState(controller: controllerSuper);
-    controller.onClose();
   }
 
   initState({@required C controller}) {

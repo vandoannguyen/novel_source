@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
+import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/survey_question/survey_question_controller.dart';
 import 'package:init_app/widgets/appbar_second.dart';
 import 'package:init_app/widgets/button_main.dart';
