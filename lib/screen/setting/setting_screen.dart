@@ -38,7 +38,7 @@ class SettingScreen extends BaseWidget<SettingController> {
                   Container(
                     margin: EdgeInsets.all(15.0),
                     child: Image.asset(
-                      Common.pathImg + "ic_edit.png",
+                      Common.pathImg + "ic_lock.png",
                       width: 20.0,
                       fit: BoxFit.contain,
                     ),
@@ -81,7 +81,7 @@ class SettingScreen extends BaseWidget<SettingController> {
                     Container(
                       margin: EdgeInsets.all(15.0),
                       child: Image.asset(
-                        Common.pathImg + "ic_edit.png",
+                        Common.pathImg + "ic_trash.png",
                         width: 20.0,
                         fit: BoxFit.contain,
                       ),
@@ -163,7 +163,7 @@ class SettingScreen extends BaseWidget<SettingController> {
                     Container(
                       margin: EdgeInsets.all(15.0),
                       child: Image.asset(
-                        Common.pathImg + "ic_edit.png",
+                        Common.pathImg + "ic_us.png",
                         width: 20.0,
                         fit: BoxFit.contain,
                       ),
