@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/images.dart';
+import 'package:init_app/data/network/NovelModelHotest.dart';
 import 'package:init_app/screen/bookstore/novel_bookstore/novel_book_controller.dart';
 import 'package:init_app/widgets/item_book_hor.dart';
 
@@ -62,15 +63,21 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                         items: _.listBanner.map((item) {
                           return Builder(
                             builder: (BuildContext context) {
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(color: Colors.amber),
-                                child: FadeInImage.assetNetwork(
-                                  image: item.bannerPic,
-                                  placeholder: ic_loading,
-                                  fit: BoxFit.cover,
-                                ),
-                              );
+                              return GestureDetector(
+                                  onTap: () {
+                                    controller.clickItem(
+                                        _, NovelModelHotest(id: item.bookId));
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration:
+                                        BoxDecoration(color: Colors.amber),
+                                    child: FadeInImage.assetNetwork(
+                                      image: item.bannerPic,
+                                      placeholder: ic_loading,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ));
                             },
                           );
                         }).toList(),
@@ -151,30 +158,38 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                                       items: _.listNewest.map((item) {
                                         return Builder(
                                           builder: (BuildContext context) {
-                                            return Container(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 5.0),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Color(Constant
-                                                            .colorTxtDefault)
-                                                        .withOpacity(0.2),
-                                                    spreadRadius: 0,
-                                                    blurRadius: 10,
-                                                    offset: Offset(0, 0),
+                                            return GestureDetector(
+                                              onTap: () {
+                                                controller.clickItem(_, item);
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.only(
+                                                    bottom: 5.0),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Color(Constant
+                                                              .colorTxtDefault)
+                                                          .withOpacity(0.2),
+                                                      spreadRadius: 0,
+                                                      blurRadius: 10,
+                                                      offset: Offset(0, 0),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  child:
+                                                      FadeInImage.assetNetwork(
+                                                    placeholder: ic_loading,
+                                                    image: item.bpic,
+                                                    fit: BoxFit.cover,
                                                   ),
-                                                ],
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
-                                                child: FadeInImage.assetNetwork(
-                                                  placeholder: ic_loading,
-                                                  image: item.bpic,
-                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             );

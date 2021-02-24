@@ -13,7 +13,7 @@ class TableContentController extends BaseController {
   int page = 1;
   final int limit = 10;
   var isLoadMore = false;
-
+  var isLoadig = false;
   bool isLoadAll = false;
 
   onInit() {
@@ -24,14 +24,27 @@ class TableContentController extends BaseController {
     Get.back();
   }
 
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    listChaps = null;
+    isLoadMore = false;
+    isLoadAll = false;
+    super.onClose();
+  }
+
   void clickItem() {
     Get.back();
   }
 
   void getChapter(String id) {
+    isLoadig = true;
+    update();
     RepositoryImpl.getInstance()
         .chapByNoval(id: id, page: page, limit: limit)
         .then((value) {
+      isLoadig = false;
+      update();
       if (page == 1) listChaps = value;
       if (page != 1) {
         listChaps.addAll(value);

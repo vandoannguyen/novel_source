@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1096237954000",
+    "project_id": "loginnovel-2bff1",
+    "storage_bucket": "loginnovel-2bff1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096237954000:android:cb7d6db753796623c7ffd5",
+        "android_client_info": {
+          "package_name": "com.example.init_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096237954000-dqfqm03s7je9c5fpq4anmg9btle4kuk0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.init_app",
+            "certificate_hash": "6bacfb17608b76c004d50683050a1ab9ffb40b1a"
+          }
+        },
+        {
+          "client_id": "1096237954000-qfqgt25rb09bfa5b8uspi4qqo96fc2gi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdBghMIrb42rfic795TjqYgaUMybfzd1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096237954000-qfqgt25rb09bfa5b8uspi4qqo96fc2gi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

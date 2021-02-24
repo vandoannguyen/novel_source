@@ -10,8 +10,10 @@ class LoadScreen extends BaseWidget<LoadController> {
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: LoadController());
-    controller.login(context);
-    Future.delayed(Duration(seconds: 2), controller.getLaguage(context));
+    Future.delayed(Duration(seconds: 1)).then((value) {
+      controller.login(context);
+      controller.getLaguage(context);
+    });
     return Scaffold(
       body: SafeArea(
         child: Container(

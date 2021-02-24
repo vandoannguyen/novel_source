@@ -12,5 +12,8 @@ class Common {
   static List<NovalModel> myBooks = null;
   static String appName = "ĐỌc SÁCH";
   static String fanpageName = "SÁCH";
+  static String email = "tahanh.aib@gmail.com";
   static var config = {};
+
+  static var isLogedIn = false;
 }

@@ -30,10 +30,10 @@ class MyApp extends StatelessWidget {
           name: Routes.home,
           page: () => HomeScreen(),
         ),
-        GetPage(
-          name: Routes.bookcase,
-          page: () => BookcaseScreen(),
-        ),
+        // GetPage(
+        //   name: Routes.bookcase,
+        //   page: () => BookcaseScreen((_) {}),
+        // ),
         GetPage(
           name: Routes.bookstore,
           page: () => BookstoreScreen(),

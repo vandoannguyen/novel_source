@@ -18,6 +18,9 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 
+//import com.facebook.FacebookSdk;
+//import com.facebook.appevents.AppEventsLogger;
+
 public class MainActivity extends FlutterActivity implements RatingDialog.RatingDialogInterFace {
     private static final String CHANNEL = "com.example.init_app";
     private static final String ONEADX_KEY = "gmBUYwLTV2VDu5Y8Dg5S9WpuaNDZvRaZ";
@@ -25,6 +28,9 @@ public class MainActivity extends FlutterActivity implements RatingDialog.Rating
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        FacebookSdk.sdkInitialize(getApplicationContext());
+//        AppEventsLogger.activateApp(this);
+
         GeneratedPluginRegistrant.registerWith(this);
         new MethodChannel(getFlutterView(), CHANNEL).setMethodCallHandler(new MethodChannel.MethodCallHandler() {
             @Override
@@ -82,10 +88,27 @@ public class MainActivity extends FlutterActivity implements RatingDialog.Rating
                         startActivity(intent);
                         break;
                     }
+                    case "getDataShare": {
+                        result.success(getSharePref(methodCall.argument("key")));
+                        break;
+                    }
+                    case "setDataShare": {
+                        setSharePref(methodCall.argument("key"), methodCall.argument("data"));
+                        result.success("");
+                        break;
+                    }
                 }
             }
         });
 
+    }
+
+    private void setSharePref(String key, String data) {
+        SharedPrefsUtils.getInstance(this).putString(key, data);
+    }
+
+    private String getSharePref(String key) {
+        return SharedPrefsUtils.getInstance(this).getString(key);
     }
 
     public static void rateApp(Context context) {

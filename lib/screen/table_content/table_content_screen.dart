@@ -20,7 +20,6 @@ class TableContentScreen extends BaseWidget<TableContentController> {
     controller.getChapter(id);
     _scrollController = ScrollController()
       ..addListener(() {
-        print("slkdjalksdjlkasdasdasd");
         print(_scrollController.position.extentAfter);
         if (_scrollController.position.extentAfter < 500) {
           // setState(() {
@@ -40,7 +39,7 @@ class TableContentScreen extends BaseWidget<TableContentController> {
             appbarSecond(TableContentScreen.name),
             Expanded(
               child: GetBuilder<TableContentController>(
-                builder: (_) => _.listChaps == null
+                builder: (_) => _.listChaps == null || _.isLoadig
                     ? Container(
                         alignment: Alignment.center,
                         child: CircularProgressIndicator(),
@@ -58,6 +57,7 @@ class TableContentScreen extends BaseWidget<TableContentController> {
                                     controller.read(_.listChaps[index]);
                                   },
                                   child: Container(
+                                    color: Colors.transparent,
                                     padding: EdgeInsets.all(15.0),
                                     child: Row(
                                       children: [
@@ -66,12 +66,16 @@ class TableContentScreen extends BaseWidget<TableContentController> {
                                             _.listChaps[index].title,
                                           ),
                                         ),
-                                        Icon(
-                                          Icons.lock_outline_rounded,
-                                          size: 20.0,
-                                          color:
-                                              Color(Constant.colorTxtDefault),
-                                        )
+                                        _.listChaps[index].coin > 0
+                                            ? Icon(
+                                                Icons.lock_outline_rounded,
+                                                size: 20.0,
+                                                color: Color(
+                                                    Constant.colorTxtDefault),
+                                              )
+                                            : Container(
+                                                width: 20,
+                                              )
                                       ],
                                     ),
                                   ),

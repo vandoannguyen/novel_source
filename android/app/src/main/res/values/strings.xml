@@ -3,4 +3,7 @@
     <string name="nb.read.setting">Establish</string>
     <string name="nb_mode_morning">Light</string>
     <string name="nb.read.list">List</string>
+    <string name="facebook_app_id">273429954217106</string>
+    <string name="fb_login_protocol_scheme">fb273429954217106</string>
+
 </resources>

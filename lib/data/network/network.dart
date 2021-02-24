@@ -49,7 +49,7 @@ abstract class IApi {
 
   Future loginWithGoogle({access_token});
 
-  Future loginWithFaceBook({access_token});
+  Future<String> loginWithFaceBook({access_token});
 
   Future getUserProfile();
 }
@@ -203,7 +203,10 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      completer.complete(value);
+      if (value.data["code"] == 1)
+        completer.complete(value.data["result"]);
+      else
+        completer.complete(null);
     }).catchError((err) {
       completer.completeError(err);
     });
@@ -470,17 +473,21 @@ class ApiImpl implements IApi {
   }
 
   @override
-  Future loginWithFaceBook({access_token}) {
-    Completer completer = new Completer();
-    // String time = _getTimeStamp();
-    // String token = CryptUtils.genSha256(
-    //     "${Common.EXTEND_ONEADX_KEY}/auth/google?timestamp=$time");
-    // Dio().post("$ROOT_API/auth/google?timestamp=$time&oneadx_token=$token",
-    //     data: {"access_token": access_token}).then((value) {
-    //   completer.complete(value);
-    // }).catchError((err) {
-    //   completer.completeError(err);
-    // });
+  Future<String> loginWithFaceBook({access_token}) {
+    Completer<String> completer = new Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/auth/facebook?timestamp=$time");
+    Dio().post("$ROOT_API/auth/facebook?timestamp=$time&oneadx_token=$token",
+        data: {"access_token": access_token}).then((value) {
+      print(value.data);
+      if (value.data["code"] == 1)
+        completer.complete(value.data["result"]["token"]);
+      else
+        throw ("err");
+    }).catchError((err) {
+      completer.completeError(err);
+    });
     return completer.future;
   }
 
@@ -492,7 +499,12 @@ class ApiImpl implements IApi {
         "${Common.EXTEND_ONEADX_KEY}/auth/google?timestamp=$time");
     Dio().post("$ROOT_API/auth/google?timestamp=$time&oneadx_token=$token",
         data: {"access_token": access_token}).then((value) {
-      completer.complete(value);
+      print(value);
+      if (value.data["code"] == 1) {
+        completer.complete(value.data["result"]["token"]);
+      } else {
+        completer.completeError("data null");
+      }
     }).catchError((err) {
       completer.completeError(err);
     });
@@ -504,7 +516,7 @@ class ApiImpl implements IApi {
     Completer completer = new Completer();
     String time = _getTimeStamp();
     String token = CryptUtils.genSha256(
-        "${Common.EXTEND_ONEADX_KEY}/comments/book/$idBook?timestamp=$time&oneadx_token=f2da7879ab4084eb");
+        "${Common.EXTEND_ONEADX_KEY}/comments/book/$idBook?timestamp=$time");
     Dio().post(
         "$ROOT_API/comments/book/$idBook?timestamp=$time&oneadx_token=$token",
         data: {"content": contentComment}).then((value) {

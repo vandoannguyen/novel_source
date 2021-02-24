@@ -97,21 +97,21 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                                     borderRadius: BorderRadius.circular(5.0),
                                     child:
                                         GetBuilder<DetailComicBookController>(
-                                      init: controller,
-                                      builder: (_) => _.detail == null
-                                          ? Image.asset(
-                                              ic_loading,
-                                              fit: BoxFit.cover,
-                                              width: 80.0,
-                                              height: 100.0,
-                                            )
-                                          : FadeInImage.assetNetwork(
-                                              placeholder: ic_loading,
-                                              image: _.detail.bpic,
-                                              fit: BoxFit.cover,
-                                              width: 80.0,
-                                              height: 100.0,
-                                            ),
+                                      builder: (_) =>
+                                          _.detail == null || _.isLoading
+                                              ? Image.asset(
+                                                  ic_loading,
+                                                  fit: BoxFit.cover,
+                                                  width: 80.0,
+                                                  height: 100.0,
+                                                )
+                                              : FadeInImage.assetNetwork(
+                                                  placeholder: ic_loading,
+                                                  image: _.detail.bpic,
+                                                  fit: BoxFit.cover,
+                                                  width: 80.0,
+                                                  height: 100.0,
+                                                ),
                                     ),
                                   ),
                                 ),
@@ -127,7 +127,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Text(
-                                              _.detail != null
+                                              _.detail != null && !_.isLoading
                                                   ? _.detail.name
                                                   : "",
                                               style: TextStyle(
@@ -143,7 +143,8 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                                                   MainAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  _.detail != null
+                                                  _.detail != null &&
+                                                          !_.isLoading
                                                       ? _.detail.writerName
                                                       : "",
                                                   style:
@@ -250,12 +251,18 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                           margin: EdgeInsets.symmetric(horizontal: 5.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(30.0),
-                            child: Image.network(
-                              "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+                            child: Image.asset(
+                              ic_loading,
                               fit: BoxFit.cover,
                               width: 30.0,
                               height: 30.0,
                             ),
+                            // child: Image.assest(
+                            //   "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+                            //   fit: BoxFit.cover,
+                            //   width: 30.0,
+                            //   height: 30.0,
+                            // ),
                           ),
                         );
                       }),
@@ -295,14 +302,18 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                   child: GetBuilder<DetailComicBookController>(
                     builder: (_) => _.textShowFlag
                         ? Text(
-                            _.detail != null ? _.detail.desc : "",
+                            _.detail != null && !_.isLoading
+                                ? _.detail.desc
+                                : "",
                             style: TextStyle(fontSize: 14.0),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           )
                         : Text(
                             // xem full des
-                            _.detail != null ? _.detail.desc : "",
+                            _.detail != null && !_.isLoading
+                                ? _.detail.desc
+                                : "",
                             style: TextStyle(fontSize: 14.0),
                           ),
                   ),
@@ -458,7 +469,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                       Expanded(child: Container()),
                       GestureDetector(
                         onTap: () {
-                          controller.callBack("COMMENT", null);
+                          controller.callBack("COMMENT", idBook);
                         },
                         child: Image.asset(
                           Common.pathImg + "ic_edit.png",
@@ -504,19 +515,32 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
           children: [
             Expanded(
               flex: 1,
-              child: Container(
-                alignment: Alignment.center,
-                height: 40.0,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color(Constant.colorTxtDefault).withOpacity(0.5),
-                    width: 0.3,
+              child: GestureDetector(
+                onTap: () {
+                  controller.postFollow(idBook);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 40.0,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+                      width: 0.3,
+                    ),
                   ),
-                ),
-                child: Text(
-                  "Theo dõi",
-                  style: TextStyle(
-                    color: Color(Constant.colorTxtSecond),
+                  child: GetBuilder<DetailComicBookController>(
+                    builder: (_) => Text(
+                      _.detail != null &&
+                              !Common.myBooks
+                                  .where((value) => value.id == _.detail.id)
+                                  .toList()
+                                  .isEmpty
+                          ? "Bỏ theo dõi"
+                          : "Theo dõi",
+                      style: TextStyle(
+                        color: Color(Constant.colorTxtSecond),
+                      ),
+                    ),
                   ),
                 ),
               ),

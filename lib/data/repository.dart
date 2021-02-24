@@ -139,7 +139,7 @@ class RepositoryImpl implements IRepository {
   }
 
   @override
-  Future loginWithFaceBook({access_token}) {
+  Future<String> loginWithFaceBook({access_token}) {
     // TODO: implement loginWithFaceBook
     return _api.loginWithFaceBook(access_token: access_token);
   }
@@ -177,5 +177,17 @@ class RepositoryImpl implements IRepository {
         page: page,
         limitPerPage: limitPerPage,
         increase: increase);
+  }
+
+  @override
+  Future<String> getLogedData() {
+    // TODO: implement getLogedData
+    return _sharef.getLogedData();
+  }
+
+  @override
+  Future<void> setLogedData({type}) {
+    // TODO: implement setLogedData
+    return _sharef.setLogedData(type: type);
   }
 }

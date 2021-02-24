@@ -12,12 +12,15 @@ class CommentScreen extends BaseWidget<CommentController> {
   static const String routeName = '/comment';
   static const String name = 'Bình luận';
   final controllerTextEdit = TextEditingController();
+  String id;
 
   @override
   void dispose() {
     // super.dispose();
     controllerTextEdit.dispose();
   }
+
+  CommentScreen(this.id);
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
@@ -126,7 +129,7 @@ class CommentScreen extends BaseWidget<CommentController> {
                 name: "Gửi",
                 color: Color(Constant.colorTxtSecond),
                 func: () {
-                  controller.sendCmt(controllerTextEdit.text);
+                  controller.sendCmt(controllerTextEdit.text, idBook: id);
                 },
               ),
             ),

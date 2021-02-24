@@ -6,6 +6,7 @@ import 'package:init_app/screen/task/task_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
+
   HomeScreen({Key key}) : super(key: key);
 
   @override
@@ -21,7 +22,12 @@ class _HomeState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
     _widgetOptions = <Widget>[
-      BookcaseScreen(),
+      BookcaseScreen((value) {
+        _selectedIndex = 1;
+        setState(() {});
+        _widgetOptions.elementAt(_selectedIndex);
+      } //callback change page
+          ),
       BookstoreScreen(),
       // TaskScreen(),
       TaskScreen(callBack: callBack),

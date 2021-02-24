@@ -19,6 +19,12 @@ abstract class BaseController extends GetxController {
                 ? Color(0xAA2196F3)
                 : Color(0xAAF44336));
   }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+  }
 }
 
 enum TypeMess { INFORMATION, WARNING, NORMAL }

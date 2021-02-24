@@ -87,7 +87,7 @@ Widget itemBookHor({NovelModelHotest item, index, func}) {
                           child: Row(
                             children: [
                               Text(
-                                "${item.id}",
+                                "${item.updateSection}",
                                 style: TextStyle(
                                     color: Color(0xFF9c9c9c), fontSize: 12.0),
                               ),
