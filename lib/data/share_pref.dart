@@ -17,11 +17,17 @@ abstract class ISharePref {
   Future<void> setLogedData({type});
 
   Future<String> getLogedData();
+
+  Future<void> setCheckin(day);
+  Future<String> getCheckin();
+  Future<void> setDatetime(date);
+  Future<String> getDatetime();
 }
 
 class SharePrefImpl extends ISharePref {
   final String _LANGUAGE = "language";
-
+  final String _CHECKIN = "checkin";
+  final String _DATETIME = "datetime";
   final String _EMAIL = "email";
 
   final _SET_DATA_SHAREPREF = "setDataShare";
@@ -129,6 +135,50 @@ class SharePrefImpl extends ISharePref {
       completer.complete(value == "" ? null : value);
     }).catchError((err) {
       print(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future<String> getCheckin() {
+    Completer<String> completer = new Completer();
+    CallNativeUtils.invokeMethod(
+        method: _GET_DATA_SHAREPREF,
+        aguments: {"key": _CHECKIN}).then((value) {
+      completer.complete(value == "" ? null : value);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future<void> setCheckin(day) {
+    Completer<String> completer = new Completer();
+    CallNativeUtils.invokeMethod(
+        method: _SET_DATA_SHAREPREF,
+        aguments: {"key": _CHECKIN, "data": day}).then((value) {
+      completer.complete();
+    });
+    return completer.future;
+  }
+
+  @override
+  Future<String> getDatetime() {
+    Completer<String> completer = new Completer();
+    CallNativeUtils.invokeMethod(
+        method: _GET_DATA_SHAREPREF,
+        aguments: {"key": _DATETIME}).then((value) {
+      completer.complete(value == "" ? null : value);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future<void> setDatetime(date) {
+    Completer<String> completer = new Completer();
+    CallNativeUtils.invokeMethod(
+        method: _SET_DATA_SHAREPREF,
+        aguments: {"key": _DATETIME, "data": date}).then((value) {
+      completer.complete();
     });
     return completer.future;
   }

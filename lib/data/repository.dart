@@ -190,4 +190,24 @@ class RepositoryImpl implements IRepository {
     // TODO: implement setLogedData
     return _sharef.setLogedData(type: type);
   }
+
+  @override
+  Future<String> getCheckin() {
+    return _sharef.getCheckin();
+  }
+
+  @override
+  Future<void> setCheckin(day) {
+   return _sharef.setCheckin(day);
+  }
+
+  @override
+  Future<String> getDatetime() {
+    return _sharef.getDatetime();
+  }
+
+  @override
+  Future<void> setDatetime(date) {
+    return _sharef.setDatetime(date);
+  }
 }
