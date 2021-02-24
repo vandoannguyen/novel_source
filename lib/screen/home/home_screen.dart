@@ -64,6 +64,7 @@ class _HomeState extends State<HomeScreen> {
               "assets/images/ic_edit.png",
               width: 25.0,
               height: 25.0,
+              color: Colors.pink,
             ),
             label: BookcaseScreen.name,
           ),
@@ -76,7 +77,7 @@ class _HomeState extends State<HomeScreen> {
             label: TaskScreen.name,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.person),
             label: PersonalScreen.name,
           ),
         ],

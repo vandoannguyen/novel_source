@@ -25,7 +25,7 @@ class _InviteFriendState extends State<InviteFriend>
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
-          "Moi ban be",
+          "Invite friend",
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
@@ -42,10 +42,10 @@ class _InviteFriendState extends State<InviteFriend>
               labelColor: Color(Constant.colorTxtPrimary),
               tabs: [
                 new Tab(
-                  text: 'Moi ban be',
+                  text: 'Invite friend',
                 ),
                 new Tab(
-                  text: 'Ban toi',
+                  text: 'My friend',
                 ),
               ],
             ),

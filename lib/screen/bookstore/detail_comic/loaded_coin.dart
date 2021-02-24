@@ -45,13 +45,13 @@ class _LoadedCoinState extends State<LoadedCoin> {
                       ),
                     ),
                   ),
+                  textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
                   ], // Only numbers can be entered
                 ),
               ),
-              // ),
               Container(
                 height: 40,
                 width: 100,

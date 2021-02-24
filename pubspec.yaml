@@ -32,13 +32,13 @@ dependencies:
   flutter_rating_bar:
   carousel_slider: ^3.0.0
   cached_network_image: ^2.5.0
-  
   page_turn:
     path: page_turn/
   flutter_email_sender: ^4.0.0
   expandable: ^4.1.4
   flutter_facebook_login:
   google_sign_in:
+  flutter_share:
 
 dev_dependencies:
   flutter_test:
