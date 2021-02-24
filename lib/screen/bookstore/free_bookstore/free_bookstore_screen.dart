@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/screen/bookstore/comic_bookstore/detail_comic_bookstore.dart';
 import 'package:init_app/screen/bookstore/free_bookstore/free_bookstore_controller.dart';
 
 import '../../../common/constant.dart';
@@ -9,8 +10,9 @@ import '../../../common/constant.dart';
 class FreeBookstoreScreen extends BaseWidget<FreeBookstoreController> {
   static const String routeName = '/FreeBookstore';
   static const String name = 'Books Store';
-  void clickItem(item, index) {
-    print("fhsdf  $index");
+  void clickItem(item, index, context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => DetailComicBook()));
   }
 
   @override
@@ -21,7 +23,7 @@ class FreeBookstoreScreen extends BaseWidget<FreeBookstoreController> {
         itemCount: 15,
         itemBuilder: (BuildContext context, int index) {
           return itemBook(index, index, () {
-            clickItem(index, index);
+            clickItem(index, index, context);
           });
         });
   }

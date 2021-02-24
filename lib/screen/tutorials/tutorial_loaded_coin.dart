@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/screen/tutorials/chplay_coin.dart';
+import 'package:init_app/screen/tutorials/momo_coin.dart';
+import 'package:init_app/screen/tutorials/viettel_coin.dart';
 
 class TutorialLoadedCoin extends StatefulWidget {
   TutorialLoadedCoin({Key key}) : super(key: key);
@@ -23,8 +26,11 @@ class _TutorialLoadedCoinState extends State<TutorialLoadedCoin> {
         child: Column(
           children: <Widget>[
             ListTile(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ViettelCoinScreen()));
+              },
               title: Text(
-                "1.Nap xu bang Viettel",
+                "1. Nap xu bang Viettel",
                 style: TextStyle(color: Colors.black),
               ),
               trailing: Icon(
@@ -37,8 +43,11 @@ class _TutorialLoadedCoinState extends State<TutorialLoadedCoin> {
               color: Colors.grey[400],
             ),
             ListTile(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ChPlayCoinScreen()));
+              },
               title: Text(
-                "2.Nap xu bang CH Play",
+                "2. Nap xu bang CH Play",
                 style: TextStyle(color: Colors.black),
               ),
               trailing: Icon(
@@ -51,6 +60,9 @@ class _TutorialLoadedCoinState extends State<TutorialLoadedCoin> {
               color: Colors.grey[400],
             ),
             ListTile(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => MomoCoinScreen()));
+              },
               title: Text(
                 "3. Huong dan thanh toan bang Momo",
                 style: TextStyle(color: Colors.black),

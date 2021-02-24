@@ -46,7 +46,7 @@ class _BookstoreState extends State<BookstoreScreen>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Tìm kiếm sách, tác giả ",
+                    "Search book, author ",
                     style: TextStyle(color: Colors.grey[400]),
                   ),
                   Icon(
@@ -66,13 +66,13 @@ class _BookstoreState extends State<BookstoreScreen>
             labelColor: Color(Constant.colorTxtPrimary),
             tabs: [
               new Tab(
-                text: 'Tiểu thuyết',
+                text: 'Novel',
               ),
               new Tab(
-                text: 'Miễn phí',
+                text: 'Free',
               ),
               new Tab(
-                text: 'Truyện tranh',
+                text: 'Comic',
               ),
             ],
           ),

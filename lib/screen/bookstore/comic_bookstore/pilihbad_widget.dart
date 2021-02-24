@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PilihbadWidget extends StatefulWidget {
   PilihbadWidget({Key key}) : super(key: key);
@@ -9,6 +10,9 @@ class PilihbadWidget extends StatefulWidget {
 
 class _PilihbadWidgetState extends State<PilihbadWidget> {
   bool isLock = false;
+  void _onClickItem(int index){
+
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,17 +21,17 @@ class _PilihbadWidgetState extends State<PilihbadWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           new Container(
-            margin: EdgeInsets.only(top: 10),
+            margin: EdgeInsets.only(top: 10, bottom: 5.0),
             height: 20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  "Đang cập nhât",
+                  "Updating",
                   style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
                 Text(
-                  "Cập nhật đến chương 70",
+                  "Update to chapter 70",
                   style: TextStyle(fontSize: 12, color: Colors.pink),
                 ),
               ],
@@ -45,7 +49,12 @@ class _PilihbadWidgetState extends State<PilihbadWidget> {
                 ),
                 itemCount: 70,
                 itemBuilder: (BuildContext context, int index) {
+                  int ind = index + 1;
                   return GestureDetector(
+                    onTap: (){
+                      index > 12 ? Fluttertoast.showToast(msg: "Warning...Chap Lock!", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIosWeb: 1,backgroundColor: Colors.grey[400], textColor: Colors.white,fontSize: 15.0)
+                          : Fluttertoast.showToast(msg: "Chap unlock!", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIosWeb: 1,backgroundColor: Colors.grey[400], textColor: Colors.white,fontSize: 15.0);
+                    },
                     child: Stack(
                       children: <Widget>[
                         Container(
@@ -58,11 +67,11 @@ class _PilihbadWidgetState extends State<PilihbadWidget> {
                                 BoxShadow(color: Colors.grey, spreadRadius: 1)
                               ]),
                           child: Center(
-                            child: Text("Chap $index",
+                            child: Text("Chap $ind",
                                 textAlign: TextAlign.center),
                           ),
                         ),
-                        index % 2 == 0
+                        index > 12
                             ? Container(
                                 margin: EdgeInsets.only(top: 5, left: 60),
                                 child: Icon(
