@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/feedback/feedback_controller.dart';
+import 'package:init_app/widgets/appbar_second.dart';
 import 'package:init_app/widgets/button_main.dart';
 
 import '../../common/constant.dart';
@@ -10,7 +11,7 @@ import '../../common/constant.dart';
 // ignore: must_be_immutable
 class FeedbackScreen extends BaseWidget<FeedbackController> {
   static const String routeName = '/feedback';
-  static const String name = 'Ý kiến phản hồi';
+  static const String name = 'Feedback';
   final ctlTextEditContent = TextEditingController();
   final ctlTextEditEmail = TextEditingController();
 
@@ -29,30 +30,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      FeedbackScreen.name,
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      padding: EdgeInsets.all(10.0),
-                      onPressed: () {
-                        controller.back();
-                      },
-                      icon: Icon(Icons.arrow_back_ios_rounded),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            appbarSecond(name),
             Stack(
               children: [
                 Container(
@@ -70,7 +48,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                     },
                     decoration: InputDecoration(
                       hintText:
-                          "Vui lòng gửi ý kiến phản hồi cho chúng tôi ! Nếu có thể xin liên hệ qua FB của fanpage (${Common.fanpageName}), cảm ơn !",
+                          "Please send us your feedback! If possible, please contact fanpage's FB (${Common.fanpageName}), thank you !",
                       hintStyle: TextStyle(
                         fontSize: 15.0,
                         color: Color(Constant.colorTxtDefault).withOpacity(0.8),
@@ -106,7 +84,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                   controller.countWord(text.length);
                 },
                 decoration: InputDecoration(
-                  hintText: "Xin nhận email của bạn (Bắt buộc)",
+                  hintText: "Please enter your email (Required)",
                   hintStyle: TextStyle(
                     fontSize: 15.0,
                     color: Color(Constant.colorTxtDefault).withOpacity(0.8),
@@ -121,7 +99,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
               width: double.infinity,
               height: 40.0,
               child: ButtonMain(
-                name: "Gửi",
+                name: "Send",
                 color: Color(Constant.colorTxtSecond),
                 func: () {
                   controller.send(
@@ -151,7 +129,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                       Align(
                         alignment: Alignment.center,
                         child: Text(
-                          "Liên hệ FB",
+                          "Contact FB",
                           style: TextStyle(),
                         ),
                       ),
@@ -160,7 +138,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(30.0),
                           child: Image.asset(
-                            Common.pathImg + "ic_edit.png",
+                            Common.pathImg + "ic_facebook.png",
                             fit: BoxFit.cover,
                             width: 45.0,
                             height: 45.0,

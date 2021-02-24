@@ -10,10 +10,13 @@ import 'package:init_app/widgets/appbar_second.dart';
 class BuyCoinScreen extends BaseWidget<BuyCoinController> {
   static const String routeName = '/buy-coin';
   static const String name = 'Chọn phương thức thanh toán';
+
   BuildContext dialogContext;
 
+
+
   @override
-  Widget build(BuildContext context, {BuyCoinController controllerSuper}) {
+  Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: BuyCoinController());
     return Scaffold(
       backgroundColor: Colors.white,
@@ -21,7 +24,8 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
         child: Column(
           children: [
             appbarSecond(BuyCoinScreen.name),
-            Column(
+              GetBuilder<BuyCoinController>(
+              builder: (_) => Column(
               children: controller.paymentMethods
                   .map((e) => Container(
                         padding: EdgeInsets.fromLTRB(20.0, 10, 10, 10),
@@ -49,6 +53,8 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                       ))
                   .toList(),
             ),
+            ),
+            
             Container(
               width: double.infinity,
               height: 50.0,
@@ -63,7 +69,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                 color: Color(Constant.colorTxtSecond),
                 textColor: Colors.white,
                 child: Text(
-                  "Nạp xu",
+                  "Deposit coins",
                   style: TextStyle(
                     fontSize: 16.0,
                   ),
@@ -149,7 +155,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                     children: [
                                                       Expanded(
                                                         child: Text(
-                                                          "Mua xu",
+                                                          "Buy coins",
                                                           style: TextStyle(
                                                               color: Color(Constant
                                                                   .colorTxtDefault),
@@ -196,7 +202,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                     children: [
                                                       Expanded(
                                                         child: Text(
-                                                          "Giá cả",
+                                                          "Price",
                                                           style: TextStyle(
                                                               color: Color(Constant
                                                                   .colorTxtDefault),
@@ -221,7 +227,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                     children: [
                                                       Expanded(
                                                         child: Text(
-                                                          "Giá cả quốc tế",
+                                                          "Price",
                                                           style: TextStyle(
                                                               color: Color(Constant
                                                                   .colorTxtDefault),
@@ -341,7 +347,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(vertical: 15.0),
                                   child: Text(
-                                    'Làm sao để nạp xu?',
+                                    'How to deposit coins?',
                                     style: TextStyle(
                                         decoration: TextDecoration.underline,
                                         color: Color(Constant.colorTxtDefault)),

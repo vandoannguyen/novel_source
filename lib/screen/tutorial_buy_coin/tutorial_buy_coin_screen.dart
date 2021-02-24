@@ -9,13 +9,6 @@ import 'package:init_app/widgets/appbar_second.dart';
 class TutorialBuyCoinScreen extends BaseWidget<TutorialBuyCoinController> {
   static const String routeName = '/tutorial-buy-coin';
   static const String name = 'Hướng dẫn nạp xu';
-  TutorialBuyCoinController controller = Get.put(TutorialBuyCoinController());
-
-  @override
-  initState({TutorialBuyCoinController controller}) {
-    return super.initState(controller: controller);
-  }
-
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: TutorialBuyCoinController());
@@ -31,21 +24,26 @@ class TutorialBuyCoinScreen extends BaseWidget<TutorialBuyCoinController> {
                   shrinkWrap: true,
                   itemCount: controller.tutorials.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      padding: EdgeInsets.all(15.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "${index + 1}. ${controller.tutorials[index]}",
+                    return GestureDetector(
+                      onTap: () {
+                        controller.clickItem(index);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(15.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "${index + 1}. ${controller.tutorials[index]}",
+                              ),
                             ),
-                          ),
-                          Icon(
-                            Icons.navigate_next_rounded,
-                            size: 20.0,
-                            color: Color(Constant.colorTxtDefault),
-                          )
-                        ],
+                            Icon(
+                              Icons.navigate_next_rounded,
+                              size: 20.0,
+                              color: Color(Constant.colorTxtDefault),
+                            )
+                          ],
+                        ),
                       ),
                     );
                   }),
@@ -55,4 +53,30 @@ class TutorialBuyCoinScreen extends BaseWidget<TutorialBuyCoinController> {
       ),
     );
   }
+}
+
+Widget appbar(name) {
+  return Container(
+    color: Colors.white,
+    child: Row(
+      children: [
+        IconButton(
+          padding: EdgeInsets.all(10.0),
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(Icons.arrow_back_ios_rounded),
+        ),
+        Expanded(
+          child: Text(
+            name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 20.0),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
+    ),
+  );
 }

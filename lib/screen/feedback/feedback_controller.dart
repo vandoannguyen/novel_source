@@ -8,8 +8,7 @@ class FeedbackController extends BaseController {
 
   FeedbackController();
   onInit() {
-    print(" object CommentController");
-    Get.snackbar('Hi', 'i am a modern snackbar');
+  
   }
 
   void countWord(word) {
