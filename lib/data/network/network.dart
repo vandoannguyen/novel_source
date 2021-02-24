@@ -437,7 +437,11 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      completer.complete(value);
+      if (value.data["code"] == 1) {
+        completer.complete(value.data["result"]);
+        print("getUserProfile ${value.data["result"]}");
+      } else
+        throw ("data null");
     }).catchError((err) {
       completer.completeError(err);
     });
@@ -465,7 +469,12 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      completer.complete(value);
+          print("object");
+      if (value.data["code"] == 1) {
+        completer.complete(value);
+        print("object ${value.data["result"]}");
+      } else
+        throw ("data null");
     }).catchError((err) {
       completer.completeError(err);
     });
@@ -501,7 +510,7 @@ class ApiImpl implements IApi {
         data: {"access_token": access_token}).then((value) {
       print(value);
       if (value.data["code"] == 1) {
-        completer.complete(value.data["result"]["token"]);
+        completer.complete(value.data["result"]);
       } else {
         completer.completeError("data null");
       }

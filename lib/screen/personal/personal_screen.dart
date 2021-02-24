@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/screen/login/login_controller.dart';
+import 'package:init_app/screen/login/login_screen.dart';
 import 'package:init_app/screen/personal/personal_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
 
@@ -13,7 +16,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
-    super.build(context, controllerSuper: PersonalController(context));
+    super.build(context, controllerSuper: PersonalController());
     var size = MediaQuery.of(context).size;
     return Container(
       color: Colors.grey[200],
@@ -39,47 +42,71 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                   ),
                 ),
               ),
-              child: Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.fromLTRB(10.0, 0, 15.0, 0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100.0),
-                      child: Image.network(
-                        "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
-                        fit: BoxFit.cover,
-                        width: 50.0,
-                        height: 50.0,
-                      ),
-                    ),
-                  ),
-                  true
-                      ? Container(
-                          padding: EdgeInsets.only(bottom: 5.0),
-                          child: Text(
-                            "Login",
-                            style: TextStyle(fontSize: 20.0),
+              child: GetBuilder<PersonalController>(
+                builder: (_) => controller.isLogin
+                    ? Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10.0, 0, 15.0, 0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(100.0),
+                              child: FadeInImage.assetNetwork(
+                                placeholder: Common.pathImg + "ic_us.png",
+                                image: controller.profile["picture"],
+                                fit: BoxFit.cover,
+                                width: 50.0,
+                                height: 50.0,
+                              ),
+                            ),
                           ),
-                        )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(bottom: 5.0),
+                                child: Text(
+                                  controller.profile["name"],
+                                  style: TextStyle(fontSize: 20.0),
+                                ),
+                              ),
+                              Text(
+                                controller.profile["code"],
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: Color(Constant.colorTxtDefault)),
+                              ),
+                            ],
+                          )
+                        ],
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          controller.goLogin();
+                        },
+                        child: Row(
                           children: [
+                            Container(
+                              padding: EdgeInsets.fromLTRB(10.0, 0, 15.0, 0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(100.0),
+                                child: Image.asset(
+                                  Common.pathImg + "ic_us.png",
+                                  fit: BoxFit.cover,
+                                  width: 50.0,
+                                  height: 50.0,
+                                ),
+                              ),
+                            ),
                             Container(
                               padding: EdgeInsets.only(bottom: 5.0),
                               child: Text(
-                                "name",
+                                "Login",
                                 style: TextStyle(fontSize: 20.0),
                               ),
                             ),
-                            Text(
-                              "id",
-                              style: TextStyle(
-                                  fontSize: 15.0,
-                                  color: Color(Constant.colorTxtDefault)),
-                            ),
                           ],
                         ),
-                ],
+                      ),
               ),
             ),
             Container(
@@ -92,7 +119,11 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                   Container(
                     child: Row(
                       children: [
-                        Text("Coin balance: " + "40.0"),
+                        GetBuilder<PersonalController>(
+                            builder: (_) => controller.isLogin
+                                ? Text("Coin balance: " +
+                                    controller.profile["coin"].toString())
+                                : Text("Coin balance: " + "0.0")),
                         Image.asset(
                           Common.pathImg + "ic_coin.png",
                           fit: BoxFit.contain,
@@ -143,7 +174,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                 }),
             item(
                 name: "Feedback",
-                icon: "ic_policy.png",
+                icon: "ic_feedback.png",
                 func: () {
                   controller.click("FEEDBACK");
                 }),

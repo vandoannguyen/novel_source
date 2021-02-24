@@ -26,9 +26,9 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
     controller.getBanner();
     controller.getNewest();
     controller.getHotest();
-    // SingleChildScrollView(
-    //   child: 
-      return Column(
+    return SingleChildScrollView(
+      child: 
+      Column(
         children: [
           GetBuilder<NovelBookController>(
               // init: controller,
@@ -326,7 +326,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
             },
           ),
         ],
-      // ),
+      ),
     );
   }
 

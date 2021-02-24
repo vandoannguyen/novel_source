@@ -12,6 +12,7 @@ class DetailTransactionScreen extends BaseWidget<DetailTransactionController> {
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: DetailTransactionController());
+    controller.getHistory();
     return Scaffold(
       body: SafeArea(
         child: Column(

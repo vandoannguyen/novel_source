@@ -15,7 +15,7 @@ import 'package:init_app/widgets/dialog_loading.dart';
 class DetailComicBookController extends BaseController {
   bool textShowFlag = true;
   var isLoading = false;
-
+  
   DetailComicBookController();
 
   NovelModelHotest detail;
@@ -23,8 +23,9 @@ class DetailComicBookController extends BaseController {
   List<CommentModle>
       // ignore: must_call_super
       onInit() {
-    print(" object DetailComicBookController");
+  
   }
+
 
   void callBack(key, value) {
     switch (key) {

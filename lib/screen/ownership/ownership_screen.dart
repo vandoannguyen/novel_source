@@ -6,7 +6,7 @@ import 'package:init_app/widgets/appbar_second.dart';
 
 class OwnershipScreen extends BaseWidget<OwnershipController> {
   static const String routeName = '/ownership';
-  static const String name = 'Quyền sở hữu';
+  static const String name = 'Ownership';
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
@@ -28,7 +28,8 @@ class OwnershipScreen extends BaseWidget<OwnershipController> {
             Container(
               padding: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 30.0),
               child: Text(
-                  "App ${Common.appName} cung cấp các nội dung bao gồm nhưng không giới hạn: tác phẩm, tóm tắt tác phẩm, hình ảnh, ứng dụng, thiết kế giao diện, bố cục ứng dụng, logo. Tất cả các nội dung trên thuộc quyền sở hữu của công ty và được bảo hộ bởi luật trí tuệ trong nước và các điều ước quốc tế và quyền tác giả.\n\nKhách hàng được sử dụng nội dung theo quy định dưới quyền lợi được trao. Khách hàng chỉ được sử dụng nội dung, không được sửa đổi, sao chép, tái tạo, đăng tải, truyền tải, sáng tạo tác phẩm có nội dung liên quan hay cung cấp hoặc bán lại nội dung cho bên thứ ba dưới mọi hình thức bất kể là phi lợi nhuận hay có lợi nhuận.\n\nNếu phát hiện các hành vi trái với các điều khoản trên, công ty chúng tôi có quyền truy cứu trách nhiệm pháp luật."),
+                  "App ${Common.appName} provides content including but not limited to: work, work summary, image, application, interface design, app layout, logo. All of the above content is owned by the company and protected by domestic intellectual laws and international treaties and copyrights.\n\nCustomers are allowed to use the content as regulated under the benefits given. Customer may only use the content, not modify, copy, reproduce, post, transmit, create works with related content or provide or resell content to third parties in any form. formula whether it's non-profit or profitable.\n\nIf detecting acts contrary to the above terms, our company has the right to prosecute legal liability.",
+                  style: TextStyle(height: 2),),
             )
           ],
         ),

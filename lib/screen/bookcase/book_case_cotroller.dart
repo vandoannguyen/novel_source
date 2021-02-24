@@ -36,7 +36,7 @@ class BookCaseController extends BaseController {
   void login() {
     IntentAnimation.intentNomal(context: context, screen: LoginScreen())
         .then((value) {
-      if (value == "ok") {
+      if (value != null) {
         Common.isLogedIn = true;
         isLogedIn = Common.isLogedIn;
         getLogedIn();
@@ -61,7 +61,7 @@ class BookCaseController extends BaseController {
     } else {
       IntentAnimation.intentNomal(context: context, screen: LoginScreen())
           .then((value) {
-        if (value == "ok") {
+        if (value != null) {
           print("valueloginSuccess $value");
           Common.isLogedIn = true;
           isLogedIn = Common.isLogedIn;

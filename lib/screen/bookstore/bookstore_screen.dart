@@ -21,75 +21,76 @@ class _BookstoreState extends State<BookstoreScreen>
   @override
   void initState() {
     super.initState();
-    _controller = new TabController(length: 3, vsync: this);
+    _controller = new TabController(length: 1, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-              child: Column(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SearchScreen()));
-              },
-              child: Container(
-                margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                padding: EdgeInsets.symmetric(vertical: 5.0),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Tìm kiếm sách, tác giả ",
-                      style: TextStyle(color: Colors.grey[400]),
-                    ),
-                    Icon(
-                      Icons.search,
-                      size: 15.0,
-                      color: Colors.grey[400],
-                    ),
-                  ],
-                ),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SearchScreen()));
+            },
+            child: Container(
+              margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              padding: EdgeInsets.symmetric(vertical: 5.0),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Tìm kiếm sách, tác giả ",
+                    style: TextStyle(color: Colors.grey[400]),
+                  ),
+                  Icon(
+                    Icons.search,
+                    size: 15.0,
+                    color: Colors.grey[400],
+                  ),
+                ],
               ),
             ),
-            // new TabBar(
-            //   controller: _controller,
-            //   indicatorColor: Color(Constant.colorTxtPrimary),
-            //   indicatorSize: TabBarIndicatorSize.label,
-            //   unselectedLabelColor: Color(Constant.colorTxtDefault),
-            //   labelColor: Color(Constant.colorTxtPrimary),
-            //   tabs: [
-            //     new Tab(
-            //       text: 'Tiểu thuyết',
-            //     ),
-            //     new Tab(
-            //       text: 'Miễn phí',
-            //     ),
-            //     new Tab(
-            //       text: 'Truyện tranh',
-            //     ),
-            //   ],
-            // ),
-            // Expanded(
-            //   child: new TabBarView(
-            //     controller: _controller,
-            //     children: <Widget>[
-            //       NovelBookstoreScreen(),
-            //       FreeBookstoreScreen(),
-            //       ComicBookstoreScreen(),
-            //     ],
-            //   ),
-            // ),
-             NovelBookstoreScreen()
-          ],
-        ),
+          ),
+          // new TabBar(
+          //   controller: _controller,
+          //   indicatorColor: Color(Constant.colorTxtPrimary),
+          //   indicatorSize: TabBarIndicatorSize.label,
+          //   unselectedLabelColor: Color(Constant.colorTxtDefault),
+          //   labelColor: Color(Constant.colorTxtPrimary),
+          //   tabs: [
+          //     new Tab(
+          //       text: 'Tiểu thuyết',
+          //     ),
+          //     // new Tab(
+          //     //   text: 'Miễn phí',
+          //     // ),
+          //     // new Tab(
+          //     //   text: 'Truyện tranh',
+          //     // ),
+          //   ],
+          // ),
+          Container(
+            padding: EdgeInsets.fromLTRB(0, 5.0, 0, 15.0),
+            child: Text("Tiểu thuyết", style: TextStyle(color: Color(Constant.colorTxtPrimary), fontSize: 20.0, fontWeight: FontWeight.bold),)),
+          Expanded(
+            child: new TabBarView(
+              controller: _controller,
+              children: <Widget>[
+                NovelBookstoreScreen(),
+                // FreeBookstoreScreen(),
+                // ComicBookstoreScreen(),
+              ],
+            ),
+          ),
+       
+        ],
       ),
     );
   }

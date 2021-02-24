@@ -10,7 +10,7 @@ import 'package:init_app/widgets/button_main.dart';
 // ignore: must_be_immutable
 class SettingScreen extends BaseWidget<SettingController> {
   static const String routeName = '/setting';
-  static const String name = 'Cài đặt';
+  static const String name = 'Settings';
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
@@ -38,12 +38,12 @@ class SettingScreen extends BaseWidget<SettingController> {
                   Container(
                     margin: EdgeInsets.all(15.0),
                     child: Image.asset(
-                      Common.pathImg + "ic_edit.png",
+                      Common.pathImg + "ic_lock.png",
                       width: 20.0,
                       fit: BoxFit.contain,
                     ),
                   ),
-                  Expanded(child: Text("Mở khóa bộ nhớ")),
+                  Expanded(child: Text("Auto unlock")),
                   Container(
                     margin: EdgeInsets.all(5.0),
                     child: GetBuilder<SettingController>(
@@ -81,12 +81,12 @@ class SettingScreen extends BaseWidget<SettingController> {
                     Container(
                       margin: EdgeInsets.all(15.0),
                       child: Image.asset(
-                        Common.pathImg + "ic_edit.png",
+                        Common.pathImg + "ic_trash.png",
                         width: 20.0,
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(child: Text("Xóa bộ nhớ")),
+                    Expanded(child: Text("Delete memory")),
                     Text(
                       "0B",
                       style: TextStyle(
@@ -125,12 +125,12 @@ class SettingScreen extends BaseWidget<SettingController> {
                     Container(
                       margin: EdgeInsets.all(15.0),
                       child: Image.asset(
-                        Common.pathImg + "ic_edit.png",
+                        Common.pathImg + "ic_ownership.png",
                         width: 20.0,
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(child: Text("Quyền sở hữu")),
+                    Expanded(child: Text("Ownership")),
                     Container(
                       margin: EdgeInsets.all(5.0),
                       child: Icon(
@@ -163,12 +163,12 @@ class SettingScreen extends BaseWidget<SettingController> {
                     Container(
                       margin: EdgeInsets.all(15.0),
                       child: Image.asset(
-                        Common.pathImg + "ic_edit.png",
+                        Common.pathImg + "ic_us.png",
                         width: 20.0,
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(child: Text("Về chúng tôi")),
+                    Expanded(child: Text("About us")),
                     Container(
                       margin: EdgeInsets.all(5.0),
                       child: Icon(
@@ -182,77 +182,7 @@ class SettingScreen extends BaseWidget<SettingController> {
             ),
             GestureDetector(
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) => Dialog(
-                    // shape: RoundedRectangleBorder(
-                    //     borderRadius:
-                    //         BorderRadius.circular(
-                    //             0.0)), //this right here
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 15.0, vertical: 20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Chọn Ngôn Ngữ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18.0),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              controller.changeLanguage("INDONESIA");
-                            },
-                            child: Container(
-                              padding:
-                                  EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 10.0),
-                              child: Text(
-                                "Bahasa Indonesia",
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  // color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              controller.changeLanguage("LANGUAGE");
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 10.0),
-                              child: Text(
-                                "Tiếng Việt",
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  // color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              controller.changeLanguage("Vi");
-                            },
-                            child: Container(
-                              padding:
-                                  EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                              child: Text(
-                                "Tiếng Việt",
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  // color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
+                controller.changeLanguage(context);
               },
               child: Container(
                 padding: EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 10.0),
@@ -270,17 +200,18 @@ class SettingScreen extends BaseWidget<SettingController> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Chọn ngôn ngữ",
+                      "Choose language",
                       style: TextStyle(
                         color: Color(Constant.colorTxtDefault),
                       ),
                     )),
-                    Text(
-                      "Tiếng Việt",
-                      style: TextStyle(
-                        color: Color(Constant.colorTxtDefault),
-                      ),
-                    ),
+                    GetBuilder<SettingController>(
+                        builder: (_) => Text(
+                              controller.language,
+                              style: TextStyle(
+                                color: Color(Constant.colorTxtDefault),
+                              ),
+                            )),
                     Container(
                       margin: EdgeInsets.all(5.0),
                       child: Icon(
@@ -297,7 +228,7 @@ class SettingScreen extends BaseWidget<SettingController> {
               height: 40.0,
               margin: EdgeInsets.symmetric(horizontal: 30.0, vertical: 25.0),
               child: ButtonMain(
-                name: "Đăng xuất",
+                name: "Logout",
                 color: Color(Constant.colorTxtSecond),
                 txtSize: 16.0,
                 func: () {},

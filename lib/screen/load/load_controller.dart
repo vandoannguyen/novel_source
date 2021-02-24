@@ -2,12 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/network/UserModel.dart';
 import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/home/home_screen.dart';
+import 'package:init_app/screen/login/login_controller.dart';
 import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/dialog_language.dart';
 
@@ -38,6 +40,7 @@ class LoadController extends BaseController {
           String token = value["result"]["token"];
           Common.token = token;
           Common.user = UserModel.fromJson(value["result"]["user"]);
+    
           _isLoginSuccess = true;
           _getData(context);
         } else {
@@ -152,8 +155,9 @@ class LoadController extends BaseController {
         RepositoryImpl.getInstance()
             .loginWithGoogle(access_token: token.accessToken)
             .then((value) {
-          Common.token = value;
+          Common.token = value["token"];
           Common.isLogedIn = true;
+
           RepositoryImpl.getInstance()
               .setLogedData(type: "google")
               .then((value) {});
@@ -180,6 +184,8 @@ class LoadController extends BaseController {
           Common.token = value;
           print("0");
           Common.isLogedIn = true;
+
+
           print("1");
           RepositoryImpl.getInstance().setLogedData(type: "facebook");
           _isLoginSuccess = true;

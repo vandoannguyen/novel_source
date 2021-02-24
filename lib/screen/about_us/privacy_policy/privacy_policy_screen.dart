@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
-import 'package:init_app/screen/privacy_policy/privacy_policy_controller.dart';
+import 'package:init_app/screen/about_us/privacy_policy/privacy_policy_controller.dart';
 import 'package:init_app/widgets/appbar_second.dart';
 
 class PrivacyPolicyScreen extends BaseWidget<PrivacyPolicyController> {
   static const String routeName = '/privacy-policy';
-  static const String name = 'CHÍNH SÁCH BẢO MẬT';
+  static const String name = 'Privacy Policy';
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {

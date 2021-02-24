@@ -135,7 +135,7 @@ class RepositoryImpl implements IRepository {
   @override
   Future historyBuy({page, limit, bool increase = true}) {
     // TODO: implement historyBuy
-    _api.historyBuy(page: page, limit: limit, increase: increase);
+  return  _api.historyBuy(page: page, limit: limit, increase: increase);
   }
 
   @override
