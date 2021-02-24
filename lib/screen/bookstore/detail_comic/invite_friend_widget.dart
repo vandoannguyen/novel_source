@@ -89,10 +89,17 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                   ),
                   Column(
                     children: <Widget>[
-                      Image.asset(
-                        Common.pathImg + "whatsapp.png",
-                        height: 60,
-                        width: 60,
+                      GestureDetector(
+                        onTap: (){
+
+                        },
+                        child: Container(
+                          child: Image.asset(
+                            Common.pathImg + "whatsapp.png",
+                            height: 60,
+                            width: 60,
+                          ),
+                        ),
                       ),
                       Text(
                         "whatsapp",
@@ -102,10 +109,17 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                   ),
                   Column(
                     children: <Widget>[
-                      Image.asset(
-                        Common.pathImg + "line.png",
-                        height: 60,
-                        width: 60,
+                      GestureDetector(
+                        onTap: (){
+
+                        },
+                        child: Container(
+                          child: Image.asset(
+                            Common.pathImg + "line.png",
+                            height: 60,
+                            width: 60,
+                          ),
+                        ),
                       ),
                       Text(
                         "line",
@@ -115,10 +129,16 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                   ),
                   Column(
                     children: <Widget>[
-                      Image.asset(
-                        Common.pathImg + "copy.png",
-                        height: 60,
-                        width: 60,
+                      GestureDetector(
+                        onTap: (){
+                        },
+                        child: Container(
+                          child: Image.asset(
+                            Common.pathImg + "copy.png",
+                            height: 60,
+                            width: 60,
+                          ),
+                        ),
                       ),
                       Text(
                         "copy link",

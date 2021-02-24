@@ -405,7 +405,7 @@ class _DetailWidgetState extends State<DetailWidget> {
               ),
             ),
             Container(
-              height: 60,
+              height: 80,
               margin: EdgeInsets.only(top: 20, right: 260),
               child: Text(
                 "HOTTEST",

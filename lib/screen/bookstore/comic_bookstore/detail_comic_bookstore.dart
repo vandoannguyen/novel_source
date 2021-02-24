@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/login/login_screen.dart';
@@ -170,7 +171,6 @@ class _DetailComicBookState extends State<DetailComicBook>
               expandedHeight: 220.0,
               floating: false,
               pinned: true,
-
               flexibleSpace: Stack(
                 children: [
                   Container(
@@ -195,19 +195,24 @@ class _DetailComicBookState extends State<DetailComicBook>
 
               ),
               actions: [
-                Container(
-                  margin: EdgeInsets.only(top: 15, right: 25),
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.grey[200])
-                  ),
-                  child: Column(
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(top: 8, left: 3, right: 3),
-                          child: Icon(Icons.share, color: Colors.grey,)),
-                    ],
+                GestureDetector(
+                  onTap: (){
+                    Fluttertoast.showToast(msg: "Share link", toastLength: Toast.LENGTH_SHORT, backgroundColor: Colors.grey, textColor: Colors.white, gravity: ToastGravity.CENTER);
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(top: 15, right: 25),
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.grey[200])
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(top: 8, left: 3, right: 3),
+                            child: Icon(Icons.share, color: Colors.grey,)),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -329,7 +334,7 @@ class _DetailComicBookState extends State<DetailComicBook>
 
       ),
       ],
-    ),
+        ),
 
       ),
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:init_app/common/common.dart';
 
 class MyFriendWidget extends StatefulWidget {
@@ -24,12 +25,10 @@ class _MyFriendWidgetState extends State<MyFriendWidget> {
                 ListTile(
                   onTap: (){
                     // Navigator.push(context, MaterialPageRoute(builder: (context) => LoadedCoin()));
+                    Fluttertoast.showToast(msg: "My friend ${ind}", gravity: ToastGravity.CENTER, fontSize: 15, toastLength: Toast.LENGTH_SHORT, backgroundColor: Colors.grey, textColor: Colors.white);
                   },
                   title: Text("My friend ${ind}"),
-                  trailing: IconButton(
-                    icon: Icon(Icons.navigate_next, color: Colors.grey[600],),
-                    onPressed: (){
-                    },
+                  trailing: Icon(Icons.navigate_next, color: Colors.grey[600],
                   ),
                 ),
                 Divider(

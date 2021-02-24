@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PilihbadWidget extends StatefulWidget {
   PilihbadWidget({Key key}) : super(key: key);
@@ -50,6 +51,10 @@ class _PilihbadWidgetState extends State<PilihbadWidget> {
                 itemBuilder: (BuildContext context, int index) {
                   int ind = index + 1;
                   return GestureDetector(
+                    onTap: (){
+                      index > 12 ? Fluttertoast.showToast(msg: "Warning...Chap Lock!", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIosWeb: 1,backgroundColor: Colors.grey[400], textColor: Colors.white,fontSize: 15.0)
+                          : Fluttertoast.showToast(msg: "Chap unlock!", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIosWeb: 1,backgroundColor: Colors.grey[400], textColor: Colors.white,fontSize: 15.0);
+                    },
                     child: Stack(
                       children: <Widget>[
                         Container(
