@@ -17,7 +17,6 @@ class AboutUsController extends BaseController {
   void onReady() {
     // TODO: implement onReady
     super.onReady();
-    print("2");
   }
 
   void clickItem(key) {

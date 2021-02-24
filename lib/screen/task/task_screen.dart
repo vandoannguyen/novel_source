@@ -6,9 +6,7 @@ import 'package:init_app/screen/task/task_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
 
 import '../../common/common.dart';
-import '../../common/common.dart';
 import '../../common/constant.dart';
-import '../../data/repository.dart';
 import '../bookstore/detail_comic/invite_friend.dart';
 import '../bookstore/detail_comic/loaded_coin.dart';
 
@@ -20,122 +18,22 @@ class TaskScreen extends BaseWidget<TaskController> {
   static const String name = 'NHIỆM VỤ';
   TextStyle styleTitle =
       TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
+
   // TaskController controller = Get.put(TaskController());
 
   // TaskController _controller = Get.find();
-  List<Map<String, dynamic>> coinDaily = [
-    {"title": "1 Ngày", "name": "20", "value": 20, "status":false},
-    {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
-    {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-    {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-    {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-    {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-    {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
-  ];
+  // List<Map<String, dynamic>> coinDaily = [
+  //   {"title": "1 Ngày", "name": "20", "value": 20, "status": false},
+  //   {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
+  //   {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
+  //   {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
+  //   {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
+  //   {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
+  //   {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
+  // ];
+
   void _incrementDate() {
-    RepositoryImpl.getInstance().getCheckin().then((value) {
-      print("valuelanguage$value");
-      if (value != null) {
-        Common.days = int.parse(value);
-        if(Common.days == 1){
-          coinDaily = [
-            {"title": "1 Ngày", "name": "20", "value": 20, "status":true},
-            {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
-            {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-            {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-            {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-            {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-            {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
-          ];
-        }else if(Common.days == 2){
-          coinDaily = [
-            {"title": "1 Ngày", "name": "20", "value": 20, "status":true},
-            {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-            {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-            {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-            {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-            {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-            {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
-          ];
-        }else if(Common.days == 3){
-          coinDaily = [
-            {"title": "1 Ngày", "name": "20", "value": 20, "status":true},
-            {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-            {"title": "3 Ngày", "name": "30", "value": 30, "status": true},
-            {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-            {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-            {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-            {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
-          ];
-        }else if(Common.days == 4){
-          coinDaily = [
-            {"title": "1 Ngày", "name": "20", "value": 20, "status":true},
-            {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-            {"title": "3 Ngày", "name": "30", "value": 30, "status": true},
-            {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
-            {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-            {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-            {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
-          ];
-        }else if(Common.days == 5){
-          coinDaily = [
-            {"title": "1 Ngày", "name": "20", "value": 20, "status":true},
-            {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-            {"title": "3 Ngày", "name": "30", "value": 30, "status": true},
-            {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
-            {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
-            {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-            {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
-          ];
-        }else if(Common.days == 6){
-          coinDaily = [
-            {"title": "1 Ngày", "name": "20", "value": 20, "status":true},
-            {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-            {"title": "3 Ngày", "name": "30", "value": 30, "status": true},
-            {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
-            {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
-            {"title": "6 Ngày", "name": "40", "value": 40, "status": true},
-            {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
-          ];
-        }else if(Common.days == 7){
-          coinDaily = [
-            {"title": "1 Ngày", "name": "20", "value": 20, "status":true},
-            {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-            {"title": "3 Ngày", "name": "30", "value": 30, "status": true},
-            {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
-            {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
-            {"title": "6 Ngày", "name": "40", "value": 40, "status": true},
-            {"title": "7 Ngày", "name": "60x2", "value": 120, "status": true},
-          ];
-        }else if(Common.days == 0){
-          coinDaily = [
-            {"title": "1 Ngày", "name": "20", "value": 20, "status": false},
-            {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
-            {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-            {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-            {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-            {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-            {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
-          ];
-        }
-      }else{
-        coinDaily = [
-          {"title": "1 Ngày", "name": "20", "value": 20, "status": false},
-          {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
-          {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-          {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-          {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-          {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-          {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
-        ];
-      }
-    });
-  }
-  @override
-  initState({TaskController controller}){
-    print("initState");
-    _incrementDate();
-    return super.initState(controller: controller);
+    controller.incrementDate();
   }
 
   @override
@@ -170,8 +68,8 @@ class TaskScreen extends BaseWidget<TaskController> {
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
-    _incrementDate();
     super.build(context, controllerSuper: TaskController());
+    _incrementDate();
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Container(
@@ -191,7 +89,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                   GestureDetector(
                     onTap: () {
                       controller.checkInToday();
-                      _incrementDate();
+                      // _incrementDate();
                     },
                     child: GetBuilder<TaskController>(
                       // init: TaskController(), // INIT IT ONLY THE FIRST TIME
@@ -258,71 +156,82 @@ class TaskScreen extends BaseWidget<TaskController> {
                         height: 5.0,
                         color: Color(Constant.colorTxtDefault).withOpacity(0.5),
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 0.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: coinDaily
-                              .map(
-                                (item) => new Container(
-                                  width: 35.0,
-                                  height: 35.0,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: item["status"]
-                                        ? Color(Constant.colorTxtSecond)
-                                        : Colors.white,
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    border: Border.all(
-                                      width: item["status"] ? 0 : 1,
-                                      color: Color(Constant.colorTxtDefault)
-                                          .withOpacity(0.5),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        item["status"]
-                                            ? Common.pathImg + "ic_coin.png"
-                                            : Common.pathImg +
-                                                "ic_coin_grey.png",
-                                        width: 12.0,
-                                        fit: BoxFit.contain,
-                                      ),
-                                      Text(
-                                        item["name"],
-                                        style: TextStyle(
-                                          fontSize: 10.0,
-                                          color: item["status"]
-                                              ? Colors.white
-                                              : Color(Constant.colorTxtDefault)
-                                                  .withOpacity(0.6),
+                      GetBuilder<TaskController>(
+                        id: "check",
+                        builder: (_) {
+                          print(_.coinDaily);
+                          return Container(
+                            padding: EdgeInsets.symmetric(vertical: 0.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: _.coinDaily
+                                  .map(
+                                    (item) => new Container(
+                                      width: 35.0,
+                                      height: 35.0,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: item["status"]
+                                            ? Color(Constant.colorTxtSecond)
+                                            : Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(50.0),
+                                        border: Border.all(
+                                          width: item["status"] ? 0 : 1,
+                                          color: Color(Constant.colorTxtDefault)
+                                              .withOpacity(0.5),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                        ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            item["status"]
+                                                ? Common.pathImg + "ic_coin.png"
+                                                : Common.pathImg +
+                                                    "ic_coin_grey.png",
+                                            width: 12.0,
+                                            fit: BoxFit.contain,
+                                          ),
+                                          Text(
+                                            item["name"],
+                                            style: TextStyle(
+                                              fontSize: 10.0,
+                                              color: item["status"]
+                                                  ? Colors.white
+                                                  : Color(Constant
+                                                          .colorTxtDefault)
+                                                      .withOpacity(0.6),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: coinDaily
-                          .map((item) => new Text(
-                                item["title"],
-                                style: TextStyle(
-                                  fontSize: 10.0,
-                                  color: Color(Constant.colorTxtDefault)
-                                      .withOpacity(0.6),
-                                ),
-                              ))
-                          .toList(),
+                  GetBuilder<TaskController>(
+                    builder: (_) => Container(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: _.coinDaily
+                            .map((item) => new Text(
+                                  item["title"],
+                                  style: TextStyle(
+                                    fontSize: 10.0,
+                                    color: Color(Constant.colorTxtDefault)
+                                        .withOpacity(0.6),
+                                  ),
+                                ))
+                            .toList(),
+                      ),
                     ),
                   ),
                   //

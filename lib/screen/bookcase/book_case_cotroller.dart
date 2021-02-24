@@ -130,24 +130,13 @@ class BookCaseController extends BaseController {
   }
 
   void delete() {
-    if (listSelected != null && listSelected.length > 0) {
-      Common.myBooks = Common.myBooks
-          .where((element) =>
-              listSelected.where((e) => e.id == element.id).toList().length ==
-              0)
-          .toList();
-      myBooks = Common.myBooks;
-      update();
-      for (int i = 0; i < listSelected.length; i++) {
-        RepositoryImpl.getInstance()
-            .removeBookFromMyBook(idBook: listSelected[i].id)
-            .then((value) {
-          print(value);
-        }).catchError((err) {});
-      }
-    } else {
-      showMess("Please select least one item", TypeMess.WARNING);
-    }
+    Common.myBooks = Common.myBooks
+        .where((element) =>
+            listSelected.where((e) => e.id == element.id).toList().length == 0)
+        .toList();
+    myBooks = Common.myBooks;
+    update();
+    print(Common.myBooks.length);
   }
 
   void cancelDelete() {

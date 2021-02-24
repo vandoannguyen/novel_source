@@ -16,7 +16,7 @@ Widget dialogLanguage(context, callback) {
           Container(
               width: double.infinity,
               padding: EdgeInsets.all(10),
-              child: Text("Chose language",
+              child: Text("Choose language",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 20,

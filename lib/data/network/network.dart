@@ -384,19 +384,19 @@ class ApiImpl implements IApi {
     Completer<List<NovelModel>> completer = new Completer();
     String time = _getTimeStamp();
     String token = CryptUtils.genSha256("${Common.EXTEND_ONEADX_KEY}"
-        "/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time");
+        "/books/language/$language?page=$page&limit=$limitPerPage&sort=${increase ? "createdAt" : "-createdAt"}&timestamp=$time");
     // String token = CryptUtils.genSha256(
     //     "${Common.EXTEND_ONEADX_KEY}/books/language/vi?page=1&limit=20&sort=createdAt&timestamp=$time");
-    Dio().get(
-        "${ROOT_API}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time&oneadx_token=$token",
-        options: Options(headers: {"Authorization": "Bearer ${Common.token}"}));
-    // print(
-    //     "${ROOT_API}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time"
-    //     "&oneadx_token=$token");
+    // Dio().get(
+    //     "${ROOT_API}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time&oneadx_token=$token",
+    //     options: Options(headers: {"Authorization": "Bearer ${Common.token}"}));
+    print(
+        "${ROOT_API}/books/language/$language?page=$page&limit=$limitPerPage&sort=${increase ? "createdAt" : "-createdAt"}&timestamp=$time"
+        "&oneadx_token=$token");
     // print(Common.token);
     Dio()
         .get(
-            "${ROOT_API}/books/language/vi?page=1&limit=20&sort=createdAt&timestamp=$time"
+            "${ROOT_API}/books/language/$language?page=$page&limit=$limitPerPage&sort=${increase ? "createdAt" : "-createdAt"}&timestamp=$time"
             "&oneadx_token=$token",
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
@@ -433,7 +433,11 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      completer.complete(value);
+      if (value.data["code"] == 1) {
+        completer.complete(value.data["result"]);
+        print("getUserProfile ${value.data["result"]}");
+      } else
+        throw ("data null");
     }).catchError((err) {
       completer.completeError(err);
     });
@@ -461,7 +465,12 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      completer.complete(value);
+      print("object");
+      if (value.data["code"] == 1) {
+        completer.complete(value);
+        print("object ${value.data["result"]}");
+      } else
+        throw ("data null");
     }).catchError((err) {
       completer.completeError(err);
     });
@@ -497,7 +506,7 @@ class ApiImpl implements IApi {
         data: {"access_token": access_token}).then((value) {
       print(value);
       if (value.data["code"] == 1) {
-        completer.complete(value.data["result"]["token"]);
+        completer.complete(value.data["result"]);
       } else {
         completer.completeError("data null");
       }
@@ -527,6 +536,6 @@ class ApiImpl implements IApi {
     int time = (DateTime.now().millisecondsSinceEpoch / 1000).round();
     print(time.round());
 
-    return "1612586520";
+    return time.toString();
   }
 }

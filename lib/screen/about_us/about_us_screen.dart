@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
+import 'package:init_app/common/images.dart';
 import 'package:init_app/screen/about_us/about_us_controller.dart';
 import 'package:init_app/widgets/appbar_second.dart';
 
@@ -19,11 +20,8 @@ class AboutUsScreen extends BaseWidget<AboutUsController> {
             appbarSecond(AboutUsScreen.name),
             Container(
               padding: EdgeInsets.symmetric(vertical: 30.0),
-              child: Image.asset(
-                Common.pathImg + "ic_coin.png",
-                width: 100.0,
-                fit: BoxFit.contain,
-              ),
+              width: 100.0,
+              child: ic_launcher,
             ),
             Container(
               color: Colors.white,
@@ -82,5 +80,4 @@ class AboutUsScreen extends BaseWidget<AboutUsController> {
       ),
     );
   }
-
 }
