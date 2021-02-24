@@ -1,6 +1,5 @@
 import 'package:init_app/data/network/BannerNovelModel.dart';
 import 'package:init_app/data/network/NovalModel.dart';
-import 'package:init_app/data/network/NovelModelHotest.dart';
 
 import 'network/NovalChapterModel.dart';
 import 'network/network.dart';
@@ -64,7 +63,7 @@ class RepositoryImpl implements IRepository {
   }
 
   @override
-  Future<List<NovalModel>> getMyBooks({String timestamp}) {
+  Future<List<NovelModel>> getMyBooks({String timestamp}) {
     // TODO: implement getMyBooks
     return _api.getMyBooks(timestamp: timestamp);
   }
@@ -113,13 +112,13 @@ class RepositoryImpl implements IRepository {
   }
 
   @override
-  Future<NovelModelHotest> getNovelDetail({idBook}) {
+  Future<NovelModel> getNovelDetail({idBook}) {
     // TODO: implement getNovelDetail
     return _api.getNovelDetail(idBook: idBook);
   }
 
   @override
-  Future<List<NovelModelHotest>> getNovelNewest(
+  Future<List<NovelModel>> getNovelNewest(
       {language, page, limitPerPage, bool increase = true}) {
     // TODO: implement getNovelNewest
     return _api.getNovelNewest(
@@ -169,7 +168,7 @@ class RepositoryImpl implements IRepository {
   }
 
   @override
-  Future<List<NovelModelHotest>> getNovelHotest(
+  Future<List<NovelModel>> getNovelHotest(
       {language, page, limitPerPage, bool increase = true}) {
     // TODO: implement getNovelHotest
     return _api.getNovelHotest(

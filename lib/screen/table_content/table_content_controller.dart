@@ -11,7 +11,7 @@ import 'package:init_app/widgets/dialog_loading.dart';
 class TableContentController extends BaseController {
   List<NovalChapterModel> listChaps;
   int page = 1;
-  final int limit = 10;
+  final int limit = 20;
   var isLoadMore = false;
   var isLoadig = false;
   bool isLoadAll = false;
@@ -39,10 +39,15 @@ class TableContentController extends BaseController {
 
   void getChapter(String id) {
     isLoadig = true;
-    update();
+    if (!isLoadMore) update();
     RepositoryImpl.getInstance()
         .chapByNoval(id: id, page: page, limit: limit)
         .then((value) {
+      if (isLoadMore) {
+        isLoadMore = false;
+        update();
+      }
+
       isLoadig = false;
       update();
       if (page == 1) listChaps = value;
@@ -54,6 +59,7 @@ class TableContentController extends BaseController {
       }
       update();
     }).catchError((err) {
+      print(err);
       listChaps = null;
     });
   }
@@ -61,7 +67,7 @@ class TableContentController extends BaseController {
   void loadMore(String id) {
     // neeus chua loa het
     if (!isLoadAll) {
-      print(loadMore);
+      print("loadMore");
       isLoadMore = true;
       update();
       page++;

@@ -20,16 +20,11 @@ class TableContentScreen extends BaseWidget<TableContentController> {
     controller.getChapter(id);
     _scrollController = ScrollController()
       ..addListener(() {
-        print(_scrollController.position.extentAfter);
-        if (_scrollController.position.extentAfter < 500) {
-          // setState(() {
-          //   items.addAll(new List.generate(42, (index) => 'Inserted $index'));
-          // });
+        if (_scrollController.offset >=
+                _scrollController.position.maxScrollExtent &&
+            !_scrollController.position.outOfRange) {
+          controller.loadMore(id);
         }
-        // if (_scrollController.position.pixels ==
-        //     _scrollController.position.maxScrollExtent) {
-        //   controller.loadMore(id);
-        // }
       });
     return Scaffold(
       backgroundColor: Colors.white,
@@ -39,63 +34,65 @@ class TableContentScreen extends BaseWidget<TableContentController> {
             appbarSecond(TableContentScreen.name),
             Expanded(
               child: GetBuilder<TableContentController>(
-                builder: (_) => _.listChaps == null || _.isLoadig
-                    ? Container(
-                        alignment: Alignment.center,
-                        child: CircularProgressIndicator(),
-                      )
-                    : Stack(
-                        children: [
-                          ListView.builder(
-                              controller: _scrollController,
-                              physics: AlwaysScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: _.listChaps.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    controller.read(_.listChaps[index]);
-                                  },
-                                  child: Container(
-                                    color: Colors.transparent,
-                                    padding: EdgeInsets.all(15.0),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            _.listChaps[index].title,
-                                          ),
-                                        ),
-                                        _.listChaps[index].coin > 0
-                                            ? Icon(
-                                                Icons.lock_outline_rounded,
-                                                size: 20.0,
-                                                color: Color(
-                                                    Constant.colorTxtDefault),
-                                              )
-                                            : Container(
-                                                width: 20,
-                                              )
-                                      ],
+                builder: (_) =>
+                    // _.listChaps == null || _.isLoadig
+                    //     ? Container(
+                    //         alignment: Alignment.center,
+                    //         child: CircularProgressIndicator(),
+                    //       )
+                    //     :
+                    Stack(
+                  children: [
+                    ListView.builder(
+                        controller: _scrollController,
+                        physics: AlwaysScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: _.listChaps == null ? 0 : _.listChaps.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return GestureDetector(
+                            onTap: () {
+                              controller.read(_.listChaps[index]);
+                            },
+                            child: Container(
+                              color: Colors.transparent,
+                              padding: EdgeInsets.all(15.0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      _.listChaps[index].title,
                                     ),
                                   ),
-                                );
-                              }),
-                          GetBuilder<TableContentController>(
-                              builder: (_) => _.isLoadMore
-                                  ? GestureDetector(
-                                      onTap: () {},
-                                      child: Container(
-                                        color: Colors.transparent,
-                                        alignment: Alignment.center,
-                                        child: CircularProgressIndicator(),
-                                      ),
-                                    )
-                                  : Container(
-                                      height: 0,
-                                    )),
-                        ],
-                      ),
+                                  _.listChaps[index].coin > 0
+                                      ? Icon(
+                                          Icons.lock_outline_rounded,
+                                          size: 20.0,
+                                          color:
+                                              Color(Constant.colorTxtDefault),
+                                        )
+                                      : Container(
+                                          width: 20,
+                                        )
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                    GetBuilder<TableContentController>(
+                        builder: (_) => _.isLoadig
+                            ? GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  color: Colors.transparent,
+                                  alignment: Alignment.center,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              )
+                            : Container(
+                                height: 0,
+                              )),
+                  ],
+                ),
               ),
             ),
           ],

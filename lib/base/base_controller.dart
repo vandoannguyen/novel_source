@@ -23,6 +23,7 @@ abstract class BaseController extends GetxController {
   @override
   void onClose() {
     // TODO: implement onClose
+    dispose();
     super.onClose();
   }
 }

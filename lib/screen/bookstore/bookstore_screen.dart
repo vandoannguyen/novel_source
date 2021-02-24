@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-
-import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/bookstore/novel_bookstore/novel_bookstore_screen.dart';
-import 'package:init_app/screen/bookstore/comic_bookstore/comic_bookstore_screen.dart';
-import 'package:init_app/screen/bookstore/free_bookstore/free_bookstore_screen.dart';
 import 'package:init_app/screen/bookstore/search/search_screen.dart';
 
 class BookstoreScreen extends StatefulWidget {
   static const String routeName = '/bookstore';
   static const String name = 'KHO SÁCH';
+
   BookstoreScreen({Key key}) : super(key: key);
 
   @override
@@ -18,17 +15,18 @@ class BookstoreScreen extends StatefulWidget {
 class _BookstoreState extends State<BookstoreScreen>
     with SingleTickerProviderStateMixin {
   TabController _controller;
+
   @override
   void initState() {
     super.initState();
-    _controller = new TabController(length: 3, vsync: this);
+    _controller = new TabController(length: 1, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-              child: Column(
+        child: Column(
           children: [
             GestureDetector(
               onTap: () {
@@ -75,19 +73,19 @@ class _BookstoreState extends State<BookstoreScreen>
             //     new Tab(
             //       text: 'Truyện tranh',
             //     ),
-            //   ],
+            // ],
             // ),
             // Expanded(
             //   child: new TabBarView(
             //     controller: _controller,
             //     children: <Widget>[
-            //       NovelBookstoreScreen(),
-            //       FreeBookstoreScreen(),
-            //       ComicBookstoreScreen(),
+            //       // NovelBookstoreScreen(),
+            //       //       FreeBookstoreScreen(),
+            //       //       ComicBookstoreScreen(),
             //     ],
             //   ),
             // ),
-             NovelBookstoreScreen()
+            NovelBookstoreScreen()
           ],
         ),
       ),

@@ -8,6 +8,7 @@ import 'package:init_app/common/common.dart';
 import 'package:init_app/common/images.dart';
 import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
+import 'package:init_app/widgets/item_book_ver.dart';
 
 import '../../common/constant.dart';
 
@@ -26,6 +27,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
     var size = MediaQuery.of(context).size;
     controller.getBookDetail(idBook);
     controller.getComments(idBook);
+    controller.getHotest();
     return Scaffold(
         body: Column(
       children: [
@@ -220,7 +222,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 0.0),
                         child: Text(
-                          "Thưởng",
+                          "Reward",
                           style: TextStyle(
                             color: Color(Constant.colorTxtSecond),
                           ),
@@ -456,57 +458,64 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                   ),
                 ),
 //COMMENT
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Bình luận",
-                        style: TextStyle(),
-                      ),
-                      Expanded(child: Container()),
-                      GestureDetector(
-                        onTap: () {
-                          controller.callBack("COMMENT", idBook);
-                        },
-                        child: Image.asset(
-                          Common.pathImg + "ic_edit.png",
-                          width: 20.0,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                //ALL_CMT
-                GestureDetector(
-                  onTap: () {
-                    controller.callBack("ALL_COMMENT", null);
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border(
-                        top: BorderSide(
-                          color:
-                              Color(Constant.colorTxtDefault).withOpacity(0.5),
-                          width: 0.3,
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      "Xem tất cả bình luận",
-                      style: TextStyle(
-                        color: Color(Constant.colorTxtDefault),
-                      ),
-                    ),
-                  ),
-                ),
-                hotBook(),
+//                 Container(
+//                   color: Colors.white,
+//                   padding: EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 10.0),
+//                   child: Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: [
+//                       Text(
+//                         "Bình luận",
+//                         style: TextStyle(),
+//                       ),
+//                       Expanded(child: Container()),
+//                       GestureDetector(
+//                         onTap: () {
+//                           controller.callBack("COMMENT", idBook);
+//                         },
+//                         child: Image.asset(
+//                           Common.pathImg + "ic_edit.png",
+//                           width: 20.0,
+//                           fit: BoxFit.contain,
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//                 //ALL_CMT
+//                 GestureDetector(
+//                   onTap: () {
+//                     controller.callBack("ALL_COMMENT", null);
+//                   },
+//                   child: Container(
+//                     alignment: Alignment.center,
+//                     padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+//                     decoration: BoxDecoration(
+//                       color: Colors.white,
+//                       border: Border(
+//                         top: BorderSide(
+//                           color:
+//                               Color(Constant.colorTxtDefault).withOpacity(0.5),
+//                           width: 0.3,
+//                         ),
+//                       ),
+//                     ),
+//                     child: Text(
+//                       "Xem tất cả bình luận",
+//                       style: TextStyle(
+//                         color: Color(Constant.colorTxtDefault),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+                GetBuilder<DetailComicBookController>(
+                    builder: (_) => _.hotest != null
+                        ? hotBook(_.hotest)
+                        : Container(
+                            height: 180,
+                            alignment: Alignment.center,
+                            child: CircularProgressIndicator(),
+                          )),
               ],
             ),
           ),
@@ -535,8 +544,8 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                                   .where((value) => value.id == _.detail.id)
                                   .toList()
                                   .isEmpty
-                          ? "Bỏ theo dõi"
-                          : "Theo dõi",
+                          ? "Unfollow"
+                          : "Follow",
                       style: TextStyle(
                         color: Color(Constant.colorTxtSecond),
                       ),
@@ -547,19 +556,24 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                alignment: Alignment.center,
-                height: 40.0,
-                // decoration: BoxDecoration(
-                color: Color(Constant.colorTxtSecond),
-                //   border: Border.all(
-                //     color: Color(Constant.colorTxtDefault).withOpacity(0.5),
-                //     width: 0.3,
-                //   ),
-                // ),
-                child: Text(
-                  "Đọc ngày",
-                  style: TextStyle(color: Colors.white),
+              child: GestureDetector(
+                onTap: () {
+                  controller.callBack("TABLE_CONTENT", idBook);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 40.0,
+                  // decoration: BoxDecoration(
+                  color: Color(Constant.colorTxtSecond),
+                  //   border: Border.all(
+                  //     color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+                  //     width: 0.3,
+                  //   ),
+                  // ),
+                  child: Text(
+                    "Read now",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -575,7 +589,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                   ),
                 ),
                 child: Text(
-                  "Thưởng",
+                  "Reward",
                   style: TextStyle(
                     color: Color(Constant.colorTxtSecond),
                   ),
@@ -588,22 +602,29 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
     ));
   }
 
-  Widget hotBook() {
+  Widget hotBook(hotest) {
     return Container(
       margin: EdgeInsets.only(top: 10),
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(padding: EdgeInsets.all(15.0), child: Text("HOT NHẤT")),
+          Container(padding: EdgeInsets.all(15.0), child: Text("HOTEST")),
           Row(
-            children: [1, 2, 3, 4]
+            children: (hotest as List)
                 .map((e) => Expanded(
                       flex: 1,
                       child: Container(
                         height: 180.0,
                         margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        // child: itemBookVer(item: e, index: null, func: () {}),
+                        child: itemBookVer(
+                            item: e,
+                            func: (_) {
+                              idBook = e.id;
+                              controller.getBookDetail(idBook);
+                              controller.getComments(idBook);
+                              controller.getHotest();
+                            }),
                       ),
                     ))
                 .toList(),

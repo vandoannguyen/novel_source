@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/images.dart';
-import 'package:init_app/data/network/NovelModelHotest.dart';
+import 'package:init_app/data/network/NovalModel.dart';
 
 import '../common/constant.dart';
 
-Widget itemBookHor({NovelModelHotest item, index, func}) {
+Widget itemBookHor({NovelModel item, index, func}) {
   return GestureDetector(
     onTap: func,
     child: Container(

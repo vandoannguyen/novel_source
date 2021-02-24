@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/network/BannerNovelModel.dart';
-import 'package:init_app/data/network/NovelModelHotest.dart';
 import 'package:init_app/utils/crypt_utils.dart';
 
 import 'NovalChapterModel.dart';
@@ -19,7 +18,7 @@ abstract class IApi {
 
   Future login({email, timestamep});
 
-  Future<List<NovalModel>> getMyBooks({String timestamp});
+  Future<List<NovelModel>> getMyBooks({String timestamp});
 
   Future createMyBooks({String timestamp, data});
 
@@ -33,13 +32,13 @@ abstract class IApi {
 
   Future<List<BannerNovelModel>> getBanner({language});
 
-  Future<List<NovelModelHotest>> getNovelHotest(
+  Future<List<NovelModel>> getNovelHotest(
       {language, page, limitPerPage, bool increase = true});
 
-  Future<List<NovelModelHotest>> getNovelNewest(
+  Future<List<NovelModel>> getNovelNewest(
       {language, page, limitPerPage, bool increase = true});
 
-  Future<NovelModelHotest> getNovelDetail({idBook});
+  Future<NovelModel> getNovelDetail({idBook});
 
   Future postComment({idBook, contentComment});
 
@@ -97,8 +96,8 @@ class ApiImpl implements IApi {
   }
 
   @override
-  Future<List<NovalModel>> getMyBooks({String timestamp}) {
-    Completer<List<NovalModel>> completer = Completer();
+  Future<List<NovelModel>> getMyBooks({String timestamp}) {
+    Completer<List<NovelModel>> completer = Completer();
     String token = CryptUtils.genSha256(
         "${Common.EXTEND_ONEADX_KEY}/racks/me?timestamp=$timestamp");
     Dio()
@@ -106,9 +105,9 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((vaule) {
-      List<NovalModel> list =
-          List<NovalModel>.from(vaule.data["result"].map((element) {
-        return NovalModel.fromJson(element);
+      List<NovelModel> list =
+          List<NovelModel>.from(vaule.data["result"].map((element) {
+        return NovelModel.fromJson(element);
       }).toList());
       completer.complete(list);
     });
@@ -206,7 +205,7 @@ class ApiImpl implements IApi {
       if (value.data["code"] == 1)
         completer.complete(value.data["result"]);
       else
-        completer.complete(null);
+        throw ("can not add book");
     }).catchError((err) {
       completer.completeError(err);
     });
@@ -226,7 +225,11 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      completer.complete(value);
+      print(value);
+      if (value.data["code"] == 1)
+        completer.complete(value);
+      else
+        throw ("can not delete book");
     }).catchError((err) {
       completer.completeError(err);
     });
@@ -301,9 +304,9 @@ class ApiImpl implements IApi {
   }
 
   @override
-  Future<NovelModelHotest> getNovelDetail({idBook}) {
+  Future<NovelModel> getNovelDetail({idBook}) {
     print("getBookDetail1");
-    Completer<NovelModelHotest> completer = new Completer();
+    Completer<NovelModel> completer = new Completer();
     String timeStamp = _getTimeStamp();
     String token = CryptUtils.genSha256("${Common.EXTEND_ONEADX_KEY}"
         "/books/$idBook"
@@ -326,7 +329,7 @@ class ApiImpl implements IApi {
       else
         throw ("data null");
     }).then((value) {
-      completer.complete(NovelModelHotest.fromJson(value));
+      completer.complete(NovelModel.fromJson(value));
     }).catchError((err) {
       print(err);
       completer.completeError(err);
@@ -335,9 +338,9 @@ class ApiImpl implements IApi {
   }
 
   @override
-  Future<List<NovelModelHotest>> getNovelHotest(
+  Future<List<NovelModel>> getNovelHotest(
       {language, page, limitPerPage, bool increase = true}) {
-    Completer<List<NovelModelHotest>> completer = new Completer();
+    Completer<List<NovelModel>> completer = new Completer();
     String time = _getTimeStamp();
     String token = CryptUtils.genSha256("${Common.EXTEND_ONEADX_KEY}"
         "/books/language/$language"
@@ -365,8 +368,8 @@ class ApiImpl implements IApi {
       if (value == null)
         throw ("null data");
       else {
-        List<NovelModelHotest> list =
-            (value as List).map((e) => NovelModelHotest.fromJson(e)).toList();
+        List<NovelModel> list =
+            (value as List).map((e) => NovelModel.fromJson(e)).toList();
         completer.complete(list);
       }
     }).catchError((err) {
@@ -376,34 +379,30 @@ class ApiImpl implements IApi {
   }
 
   @override
-  Future<List<NovelModelHotest>> getNovelNewest(
+  Future<List<NovelModel>> getNovelNewest(
       {language, page, limitPerPage, bool increase = true}) {
-    Completer<List<NovelModelHotest>> completer = new Completer();
+    Completer<List<NovelModel>> completer = new Completer();
     String time = _getTimeStamp();
-    // String token = CryptUtils.genSha256("${Common.EXTEND_ONEADX_KEY}"
-    //     "/books/language/$language?page=$page&limit=$limitPerPage&sort=createdAt&timestamp=$time");
-    String token = CryptUtils.genSha256(
-        "${Common.EXTEND_ONEADX_KEY}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time");
-    // Dio()
-    //     .get(
-    //         "${ROOT_API}/books/language/$language"
-    //         "?page=$page"
-    //         "&limit=$limitPerPage"
-    //         "&sort=createdAt"
-    //         "&timestamp=$time"
-    //         "&oneadx_token=$token",
-    //         options:
-    //             Options(headers: {"Authorization": "Bearer ${Common.token}"}))
-    // print(
-    //     "${ROOT_API}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time"
-    //     "&oneadx_token=$token");
-    // print(Common.token);
+    String token = CryptUtils.genSha256("${Common.EXTEND_ONEADX_KEY}"
+        "/books/language/$language?page=$page&limit=$limitPerPage&sort=${increase ? "createdAt" : "-createdAt"}&timestamp=$time");
+    // String token = CryptUtils.genSha256(
+    //     "${Common.EXTEND_ONEADX_KEY}/books/language/vi?page=1&limit=20&sort=createdAt&timestamp=$time");
     Dio()
         .get(
-            "${ROOT_API}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time"
+            "${ROOT_API}/books/language/$language?page=$page&limit=$limitPerPage&sort=${increase ? "createdAt" : "-createdAt"}&timestamp=$time"
             "&oneadx_token=$token",
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        // print(
+        //     "${ROOT_API}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time"
+        //     "&oneadx_token=$token");
+        // print(Common.token);
+        // Dio()
+        //     .get(
+        //         "${ROOT_API}/books/language/vi?page=1&limit=20&sort=createdAt&timestamp=$time"
+        //         "&oneadx_token=$token",
+        //         options:
+        //             Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
       if (value.data["code"] == 1) {
         return value.data["result"];
@@ -411,8 +410,8 @@ class ApiImpl implements IApi {
         return null;
     }).then((value) {
       if (value != null) {
-        List<NovelModelHotest> list =
-            (value as List).map((e) => NovelModelHotest.fromJson(e)).toList();
+        List<NovelModel> list =
+            (value as List).map((e) => NovelModel.fromJson(e)).toList();
         completer.complete(list);
       } else
         throw ("data null");
@@ -531,6 +530,6 @@ class ApiImpl implements IApi {
     int time = (DateTime.now().millisecondsSinceEpoch / 1000).round();
     print(time.round());
 
-    return "1612586520";
+    return time;
   }
 }

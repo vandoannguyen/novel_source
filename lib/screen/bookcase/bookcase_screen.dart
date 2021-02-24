@@ -17,7 +17,7 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
 
   BookcaseScreen(this.callback);
 
-  void clickItem(context, index, NovalModel item) {
+  void clickItem(context, index, NovelModel item) {
     print("item.id${item.id}");
     IntentAnimation.intentNomal(
         context: context,

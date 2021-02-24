@@ -1,4 +1,4 @@
-class NovalModel {
+class NovelModel {
   String id;
   String name;
   String desc;
@@ -7,8 +7,9 @@ class NovalModel {
   int updateSection;
   int updateStatus;
   String createdAt;
+  String updatedAt;
 
-  NovalModel(
+  NovelModel(
       {this.id,
       this.name,
       this.desc,
@@ -16,9 +17,10 @@ class NovalModel {
       this.writerName,
       this.updateSection,
       this.updateStatus,
-      this.createdAt});
+      this.createdAt,
+      this.updatedAt});
 
-  NovalModel.fromJson(Map<String, dynamic> json) {
+  NovelModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     desc = json['desc'];
@@ -27,6 +29,7 @@ class NovalModel {
     updateSection = json['update_section'];
     updateStatus = json['update_status'];
     createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
   }
 
   Map<String, dynamic> toJson() {
@@ -39,6 +42,7 @@ class NovalModel {
     data['update_section'] = this.updateSection;
     data['update_status'] = this.updateStatus;
     data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
     return data;
   }
 }

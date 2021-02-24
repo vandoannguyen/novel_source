@@ -12,11 +12,11 @@ abstract class BaseWidget<C extends BaseController> extends GetWidget<C> {
   @override
   Widget build(BuildContext context, {C controllerSuper}) {
     controllerSuper.context = context;
-    initState(controller: controllerSuper);
+    initState(controller: (this.controller = controllerSuper));
     this.controller.context = context;
   }
 
   initState({@required C controller}) {
-    this.controller = Get.put(controller);
+    Get.lazyPut(() => controller);
   }
 }

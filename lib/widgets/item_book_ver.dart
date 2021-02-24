@@ -5,12 +5,12 @@ import 'package:init_app/data/network/NovalModel.dart';
 import '../common/constant.dart';
 
 class itemBookVer extends StatefulWidget {
-  NovalModel item;
+  NovelModel item;
   var isManager;
   dynamic func;
   var isSelected = false;
 
-  itemBookVer({NovalModel this.item, this.isManager = false, this.func});
+  itemBookVer({NovelModel this.item, this.isManager = false, this.func});
 
   @override
   _itemBookVerState createState() => _itemBookVerState();

@@ -9,9 +9,9 @@ import 'package:page_turn/page_turn.dart';
 // import 'package:page_turn/page_turn.dart';
 
 class ReadNovalScreen extends BaseWidget<ReadNovalController> {
-  NovalModel item;
+  NovelModel item;
 
-  ReadNovalScreen({@required NovalModel this.item});
+  ReadNovalScreen({@required NovelModel this.item});
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
