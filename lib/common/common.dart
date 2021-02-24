@@ -16,4 +16,9 @@ class Common {
   static var config = {};
 
   static var isLogedIn = false;
+  //checkin
+  static int coin_checkin = 0;
+  // static bool isCheckin = false;
+  static int days = 0;
+  static int date = 0;
 }

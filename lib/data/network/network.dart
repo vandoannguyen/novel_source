@@ -384,25 +384,22 @@ class ApiImpl implements IApi {
     Completer<List<NovelModel>> completer = new Completer();
     String time = _getTimeStamp();
     String token = CryptUtils.genSha256("${Common.EXTEND_ONEADX_KEY}"
-        "/books/language/$language?page=$page&limit=$limitPerPage&sort=${increase ? "createdAt" : "-createdAt"}&timestamp=$time");
+        "/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time");
     // String token = CryptUtils.genSha256(
     //     "${Common.EXTEND_ONEADX_KEY}/books/language/vi?page=1&limit=20&sort=createdAt&timestamp=$time");
+    Dio().get(
+        "${ROOT_API}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time&oneadx_token=$token",
+        options: Options(headers: {"Authorization": "Bearer ${Common.token}"}));
+    // print(
+    //     "${ROOT_API}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time"
+    //     "&oneadx_token=$token");
+    // print(Common.token);
     Dio()
         .get(
-            "${ROOT_API}/books/language/$language?page=$page&limit=$limitPerPage&sort=${increase ? "createdAt" : "-createdAt"}&timestamp=$time"
+            "${ROOT_API}/books/language/vi?page=1&limit=20&sort=createdAt&timestamp=$time"
             "&oneadx_token=$token",
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
-        // print(
-        //     "${ROOT_API}/books/language/vi?page=1&limit=10&sort=createdAt&timestamp=$time"
-        //     "&oneadx_token=$token");
-        // print(Common.token);
-        // Dio()
-        //     .get(
-        //         "${ROOT_API}/books/language/vi?page=1&limit=20&sort=createdAt&timestamp=$time"
-        //         "&oneadx_token=$token",
-        //         options:
-        //             Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
       if (value.data["code"] == 1) {
         return value.data["result"];
@@ -530,6 +527,6 @@ class ApiImpl implements IApi {
     int time = (DateTime.now().millisecondsSinceEpoch / 1000).round();
     print(time.round());
 
-    return time;
+    return "1612586520";
   }
 }

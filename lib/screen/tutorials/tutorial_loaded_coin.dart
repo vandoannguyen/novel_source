@@ -18,7 +18,7 @@ class _TutorialLoadedCoinState extends State<TutorialLoadedCoin> {
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
           "Huong dan nap xu",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontSize: 16.0),
         ),
         backgroundColor: Colors.white,
       ),
@@ -31,7 +31,7 @@ class _TutorialLoadedCoinState extends State<TutorialLoadedCoin> {
               },
               title: Text(
                 "1. Nap xu bang Viettel",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black,fontSize: 13.0),
               ),
               trailing: Icon(
                 Icons.navigate_next_sharp,
@@ -48,7 +48,7 @@ class _TutorialLoadedCoinState extends State<TutorialLoadedCoin> {
               },
               title: Text(
                 "2. Nap xu bang CH Play",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black, fontSize: 13.0),
               ),
               trailing: Icon(
                 Icons.navigate_next_sharp,
@@ -65,7 +65,7 @@ class _TutorialLoadedCoinState extends State<TutorialLoadedCoin> {
               },
               title: Text(
                 "3. Huong dan thanh toan bang Momo",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black, fontSize: 13.0),
               ),
               trailing: Icon(
                 Icons.navigate_next_sharp,

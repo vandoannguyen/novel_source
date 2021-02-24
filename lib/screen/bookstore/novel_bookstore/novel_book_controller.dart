@@ -82,6 +82,7 @@ class NovelBookController extends BaseController {
     RepositoryImpl.getInstance()
         .getBanner(language: Common.language)
         .then((value) {
+      print(value);
       listBanner = new List();
       listBanner.addAll(value);
       update();
