@@ -51,6 +51,14 @@ abstract class IApi {
   Future<String> loginWithFaceBook({access_token});
 
   Future getUserProfile();
+
+  Future getSubscription();
+
+  Future buySubscription({idSub});
+
+  Future inviteFriend({idUser});
+
+  Future donateForWrite({idBook, coin});
 }
 
 class ApiImpl implements IApi {
@@ -522,9 +530,13 @@ class ApiImpl implements IApi {
     String time = _getTimeStamp();
     String token = CryptUtils.genSha256(
         "${Common.EXTEND_ONEADX_KEY}/comments/book/$idBook?timestamp=$time");
-    Dio().post(
-        "$ROOT_API/comments/book/$idBook?timestamp=$time&oneadx_token=$token",
-        data: {"content": contentComment}).then((value) {
+    Dio()
+        .post(
+            "$ROOT_API/comments/book/$idBook?timestamp=$time&oneadx_token=$token",
+            data: {"content": contentComment},
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
       completer.complete(value);
     }).catchError((err) {
       completer.completeError(err);
@@ -537,5 +549,96 @@ class ApiImpl implements IApi {
     print(time.round());
 
     return time.toString();
+  }
+
+  @override
+  Future getSubscription() {
+    // TODO: implement getSubcryption
+    Completer completer = new Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/subscriptions?timestamp=$time");
+    Dio()
+        .get("${ROOT_API}/subscriptions?timestamp=$time&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      print(value);
+      if (value.data["code"] == 1)
+        completer.complete((value.data));
+      else
+        throw ("data null ");
+    }).catchError((err) {
+      completer.completeError((err));
+    });
+    return completer.future;
+  }
+
+  @override
+  Future buySubscription({idSub}) {
+    // TODO: implement buySubscription
+    Completer completer = Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/payments/buy/$idSub?timestamp=$time");
+    Dio()
+        .post(
+            "$ROOT_API}/payments/buy/$idSub?timestamp=$time&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      if (value.data["code"] == 1)
+        completer.complete((value.data));
+      else
+        throw ("data null ");
+    }).catchError((err) {
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future inviteFriend({idUser}) {
+    // TODO: implement inviteFriend
+    Completer completer = new Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/introduces/$idUser?timestamp=$time");
+    Dio()
+        .post(
+            "$ROOT_API/introduces/605C0B?timestamp=1612586520&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      if (value.data["code"] == 1)
+        completer.complete((value.data));
+      else
+        throw ("data null ");
+    }).catchError((err) {
+      completer.completeError((err));
+    });
+    return completer.future;
+  }
+
+  @override
+  Future donateForWrite({idBook, coin}) {
+    Completer completer = new Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/books/donate/$idBook?coin=$coin&timestamp=$time");
+    Dio()
+        .post(
+            "$ROOT_API/books/donate/$idBook?coin=$coin&timestamp=$time&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      if (value.data["code"] == 1)
+        completer.complete(value.data);
+      else
+        throw ("data null");
+    }).catchError((err) {
+      completer.completeError((err));
+    });
+    return completer.future;
   }
 }

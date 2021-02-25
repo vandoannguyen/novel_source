@@ -212,4 +212,27 @@ class RepositoryImpl implements IRepository {
   Future<void> setDatetime(date) {
     return _sharef.setDatetime(date);
   }
+
+  @override
+  Future getSubscription() {
+    // TODO: implement getSubcryption
+    return _api.getSubscription();
+  }
+
+  @override
+  Future buySubscription({idSub}) {
+    // TODO: implement buySubscription
+    return _api.buySubscription(idSub: idSub);
+  }
+
+  @override
+  Future donateForWrite({idBook, coin}) {
+    // TODO: implement donateForWrite
+    return _api.donateForWrite(idBook: idBook, coin: coin);
+  }
+
+  @override
+  Future inviteFriend({idUser}) {
+    return _api.inviteFriend(idUser: idUser);
+  }
 }
