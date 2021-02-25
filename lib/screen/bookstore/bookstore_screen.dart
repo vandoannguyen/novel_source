@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/screen/bookstore/novel_bookstore/novel_bookstore_screen.dart';
-import 'package:init_app/screen/bookstore/search/search_screen.dart';
+import 'package:init_app/screen/search/search_screen.dart';
 
 class BookstoreScreen extends StatefulWidget {
   static const String routeName = '/bookstore';

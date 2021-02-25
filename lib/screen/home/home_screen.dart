@@ -60,12 +60,12 @@ class _HomeState extends State<HomeScreen> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            activeIcon: Image.asset(
-              "assets/images/ic_edit.png",
-              width: 25.0,
-              height: 25.0,
-              color: Colors.pink,
-            ),
+            // activeIcon: Image.asset(
+            //   "assets/images/ic_edit.png",
+            //   width: 25.0,
+            //   height: 25.0,
+            //   color: Colors.pink,
+            // ),
             label: BookcaseScreen.name,
           ),
           BottomNavigationBarItem(

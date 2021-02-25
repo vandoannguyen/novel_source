@@ -3,6 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/data/network/NovalModel.dart';
+import 'package:init_app/screen/bookstore/comic_bookstore/detail_comic_bookstore.dart';
+import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_screen.dart';
+import 'package:init_app/utils/intent_animation.dart';
 
 class SearchScreen extends StatefulWidget {
   SearchScreen({Key key}) : super(key: key);
@@ -13,6 +17,14 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController _controller = new TextEditingController();
+  void clickItem(index, NovelModel item) {
+    print(item.id);
+    IntentAnimation.intentNomal(
+        context: context,
+        screen: DetailComicBookScreen(idBook: item.id),
+        option: IntentAnimationOption.RIGHT_TO_LEFT,
+        duration: Duration(milliseconds: 800));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,18 +62,32 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: Center(
                       child: TextField(
                         controller: _controller,
-                        textAlign: TextAlign.center,
+                        // textAlign: TextAlign.center,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(top: 3),
+                          contentPadding: EdgeInsets.only(top: 3, left: 15.0),
                           fillColor: Colors.grey[400],
                           hintText: "Search book, author",
                           hintStyle: TextStyle(
                             color: Colors.grey[400],
                             fontSize: 12,
                           ),
-                          border: new OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(32),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.grey, width: 1.0),
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(32.0),
+                            ),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Colors.grey, width: 1.0),
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(32.0),
+                            ),
+                          ),
+                          // border: new OutlineInputBorder(
+                          //   borderRadius: BorderRadius.circular(32),
+                          // ),
                         ),
                       ),
                     ),
@@ -89,10 +115,7 @@ class _SearchScreenState extends State<SearchScreen> {
               margin: EdgeInsets.only(top: 10, left: 10, right: 10),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.ac_unit,
-                    color: Colors.red,
-                  ),
+                  Image.asset(Common.pathImg + "promotional.png", height: 20.0,width: 20.0),
                   Container(
                     margin: EdgeInsets.only(left: 5.0),
                     child: Text(
@@ -104,7 +127,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             Container(
-              height: 100,
+              height: 120,
               child: GridView.builder(
                   physics: AlwaysScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -118,6 +141,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     int ind = index + 1;
                     return GestureDetector(
+                      onTap: (){
+                          //clickItem(index, item)
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => DetailComicBook()));
+                      },
                       child: Container(
                         margin: EdgeInsets.only(left: 10),
                         child: Row(
@@ -150,10 +177,7 @@ class _SearchScreenState extends State<SearchScreen> {
               margin: EdgeInsets.only(top: 10, left: 10),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.ac_unit,
-                    color: Colors.red,
-                  ),
+                  Image.asset(Common.pathImg + "like.png", height: 20.0,width: 20.0),
                   Container(
                     margin: EdgeInsets.only(left: 5.0),
                     child: Text(
@@ -180,6 +204,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     int ind = index + 1;
                     return GestureDetector(
+                      onTap: (){
+                        //clickItem(index, item)
+                      },
                       child: Container(
                         margin: EdgeInsets.only(left: 10, right: 10),
                         child: Column(
@@ -192,10 +219,10 @@ class _SearchScreenState extends State<SearchScreen> {
                               margin: EdgeInsets.only(top: 5.0),
                               child: Center(
                                 child: Text(
-                                  "Truyen hay so ${ind} 12345",
-                                  overflow: TextOverflow.ellipsis,
+                                  "Truyen hay so ${ind} ban goc",
+                                  // overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.grey[800]),
+                                  style: TextStyle(color: Colors.grey[800], fontSize: 13.0),
                                 ),
                               ),
                             ),

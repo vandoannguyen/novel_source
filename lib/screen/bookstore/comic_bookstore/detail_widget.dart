@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/bookstore/detail_comic/invite_friend.dart';
+import 'package:init_app/screen/comment/comment_screen.dart';
+import 'package:init_app/screen/comment_all/comment_all_screen.dart';
 import 'package:init_app/screen/tutorials/tutorial_loaded_coin.dart';
 import 'package:init_app/widgets/description_text.dart';
-
+import 'package:init_app/widgets/bottom_sheet_coin.dart';
 class DetailWidget extends StatefulWidget {
   DetailWidget({Key key}) : super(key: key);
 
@@ -12,100 +14,6 @@ class DetailWidget extends StatefulWidget {
 }
 
 class _DetailWidgetState extends State<DetailWidget> {
-  void _onReward() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-            height: 200,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 49,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Common.pathImg + "ic_coin.png",
-                        width: 18.0,
-                        height: 18.0,
-                      ),
-                      Text(
-                        "15",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  height: 1,
-                  color: Colors.grey[400],
-                ),
-                Container(
-                  height: 49,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Common.pathImg + "ic_coin.png",
-                        width: 18.0,
-                        height: 18.0,
-                      ),
-                      Text(
-                        "50",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  height: 1,
-                  color: Colors.grey[400],
-                ),
-                Container(
-                  height: 49,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Common.pathImg + "ic_coin.png",
-                        width: 18.0,
-                        height: 18.0,
-                      ),
-                      Text(
-                        "150",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  height: 1,
-                  color: Colors.grey[400],
-                ),
-                Container(
-                  color: Colors.grey[200],
-                  height: 50,
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    selectedTileColor: Colors.grey[200],
-                    title: Text(
-                      "No",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey[800]),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -298,7 +206,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            _onReward();
+                            onDialogBottomSheet(context);
                           },
                           child: Container(
                             height: 30,
@@ -365,36 +273,46 @@ class _DetailWidgetState extends State<DetailWidget> {
               height: 1,
               color: Colors.grey[400],
             ),
-            Container(
-              margin: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
-              height: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "Comment",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  Image.asset(
-                    Common.pathImg + "ic_edit.png",
-                    height: 20,
-                    width: 20,
-                  ),
-                ],
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CommentScreen("test")));
+              },
+              child: Container(
+                margin: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+                height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Comment",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    Image.asset(
+                      Common.pathImg + "ic_edit.png",
+                      height: 20,
+                      width: 20,
+                    ),
+                  ],
+                ),
               ),
             ),
             Divider(
               height: 1,
               color: Colors.grey[400],
             ),
-            Container(
-              margin: EdgeInsets.all(10),
-              height: 30,
-              child: Center(
-                child: Text(
-                  "Watch all to comment",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey),
+            GestureDetector(
+              onTap: (){
+               Navigator.push(context, MaterialPageRoute(builder: (context) => CommentAllScreen()));
+              },
+              child: Container(
+                margin: EdgeInsets.all(10),
+                height: 30,
+                child: Center(
+                  child: Text(
+                    "Watch all to comment",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.grey),
+                  ),
                 ),
               ),
             ),

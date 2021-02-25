@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/common/Common.dart';
 import 'package:init_app/routes/routes.dart';
-import 'package:init_app/screen/bookcase/bookcase_screen.dart';
 import 'package:init_app/screen/bookstore/bookstore_screen.dart';
 import 'package:init_app/screen/home/home_screen.dart';
 import 'package:init_app/screen/load/load_screen.dart';

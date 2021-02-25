@@ -23,7 +23,14 @@ class _InviteFriendState extends State<InviteFriend>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios_rounded,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         title: Text(
           "Invite friend",
           style: TextStyle(color: Colors.black),

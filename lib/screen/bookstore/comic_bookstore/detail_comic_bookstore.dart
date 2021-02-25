@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
+import 'package:init_app/data/network/NovalModel.dart';
+import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/login/login_screen.dart';
+import 'package:init_app/widgets/bottom_sheet_coin.dart';
+import 'package:init_app/widgets/dialog_loading.dart';
 import 'detail_widget.dart';
 import 'pilihbad_widget.dart';
 import 'package:flutter_share/flutter_share.dart';
@@ -18,125 +22,53 @@ class DetailComicBook extends StatefulWidget {
 class _DetailComicBookState extends State<DetailComicBook>
     with SingleTickerProviderStateMixin {
   TabController _controller;
-  int _selectedIndex = 0;
   bool isFollow = false;
+  NovelModel detail;
   @override
   void initState() {
     super.initState();
     _controller = new TabController(length: 2, vsync: this);
   }
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  //   if (index == 0) {
-  //     Navigator.push(
-  //         context, MaterialPageRoute(builder: (context) => LoginScreen()));
-  //   } else {
-  //     _onReward();
-  //   }
-  // }
-  Future<void> share() async {
+  Future<void> share(String link) async {
     await FlutterShare.share(
-        title: 'Example share',
-        text: 'Example share text',
-        linkUrl: 'https://flutter.dev/',
-        chooserTitle: 'Example Chooser Title');
+        title: 'Share book',
+        text: 'Share book',
+        linkUrl: link,
+        chooserTitle: 'Choose app share book');
   }
-  void _onReward() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-            height: 200,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 49,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Common.pathImg + "ic_coin.png",
-                        width: 18.0,
-                        height: 18.0,
-                      ),
-                      Text(
-                        "15",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  height: 1,
-                  color: Colors.grey[400],
-                ),
-                Container(
-                  height: 49,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Common.pathImg + "ic_coin.png",
-                        width: 18.0,
-                        height: 18.0,
-                      ),
-                      Text(
-                        "50",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  height: 1,
-                  color: Colors.grey[400],
-                ),
-                Container(
-                  height: 49,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Common.pathImg + "ic_coin.png",
-                        width: 18.0,
-                        height: 18.0,
-                      ),
-                      Text(
-                        "150",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  height: 1,
-                  color: Colors.grey[400],
-                ),
-                Container(
-                  color: Colors.grey[200],
-                  height: 50,
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    selectedTileColor: Colors.grey[200],
-                    title: Text(
-                      "No",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey[800]),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
+  void postFollow(String idBook) {
+    showDialogLoading(context);
+    if (Common.myBooks
+        .where((element) => element.id == idBook)
+        .toList()
+        .length ==
+        0) {
+      RepositoryImpl.getInstance()
+          .addBookIntoMyBooks(idBook: idBook)
+          .then((value) {
+        if (value != null) {
+          print(value);
+          Navigator.of(context).pop();
+          Common.myBooks.add(NovelModel.fromJson(detail.toJson()));
+          //update();
+        }
+      }).catchError((err) {
+        Navigator.of(context).pop();
+      });
+    } else {
+      RepositoryImpl.getInstance()
+          .removeBookFromMyBook(idBook: idBook)
+          .then((value) {
+        print(value);
+        Navigator.of(context).pop();
+        Common.myBooks =
+            Common.myBooks.where((e) => e.id != detail.id).toList();
+        //update();
+      }).catchError((err) {
+        Navigator.of(context).pop();
+      });
+    }
   }
-
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -148,26 +80,14 @@ class _DetailComicBookState extends State<DetailComicBook>
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              leading: GestureDetector(
-                onTap: (){
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  margin: EdgeInsets.only(top: 15, left: 25),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.grey[200])
+              leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios_rounded,
+                    color: Colors.white,
                   ),
-                  child: Column(
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(top: 8, left: 5),
-                          child: Icon(Icons.arrow_back_ios, color: Colors.grey,)),
-                    ],
-                  ),
-                ),
-              ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
               expandedHeight: 220.0,
               floating: false,
               pinned: true,
@@ -195,24 +115,13 @@ class _DetailComicBookState extends State<DetailComicBook>
 
               ),
               actions: [
-                GestureDetector(
-                  onTap: (){
-                    Fluttertoast.showToast(msg: "Share link", toastLength: Toast.LENGTH_SHORT, backgroundColor: Colors.grey, textColor: Colors.white, gravity: ToastGravity.CENTER);
+                IconButton(
+                  onPressed: () {
+                    share("link book");
                   },
-                  child: Container(
-                    margin: EdgeInsets.only(top: 15, right: 25),
-                    decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.grey[200])
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                            margin: EdgeInsets.only(top: 8, left: 3, right: 3),
-                            child: Icon(Icons.share, color: Colors.grey,)),
-                      ],
-                    ),
+                  icon: Icon(
+                    Icons.share_outlined,
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -230,7 +139,7 @@ class _DetailComicBookState extends State<DetailComicBook>
                         text: 'Detail',
                       ),
                       new Tab(
-                        text: 'Pilih Bad',
+                        text: 'List',
                       ),
                   ],
                 ),
@@ -241,21 +150,6 @@ class _DetailComicBookState extends State<DetailComicBook>
         },
         body: Column(
       children: [
-      // new TabBar(
-      //   controller: _controller,
-      //   indicatorColor: Color(Constant.colorTxtPrimary),
-      //   indicatorSize: TabBarIndicatorSize.label,
-      //   unselectedLabelColor: Color(Constant.colorTxtDefault),
-      //   labelColor: Color(Constant.colorTxtPrimary),
-      //   tabs: [
-      //     new Tab(
-      //       text: 'Detail',
-      //     ),
-      //     new Tab(
-      //       text: 'Pilih Bad',
-      //     ),
-      //   ],
-      // ),
       Expanded(
         flex: 1,
         child: new TabBarView(
@@ -274,8 +168,16 @@ class _DetailComicBookState extends State<DetailComicBook>
           children: <Widget>[
             GestureDetector(
               onTap: () {
+                postFollow("idTest");
                 setState(() {
-                  isFollow = !isFollow;
+                  // isFollow = !isFollow;
+                  detail != null &&
+                      !Common.myBooks
+                          .where((value) => value.id == detail.id)
+                          .toList()
+                          .isNotEmpty
+                      ? isFollow = false
+                      : isFollow = true;
                 });
                 // Navigator.push(
                 //     context,
@@ -316,7 +218,7 @@ class _DetailComicBookState extends State<DetailComicBook>
             ),
             GestureDetector(
               onTap: () {
-                _onReward();
+                onDialogBottomSheet(context);
               },
               child: Container(
                 height: 45,
@@ -337,39 +239,6 @@ class _DetailComicBookState extends State<DetailComicBook>
         ),
 
       ),
-
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(
-      //       icon: Text(
-      //         "Follow",
-      //         style: TextStyle(color: Colors.pink),
-      //       ),
-      //       label: "",
-      //     ),
-      //     BottomNavigationBarItem(
-      //       backgroundColor: Colors.pink,
-      //       icon: Text(
-      //         "Read Now",
-      //         style: TextStyle(color: Colors.pink),
-      //       ),
-      //       label: "",
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Text(
-      //         "Coin",
-      //         style: TextStyle(color: Colors.pink),
-      //       ),
-      //       label: "",
-      //     ),
-      //   ],
-      //   currentIndex: _selectedIndex,
-      //   showSelectedLabels: false,
-      //   selectedItemColor: Colors.pink,
-      //   unselectedItemColor: Colors.white,
-      //   showUnselectedLabels: false,
-      //   onTap: _onItemTapped,
-      // ),
       ),
     );
   }

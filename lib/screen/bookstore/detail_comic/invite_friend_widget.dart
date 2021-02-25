@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_share/flutter_share.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:init_app/common/common.dart';
+import 'package:installed_apps/app_info.dart';
+import 'package:installed_apps/installed_apps.dart';
+import 'package:social_share_plugin/social_share_plugin.dart';
 
 class InviteFriendWidget extends StatefulWidget {
   InviteFriendWidget({Key key}) : super(key: key);
@@ -10,11 +15,11 @@ class InviteFriendWidget extends StatefulWidget {
 }
 
 class _InviteFriendWidgetState extends State<InviteFriendWidget> {
-
   @override
-  void setState(fn) {
+  void setState(fn) async{
     // TODO: implement setState
     super.setState(fn);
+
   }
   //copylink
   void _copyLink(String text){
@@ -24,19 +29,82 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
     });
   }
   //shareface
-  // void shareOnFacebook() async {
-  //   String result = await FlutterSocialContentShare.share(
-  //       type: ShareType.facebookWithoutImage,
-  //       url: "https://www.apple.com",
-  //       quote: "captions");
-  //   print(result);
-  // }
-  //sharewhats
-  // void shareWhatsapp() async {
-  //   String result = await FlutterSocialContentShare.shareOnWhatsapp(
-  //       number: "xxxxxx", text: "Text appears here");
-  //   print(result);
-  // }
+  Future<void> _shareOnFacebook(String text) async {
+    List<AppInfo> apps = await InstalledApps.getInstalledApps(true, true);
+    for(int i=0; i < apps.length; i++){
+      if(apps.elementAt(i).packageName == "com.facebook.katana"){
+        Fluttertoast.showToast(msg: "Facebook App Installed", backgroundColor: Colors.grey, textColor: Colors.white, gravity: ToastGravity.BOTTOM, toastLength: Toast.LENGTH_SHORT);
+        final quote =
+            'Flutter is Google’s portable UI toolkit for building beautiful, natively-compiled applications for mobile, web, and desktop from a single codebase.';
+        final result = await SocialSharePlugin.shareToFeedFacebookLink(
+          quote: quote,
+          url: text,
+          onSuccess: (postId) {
+            print('FACEBOOK SUCCESS $postId');
+            return;
+          },
+          onCancel: () {
+            print('FACEBOOK CANCELLED');
+            return;
+          },
+          onError: (error) {
+            print('FACEBOOK ERROR $error');
+            return;
+          },
+        );
+        break;
+      }else{
+        Fluttertoast.showToast(msg: "App not install ", backgroundColor: Colors.grey[200], textColor: Colors.red, gravity: ToastGravity.BOTTOM, toastLength: Toast.LENGTH_SHORT);
+        break;
+      }
+    }
+
+    // String result = await FlutterSocialContentShare.share(
+    //     type: ShareType.facebookWithoutImage,
+    //     url: "https://www.apple.com",
+    //     quote: "captions");
+    // print(result);
+  }
+  //sharetwitter
+  void _shareTwitter(String text) async {
+    List<AppInfo> apps = await InstalledApps.getInstalledApps(true, true);
+    for(int i=0; i < apps.length; i++){
+      if(apps.elementAt(i).packageName == "com.twitter.android"){
+        Fluttertoast.showToast(msg: "Twitter App Installed", backgroundColor: Colors.grey, textColor: Colors.white, gravity: ToastGravity.BOTTOM, toastLength: Toast.LENGTH_SHORT);
+        final quote =
+            'Flutter is Google’s portable UI toolkit for building beautiful, natively-compiled applications for mobile, web, and desktop from a single codebase.';
+        final result = await SocialSharePlugin.shareToTwitterLink(
+          text: quote,
+          url: text,
+          onSuccess: (postId) {
+            print('TWITTER SUCCESS $postId');
+            return;
+          },
+          onCancel: () {
+            print('TWITTER CANCELLED');
+            return;
+          },
+        );
+        break;
+      }else{
+        Fluttertoast.showToast(msg: "App not install ", backgroundColor: Colors.grey[200], textColor: Colors.red, gravity: ToastGravity.BOTTOM, toastLength: Toast.LENGTH_SHORT);
+        break;
+      }
+    }
+
+    // String result = await FlutterSocialContentShare.shareOnWhatsapp(
+    //     number: "xxxxxx", text: "Text appears here");
+    // print(result);
+  }
+  //sharemore
+  Future<void> _shareMore(String text) async {
+        await FlutterShare.share(
+            title: 'Share more app',
+            text: 'Example share text',
+            linkUrl: text,
+            chooserTitle: 'Choose app share link'
+        );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +140,9 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                   Column(
                     children: <Widget>[
                       GestureDetector(
-                        onTap: (){},
+                        onTap: (){
+                          _shareOnFacebook("https");
+                        },
                         child: Container(
                           child: Image.asset(
                             Common.pathImg + "facebook.png",
@@ -91,18 +161,18 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: (){
-
+                          _shareTwitter("https");
                         },
                         child: Container(
                           child: Image.asset(
-                            Common.pathImg + "whatsapp.png",
+                            Common.pathImg + "twitter.png",
                             height: 60,
                             width: 60,
                           ),
                         ),
                       ),
                       Text(
-                        "whatsapp",
+                        "twitter",
                         style: TextStyle(color: Colors.black),
                       )
                     ],
@@ -111,18 +181,18 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: (){
-
+                            _shareMore("https");
                         },
                         child: Container(
                           child: Image.asset(
-                            Common.pathImg + "line.png",
+                            Common.pathImg + "more.png",
                             height: 60,
                             width: 60,
                           ),
                         ),
                       ),
                       Text(
-                        "line",
+                        "more",
                         style: TextStyle(color: Colors.black),
                       )
                     ],

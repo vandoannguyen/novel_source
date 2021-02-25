@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/screen/survey_question/survey_question_screen.dart';
 import 'package:init_app/screen/task/task_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
 
@@ -40,12 +41,13 @@ class TaskScreen extends BaseWidget<TaskController> {
   void funcTask(String key, BuildContext context) {
     switch (key) {
       case "ANSWER":
+        onClickIntent(context, "ANSWER");
         break;
       case "INVITE":
-        onClickInviteFriend(context);
+        onClickIntent(context, "INVITE");
         break;
       case "COIN_FOR_FRIEND":
-        onClickCoinFriend(context);
+        onClickIntent(context, "COIN_FOR_FRIEND");
         break;
       case "WATCH_ADS":
         break;
@@ -56,14 +58,22 @@ class TaskScreen extends BaseWidget<TaskController> {
     }
   }
 
-  void onClickCoinFriend(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoadedCoin()));
-  }
+  void onClickIntent(BuildContext context, String name) {
+    switch(name){
+      case "ANSWER":
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SurveyQuestionScreen()));
+        break;
+      case "INVITE":
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => InviteFriend()));
+        break;
+      case "COIN_FOR_FRIEND":
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoadedCoin()));
+        break;
+    }
 
-  void onClickInviteFriend(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => InviteFriend()));
   }
 
   @override
@@ -140,7 +150,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                               child: Text(
                                 "Điểm danh",
                                 style: TextStyle(
-                                  color: Color(Constant.colorTxtPrimary),
+                                  color: Colors.white,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -268,7 +278,7 @@ class TaskScreen extends BaseWidget<TaskController> {
               ),
             ),
             itemTask(
-                icon: "ic_edit.png",
+                icon: "conversation.png",
                 name: "Câu hỏi khảo sát",
                 des: "Thưởng 50",
                 btnName: "Trả lời",
@@ -286,7 +296,7 @@ class TaskScreen extends BaseWidget<TaskController> {
               ),
             ),
             itemTask(
-                icon: "ic_edit.png",
+                icon: "adduser.png",
                 name: "Mời bạn bè",
                 des: "Mời mỗi bạn thưởng 500",
                 btnName: "Mời",
@@ -294,7 +304,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                   funcTask("INVITE", context);
                 }),
             itemTask(
-                icon: "ic_edit.png",
+                icon: "income.png",
                 name: "Thay bạn bè nạp xu",
                 des: "Trả lại 20%",
                 btnName: "Load cents",
@@ -302,7 +312,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                   funcTask("COIN_FOR_FRIEND", context);
                 }),
             itemTask(
-                icon: "ic_edit.png",
+                icon: "onlinevideo.png",
                 name: "Xem quảng cáo nhận xu",
                 des: "Mỗi lần xem thưởng 200",
                 btnName: "Xem",
@@ -310,7 +320,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                   funcTask("WATCH_ADS", context);
                 }),
             itemTask(
-                icon: "ic_edit.png",
+                icon: "bookday.png",
                 name: "Đọc hằng ngày",
                 des: "Đọc 20 phút, thưởng 200",
                 btnName: "Đọc Ngay",
@@ -341,8 +351,9 @@ class TaskScreen extends BaseWidget<TaskController> {
         children: [
           Image.asset(
             "assets/images/" + icon,
-            width: 30.0,
-            height: 30.0,
+            width: 25.0,
+            height: 25.0,
+            color: Colors.pink,
           ),
           Expanded(
             child: Container(

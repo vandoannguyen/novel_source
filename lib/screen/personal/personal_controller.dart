@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
@@ -52,7 +53,6 @@ class PersonalController extends BaseController {
       case "SETTING":
         Get.to(SettingScreen());
         break;
-
       default:
     }
   }
@@ -84,6 +84,11 @@ class PersonalController extends BaseController {
   void getProfile() {
     RepositoryImpl.getInstance().getUserProfile().then((value) {
       profile = value;
+      print(profile["id"]);
+      print(profile["name"]);
+      print(profile["picture"]);
+      print(profile["coin"]);
+      print(profile["code"]);
       isLogin = Common.isLogedIn;
       update();
     }).catchError((err) {

@@ -10,7 +10,7 @@ class Common {
   static String token = "";
   static UserModel user = null;
   static List<NovelModel> myBooks = null;
-  static String appName = "ĐỌc SÁCH";
+  static String appName = "ĐỌC SÁCH";
   static String fanpageName = "SÁCH";
   static String fanpageLink = "https://www.facebook.com/";
   static String email = "tahanh.aib@gmail.com";

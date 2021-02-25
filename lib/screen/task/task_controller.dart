@@ -154,6 +154,7 @@ class TaskController extends BaseController {
           } else {
             // print("Commondys${Common.days}");
             setCheckIn(Common.days);
+
             //   switch (Common.days) {
             //     case 0:
             //       RepositoryImpl.getInstance().setCheckin("1");
@@ -253,15 +254,6 @@ class TaskController extends BaseController {
         setCheckIn(1);
       }
     });
-
-    // if (date == checkValue) {
-    //   _dialog(context);
-    // }
-    // else{
-    //   isCheckdInScreen = true;
-    //   update(); // use update() to update counter variable on UI when increment be called
-    //
-    // }
   }
 
   void _dialog(BuildContext context) {
@@ -273,6 +265,7 @@ class TaskController extends BaseController {
             descriptions:
                 "Bạn đã đăng nhập hôm nay rồi. Quay trở lại vào ngày mai nhé!!!",
             text: "OK",
+            img: Image.asset(Common.pathImg + "icon.png"),
           );
           // return AlertDialog(
           //   shape: RoundedRectangleBorder(
