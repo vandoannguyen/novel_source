@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
@@ -8,7 +9,7 @@ import 'package:init_app/widgets/appbar_second.dart';
 
 class AboutUsScreen extends BaseWidget<AboutUsController> {
   static const String routeName = '/about-us';
-  static const String name = 'About us';
+  static const String name = 'about us';
 
   @override
   Widget build(BuildContext context, {AboutUsController controllerSuper}) {
@@ -17,7 +18,7 @@ class AboutUsScreen extends BaseWidget<AboutUsController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AboutUsScreen.name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
             Container(
               padding: EdgeInsets.symmetric(vertical: 30.0),
               width: 100.0,
@@ -29,7 +30,7 @@ class AboutUsScreen extends BaseWidget<AboutUsController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Version"),
+                  Text(AppLocalizations.of(context).translate("version")),
                   Text(
                     controller.version,
                     style: TextStyle(color: Color(Constant.colorTxtDefault)),
@@ -63,7 +64,7 @@ class AboutUsScreen extends BaseWidget<AboutUsController> {
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(child: Text("Privacy Policy")),
+                    Expanded(child: Text(AppLocalizations.of(context).translate("privacy policy menu"),),),
                     Container(
                       margin: EdgeInsets.all(5.0),
                       child: Icon(

@@ -6,7 +6,11 @@ abstract class BaseController extends GetxController {
   BuildContext context;
 
   BaseController();
-
+  int coinDemo = 0;
+void setCoin(coin){
+  coinDemo = coin;
+  update();
+}
   void showMess(String mess, TypeMess type) {
     Fluttertoast.showToast(
         msg: mess,

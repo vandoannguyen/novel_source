@@ -87,7 +87,6 @@ class BuyCoinViettelScreen extends BaseWidget<BuyCoinViettelController> {
                         style: TextStyle(color: Colors.blue, height: 1.2),
                       ),
                     ),
-                    Image.asset(Common.pathImg + "img_persional.png"),
                     Image.asset(Common.pathImg + "img_buy_coin1.png"),
                     Image.asset(Common.pathImg + "img_buy_coin2.png"),
                     Container(

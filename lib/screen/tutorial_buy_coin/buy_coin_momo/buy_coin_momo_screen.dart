@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/tutorial_buy_coin/buy_coin_momo/buy_coin_momo_controller.dart';
@@ -17,7 +18,7 @@ class BuyCoinMonoScreen extends BaseWidget<BuyCoinMonoController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
             Expanded(
                 child: Container(
               padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
@@ -119,7 +120,6 @@ class BuyCoinMonoScreen extends BaseWidget<BuyCoinMonoController> {
                         style: TextStyle(color: Colors.blue),
                       ),
                     ),
-                    Image.asset(Common.pathImg + "img_persional.png"),
                     Image.asset(Common.pathImg + "img_buy_coin1.png"),
                   ],
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/survey_question/survey_question_screen.dart';
@@ -16,7 +17,7 @@ class TaskScreen extends BaseWidget<TaskController> {
 
   final Function callBack;
   static const String routeName = '/tasks';
-  static const String name = 'NHIỆM VỤ';
+  static const String name = 'tasks';
   TextStyle styleTitle =
       TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
 
@@ -299,7 +300,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                 icon: "adduser.png",
                 name: "Mời bạn bè",
                 des: "Mời mỗi bạn thưởng 500",
-                btnName: "Mời",
+                btnName: AppLocalizations.of(context).translate("invite"),
                 func: () {
                   funcTask("INVITE", context);
                 }),
@@ -307,7 +308,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                 icon: "income.png",
                 name: "Thay bạn bè nạp xu",
                 des: "Trả lại 20%",
-                btnName: "Load cents",
+                btnName: AppLocalizations.of(context).translate("deposit coin"),
                 func: () {
                   funcTask("COIN_FOR_FRIEND", context);
                 }),
@@ -315,7 +316,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                 icon: "onlinevideo.png",
                 name: "Xem quảng cáo nhận xu",
                 des: "Mỗi lần xem thưởng 200",
-                btnName: "Xem",
+                btnName: AppLocalizations.of(context).translate("watch"),
                 func: () {
                   funcTask("WATCH_ADS", context);
                 }),
@@ -323,7 +324,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                 icon: "bookday.png",
                 name: "Đọc hằng ngày",
                 des: "Đọc 20 phút, thưởng 200",
-                btnName: "Đọc Ngay",
+                btnName: AppLocalizations.of(context).translate("read now"),
                 func: () {
                   funcTask("READ_BOOK", context);
                 }),
@@ -395,7 +396,7 @@ class TaskScreen extends BaseWidget<TaskController> {
               func: func,
               color: Color(Constant.colorTxtPrimary),
             ),
-          )
+          ),
         ],
       ),
     );

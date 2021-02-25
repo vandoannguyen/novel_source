@@ -25,7 +25,7 @@ class SurveyQuestionController extends BaseController {
         '',
         'You must fill out all information!',
         titleText: Text(
-          "Error",
+          "ERROR",
           style: TextStyle(color: Colors.redAccent, fontSize: 18.0),
         ),
       );

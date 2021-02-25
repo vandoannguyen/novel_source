@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/about_us/privacy_policy/privacy_policy_controller.dart';
@@ -6,7 +7,7 @@ import 'package:init_app/widgets/appbar_second.dart';
 
 class PrivacyPolicyScreen extends BaseWidget<PrivacyPolicyController> {
   static const String routeName = '/privacy-policy';
-  static const String name = 'Privacy Policy';
+  static const String name = 'privacy policy';
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
@@ -16,7 +17,7 @@ class PrivacyPolicyScreen extends BaseWidget<PrivacyPolicyController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(PrivacyPolicyScreen.name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
             Container(
               padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
               alignment: Alignment.center,
@@ -28,8 +29,12 @@ class PrivacyPolicyScreen extends BaseWidget<PrivacyPolicyController> {
             Container(
               padding: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 30.0),
               child: Text(
-                  "App ${Common.appName} cung cấp các nội dung bao gồm nhưng không giới hạn: tác phẩm, tóm tắt tác phẩm, hình ảnh, ứng dụng, thiết kế giao diện, bố cục ứng dụng, logo. Tất cả các nội dung trên thuộc quyền sở hữu của công ty và được bảo hộ bởi luật trí tuệ trong nước và các điều ước quốc tế và quyền tác giả.\n\nKhách hàng được sử dụng nội dung theo quy định dưới quyền lợi được trao. Khách hàng chỉ được sử dụng nội dung, không được sửa đổi, sao chép, tái tạo, đăng tải, truyền tải, sáng tạo tác phẩm có nội dung liên quan hay cung cấp hoặc bán lại nội dung cho bên thứ ba dưới mọi hình thức bất kể là phi lợi nhuận hay có lợi nhuận.\n\nNếu phát hiện các hành vi trái với các điều khoản trên, công ty chúng tôi có quyền truy cứu trách nhiệm pháp luật."),
-            )
+                AppLocalizations.of(context).translate("app") +
+                    " ${Common.appName} " +
+                    AppLocalizations.of(context)
+                        .translate("privacy policy content"),
+              ),
+            ),
           ],
         ),
       ),

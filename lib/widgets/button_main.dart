@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 
 import '../common/constant.dart';
 
@@ -33,6 +34,7 @@ class _ButtonMainState extends State<ButtonMain> {
             : Color(Constant.colorTxtPrimary),
         textColor: Colors.white,
         child: Text(widget.name,
+         
             style: TextStyle(
                 fontSize: widget.txtSize != null ? widget.txtSize : 13.0)),
       ),

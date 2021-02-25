@@ -8,7 +8,7 @@ import 'package:init_app/screen/detail_transaction/task_history/task_history_con
 // ignore: must_be_immutable
 class TaskHistoryScreen extends BaseWidget<TaskHistoryController> {
   static const String routeName = '/task-history';
-  static const String name = 'Nhiệm Vụ';
+  static const String name = 'tasks';
 
   @override
   void dispose() {}

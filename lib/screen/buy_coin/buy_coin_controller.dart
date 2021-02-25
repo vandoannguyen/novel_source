@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
+import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_screen.dart';
 
 class BuyCoinController extends BaseController {
@@ -60,7 +63,6 @@ class BuyCoinController extends BaseController {
 
   BuyCoinController();
   onInit() {
-    print(" object BuyCoinController");
     value = paymentMethods[0];
   }
 
@@ -71,6 +73,19 @@ class BuyCoinController extends BaseController {
 
   void buyCoin(value) {
     print(value);
+    Common.coin += value["coin"] + value["coinExtra"];
+    // coinDemo  += value["coin"] + value["coinExtra"];
+    setCoin(Common.coin);
+    print("coinDemo ${coinDemo}");
+    Get.back();
+      Get.snackbar(
+        '',
+        'Deposit coins success! You have ${Common.coin}!',
+        titleText: Text(
+          "SUCCESS",
+          style: TextStyle(color: Colors.green, fontSize: 18.0),
+        ),
+      );
   }
 
   void goTutorialBuyCoin() {

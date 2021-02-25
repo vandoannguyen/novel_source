@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/table_content/table_content_controller.dart';
@@ -8,7 +9,7 @@ import 'package:init_app/widgets/appbar_second.dart';
 // ignore: must_be_immutable
 class TableContentScreen extends BaseWidget<TableContentController> {
   static const String routeName = '/table-content';
-  static const String name = 'Mục lục';
+  static const String name = 'table content';
   String id;
   ScrollController _scrollController;
 
@@ -31,7 +32,7 @@ class TableContentScreen extends BaseWidget<TableContentController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(TableContentScreen.name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
             Expanded(
               child: GetBuilder<TableContentController>(
                 builder: (_) =>

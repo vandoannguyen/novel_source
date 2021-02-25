@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/images.dart';
 import 'package:init_app/data/network/NovalModel.dart';
@@ -111,8 +112,8 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
           titleWidget(
               checkAll: true,
               icon: "ic_edit.png",
-              name: " Mới nhất",
-              nameAll: "Xem tất cả",
+              name: AppLocalizations.of(context).translate("newest"),
+              nameAll: AppLocalizations.of(context).translate("read more"),
               funcAll: () {
                 IntentAnimation.intentNomal(
                     context: context,
@@ -312,8 +313,8 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
           titleWidget(
               checkAll: true,
               icon: "ic_edit.png",
-              name: " Sách hot bán chạy",
-              nameAll: "View All",
+              name: AppLocalizations.of(context).translate("hot selling books"),
+              nameAll:AppLocalizations.of(context).translate("read more"),
               funcAll: () {
                 IntentAnimation.intentNomal(
                     context: context,
@@ -365,10 +366,13 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                     width: 20.0,
                     height: 20.0,
                   ),
-                  Text(
-                    name,
-                    style: TextStyle(
-                      color: Color(Constant.colorTxtSecond),
+                  Container(
+                    padding: EdgeInsets.only(left: 5.0),
+                    child: Text(
+                      name,
+                      style: TextStyle(
+                        color: Color(Constant.colorTxtSecond),
+                      ),
                     ),
                   ),
                 ],

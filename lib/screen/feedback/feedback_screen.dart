@@ -52,7 +52,8 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                             "Please send us your feedback! If possible, please contact fanpage's FB (${Common.fanpageName}), thank you !",
                         hintStyle: TextStyle(
                           fontSize: 15.0,
-                          color: Color(Constant.colorTxtDefault).withOpacity(0.8),
+                          color:
+                              Color(Constant.colorTxtDefault).withOpacity(0.8),
                         ),
                         contentPadding: EdgeInsets.all(10.0),
                         border: InputBorder.none,

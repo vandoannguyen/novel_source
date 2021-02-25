@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/survey_question/survey_question_controller.dart';
@@ -11,7 +12,7 @@ import '../../common/constant.dart';
 // ignore: must_be_immutable
 class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
   static const String routeName = '/survey_question';
-  static const String name = 'Survey Question';
+  static const String name = 'survey question';
   SurveyQuestionController controller = Get.put(SurveyQuestionController());
   final ctlTextEditContent = TextEditingController();
   final ctlTextEditEmail = TextEditingController();
@@ -29,7 +30,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(SurveyQuestionScreen.name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -505,7 +506,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                           margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
                           height: 40.0,
                           child: ButtonMain(
-                            name: "DONE",
+                            name: AppLocalizations.of(context).translate("done"),
                             color: Color(Constant.colorTxtSecond),
                             txtSize: 16.0,
                             func: () {

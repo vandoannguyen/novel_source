@@ -20,6 +20,8 @@ class Common {
   static var isLogedIn = false;
   //checkin
   static int coin_checkin = 0;
+  static int coin = 0;
+  // static bool isCheckin = false;
   //static bool isCheckin = false;
   static int days = 0;
   static int date = 0;
