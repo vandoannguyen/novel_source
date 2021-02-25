@@ -72,7 +72,6 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                                   },
                                   child: Container(
                                     width: MediaQuery.of(context).size.width,
-                                
                                     child: FadeInImage.assetNetwork(
                                       image: item.bannerPic,
                                       placeholder: ic_loading,
