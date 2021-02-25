@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/bookstore/novel_bookstore/novel_bookstore_screen.dart';
 import 'package:init_app/screen/search/search_screen.dart';
 
@@ -25,7 +26,6 @@ class _BookstoreState extends State<BookstoreScreen>
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
         child: Column(
           children: [
             GestureDetector(
@@ -85,10 +85,21 @@ class _BookstoreState extends State<BookstoreScreen>
             //     ],
             //   ),
             // ),
-            NovelBookstoreScreen()
+             Container(
+            padding: EdgeInsets.fromLTRB(0, 5.0, 0, 15.0),
+            child: Text("Tiểu thuyết", style: TextStyle(color: Color(Constant.colorTxtPrimary), fontSize: 20.0, fontWeight: FontWeight.bold),)),
+          Expanded(
+            child: new TabBarView(
+              controller: _controller,
+              children: <Widget>[
+                NovelBookstoreScreen(),
+                // FreeBookstoreScreen(),
+                // ComicBookstoreScreen(),
+              ],
+            ),
+          ),
           ],
         ),
-      ),
     );
   }
 }
