@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
@@ -10,7 +11,7 @@ import 'package:init_app/widgets/button_main.dart';
 // ignore: must_be_immutable
 class SettingScreen extends BaseWidget<SettingController> {
   static const String routeName = '/setting';
-  static const String name = 'Settings';
+  static const String name = 'settings';
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
@@ -20,7 +21,7 @@ class SettingScreen extends BaseWidget<SettingController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(SettingScreen.name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
             Container(
               padding: EdgeInsets.symmetric(vertical: 0.0),
               decoration: BoxDecoration(
@@ -43,7 +44,7 @@ class SettingScreen extends BaseWidget<SettingController> {
                       fit: BoxFit.contain,
                     ),
                   ),
-                  Expanded(child: Text("Auto unlock")),
+                  Expanded(child: Text(AppLocalizations.of(context).translate("auto unlock"))),
                   Container(
                     margin: EdgeInsets.all(5.0),
                     child: GetBuilder<SettingController>(
@@ -86,7 +87,7 @@ class SettingScreen extends BaseWidget<SettingController> {
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(child: Text("Delete memory")),
+                    Expanded(child: Text(AppLocalizations.of(context).translate("delete memory"))),
                     Text(
                       "0B",
                       style: TextStyle(
@@ -130,7 +131,7 @@ class SettingScreen extends BaseWidget<SettingController> {
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(child: Text("Ownership")),
+                    Expanded(child: Text(AppLocalizations.of(context).translate("ownership"),),),
                     Container(
                       margin: EdgeInsets.all(5.0),
                       child: Icon(
@@ -168,7 +169,7 @@ class SettingScreen extends BaseWidget<SettingController> {
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(child: Text("About us")),
+                    Expanded(child: Text(AppLocalizations.of(context).translate("about us"),),),
                     Container(
                       margin: EdgeInsets.all(5.0),
                       child: Icon(
@@ -200,7 +201,7 @@ class SettingScreen extends BaseWidget<SettingController> {
                   children: [
                     Expanded(
                         child: Text(
-                      "Choose language",
+                      AppLocalizations.of(context).translate("choose language"),
                       style: TextStyle(
                         color: Color(Constant.colorTxtDefault),
                       ),
@@ -228,7 +229,7 @@ class SettingScreen extends BaseWidget<SettingController> {
               height: 40.0,
               margin: EdgeInsets.symmetric(horizontal: 30.0, vertical: 25.0),
               child: ButtonMain(
-                name: "Logout",
+                name: AppLocalizations.of(context).translate("logout"),
                 color: Color(Constant.colorTxtSecond),
                 txtSize: 16.0,
                 func: () {},

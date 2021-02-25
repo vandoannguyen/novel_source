@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/personal/personal_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
-
 import '../../common/constant.dart';
 
 // ignore: must_be_immutable
 class PersonalScreen extends BaseWidget<PersonalController> {
   static const String routeName = '/personal';
-  static const String name = 'Personal';
+  static const String name = 'personal';
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
@@ -25,9 +25,13 @@ class PersonalScreen extends BaseWidget<PersonalController> {
               color: Colors.white,
               width: size.width,
               padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
-              child: Text(PersonalScreen.name,
-                  style: TextStyle(fontSize: 20.0),
-                  textAlign: TextAlign.center),
+              child: Text(
+                AppLocalizations.of(context).translate(name),
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 15.0),
@@ -98,7 +102,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                             Container(
                               padding: EdgeInsets.only(bottom: 5.0),
                               child: Text(
-                                "Login",
+                                AppLocalizations.of(context).translate('login'),
                                 style: TextStyle(fontSize: 20.0),
                               ),
                             ),
@@ -107,6 +111,10 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                       ),
               ),
             ),
+            // GetBuilder<BaseController>(
+            //     init: BaseController(),
+            //     builder: (_) =>
+            //         Text("Coin Deme: " + controller.coinDemo.toString())),
             Container(
               color: Colors.white,
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
@@ -118,10 +126,16 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                     child: Row(
                       children: [
                         GetBuilder<PersonalController>(
-                            builder: (_) => controller.isLogin
-                                ? Text("Coin balance: " +
-                                    controller.profile["coin"].toString())
-                                : Text("Coin balance: " + "0.0")),
+                          builder: (_) => controller.isLogin
+                              ? Text(AppLocalizations.of(context)
+                                      .translate('coin balance') +
+                                  ": " +
+                                  controller.profile["coin"].toString())
+                              : Text(AppLocalizations.of(context)
+                                      .translate('coin balance') +
+                                  ": " +
+                                  "0.0"),
+                        ),
                         Image.asset(
                           Common.pathImg + "ic_coin.png",
                           fit: BoxFit.contain,
@@ -134,7 +148,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                   Container(
                     height: 30.0,
                     child: ButtonMain(
-                        name: "Deposit coins",
+                        name: AppLocalizations.of(context).translate("deposit coin"),
                         func: () {
                           controller.click("BUY_COIN");
                         }),
@@ -147,37 +161,43 @@ class PersonalScreen extends BaseWidget<PersonalController> {
             ),
             // financial-transaction
             item(
-                name: "Detail transaction",
+                context: context,
+                name: "detail transaction",
                 icon: "ic_transaction.png",
                 func: () {
                   controller.click("DETAIL_TRANSACTION");
                 }),
             item(
-                name: "Support online",
+                context: context,
+                name: "support",
                 icon: "ic_support.png",
                 func: () {
                   controller.click("SUPPORT");
                 }),
             item(
-                name: "Come author",
+                context: context,
+                name: "come author",
                 icon: "ic_author.png",
                 func: () {
                   controller.click("COME_AUTHOR");
                 }),
             item(
-                name: "Frequently question",
+                context: context,
+                name: "frequently question",
                 icon: "ic_question.png",
                 func: () {
                   controller.click("QUESTION");
                 }),
             item(
-                name: "Feedback",
+                context: context,
+                name: "feedback",
                 icon: "ic_feedback.png",
                 func: () {
                   controller.click("FEEDBACK");
                 }),
             item(
-                name: "Settings",
+                context: context,
+                name: "settings",
                 icon: "ic_setting.png",
                 func: () {
                   controller.click("SETTING");
@@ -188,7 +208,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
     );
   }
 
-  Widget item({name, icon, func}) {
+  Widget item({context, name, icon, func}) {
     return GestureDetector(
       onTap: func,
       child: Container(
@@ -213,7 +233,10 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                 height: 25.0,
               ),
             ),
-            Expanded(child: Text(name)),
+            Expanded(
+                child: Text(
+              AppLocalizations.of(context).translate(name),
+            ),),
             Container(
               margin: EdgeInsets.all(5.0),
               child: Icon(

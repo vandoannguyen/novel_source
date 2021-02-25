@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/screen/bookcase/bookcase_screen.dart';
 import 'package:init_app/screen/bookstore/bookstore_screen.dart';
 import 'package:init_app/screen/personal/personal_screen.dart';
@@ -29,7 +30,6 @@ class _HomeState extends State<HomeScreen> {
       } //callback change page
           ),
       BookstoreScreen(),
-      // TaskScreen(),
       TaskScreen(callBack: callBack),
       PersonalScreen()
     ];
@@ -66,19 +66,19 @@ class _HomeState extends State<HomeScreen> {
               height: 25.0,
               color: Colors.pink,
             ),
-            label: BookcaseScreen.name,
+            label: AppLocalizations.of(context).translate("bookcase"),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
-            label: BookstoreScreen.name,
+            label: AppLocalizations.of(context).translate("bookstore"),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
-            label: TaskScreen.name,
+            label: AppLocalizations.of(context).translate("tasks"),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: PersonalScreen.name,
+            label: AppLocalizations.of(context).translate("personal"),
           ),
         ],
         currentIndex: _selectedIndex,

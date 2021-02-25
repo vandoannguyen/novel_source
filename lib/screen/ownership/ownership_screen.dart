@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/ownership/ownership_controller.dart';
@@ -6,7 +7,7 @@ import 'package:init_app/widgets/appbar_second.dart';
 
 class OwnershipScreen extends BaseWidget<OwnershipController> {
   static const String routeName = '/ownership';
-  static const String name = 'Ownership';
+  static const String name = 'ownership';
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
@@ -16,7 +17,7 @@ class OwnershipScreen extends BaseWidget<OwnershipController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(OwnershipScreen.name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
             Container(
               padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
               alignment: Alignment.center,

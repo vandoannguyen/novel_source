@@ -46,7 +46,6 @@ class BuyCoinChplayScreen extends BaseWidget<BuyCoinChplayController> {
                         style: TextStyle(color: Colors.blue),
                       ),
                     ),
-                    Image.asset(Common.pathImg + "img_persional.png"),
                     Image.asset(Common.pathImg + "img_buy_coin1.png"),
                     
                     Container(
@@ -79,7 +78,6 @@ class BuyCoinChplayScreen extends BaseWidget<BuyCoinChplayController> {
                         style: TextStyle(color: Colors.blue),
                       ),
                     ),
-                     Image.asset(Common.pathImg + "img_persional.png"),
                     Image.asset(Common.pathImg + "img_buy_coin1.png"),
                     Container(
                       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),

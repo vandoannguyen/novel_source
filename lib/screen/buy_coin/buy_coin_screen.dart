@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
@@ -9,12 +10,9 @@ import 'package:init_app/widgets/appbar_second.dart';
 // ignore: must_be_immutable
 class BuyCoinScreen extends BaseWidget<BuyCoinController> {
   static const String routeName = '/buy-coin';
-  static const String name = 'Chọn phương thức thanh toán';
-
+  static const String name = 'select a payment method';
   BuildContext dialogContext;
-
-
-
+  
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: BuyCoinController());
@@ -23,7 +21,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(BuyCoinScreen.name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
               GetBuilder<BuyCoinController>(
               builder: (_) => Column(
               children: controller.paymentMethods
@@ -227,7 +225,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                     children: [
                                                       Expanded(
                                                         child: Text(
-                                                          "Price",
+                                                          "International prices",
                                                           style: TextStyle(
                                                               color: Color(Constant
                                                                   .colorTxtDefault),

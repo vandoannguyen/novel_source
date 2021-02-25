@@ -291,7 +291,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                       Container(
                           height: 25.0,
                           child: ButtonMain(
-                              name: "Thưởng",
+                              name: "reward",
                               func: () {},
                               color: Color(Constant.colorTxtSecond))),
                     ],

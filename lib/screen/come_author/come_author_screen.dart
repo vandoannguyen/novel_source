@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/widgets/appbar_second.dart';
@@ -9,7 +10,7 @@ import 'come_author_controller.dart';
 
 class ComeAuthorScreen extends BaseWidget<ComeAuthorController> {
   static const String routeName = '/bookcase';
-  static const String name = "Become Author";
+  static const String name = "become author";
   int color = 0xFFfdf1f1;
 
   build(BuildContext context, {controllerSuper}) {
@@ -19,7 +20,7 @@ class ComeAuthorScreen extends BaseWidget<ComeAuthorController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(

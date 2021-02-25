@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/frequently_question/frequently_question_controller.dart';
@@ -11,7 +12,7 @@ import 'package:init_app/widgets/appbar_second.dart';
 class FrequentlyQuestionScreen
     extends BaseWidget<FrequentlyQuestionController> {
   static const String routeName = '/frequently-question';
-  static const String name = 'Câu hỏi thường gặp';
+  static const String name = 'frequently question';
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
@@ -21,7 +22,7 @@ class FrequentlyQuestionScreen
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(FrequentlyQuestionScreen.name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
             Expanded(
               child: ListView.builder(
                   physics: AlwaysScrollableScrollPhysics(),

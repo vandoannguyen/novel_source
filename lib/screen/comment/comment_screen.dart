@@ -126,7 +126,7 @@ class CommentScreen extends BaseWidget<CommentController> {
               width: double.infinity,
               height: 40.0,
               child: ButtonMain(
-                name: "Gửi",
+                name: "send",
                 color: Color(Constant.colorTxtSecond),
                 func: () {
                   controller.sendCmt(controllerTextEdit.text, idBook: id);

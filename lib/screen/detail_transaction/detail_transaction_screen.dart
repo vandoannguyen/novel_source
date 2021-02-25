@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/detail_transaction/detail_transaction_controller.dart';
@@ -7,7 +8,7 @@ import 'package:init_app/widgets/appbar_second.dart';
 
 class DetailTransactionScreen extends BaseWidget<DetailTransactionController> {
   static const String routeName = '/detail-transaction';
-  static const String name = 'Chi tiết giao dịch';
+  static const String name = 'detail transaction';
 
   @override
   Widget build(BuildContext context, {controllerSuper}) {
@@ -17,7 +18,7 @@ class DetailTransactionScreen extends BaseWidget<DetailTransactionController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(DetailTransactionScreen.name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
             new TabBar(
               controller: controller.controllerTab,
               indicatorColor: Color(Constant.colorTxtPrimary),

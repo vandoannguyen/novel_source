@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/feedback/feedback_controller.dart';
@@ -11,7 +12,7 @@ import '../../common/constant.dart';
 // ignore: must_be_immutable
 class FeedbackScreen extends BaseWidget<FeedbackController> {
   static const String routeName = '/feedback';
-  static const String name = 'Feedback';
+  static const String name = 'feedback';
   final ctlTextEditContent = TextEditingController();
   final ctlTextEditEmail = TextEditingController();
 
@@ -30,7 +31,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(name),
+            appbarSecond(AppLocalizations.of(context).translate(name)),
             Stack(
               children: [
                 Container(
@@ -48,7 +49,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                     },
                     decoration: InputDecoration(
                       hintText:
-                          "Please send us your feedback! If possible, please contact fanpage's FB (${Common.fanpageName}), thank you !",
+                          AppLocalizations.of(context).translate('please send us your feedback') + "(${Common.fanpageName}), " +AppLocalizations.of(context).translate('thanks') ,
                       hintStyle: TextStyle(
                         fontSize: 15.0,
                         color: Color(Constant.colorTxtDefault).withOpacity(0.8),
@@ -84,7 +85,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                   controller.countWord(text.length);
                 },
                 decoration: InputDecoration(
-                  hintText: "Please enter your email (Required)",
+                  hintText: AppLocalizations.of(context).translate("please enter your email"),
                   hintStyle: TextStyle(
                     fontSize: 15.0,
                     color: Color(Constant.colorTxtDefault).withOpacity(0.8),
@@ -99,7 +100,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
               width: double.infinity,
               height: 40.0,
               child: ButtonMain(
-                name: "Send",
+                name: AppLocalizations.of(context).translate('send'),
                 color: Color(Constant.colorTxtSecond),
                 func: () {
                   controller.send(
@@ -129,7 +130,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                       Align(
                         alignment: Alignment.center,
                         child: Text(
-                          "Contact FB",
+                          AppLocalizations.of(context).translate("contact FB"),
                           style: TextStyle(),
                         ),
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/images.dart';
@@ -12,7 +13,7 @@ import 'package:init_app/widgets/item_book_ver.dart';
 
 class BookcaseScreen extends BaseWidget<BookCaseController> {
   static const String routeName = '/bookcase';
-  static const String name = 'TỦ SÁCH';
+  static const String name = 'bookcase';
   dynamic callback;
 
   BookcaseScreen(this.callback);
@@ -41,7 +42,7 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    BookcaseScreen.name,
+                    AppLocalizations.of(context).translate(name),
                     style: TextStyle(fontSize: 20.0),
                   ),
                 ),
@@ -104,7 +105,7 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
                           style: TextStyle(color: Colors.grey[400]),
                         ),
                         ButtonMain(
-                          name: "Login",
+                          name: AppLocalizations.of(context).translate("login"),
                           func: () {
                             controller.login();
                           },
