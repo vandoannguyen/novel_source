@@ -59,16 +59,17 @@ Widget itemBookHor({NovelModel item, index, func}) {
                 children: [
                   Text("${item.name}",
                       style: TextStyle(
-                        fontSize: 18.0,
+                        fontSize: 16.0,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis),
                   Container(
-                    padding: EdgeInsets.only(top: 8.0, bottom: 5.0),
+                    padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                     child: Text("${item.desc}",
                         style: TextStyle(
-                          fontSize: 13.0,
+                          fontSize: 12.0,
                           color: Color(Constant.colorTxtDefault),
+                          height: 1.25
                         ),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis),
@@ -81,7 +82,7 @@ Widget itemBookHor({NovelModel item, index, func}) {
                           "${item.writerName}",
                           style: TextStyle(
                               color: Color(Constant.colorTxtPrimary),
-                              fontSize: 13.0),
+                              fontSize: 12.0),
                         ),
                         Container(
                           child: Row(

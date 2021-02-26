@@ -111,10 +111,8 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                       ),
               ),
             ),
-            // GetBuilder<BaseController>(
-            //     init: BaseController(),
-            //     builder: (_) =>
-            //         Text("Coin Deme: " + controller.coinDemo.toString())),
+            // Obx(()=> Text("Coin Deme: " + controller.coinDemo.toString())),
+         
             Container(
               color: Colors.white,
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
@@ -150,7 +148,8 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                     child: ButtonMain(
                         name: AppLocalizations.of(context).translate("deposit coin"),
                         func: () {
-                          controller.click("BUY_COIN");
+                          controller.goBuyCoin();
+                          // controller.click("BUY_COIN");
                         }),
                   )
                 ],

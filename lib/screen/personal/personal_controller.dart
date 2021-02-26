@@ -12,8 +12,6 @@ import 'package:init_app/screen/setting/setting_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PersonalController extends BaseController {
-  // PersonalController(BuildContext context);
-  // LoginController ctlLogin = Get.put(LoginController());
   dynamic profile;
   bool isLogin = false;
   @override
@@ -57,6 +55,16 @@ class PersonalController extends BaseController {
     }
   }
 
+  void goBuyCoin() async {
+    if (isLogin) {
+      await Get.to(BuyCoinScreen());
+      profile["coin"] = Common.coin;
+      update();
+    } else {
+      goLogin();
+    }
+  }
+
   Future<void> _launchInBrowser(String url) async {
     if (await canLaunch(url)) {
       await launch(
@@ -84,6 +92,7 @@ class PersonalController extends BaseController {
   void getProfile() {
     RepositoryImpl.getInstance().getUserProfile().then((value) {
       profile = value;
+      Common.coin = profile["coin"];
       isLogin = Common.isLogedIn;
       update();
     }).catchError((err) {

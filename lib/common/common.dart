@@ -23,4 +23,6 @@ class Common {
   // static bool isCheckin = false;
   static int days = 0;
   static int date = 0;
+
+  static String langNow = "en";
 }
