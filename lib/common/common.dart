@@ -1,5 +1,6 @@
 import 'package:init_app/data/network/NovalModel.dart';
 import 'package:init_app/data/network/UserModel.dart';
+import 'package:installed_apps/app_info.dart';
 
 class Common {
   static final String CHANNEL = "com.example.init_app";
@@ -19,7 +20,9 @@ class Common {
   static var isLogedIn = false;
   //checkin
   static int coin_checkin = 0;
-  // static bool isCheckin = false;
+  //static bool isCheckin = false;
   static int days = 0;
   static int date = 0;
+  //getList
+  static List<AppInfo> apps = [];
 }

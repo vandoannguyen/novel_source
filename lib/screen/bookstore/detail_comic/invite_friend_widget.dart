@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/widgets/dialog_loading.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
 import 'package:social_share_plugin/social_share_plugin.dart';
@@ -15,6 +16,7 @@ class InviteFriendWidget extends StatefulWidget {
 }
 
 class _InviteFriendWidgetState extends State<InviteFriendWidget> {
+  // List<AppInfo> apps = [];
   @override
   void setState(fn) async{
     // TODO: implement setState
@@ -28,11 +30,14 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
           SnackBar(content:Text("Link copied to clipboard")));
     });
   }
+  void _getList() async{
+     Common.apps = await InstalledApps.getInstalledApps(true, true);
+  }
   //shareface
   Future<void> _shareOnFacebook(String text) async {
-    List<AppInfo> apps = await InstalledApps.getInstalledApps(true, true);
-    for(int i=0; i < apps.length; i++){
-      if(apps.elementAt(i).packageName == "com.facebook.katana"){
+    //List<AppInfo> apps = await InstalledApps.getInstalledApps(true, true);
+    for(int i=0; i < Common.apps.length; i++){
+      if(Common.apps.elementAt(i).packageName == "com.facebook.katana"){
         Fluttertoast.showToast(msg: "Facebook App Installed", backgroundColor: Colors.grey, textColor: Colors.white, gravity: ToastGravity.BOTTOM, toastLength: Toast.LENGTH_SHORT);
         final quote =
             'Flutter is Google’s portable UI toolkit for building beautiful, natively-compiled applications for mobile, web, and desktop from a single codebase.';
@@ -52,24 +57,19 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
             return;
           },
         );
+        print(result);
         break;
       }else{
         Fluttertoast.showToast(msg: "App not install ", backgroundColor: Colors.grey[200], textColor: Colors.red, gravity: ToastGravity.BOTTOM, toastLength: Toast.LENGTH_SHORT);
         break;
       }
     }
-
-    // String result = await FlutterSocialContentShare.share(
-    //     type: ShareType.facebookWithoutImage,
-    //     url: "https://www.apple.com",
-    //     quote: "captions");
-    // print(result);
   }
   //sharetwitter
   void _shareTwitter(String text) async {
-    List<AppInfo> apps = await InstalledApps.getInstalledApps(true, true);
-    for(int i=0; i < apps.length; i++){
-      if(apps.elementAt(i).packageName == "com.twitter.android"){
+    // List<AppInfo> apps = await InstalledApps.getInstalledApps(true, true);
+    for(int i=0; i < Common.apps.length; i++){
+      if(Common.apps.elementAt(i).packageName == "com.twitter.android"){
         Fluttertoast.showToast(msg: "Twitter App Installed", backgroundColor: Colors.grey, textColor: Colors.white, gravity: ToastGravity.BOTTOM, toastLength: Toast.LENGTH_SHORT);
         final quote =
             'Flutter is Google’s portable UI toolkit for building beautiful, natively-compiled applications for mobile, web, and desktop from a single codebase.';
@@ -91,10 +91,6 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
         break;
       }
     }
-
-    // String result = await FlutterSocialContentShare.shareOnWhatsapp(
-    //     number: "xxxxxx", text: "Text appears here");
-    // print(result);
   }
   //sharemore
   Future<void> _shareMore(String text) async {
@@ -107,6 +103,9 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
   }
   @override
   Widget build(BuildContext context) {
+    if(Common.apps.isEmpty){
+    _getList();
+    };
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: 10),
@@ -118,7 +117,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                 "Share for friend",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 15.0,
                     color: Colors.black,
                     fontWeight: FontWeight.bold),
               ),
@@ -127,7 +126,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
               child: Text(
                 "Moi ban be nhan xu thuong",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 11, color: Colors.grey[800]),
+                style: TextStyle(fontSize: 12.0, color: Colors.grey[800]),
               ),
             ),
             Container(
@@ -211,7 +210,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                         ),
                       ),
                       Text(
-                        "copy link",
+                        "copy Link",
                         style: TextStyle(color: Colors.black),
                       )
                     ],
@@ -229,9 +228,12 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "Moi ban be nhan xu thuong",
-                    style: TextStyle(color: Colors.black),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10.0),
+                    child: Text(
+                      "Moi ban be nhan xu thuong",
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
                   Text(
                     "1. Moi 1 ban thuong 10 xu",
@@ -244,9 +246,12 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                   SizedBox(
                     height: 30,
                   ),
-                  Text(
-                    "Remind",
-                    style: TextStyle(color: Colors.black),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10.0),
+                    child: Text(
+                      "Remind",
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
                   Text(
                     "1. Mot so dien thoai chi co the moi mot lan",

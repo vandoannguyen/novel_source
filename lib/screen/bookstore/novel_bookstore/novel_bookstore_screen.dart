@@ -67,13 +67,11 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                           builder: (BuildContext context) {
                             return GestureDetector(
                                 onTap: () {
-                                  controller.clickItem(
-                                      _, NovelModel(id: item.bookId));
+                                  controller.clickItem(_, NovelModel(id: item.bookId));
                                 },
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
-                                  decoration:
-                                      BoxDecoration(color: Colors.amber),
+                                  decoration: BoxDecoration(color: Colors.amber),
                                   child: FadeInImage.assetNetwork(
                                     image: item.bannerPic,
                                     placeholder: ic_loading,
@@ -94,13 +92,10 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                             builder: (_) => Container(
                               width: 10.0,
                               height: 2.0,
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 2.0),
+                              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                               decoration: BoxDecoration(
                                 shape: BoxShape.rectangle,
-                                color: _.currentCarousel == index
-                                    ? Color(Constant.colorTxtSecond)
-                                    : Color(0xFFfdbbc5),
+                                color: _.currentCarousel == index ? Color(Constant.colorTxtSecond) : Color(0xFFfdbbc5),
                               ),
                             ),
                           );
@@ -137,15 +132,11 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                       // init: controller,
                       builder: (_) {
                         return _.listNewest == null
-                            ? Container(
-                                height: 180,
-                                alignment: Alignment.center,
-                                child: CircularProgressIndicator())
+                            ? Container(height: 180, alignment: Alignment.center, child: CircularProgressIndicator())
                             : Column(
                                 children: [
                                   CarouselSlider(
-                                    carouselController:
-                                        controllerCarouselNewest,
+                                    carouselController: controllerCarouselNewest,
                                     options: CarouselOptions(
                                       // disableCenter: true,
                                       height: 180.0,
@@ -154,13 +145,11 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                                       initialPage: 1,
                                       enableInfiniteScroll: false,
                                       autoPlayInterval: Duration(seconds: 3),
-                                      autoPlayAnimationDuration:
-                                          Duration(milliseconds: 800),
+                                      autoPlayAnimationDuration: Duration(milliseconds: 800),
                                       autoPlayCurve: Curves.fastOutSlowIn,
                                       enlargeCenterPage: true,
                                       onPageChanged: (index, _) {
-                                        controller.changeCarouselNewest(
-                                            index, _);
+                                        controller.changeCarouselNewest(index, _);
                                       },
                                       scrollDirection: Axis.horizontal,
                                     ),
@@ -172,16 +161,12 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                                               controller.clickItem(_, item);
                                             },
                                             child: Container(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 5.0),
+                                              padding: EdgeInsets.only(bottom: 5.0),
                                               decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
+                                                borderRadius: BorderRadius.circular(5.0),
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color: Color(Constant
-                                                            .colorTxtDefault)
-                                                        .withOpacity(0.2),
+                                                    color: Color(Constant.colorTxtDefault).withOpacity(0.2),
                                                     spreadRadius: 0,
                                                     blurRadius: 10,
                                                     offset: Offset(0, 0),
@@ -189,8 +174,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                                                 ],
                                               ),
                                               child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(5.0),
+                                                borderRadius: BorderRadius.circular(5.0),
                                                 child: FadeInImage.assetNetwork(
                                                   placeholder: ic_loading,
                                                   image: item.bpic,
@@ -204,23 +188,18 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                                     }).toList(),
                                   ),
                                   GetBuilder<NovelBookController>(
-                                    init:
-                                        controller, // INIT IT ONLY THE FIRST TIME
+                                    init: controller, // INIT IT ONLY THE FIRST TIME
                                     builder: (_) => Container(
-                                      padding: EdgeInsets.fromLTRB(
-                                          15.0, 25.0, 15.0, 20.0),
+                                      padding: EdgeInsets.fromLTRB(15.0, 25.0, 15.0, 20.0),
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           Container(
-                                            padding:
-                                                EdgeInsets.only(bottom: 15.0),
+                                            padding: EdgeInsets.only(bottom: 15.0),
                                             child: Text(
                                               "${_.listNewest[_.currentCarouselNewest].name}",
                                               style: TextStyle(
-                                                color: Color(
-                                                    Constant.colorTxtDefault),
+                                                color: Color(Constant.colorTxtDefault),
                                                 fontSize: 18.0,
                                               ),
                                               textAlign: TextAlign.center,
@@ -229,9 +208,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                                           Text(
                                             // controller.images[controller.currentCarouselNewest] +
                                             "${_.listNewest[_.currentCarouselNewest].desc}",
-                                            style: TextStyle(
-                                                color: Color(
-                                                    Constant.colorTxtDefault)),
+                                            style: TextStyle(color: Color(Constant.colorTxtDefault)),
                                             maxLines: 3,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.center,
@@ -256,8 +233,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                               size: 16.0,
                               color: Color(Constant.colorTxtDefault),
                             ),
-                            onPressed: () =>
-                                controllerCarouselNewest.previousPage(),
+                            onPressed: () => controllerCarouselNewest.previousPage(),
                           ),
                         ),
                         Container(
@@ -269,8 +245,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                               size: 25.0,
                               color: Color(Constant.colorTxtDefault),
                             ),
-                            onPressed: () =>
-                                controllerCarouselNewest.nextPage(),
+                            onPressed: () => controllerCarouselNewest.nextPage(),
                           ),
                         ),
                       ],
@@ -320,10 +295,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
           // init: controller,
           builder: (_) {
             return _.listHotest == null
-                ? Container(
-                    height: 180,
-                    alignment: Alignment.center,
-                    child: CircularProgressIndicator())
+                ? Container(height: 180, alignment: Alignment.center, child: CircularProgressIndicator())
                 : ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -373,8 +345,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                     children: [
                       Text(
                         nameAll,
-                        style:
-                            TextStyle(color: Color(Constant.colorTxtDefault)),
+                        style: TextStyle(color: Color(Constant.colorTxtDefault)),
                       ),
                       Icon(
                         Icons.navigate_next_rounded,

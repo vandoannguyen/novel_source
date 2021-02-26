@@ -6,6 +6,7 @@ import 'package:init_app/screen/comment_all/comment_all_screen.dart';
 import 'package:init_app/screen/tutorials/tutorial_loaded_coin.dart';
 import 'package:init_app/widgets/description_text.dart';
 import 'package:init_app/widgets/bottom_sheet_coin.dart';
+
 class DetailWidget extends StatefulWidget {
   DetailWidget({Key key}) : super(key: key);
 
@@ -76,7 +77,9 @@ class _DetailWidgetState extends State<DetailWidget> {
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 10, right: 10),
-                    child: DescriptionTextWidget(text: "Pin của iPhone sử dụng công nghệ lithium-ion. So với các thế hệ công nghệ pin trước đây, pin lithium-ion sạc nhanh hơn, tuổi thọ cao hơn và có mật độ năng lượng lớn hơn giúp tăng thời lượng và giảm trọng lượng. Công nghệ pin sạc lithium-ion hiện nay là công nghệ tốt nhất cho thiết bị của bạn. Tìm hiểu thêm về pin lithium-ion."),
+                    child: DescriptionTextWidget(
+                        text:
+                            "Pin của iPhone sử dụng công nghệ lithium-ion. So với các thế hệ công nghệ pin trước đây, pin lithium-ion sạc nhanh hơn, tuổi thọ cao hơn và có mật độ năng lượng lớn hơn giúp tăng thời lượng và giảm trọng lượng. Công nghệ pin sạc lithium-ion hiện nay là công nghệ tốt nhất cho thiết bị của bạn. Tìm hiểu thêm về pin lithium-ion."),
                   ),
                 ],
               ),
@@ -155,38 +158,32 @@ class _DetailWidgetState extends State<DetailWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Row(children: <Widget>[
-                    Expanded(
-                        child: Container(
-                            margin: EdgeInsets.only(left: 10, right: 10),
-                            child: Divider())),
+                    Expanded(child: Container(margin: EdgeInsets.only(left: 10, right: 10), child: Divider())),
                     Text(
                       "Reward",
                       style: TextStyle(color: Colors.pink),
                     ),
-                    Expanded(
-                        child: Container(
-                            margin: EdgeInsets.only(left: 10, right: 10),
-                            child: Divider())),
+                    Expanded(child: Container(margin: EdgeInsets.only(left: 10, right: 10), child: Divider())),
                   ]),
                   Container(
-                      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-                      height: 30,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 12,
-                        itemBuilder: (context, i) {
-                          return Container(
-                            margin: EdgeInsets.all(3),
-                            child: Image.asset(
-                              Common.pathImg + "ic_user.png",
-                              height: 20,
-                              width: 20,
-                            ),
-                          );
-                        },
-                      ),
-                      ),
+                    margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                    height: 30,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 12,
+                      itemBuilder: (context, i) {
+                        return Container(
+                          margin: EdgeInsets.all(3),
+                          child: Image.asset(
+                            Common.pathImg + "ic_user.png",
+                            height: 20,
+                            width: 20,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                   Container(
                     margin: EdgeInsets.only(bottom: 10),
                     child: Row(
@@ -196,7 +193,11 @@ class _DetailWidgetState extends State<DetailWidget> {
                           margin: EdgeInsets.all(10),
                           child: Row(
                             children: <Widget>[
-                              Image.asset(Common.pathImg + "ic_coin.png", height: 20, width: 20,),
+                              Image.asset(
+                                Common.pathImg + "ic_coin.png",
+                                height: 20,
+                                width: 20,
+                              ),
                               Text("3720",
                                   style: TextStyle(
                                     color: Colors.pink,
@@ -237,8 +238,7 @@ class _DetailWidgetState extends State<DetailWidget> {
             ),
             ListTile(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => InviteFriend()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => InviteFriend()));
               },
               title: Text(
                 "Invite friends to receive coins",
@@ -255,10 +255,7 @@ class _DetailWidgetState extends State<DetailWidget> {
             ),
             ListTile(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TutorialLoadedCoin()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => TutorialLoadedCoin()));
               },
               title: Text(
                 "How to make a coin?",
@@ -274,7 +271,7 @@ class _DetailWidgetState extends State<DetailWidget> {
               color: Colors.grey[400],
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => CommentScreen("test")));
               },
               child: Container(
@@ -301,8 +298,8 @@ class _DetailWidgetState extends State<DetailWidget> {
               color: Colors.grey[400],
             ),
             GestureDetector(
-              onTap: (){
-               Navigator.push(context, MaterialPageRoute(builder: (context) => CommentAllScreen()));
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CommentAllScreen()));
               },
               child: Container(
                 margin: EdgeInsets.all(10),
@@ -318,8 +315,8 @@ class _DetailWidgetState extends State<DetailWidget> {
             ),
             SizedBox(
               height: 20,
-              child:Container(
-                color : Colors.grey[200],
+              child: Container(
+                color: Colors.grey[200],
               ),
             ),
             Container(

@@ -43,16 +43,14 @@ class DetailComicBookController extends BaseController {
         break;
       case "TABLE_CONTENT":
         // Get.to(TableContentScreen());
-        IntentAnimation.intentNomal(
-            context: context, screen: TableContentScreen(value));
+        IntentAnimation.intentNomal(context: context, screen: TableContentScreen(value));
         break;
       case "INVITE":
         inviteFriend();
         break;
       case "HOW_ADD_COIN":
         {
-          IntentAnimation.intentNomal(
-              context: context, screen: TutorialBuyCoinScreen());
+          IntentAnimation.intentNomal(context: context, screen: TutorialBuyCoinScreen());
         }
         break;
       case "COMMENT":
@@ -79,10 +77,7 @@ class DetailComicBookController extends BaseController {
   }
 
   void getComments(String idBook) {
-    RepositoryImpl.getInstance()
-        .getComments(idBook: idBook, page: 1, limit: 20, increase: true)
-        .then((value) {})
-        .catchError((err) {});
+    RepositoryImpl.getInstance().getComments(idBook: idBook, page: 1, limit: 20, increase: true).then((value) {}).catchError((err) {});
   }
 
   void clickShowMore(bool textShowFlag) {
@@ -93,14 +88,8 @@ class DetailComicBookController extends BaseController {
 
   void postFollow(String idBook) {
     showDialogLoading(context);
-    if (Common.myBooks
-            .where((element) => element.id == idBook)
-            .toList()
-            .length ==
-        0) {
-      RepositoryImpl.getInstance()
-          .addBookIntoMyBooks(idBook: idBook)
-          .then((value) {
+    if (Common.myBooks.where((element) => element.id == idBook).toList().length == 0) {
+      RepositoryImpl.getInstance().addBookIntoMyBooks(idBook: idBook).then((value) {
         if (value != null) {
           print(value);
           Navigator.of(context).pop();
@@ -111,13 +100,10 @@ class DetailComicBookController extends BaseController {
         Navigator.of(context).pop();
       });
     } else {
-      RepositoryImpl.getInstance()
-          .removeBookFromMyBook(idBook: idBook)
-          .then((value) {
+      RepositoryImpl.getInstance().removeBookFromMyBook(idBook: idBook).then((value) {
         print(value);
         Navigator.of(context).pop();
-        Common.myBooks =
-            Common.myBooks.where((e) => e.id != detail.id).toList();
+        Common.myBooks = Common.myBooks.where((e) => e.id != detail.id).toList();
         update();
       }).catchError((err) {
         Navigator.of(context).pop();
@@ -126,9 +112,7 @@ class DetailComicBookController extends BaseController {
   }
 
   void getHotest() {
-    RepositoryImpl.getInstance()
-        .getNovelHotest(language: Common.language, page: 1, limitPerPage: 4)
-        .then((value) {
+    RepositoryImpl.getInstance().getNovelHotest(language: Common.language, page: 1, limitPerPage: 4).then((value) {
       hotest = value;
       update();
     }).catchError((err) {});

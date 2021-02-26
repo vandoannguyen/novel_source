@@ -16,8 +16,8 @@ class CustomDialogBox extends StatefulWidget {
 }
 
 class _CustomDialogBoxState extends State<CustomDialogBox> {
-  double padding =20;
-  double avatarRadius =45;
+  double padding = 20;
+  double avatarRadius = 45;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -29,38 +29,49 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
       child: contentBox(context),
     );
   }
-  contentBox(context){
+
+  contentBox(context) {
     return Stack(
       children: <Widget>[
         Container(
-          padding: EdgeInsets.only(left: padding,top: avatarRadius
-              + padding, right:padding,bottom: padding
-          ),
+          padding: EdgeInsets.only(left: padding, top: avatarRadius + padding, right: padding, bottom: padding),
           margin: EdgeInsets.only(top: avatarRadius),
           decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(padding),
-              boxShadow: [
-                BoxShadow(color: Colors.black,offset: Offset(0,10),
-                    blurRadius: 10
-                ),
-              ]
+            shape: BoxShape.rectangle,
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(padding),
+            boxShadow: [
+              BoxShadow(color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
+            ],
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text(widget.title,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w600),),
-              SizedBox(height: 15,),
-              Text(widget.descriptions,style: TextStyle(fontSize: 14),textAlign: TextAlign.center,),
-              SizedBox(height: 22,),
+              Text(
+                widget.title,
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                widget.descriptions,
+                style: TextStyle(fontSize: 14),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 22,
+              ),
               Align(
                 alignment: Alignment.bottomRight,
                 child: FlatButton(
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text(widget.text,style: TextStyle(fontSize: 18),)),
+                    child: Text(
+                      widget.text,
+                      style: TextStyle(fontSize: 18),
+                    )),
               ),
             ],
           ),
@@ -72,8 +83,9 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             backgroundColor: Colors.transparent,
             radius: avatarRadius,
             child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(avatarRadius)),
-                child: widget.img,
+              borderRadius: BorderRadius.all(Radius.circular(avatarRadius)),
+              // child: widget.img,
+              child: Image.asset(Common.pathImg + "bg_checkin.jpg"),
             ),
           ),
         ),
