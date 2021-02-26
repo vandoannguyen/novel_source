@@ -12,7 +12,7 @@ Widget appbarSecond(name) {
           alignment: Alignment.center,
           child: Text(
             name,
-            style: TextStyle(fontSize: 20.0),
+            style: TextStyle(fontSize: 18.0),
           ),
         ),
         Align(

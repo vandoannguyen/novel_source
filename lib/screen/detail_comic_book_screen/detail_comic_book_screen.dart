@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/images.dart';
 import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_controller.dart';
-import 'package:init_app/widgets/bottom_sheet_coin.dart';
 import 'package:init_app/widgets/button_main.dart';
 import 'package:init_app/widgets/item_book_ver.dart';
 
@@ -223,7 +223,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 0.0),
                         child: Text(
-                          "Reward",
+                          AppLocalizations.of(context).translate('reward'),
                           style: TextStyle(
                             color: Color(Constant.colorTxtSecond),
                           ),
@@ -580,24 +580,19 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
             ),
             Expanded(
               flex: 1,
-              child: GestureDetector(
-               onTap: (){
-                 onDialogBottomSheet(context);
-               },
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 40.0,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color(Constant.colorTxtDefault).withOpacity(0.5),
-                      width: 0.3,
-                    ),
+              child: Container(
+                alignment: Alignment.center,
+                height: 40.0,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+                    width: 0.3,
                   ),
-                  child: Text(
-                    "Reward",
-                    style: TextStyle(
-                      color: Color(Constant.colorTxtSecond),
-                    ),
+                ),
+                child: Text(
+                  "Reward",
+                  style: TextStyle(
+                    color: Color(Constant.colorTxtSecond),
                   ),
                 ),
               ),

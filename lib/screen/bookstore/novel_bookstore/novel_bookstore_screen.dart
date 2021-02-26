@@ -261,7 +261,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                                             style: TextStyle(
                                               color: Color(
                                                   Constant.colorTxtDefault),
-                                              fontSize: 18.0,
+                                              fontSize: 16.0,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -271,8 +271,9 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                                           "${_.listNewest[_.currentCarouselNewest].desc}",
                                           style: TextStyle(
                                               color: Color(
-                                                  Constant.colorTxtDefault)),
+                                                  Constant.colorTxtDefault), fontSize: 13.5, height: 1.25),
                                           maxLines: 3,
+                                          
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.center,
                                         ),

@@ -46,6 +46,7 @@ dependencies:
   flutter_facebook_login:
   google_sign_in:
   flutter_share:
+  webview_flutter: ^1.0.7
   installed_apps: ^1.1.1
   social_share_plugin: ^0.3.1+1
 

@@ -72,9 +72,10 @@ class _HomeState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
             label: AppLocalizations.of(context).translate("bookstore"),
+            
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.fact_check_outlined),
             label: AppLocalizations.of(context).translate("tasks"),
           ),
           BottomNavigationBarItem(
@@ -87,6 +88,8 @@ class _HomeState extends State<HomeScreen> {
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         onTap: _onItemTapped,
+        selectedLabelStyle: TextStyle(fontSize: 11.0),
+        unselectedLabelStyle: TextStyle(fontSize: 10.0),
       ),
     );
   }

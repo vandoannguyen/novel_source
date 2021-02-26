@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:init_app/app_localizations.dart';
-import 'package:init_app/common/Common.dart';
+import 'package:init_app/common/common.dart';
 import 'package:init_app/routes/routes.dart';
 import 'package:init_app/screen/bookstore/bookstore_screen.dart';
 import 'package:init_app/screen/home/home_screen.dart';
@@ -14,12 +14,15 @@ import 'app_localizations.dart';
 
 void main() {
   CallNativeUtils.setChannel(Common.CHANNEL);
+
   return runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+//     Locale myLocale = Localizations.localeOf(context);
+// print("myLocale myLocale myLocale $myLocale");
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
@@ -29,13 +32,18 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-         Locale('vi', 'VN'),
-    Locale('en', 'US'),
+        Locale('en', 'US'),
+        Locale('vi', 'VN'),
+        Locale('id', 'ID'),
+        Locale('th', 'TH'),
       ],
       localeResolutionCallback: (locale, supportedLocales) {
         for (var supportedLocale in supportedLocales) {
           if (supportedLocale.languageCode == locale.languageCode &&
               supportedLocale.countryCode == locale.countryCode) {
+            Common.langNow = supportedLocale.languageCode;
+            print(
+                "myLocale myLocale myLocale ${supportedLocale.countryCode} ${supportedLocale.languageCode}");
             return supportedLocale;
           }
         }
@@ -76,6 +84,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -88,7 +97,7 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Text(
-           AppLocalizations.of(context).translate('coin balance'),
+            AppLocalizations.of(context).translate('coin balance'),
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 24.0,
