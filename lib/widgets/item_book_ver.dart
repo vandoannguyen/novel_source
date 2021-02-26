@@ -84,7 +84,7 @@ class _itemBookVerState extends State<itemBookVer> {
                     color: Colors.transparent,
                     child: Image.asset(
                         widget.isSelected ? ic_seleted : ic_unselect),
-                  ))
+                  ),)
               : Container()
         ],
       ),

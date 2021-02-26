@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/images.dart';
@@ -35,170 +36,177 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image:
-                          AssetImage(Common.pathImg + "bg_btn_checkined.jpg"),
-                      fit: BoxFit.cover,
+                GetBuilder<DetailComicBookController>(
+                  builder: (_) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: _.detail != null && _.detail.bpic != null
+                            ? NetworkImage(_.detail.bpic)
+                            : AssetImage(Common.pathImg + "bg_checkin.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                      shape: BoxShape.rectangle,
                     ),
-                    shape: BoxShape.rectangle,
-                  ),
-                  child: new BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                    child: Container(
-                      alignment: Alignment.center,
-                      color: Colors.white.withOpacity(0.2),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.fromLTRB(0.0, 35.0, 0.0, 0.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconButton(
+                    child: new BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      child: Container(
+                        alignment: Alignment.center,
+                        color: Colors.white.withOpacity(0.35),
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.fromLTRB(0.0, 35.0, 0.0, 0.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconButton(
+                                      icon: Icon(
+                                        Icons.arrow_back_ios_rounded,
+                                        color: Color(Constant.colorTxtDefault),
+                                      ),
+                                      onPressed: () {
+                                        controller.callBack("BACK", null);
+                                      }),
+                                  IconButton(
+                                    onPressed: () {
+                                      controller.callBack("SHARE", null);
+                                    },
                                     icon: Icon(
-                                      Icons.arrow_back_ios_rounded,
+                                      Icons.share_outlined,
                                       color: Color(Constant.colorTxtDefault),
                                     ),
-                                    onPressed: () {
-                                      controller.callBack("BACK", null);
-                                    }),
-                                IconButton(
-                                  onPressed: () {
-                                    controller.callBack("SHARE", null);
-                                  },
-                                  icon: Icon(
-                                    Icons.share_outlined,
-                                    color: Color(Constant.colorTxtDefault),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            padding:
-                                EdgeInsets.fromLTRB(20.0, 20.0, 10.0, 30.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color(Constant.colorTxtDefault)
-                                            .withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 2),
-                                      ),
-                                    ],
+                            Container(
+                              padding:
+                                  EdgeInsets.fromLTRB(20.0, 20.0, 10.0, 30.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color(Constant.colorTxtDefault)
+                                              .withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      child:
+                                        //   GetBuilder<DetailComicBookController>(
+                                        // builder: (_) =>
+                                            _.detail == null || _.isLoading
+                                                ? Image.asset(
+                                                    ic_loading,
+                                                    fit: BoxFit.cover,
+                                                    width: 80.0,
+                                                    height: 100.0,
+                                                  )
+                                                : FadeInImage.assetNetwork(
+                                                    placeholder: ic_loading,
+                                                    image: _.detail.bpic,
+                                                    fit: BoxFit.cover,
+                                                    width: 80.0,
+                                                    height: 100.0,
+                                                  ),
+                                      // ),
+                                    ),
                                   ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(5.0),
+                                  Expanded(
                                     child:
                                         GetBuilder<DetailComicBookController>(
-                                      builder: (_) =>
-                                          _.detail == null || _.isLoading
-                                              ? Image.asset(
-                                                  ic_loading,
-                                                  fit: BoxFit.cover,
-                                                  width: 80.0,
-                                                  height: 100.0,
-                                                )
-                                              : FadeInImage.assetNetwork(
-                                                  placeholder: ic_loading,
-                                                  image: _.detail.bpic,
-                                                  fit: BoxFit.cover,
-                                                  width: 80.0,
-                                                  height: 100.0,
+                                      builder: (_) => Container(
+                                        padding: EdgeInsets.only(left: 10.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                                _.detail != null && !_.isLoading
+                                                    ? _.detail.name
+                                                    : "",
+                                                style: TextStyle(
+                                                  fontSize: 16.0,
                                                 ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: GetBuilder<DetailComicBookController>(
-                                    builder: (_) => Container(
-                                      padding: EdgeInsets.only(left: 10.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Text(
-                                              _.detail != null && !_.isLoading
-                                                  ? _.detail.name
-                                                  : "",
-                                              style: TextStyle(
-                                                fontSize: 18.0,
+                                                maxLines: 1,
+                                                overflow:
+                                                    TextOverflow.ellipsis),
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 8.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    _.detail != null &&
+                                                            !_.isLoading
+                                                        ? _.detail.writerName
+                                                        : "",
+                                                    style: TextStyle(
+                                                        fontSize: 12.0),
+                                                  ),
+                                                  Container(
+                                                      margin:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 5.0),
+                                                      height: 10.0,
+                                                      width: 1.0,
+                                                      color: Colors.black),
+                                                  Text(
+                                                    "FULL",
+                                                    style: TextStyle(
+                                                        fontSize: 12.0),
+                                                  ),
+                                                ],
                                               ),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis),
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 5.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  _.detail != null &&
-                                                          !_.isLoading
-                                                      ? _.detail.writerName
-                                                      : "",
-                                                  style:
-                                                      TextStyle(fontSize: 13.0),
-                                                ),
-                                                Container(
-                                                    margin:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 5.0),
-                                                    height: 10.0,
-                                                    width: 1.0,
-                                                    color: Colors.black),
-                                                Text(
-                                                  "FULL",
-                                                  style:
-                                                      TextStyle(fontSize: 12.0),
-                                                ),
-                                              ],
                                             ),
-                                          ),
-                                          Text(
-                                            "Cập nhật tới ..",
-                                            style: TextStyle(
-                                              fontSize: 13.0,
-                                              color: Color(
-                                                  Constant.colorTxtSecond),
+                                            Text(
+                                              "Cập nhật tới ..",
+                                              style: TextStyle(
+                                                fontSize: 11.0,
+                                                color: Color(
+                                                    Constant.colorTxtSecond),
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            height: 5.0,
-                                          ),
-                                          RatingBarIndicator(
-                                            rating: 2.75,
-                                            itemBuilder: (context, index) =>
-                                                Icon(
-                                              Icons.star,
-                                              color: Color(Constant.colorStar),
+                                            SizedBox(
+                                              height: 5.0,
                                             ),
-                                            unratedColor: Colors.white,
-                                            itemCount: 5,
-                                            itemSize: 18.0,
-                                            direction: Axis.horizontal,
-                                          ),
-                                        ],
+                                            RatingBarIndicator(
+                                              rating: 2.75,
+                                              itemBuilder: (context, index) =>
+                                                  Icon(
+                                                Icons.star,
+                                                color:
+                                                    Color(Constant.colorStar),
+                                              ),
+                                              unratedColor: Colors.white,
+                                              itemCount: 5,
+                                              itemSize: 18.0,
+                                              direction: Axis.horizontal,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -222,7 +230,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                         padding: EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 0.0),
                         child: Text(
-                          "Reward",
+                          AppLocalizations.of(context).translate('reward'),
                           style: TextStyle(
                             color: Color(Constant.colorTxtSecond),
                           ),
@@ -291,7 +299,8 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                       Container(
                           height: 25.0,
                           child: ButtonMain(
-                              name: "reward",
+                              name: AppLocalizations.of(context)
+                                  .translate('reward'),
                               func: () {},
                               color: Color(Constant.colorTxtSecond))),
                     ],
@@ -338,7 +347,8 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Text(
-                                          "Xem thêm",
+                                          AppLocalizations.of(context)
+                                              .translate('read more'),
                                           style: TextStyle(
                                               color: Color(
                                                   Constant.colorTxtSecond)),
@@ -353,7 +363,8 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
                                         Text(
-                                          "Rút gọn",
+                                          AppLocalizations.of(context)
+                                              .translate('collapse'),
                                           style: TextStyle(
                                               color: Color(
                                                   Constant.colorTxtSecond)),
@@ -392,7 +403,8 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                           ),
                         ),
                         Text(
-                          "Mục lục",
+                          AppLocalizations.of(context)
+                              .translate('table content'),
                           style: TextStyle(),
                         ),
                         Expanded(child: Container()),
@@ -421,7 +433,8 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Mời bạn bè sẽ được tặng xu",
+                          AppLocalizations.of(context)
+                              .translate('Invite friends to receive coins'),
                           style: TextStyle(),
                         ),
                         Expanded(child: Container()),
@@ -445,7 +458,8 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Làm sao để nạp xu?",
+                          AppLocalizations.of(context)
+                              .translate("How to deposit coins?"),
                           style: TextStyle(),
                         ),
                         Expanded(child: Container()),
@@ -510,7 +524,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
 //                 ),
                 GetBuilder<DetailComicBookController>(
                     builder: (_) => _.hotest != null
-                        ? hotBook(_.hotest)
+                        ? hotBook(context, _.hotest)
                         : Container(
                             height: 180,
                             alignment: Alignment.center,
@@ -544,8 +558,8 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                                   .where((value) => value.id == _.detail.id)
                                   .toList()
                                   .isEmpty
-                          ? "Unfollow"
-                          : "Follow",
+                          ? AppLocalizations.of(context).translate("Unfollow")
+                          : AppLocalizations.of(context).translate("Follow"),
                       style: TextStyle(
                         color: Color(Constant.colorTxtSecond),
                       ),
@@ -571,7 +585,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                   //   ),
                   // ),
                   child: Text(
-                    "Read now",
+                    AppLocalizations.of(context).translate("read now"),
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -589,7 +603,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                   ),
                 ),
                 child: Text(
-                  "Reward",
+                  AppLocalizations.of(context).translate("reward"),
                   style: TextStyle(
                     color: Color(Constant.colorTxtSecond),
                   ),
@@ -602,14 +616,16 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
     ));
   }
 
-  Widget hotBook(hotest) {
+  Widget hotBook(context, hotest) {
     return Container(
       margin: EdgeInsets.only(top: 10),
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(padding: EdgeInsets.all(15.0), child: Text("HOTEST")),
+          Container(
+              padding: EdgeInsets.all(15.0),
+              child: Text(AppLocalizations.of(context).translate("hotest"))),
           Row(
             children: (hotest as List)
                 .map((e) => Expanded(

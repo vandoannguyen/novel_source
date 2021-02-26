@@ -43,7 +43,7 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
                   alignment: Alignment.center,
                   child: Text(
                     AppLocalizations.of(context).translate(name),
-                    style: TextStyle(fontSize: 20.0),
+                    style: TextStyle(fontSize: 18.0),
                   ),
                 ),
                 GestureDetector(
