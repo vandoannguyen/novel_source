@@ -47,6 +47,8 @@ dependencies:
   google_sign_in:
   flutter_share:
   webview_flutter: ^1.0.7
+  installed_apps: ^1.1.1
+  social_share_plugin: ^0.3.1+1
 
     
 dev_dependencies:
@@ -68,6 +70,7 @@ flutter:
    - android/app/src/main/res/mipmap-xxxhdpi/
    - assets/gif/
    - assets/lang/
+   - assets/html/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
@@ -12,7 +13,9 @@ import 'package:init_app/screen/login/login_screen.dart';
 import 'package:init_app/screen/table_content/table_content_screen.dart';
 import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_screen.dart';
 import 'package:init_app/utils/intent_animation.dart';
+import 'package:init_app/widgets/bottom_sheet_coin.dart';
 import 'package:init_app/widgets/dialog_loading.dart';
+import 'package:init_app/widgets/dialog_not_enough_coin.dart';
 
 class DetailComicBookController extends BaseController {
   bool textShowFlag = true;
@@ -140,5 +143,24 @@ class DetailComicBookController extends BaseController {
     } else {
       IntentAnimation.intentNomal(context: context, screen: LoginScreen());
     }
+  }
+
+  void showDialogReward() {
+    showModalBottomSheet(
+        context: context,
+        builder: (_) => dialogReward(context, callback: (value) {
+              // if (Common.coin > value) {
+              //   showDialogLoading(context);
+              //   RepositoryImpl.getInstance()
+              //       .donateForWrite(idBook: detail.id, coin: value)
+              //       .then((data) {
+              //     showMess("+$value coin", TypeMess.INFORMATION);
+              //     Navigator.pop(context);
+              //     Common.coin -= value;
+              //   }).catchError((err) {});
+              // } else {
+              showDialogNotEnough(context, (value) {});
+              // }
+            }));
   }
 }

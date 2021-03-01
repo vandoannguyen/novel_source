@@ -29,8 +29,11 @@ class OwnershipScreen extends BaseWidget<OwnershipController> {
             Container(
               padding: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 30.0),
               child: Text(
-                  AppLocalizations.of(context).translate('app') + " ${Common.appName} " + AppLocalizations.of(context).translate('ownership content'),
-                  style: TextStyle(height: 2),),
+                AppLocalizations.of(context).translate('app') +
+                    " ${Common.appName} " +
+                    AppLocalizations.of(context).translate('ownership content'),
+                style: TextStyle(height: 2),
+              ),
             ),
           ],
         ),

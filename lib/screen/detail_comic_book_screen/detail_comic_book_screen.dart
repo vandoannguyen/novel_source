@@ -8,7 +8,6 @@ import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/images.dart';
 import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_controller.dart';
-import 'package:init_app/widgets/button_main.dart';
 import 'package:init_app/widgets/item_book_ver.dart';
 
 import '../../common/constant.dart';
@@ -30,80 +29,85 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
     controller.getComments(idBook);
     controller.getHotest();
     return Scaffold(
-        body: Column(
-      children: [
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                GetBuilder<DetailComicBookController>(
-                  builder: (_) => Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: _.detail != null && _.detail.bpic != null
-                            ? NetworkImage(_.detail.bpic)
-                            : AssetImage(Common.pathImg + "bg_checkin.jpg"),
-                        fit: BoxFit.cover,
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  GetBuilder<DetailComicBookController>(
+                    builder: (_) => Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: _.detail != null && _.detail.bpic != null
+                              ? NetworkImage(_.detail.bpic)
+                              : AssetImage(Common.pathImg + "bg_checkin.jpg"),
+                          fit: BoxFit.cover,
+                        ),
+                        shape: BoxShape.rectangle,
                       ),
-                      shape: BoxShape.rectangle,
-                    ),
-                    child: new BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                      child: Container(
-                        alignment: Alignment.center,
-                        color: Colors.white.withOpacity(0.35),
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.fromLTRB(0.0, 35.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  IconButton(
+                      child: new BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                        child: Container(
+                          alignment: Alignment.center,
+                          color: Colors.white.withOpacity(0.35),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding:
+                                    EdgeInsets.fromLTRB(0.0, 35.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    IconButton(
+                                        icon: Icon(
+                                          Icons.arrow_back_ios_rounded,
+                                          color:
+                                              Color(Constant.colorTxtDefault),
+                                        ),
+                                        onPressed: () {
+                                          controller.callBack("BACK", null);
+                                        }),
+                                    IconButton(
+                                      onPressed: () {
+                                        controller.callBack("SHARE", null);
+                                      },
                                       icon: Icon(
-                                        Icons.arrow_back_ios_rounded,
+                                        Icons.share_outlined,
                                         color: Color(Constant.colorTxtDefault),
                                       ),
-                                      onPressed: () {
-                                        controller.callBack("BACK", null);
-                                      }),
-                                  IconButton(
-                                    onPressed: () {
-                                      controller.callBack("SHARE", null);
-                                    },
-                                    icon: Icon(
-                                      Icons.share_outlined,
-                                      color: Color(Constant.colorTxtDefault),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                            Container(
-                              padding:
-                                  EdgeInsets.fromLTRB(20.0, 20.0, 10.0, 30.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Color(Constant.colorTxtDefault)
-                                              .withOpacity(0.5),
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: Offset(0, 2),
-                                        ),
-                                      ],
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      child:
-                                        //   GetBuilder<DetailComicBookController>(
-                                        // builder: (_) =>
+                              Container(
+                                padding:
+                                    EdgeInsets.fromLTRB(20.0, 20.0, 10.0, 30.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Color(Constant.colorTxtDefault)
+                                                    .withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0),
+                                        child:
+                                            //   GetBuilder<DetailComicBookController>(
+                                            // builder: (_) =>
                                             _.detail == null || _.isLoading
                                                 ? Image.asset(
                                                     ic_loading,
@@ -118,359 +122,411 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                                                     width: 80.0,
                                                     height: 100.0,
                                                   ),
-                                      // ),
+                                        // ),
+                                      ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    child:
-                                        GetBuilder<DetailComicBookController>(
-                                      builder: (_) => Container(
-                                        padding: EdgeInsets.only(left: 10.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(
+                                    Expanded(
+                                      child:
+                                          GetBuilder<DetailComicBookController>(
+                                        builder: (_) => Container(
+                                          padding: EdgeInsets.only(left: 10.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Text(
+                                                  _.detail != null &&
+                                                          !_.isLoading
+                                                      ? _.detail.name
+                                                      : "",
+                                                  style: TextStyle(
+                                                    fontSize: 16.0,
+                                                  ),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 8.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      _.detail != null &&
+                                                              !_.isLoading
+                                                          ? _.detail.writerName
+                                                          : "",
+                                                      style: TextStyle(
+                                                          fontSize: 12.0),
+                                                    ),
+                                                    Container(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    5.0),
+                                                        height: 10.0,
+                                                        width: 1.0,
+                                                        color: Colors.black),
+                                                    Text(
+                                                      "FULL",
+                                                      style: TextStyle(
+                                                          fontSize: 12.0),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Text("Cập nhật tới ..",
+                                                  style: TextStyle(
+                                                    fontSize: 11.0,
+                                                    color: Color(Constant
+                                                        .colorTxtSecond),
+                                                  ),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis),
+                                              Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 5.0),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      _.detail != null &&
+                                                              !_.isLoading
+                                                          ? _.detail.writerName
+                                                          : "",
+                                                      style: TextStyle(
+                                                          fontSize: 13.0),
+                                                    ),
+                                                    Container(
+                                                        margin: EdgeInsets
+                                                            .symmetric(
+                                                                horizontal:
+                                                                    5.0),
+                                                        height: 10.0,
+                                                        width: 1.0,
+                                                        color: Colors.black),
+                                                    Text(
+                                                      _.detail != null &&
+                                                              !_.isLoading
+                                                          ? _.detail.updateStatus ==
+                                                                  1
+                                                              ? "Updating..."
+                                                              : "FULL"
+                                                          : "",
+                                                      style: TextStyle(
+                                                          fontSize: 12.0),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Text(
                                                 _.detail != null && !_.isLoading
-                                                    ? _.detail.name
+                                                    ? _.detail.updateStatus == 1
+                                                        ? "${AppLocalizations.of(context).translate("Update to ...")}${_.detail.updateSection}"
+                                                        : ""
                                                     : "",
                                                 style: TextStyle(
-                                                  fontSize: 16.0,
+                                                  fontSize: 13.0,
+                                                  color: Color(
+                                                      Constant.colorTxtSecond),
                                                 ),
-                                                maxLines: 1,
-                                                overflow:
-                                                    TextOverflow.ellipsis),
-                                            Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    _.detail != null &&
-                                                            !_.isLoading
-                                                        ? _.detail.writerName
-                                                        : "",
-                                                    style: TextStyle(
-                                                        fontSize: 12.0),
-                                                  ),
-                                                  Container(
-                                                      margin:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 5.0),
-                                                      height: 10.0,
-                                                      width: 1.0,
-                                                      color: Colors.black),
-                                                  Text(
-                                                    "FULL",
-                                                    style: TextStyle(
-                                                        fontSize: 12.0),
-                                                  ),
-                                                ],
                                               ),
-                                            ),
-                                            Text(
-                                              "Cập nhật tới ..",
-                                              style: TextStyle(
-                                                fontSize: 11.0,
-                                                color: Color(
-                                                    Constant.colorTxtSecond),
+                                              RatingBarIndicator(
+                                                rating: 2.75,
+                                                itemBuilder: (context, index) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  color:
+                                                      Color(Constant.colorStar),
+                                                ),
+                                                unratedColor: Colors.white,
+                                                itemCount: 5,
+                                                itemSize: 18.0,
+                                                direction: Axis.horizontal,
                                               ),
-                                            ),
-                                            SizedBox(
-                                              height: 5.0,
-                                            ),
-                                            RatingBarIndicator(
-                                              rating: 2.75,
-                                              itemBuilder: (context, index) =>
-                                                  Icon(
-                                                Icons.star,
-                                                color:
-                                                    Color(Constant.colorStar),
-                                              ),
-                                              unratedColor: Colors.white,
-                                              itemCount: 5,
-                                              itemSize: 18.0,
-                                              direction: Axis.horizontal,
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                //
-                Container(
-                  color: Colors.white,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: 0.5,
-                          color:
-                              Color(Constant.colorTxtDefault).withOpacity(0.5),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 0.0),
-                        child: Text(
-                          AppLocalizations.of(context).translate('reward'),
-                          style: TextStyle(
-                            color: Color(Constant.colorTxtSecond),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: 0.5,
-                          color:
-                              Color(Constant.colorTxtDefault).withOpacity(0.5),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 30.0,
-                  color: Colors.white,
-                  child: ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 15,
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(30.0),
-                            child: Image.asset(
-                              ic_loading,
-                              fit: BoxFit.cover,
-                              width: 30.0,
-                              height: 30.0,
-                            ),
-                            // child: Image.assest(
-                            //   "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
-                            //   fit: BoxFit.cover,
-                            //   width: 30.0,
-                            //   height: 30.0,
-                            // ),
-                          ),
-                        );
-                      }),
-                ),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.only(top: 15.0, bottom: 30.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Common.pathImg + "ic_coin.png",
-                        width: 18.0,
-                        height: 18.0,
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(right: 10.0),
-                        child: Text(
-                          "1234",
-                          style:
-                              TextStyle(color: Color(Constant.colorTxtSecond)),
-                        ),
-                      ),
-                      Container(
-                          height: 25.0,
-                          child: ButtonMain(
-                              name: AppLocalizations.of(context)
-                                  .translate('reward'),
-                              func: () {},
-                              color: Color(Constant.colorTxtSecond))),
-                    ],
-                  ),
-                ),
-                Container(
-                  color: Colors.white,
-                  width: double.infinity,
-                  padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 10.0),
-                  child: GetBuilder<DetailComicBookController>(
-                    builder: (_) => _.textShowFlag
-                        ? Text(
-                            _.detail != null && !_.isLoading
-                                ? _.detail.desc
-                                : "",
-                            style: TextStyle(fontSize: 14.0),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          )
-                        : Text(
-                            // xem full des
-                            _.detail != null && !_.isLoading
-                                ? _.detail.desc
-                                : "",
-                            style: TextStyle(fontSize: 14.0),
-                          ),
-                  ),
-                ),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 20.0),
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () {
-                      controller.clickShowMore(controller.textShowFlag);
-                    },
+                  //
+                  // Container(
+                  //   color: Colors.white,
+                  //   padding:
+                  //       EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+                  //   child: Row(
+                  //     children: [
+                  //       Expanded(
+                  //         flex: 1,
+                  //         child: Container(
+                  //           height: 0.5,
+                  //           color:
+                  //               Color(Constant.colorTxtDefault).withOpacity(0.5),
+                  //         ),
+                  //       ),
+                  //       Container(
+                  //         padding: EdgeInsets.symmetric(
+                  //             horizontal: 10.0, vertical: 0.0),
+                  //         child: Text(
+                  //           AppLocalizations.of(context).translate('reward'),
+                  //           style: TextStyle(
+                  //             color: Color(Constant.colorTxtSecond),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       Expanded(
+                  //         flex: 1,
+                  //         child: Container(
+                  //           height: 0.5,
+                  //           color:
+                  //               Color(Constant.colorTxtDefault).withOpacity(0.5),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // Container(
+                  //   height: 30.0,
+                  //   color: Colors.white,
+                  //   child: ListView.builder(
+                  //       physics: AlwaysScrollableScrollPhysics(),
+                  //       shrinkWrap: true,
+                  //       itemCount: 15,
+                  //       scrollDirection: Axis.horizontal,
+                  //       padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  //       itemBuilder: (BuildContext context, int index) {
+                  //         return Container(
+                  //           margin: EdgeInsets.symmetric(horizontal: 5.0),
+                  //           child: ClipRRect(
+                  //             borderRadius: BorderRadius.circular(30.0),
+                  //             child: Image.asset(
+                  //               ic_loading,
+                  //               fit: BoxFit.cover,
+                  //               width: 30.0,
+                  //               height: 30.0,
+                  //             ),
+                  //             // child: Image.assest(
+                  //             //   "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+                  //             //   fit: BoxFit.cover,
+                  //             //   width: 30.0,
+                  //             //   height: 30.0,
+                  //             // ),
+                  //           ),
+                  //         );
+                  //       }),
+                  // ),
+                  // Container(
+                  //   color: Colors.white,
+                  //   padding: EdgeInsets.only(top: 15.0, bottom: 30.0),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Image.asset(
+                  //         Common.pathImg + "ic_coin.png",
+                  //         width: 18.0,
+                  //         height: 18.0,
+                  //       ),
+                  //       Container(
+                  //         padding: EdgeInsets.only(right: 10.0),
+                  //         child: Text(
+                  //           "1234",
+                  //           style:
+                  //               TextStyle(color: Color(Constant.colorTxtSecond)),
+                  //         ),
+                  //       ),
+                  //       Container(
+                  //           height: 25.0,
+                  //           child: ButtonMain(
+                  //               name: AppLocalizations.of(context)
+                  //                   .translate('reward'),
+                  //               func: () {},
+                  //               color: Color(Constant.colorTxtSecond))),
+                  //     ],
+                  //   ),
+                  // ),
+                  Container(
+                    color: Colors.white,
+                    width: double.infinity,
+                    padding: EdgeInsets.fromLTRB(15.0, 0, 15.0, 10.0),
                     child: GetBuilder<DetailComicBookController>(
-                        builder: (_) => Container(
-                              padding: EdgeInsets.all(10),
-                              color: Colors.transparent,
-                              child: _.textShowFlag
-                                  ? Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          AppLocalizations.of(context)
-                                              .translate('read more'),
-                                          style: TextStyle(
-                                              color: Color(
-                                                  Constant.colorTxtSecond)),
-                                        ),
-                                        Icon(Icons.keyboard_arrow_down_rounded,
-                                            color:
-                                                Color(Constant.colorTxtSecond))
-                                      ],
-                                    )
-                                  : Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          AppLocalizations.of(context)
-                                              .translate('collapse'),
-                                          style: TextStyle(
-                                              color: Color(
-                                                  Constant.colorTxtSecond)),
-                                        ),
-                                        Icon(Icons.keyboard_arrow_up_rounded,
-                                            color:
-                                                Color(Constant.colorTxtSecond))
-                                      ],
-                                    ),
-                            )),
+                      builder: (_) => _.textShowFlag
+                          ? Text(
+                              _.detail != null && !_.isLoading
+                                  ? _.detail.desc
+                                  : "",
+                              style: TextStyle(fontSize: 14.0),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          : Text(
+                              // xem full des
+                              _.detail != null && !_.isLoading
+                                  ? _.detail.desc
+                                  : "",
+                              style: TextStyle(fontSize: 14.0),
+                            ),
+                    ),
                   ),
-                ),
-                //
-                Container(
-                  height: 0.5,
-                  color: Color(Constant.colorTxtDefault).withOpacity(0.3),
-                ),
+                  Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 20.0),
+                    alignment: Alignment.centerRight,
+                    child: InkWell(
+                      onTap: () {
+                        controller.clickShowMore(controller.textShowFlag);
+                      },
+                      child: GetBuilder<DetailComicBookController>(
+                          builder: (_) => Container(
+                                padding: EdgeInsets.all(10),
+                                color: Colors.transparent,
+                                child: _.textShowFlag
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            AppLocalizations.of(context)
+                                                .translate('read more'),
+                                            style: TextStyle(
+                                                color: Color(
+                                                    Constant.colorTxtSecond)),
+                                          ),
+                                          Icon(
+                                              Icons.keyboard_arrow_down_rounded,
+                                              color: Color(
+                                                  Constant.colorTxtSecond))
+                                        ],
+                                      )
+                                    : Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            AppLocalizations.of(context)
+                                                .translate('collapse'),
+                                            style: TextStyle(
+                                                color: Color(
+                                                    Constant.colorTxtSecond)),
+                                          ),
+                                          Icon(Icons.keyboard_arrow_up_rounded,
+                                              color: Color(
+                                                  Constant.colorTxtSecond))
+                                        ],
+                                      ),
+                              )),
+                    ),
+                  ),
+                  //
+                  Container(
+                    height: 0.5,
+                    color: Color(Constant.colorTxtDefault).withOpacity(0.3),
+                  ),
 
-                //TABLE_CONTENT
-                GestureDetector(
-                  onTap: () {
-                    controller.callBack("TABLE_CONTENT", idBook);
-                  },
-                  child: Container(
-                    color: Colors.white,
-                    padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 5.0),
-                          child: Image.asset(
-                            Common.pathImg + "ic_edit.png",
-                            width: 20.0,
-                            fit: BoxFit.contain,
+                  //TABLE_CONTENT
+                  GestureDetector(
+                    onTap: () {
+                      controller.callBack("TABLE_CONTENT", idBook);
+                    },
+                    child: Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 5.0),
+                            child: Image.asset(
+                              Common.pathImg + "ic_edit.png",
+                              width: 20.0,
+                              fit: BoxFit.contain,
+                            ),
                           ),
-                        ),
-                        Text(
-                          AppLocalizations.of(context)
-                              .translate('table content'),
-                          style: TextStyle(),
-                        ),
-                        Expanded(child: Container()),
-                        Text(
-                          "FULL",
-                          style:
-                              TextStyle(color: Color(Constant.colorTxtSecond)),
-                        ),
-                        Icon(
-                          Icons.navigate_next_rounded,
-                          color: Color(Constant.colorTxtDefault),
-                        ),
-                      ],
+                          Text(
+                            AppLocalizations.of(context)
+                                .translate('table content'),
+                            style: TextStyle(),
+                          ),
+                          Expanded(child: Container()),
+                          Text(
+                            "FULL",
+                            style: TextStyle(
+                                color: Color(Constant.colorTxtSecond)),
+                          ),
+                          Icon(
+                            Icons.navigate_next_rounded,
+                            color: Color(Constant.colorTxtDefault),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                //INVITE
-                GestureDetector(
-                  onTap: () {
-                    controller.callBack("INVITE", null);
-                  },
-                  child: Container(
-                    color: Colors.white,
-                    padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)
-                              .translate('Invite friends to receive coins'),
-                          style: TextStyle(),
-                        ),
-                        Expanded(child: Container()),
-                        Icon(
-                          Icons.navigate_next_rounded,
-                          color: Color(Constant.colorTxtDefault),
-                        ),
-                      ],
+                  //INVITE
+                  GestureDetector(
+                    onTap: () {
+                      controller.callBack("INVITE", null);
+                    },
+                    child: Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)
+                                .translate('Invite friends to receive coins'),
+                            style: TextStyle(),
+                          ),
+                          Expanded(child: Container()),
+                          Icon(
+                            Icons.navigate_next_rounded,
+                            color: Color(Constant.colorTxtDefault),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                //  HOW_ADD_COIN
-                GestureDetector(
-                  onTap: () {
-                    controller.callBack("HOW_ADD_COIN", null);
-                  },
-                  child: Container(
-                    color: Colors.white,
-                    padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)
-                              .translate("How to deposit coins?"),
-                          style: TextStyle(),
-                        ),
-                        Expanded(child: Container()),
-                        Icon(
-                          Icons.navigate_next_rounded,
-                          color: Color(Constant.colorTxtDefault),
-                        ),
-                      ],
+                  //  HOW_ADD_COIN
+                  GestureDetector(
+                    onTap: () {
+                      controller.callBack("HOW_ADD_COIN", null);
+                    },
+                    child: Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)
+                                .translate("How to deposit coins?"),
+                            style: TextStyle(),
+                          ),
+                          Expanded(child: Container()),
+                          Icon(
+                            Icons.navigate_next_rounded,
+                            color: Color(Constant.colorTxtDefault),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
 //COMMENT
 //                 Container(
 //                   color: Colors.white,
@@ -522,44 +578,92 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
 //                     ),
 //                   ),
 //                 ),
-                GetBuilder<DetailComicBookController>(
-                    builder: (_) => _.hotest != null
-                        ? hotBook(context, _.hotest)
-                        : Container(
-                            height: 180,
-                            alignment: Alignment.center,
-                            child: CircularProgressIndicator(),
-                          )),
-              ],
+                  GetBuilder<DetailComicBookController>(
+                      builder: (_) => _.hotest != null
+                          ? hotBook(context, _.hotest)
+                          : Container(
+                              height: 180,
+                              alignment: Alignment.center,
+                              child: CircularProgressIndicator(),
+                            )),
+                ],
+              ),
             ),
           ),
-        ),
-        Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: GestureDetector(
-                onTap: () {
-                  controller.postFollow(idBook);
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 40.0,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Color(Constant.colorTxtDefault).withOpacity(0.5),
-                      width: 0.3,
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    controller.postFollow(idBook);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 40.0,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+                        width: 0.3,
+                      ),
+                    ),
+                    child: GetBuilder<DetailComicBookController>(
+                      builder: (_) => Text(
+                        _.detail != null &&
+                                !Common.myBooks
+                                    .where((value) => value.id == _.detail.id)
+                                    .toList()
+                                    .isEmpty
+                            ? AppLocalizations.of(context).translate("Unfollow")
+                            : AppLocalizations.of(context).translate("Follow"),
+                        style: TextStyle(
+                          color: Color(Constant.colorTxtSecond),
+                        ),
+                      ),
                     ),
                   ),
-                  child: GetBuilder<DetailComicBookController>(
-                    builder: (_) => Text(
-                      _.detail != null &&
-                              !Common.myBooks
-                                  .where((value) => value.id == _.detail.id)
-                                  .toList()
-                                  .isEmpty
-                          ? AppLocalizations.of(context).translate("Unfollow")
-                          : AppLocalizations.of(context).translate("Follow"),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    controller.callBack("TABLE_CONTENT", idBook);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 40.0,
+                    // decoration: BoxDecoration(
+                    color: Color(Constant.colorTxtSecond),
+                    //   border: Border.all(
+                    //     color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+                    //     width: 0.3,
+                    //   ),
+                    // ),
+                    child: Text(
+                      AppLocalizations.of(context).translate("read now"),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  onTap: () {
+                    controller.showDialogReward();
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 40.0,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+                        width: 0.3,
+                      ),
+                    ),
+                    child: Text(
+                      AppLocalizations.of(context).translate("reward"),
                       style: TextStyle(
                         color: Color(Constant.colorTxtSecond),
                       ),
@@ -567,53 +671,11 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: GestureDetector(
-                onTap: () {
-                  controller.callBack("TABLE_CONTENT", idBook);
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 40.0,
-                  // decoration: BoxDecoration(
-                  color: Color(Constant.colorTxtSecond),
-                  //   border: Border.all(
-                  //     color: Color(Constant.colorTxtDefault).withOpacity(0.5),
-                  //     width: 0.3,
-                  //   ),
-                  // ),
-                  child: Text(
-                    AppLocalizations.of(context).translate("read now"),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                alignment: Alignment.center,
-                height: 40.0,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color(Constant.colorTxtDefault).withOpacity(0.5),
-                    width: 0.3,
-                  ),
-                ),
-                child: Text(
-                  AppLocalizations.of(context).translate("reward"),
-                  style: TextStyle(
-                    color: Color(Constant.colorTxtSecond),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        )
-      ],
-    ));
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   Widget hotBook(context, hotest) {

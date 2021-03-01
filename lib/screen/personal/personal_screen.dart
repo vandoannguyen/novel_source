@@ -9,9 +9,11 @@ import '../../common/constant.dart';
 
 // ignore: must_be_immutable
 class PersonalScreen extends BaseWidget<PersonalController> {
+  PersonalScreen({this.callBack});
+  final Function callBack;
   static const String routeName = '/personal';
   static const String name = 'personal';
-
+  
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: PersonalController());
@@ -146,7 +148,8 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                   Container(
                     height: 30.0,
                     child: ButtonMain(
-                        name: AppLocalizations.of(context).translate("deposit coin"),
+                        name: AppLocalizations.of(context)
+                            .translate("deposit coin"),
                         func: () {
                           controller.goBuyCoin();
                           // controller.click("BUY_COIN");
@@ -185,7 +188,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                 name: "frequently question",
                 icon: "ic_question.png",
                 func: () {
-                  controller.click("QUESTION");
+                  controller.goFrequentlyQuestion(callBack("GOTO_TAB", 2));
                 }),
             item(
                 context: context,
@@ -233,9 +236,10 @@ class PersonalScreen extends BaseWidget<PersonalController> {
               ),
             ),
             Expanded(
-                child: Text(
-              AppLocalizations.of(context).translate(name),
-            ),),
+              child: Text(
+                AppLocalizations.of(context).translate(name),
+              ),
+            ),
             Container(
               margin: EdgeInsets.all(5.0),
               child: Icon(

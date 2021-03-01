@@ -154,6 +154,7 @@ class TaskController extends BaseController {
           } else {
             // print("Commondys${Common.days}");
             setCheckIn(Common.days);
+
             //   switch (Common.days) {
             //     case 0:
             //       RepositoryImpl.getInstance().setCheckin("1");
@@ -253,15 +254,6 @@ class TaskController extends BaseController {
         setCheckIn(1);
       }
     });
-
-    // if (date == checkValue) {
-    //   _dialog(context);
-    // }
-    // else{
-    //   isCheckdInScreen = true;
-    //   update(); // use update() to update counter variable on UI when increment be called
-    //
-    // }
   }
 
   void _dialog(BuildContext context) {
@@ -270,9 +262,9 @@ class TaskController extends BaseController {
         builder: (BuildContext context) {
           return CustomDialogBox(
             title: "Messenger",
-            descriptions:
-                "Bạn đã đăng nhập hôm nay rồi. Quay trở lại vào ngày mai nhé!!!",
+            descriptions: "Bạn đã đăng nhập hôm nay rồi. Quay trở lại vào ngày mai nhé!!!",
             text: "OK",
+            img: Image.asset(Common.pathImg + "icon.png"),
           );
           // return AlertDialog(
           //   shape: RoundedRectangleBorder(
@@ -334,12 +326,7 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
@@ -352,12 +339,7 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
@@ -370,12 +352,7 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
@@ -388,12 +365,7 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
@@ -406,12 +378,7 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
@@ -424,12 +391,7 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
@@ -442,12 +404,7 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": true},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
@@ -460,12 +417,7 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": true},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": true
-                },
+                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": true},
               ];
               break;
             }
@@ -576,7 +528,7 @@ class TaskController extends BaseController {
   void setCheckIn(int days) async {
     Common.days = days;
     await RepositoryImpl.getInstance().setCheckin("${Common.days}");
-    Common.coin_checkin += 20;
+    Common.coin_checkin += getCoin(Common.days);
     await RepositoryImpl.getInstance().setDatetime(date);
     Fluttertoast.showToast(
         msg: "You have +${getCoin(Common.days)} coin",

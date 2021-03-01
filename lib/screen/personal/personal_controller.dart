@@ -33,7 +33,11 @@ class PersonalController extends BaseController {
         Get.to(BuyCoinScreen());
         break;
       case "DETAIL_TRANSACTION":
-        Get.to(DetailTransactionScreen());
+        if (Common.isLogedIn) {
+          Get.to(DetailTransactionScreen());
+        } else {
+          goLogin();
+        }
         break;
       case "SUPPORT":
         _launchInBrowser(Common.fanpageLink);
@@ -42,7 +46,6 @@ class PersonalController extends BaseController {
         Get.to(ComeAuthorScreen());
         break;
       case "QUESTION":
-        Get.to(FrequentlyQuestionScreen());
         break;
       case "FEEDBACK":
         Get.to(FeedbackScreen());
@@ -52,6 +55,14 @@ class PersonalController extends BaseController {
         break;
 
       default:
+    }
+  }
+
+  void goFrequentlyQuestion(callBack) async {
+    var data = await Get.to(FrequentlyQuestionScreen());
+    print("======================== ${data}");
+    if (data == 1) {
+      callBack;
     }
   }
 

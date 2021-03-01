@@ -10,9 +10,7 @@ class PilihbadWidget extends StatefulWidget {
 
 class _PilihbadWidgetState extends State<PilihbadWidget> {
   bool isLock = false;
-  void _onClickItem(int index){
-
-  }
+  void _onClickItem(int index) {}
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,31 +42,41 @@ class _PilihbadWidgetState extends State<PilihbadWidget> {
                 scrollDirection: Axis.vertical,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  childAspectRatio: MediaQuery.of(context).size.width /
-                      (MediaQuery.of(context).size.height / 2.5),
+                  childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 2.5),
                 ),
                 itemCount: 70,
                 itemBuilder: (BuildContext context, int index) {
                   int ind = index + 1;
                   return GestureDetector(
-                    onTap: (){
-                      index > 12 ? Fluttertoast.showToast(msg: "Warning...Chap Lock!", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIosWeb: 1,backgroundColor: Colors.grey[400], textColor: Colors.white,fontSize: 15.0)
-                          : Fluttertoast.showToast(msg: "Chap unlock!", toastLength: Toast.LENGTH_SHORT, gravity: ToastGravity.CENTER, timeInSecForIosWeb: 1,backgroundColor: Colors.grey[400], textColor: Colors.white,fontSize: 15.0);
+                    onTap: () {
+                      index > 12
+                          ? Fluttertoast.showToast(
+                              msg: "Warning...Chap Lock!",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.grey[400],
+                              textColor: Colors.white,
+                              fontSize: 15.0)
+                          : Fluttertoast.showToast(
+                              msg: "Chap unlock!",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.grey[400],
+                              textColor: Colors.white,
+                              fontSize: 15.0);
                     },
                     child: Stack(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(
-                              left: 10, right: 10, top: 5, bottom: 5),
+                          margin: EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(6),
-                              boxShadow: [
-                                BoxShadow(color: Colors.grey, spreadRadius: 1)
-                              ]),
+                              boxShadow: [BoxShadow(color: Colors.grey, spreadRadius: 1)]),
                           child: Center(
-                            child: Text("Chap $ind",
-                                textAlign: TextAlign.center),
+                            child: Text("Chap $ind", textAlign: TextAlign.center),
                           ),
                         ),
                         index > 12

@@ -87,6 +87,7 @@ class BuyCoinController extends BaseController {
         "SUCCESS",
         style: TextStyle(color: Colors.green, fontSize: 18.0),
       ),
+      snackPosition: SnackPosition.BOTTOM
     );
   }
 
