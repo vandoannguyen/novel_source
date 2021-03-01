@@ -8,7 +8,6 @@ import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/images.dart';
 import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_controller.dart';
-import 'package:init_app/widgets/button_main.dart';
 import 'package:init_app/widgets/item_book_ver.dart';
 
 import '../../common/constant.dart';
@@ -161,7 +160,13 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                                                     width: 1.0,
                                                     color: Colors.black),
                                                 Text(
-                                                  "FULL",
+                                                  _.detail != null &&
+                                                          !_.isLoading
+                                                      ? _.detail.updateStatus ==
+                                                              1
+                                                          ? "Updating..."
+                                                          : "FULL"
+                                                      : "",
                                                   style:
                                                       TextStyle(fontSize: 12.0),
                                                 ),
@@ -169,7 +174,11 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                                             ),
                                           ),
                                           Text(
-                                            "Cập nhật tới ..",
+                                            _.detail != null && !_.isLoading
+                                                ? _.detail.updateStatus == 1
+                                                    ? "${AppLocalizations.of(context).translate("Update to ...")}${_.detail.updateSection}"
+                                                    : ""
+                                                : "",
                                             style: TextStyle(
                                               fontSize: 13.0,
                                               color: Color(
@@ -205,98 +214,101 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                   ),
                 ),
                 //
-                Container(
-                  color: Colors.white,
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: 0.5,
-                          color:
-                              Color(Constant.colorTxtDefault).withOpacity(0.5),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 0.0),
-                        child: Text(
-                          AppLocalizations.of(context).translate('reward'),
-                          style: TextStyle(
-                            color: Color(Constant.colorTxtSecond),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: 0.5,
-                          color:
-                              Color(Constant.colorTxtDefault).withOpacity(0.5),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 30.0,
-                  color: Colors.white,
-                  child: ListView.builder(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: 15,
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(30.0),
-                            child: Image.asset(
-                              ic_loading,
-                              fit: BoxFit.cover,
-                              width: 30.0,
-                              height: 30.0,
-                            ),
-                            // child: Image.assest(
-                            //   "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
-                            //   fit: BoxFit.cover,
-                            //   width: 30.0,
-                            //   height: 30.0,
-                            // ),
-                          ),
-                        );
-                      }),
-                ),
-                Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.only(top: 15.0, bottom: 30.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Common.pathImg + "ic_coin.png",
-                        width: 18.0,
-                        height: 18.0,
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(right: 10.0),
-                        child: Text(
-                          "1234",
-                          style:
-                              TextStyle(color: Color(Constant.colorTxtSecond)),
-                        ),
-                      ),
-                      Container(
-                          height: 25.0,
-                          child: ButtonMain(
-                              name: "reward",
-                              func: () {},
-                              color: Color(Constant.colorTxtSecond))),
-                    ],
-                  ),
+                // Container(
+                //   color: Colors.white,
+                //   padding:
+                //       EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+                //   child: Row(
+                //     children: [
+                //       Expanded(
+                //         flex: 1,
+                //         child: Container(
+                //           height: 0.5,
+                //           color:
+                //               Color(Constant.colorTxtDefault).withOpacity(0.5),
+                //         ),
+                //       ),
+                //       Container(
+                //         padding: EdgeInsets.symmetric(
+                //             horizontal: 10.0, vertical: 0.0),
+                //         child: Text(
+                //           AppLocalizations.of(context).translate('reward'),
+                //           style: TextStyle(
+                //             color: Color(Constant.colorTxtSecond),
+                //           ),
+                //         ),
+                //       ),
+                //       Expanded(
+                //         flex: 1,
+                //         child: Container(
+                //           height: 0.5,
+                //           color:
+                //               Color(Constant.colorTxtDefault).withOpacity(0.5),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // Container(
+                //   height: 30.0,
+                //   color: Colors.white,
+                //   child: ListView.builder(
+                //       physics: AlwaysScrollableScrollPhysics(),
+                //       shrinkWrap: true,
+                //       itemCount: 15,
+                //       scrollDirection: Axis.horizontal,
+                //       padding: EdgeInsets.symmetric(horizontal: 10.0),
+                //       itemBuilder: (BuildContext context, int index) {
+                //         return Container(
+                //           margin: EdgeInsets.symmetric(horizontal: 5.0),
+                //           child: ClipRRect(
+                //             borderRadius: BorderRadius.circular(30.0),
+                //             child: Image.asset(
+                //               ic_loading,
+                //               fit: BoxFit.cover,
+                //               width: 30.0,
+                //               height: 30.0,
+                //             ),
+                //             // child: Image.assest(
+                //             //   "https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg",
+                //             //   fit: BoxFit.cover,
+                //             //   width: 30.0,
+                //             //   height: 30.0,
+                //             // ),
+                //           ),
+                //         );
+                //       }),
+                // ),
+                // Container(
+                //   color: Colors.white,
+                //   padding: EdgeInsets.only(top: 15.0, bottom: 30.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: [
+                //       Image.asset(
+                //         Common.pathImg + "ic_coin.png",
+                //         width: 18.0,
+                //         height: 18.0,
+                //       ),
+                //       Container(
+                //         padding: EdgeInsets.only(right: 10.0),
+                //         child: Text(
+                //           "1234",
+                //           style:
+                //               TextStyle(color: Color(Constant.colorTxtSecond)),
+                //         ),
+                //       ),
+                //       Container(
+                //           height: 25.0,
+                //           child: ButtonMain(
+                //               name: "reward",
+                //               func: () {},
+                //               color: Color(Constant.colorTxtSecond))),
+                //     ],
+                //   ),
+                // ),
+                SizedBox(
+                  height: 20,
                 ),
                 Container(
                   color: Colors.white,
@@ -580,19 +592,24 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
             ),
             Expanded(
               flex: 1,
-              child: Container(
-                alignment: Alignment.center,
-                height: 40.0,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color(Constant.colorTxtDefault).withOpacity(0.5),
-                    width: 0.3,
+              child: GestureDetector(
+                onTap: () {
+                  controller.showDialogReward();
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 40.0,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+                      width: 0.3,
+                    ),
                   ),
-                ),
-                child: Text(
-                  "Reward",
-                  style: TextStyle(
-                    color: Color(Constant.colorTxtSecond),
+                  child: Text(
+                    "Reward",
+                    style: TextStyle(
+                      color: Color(Constant.colorTxtSecond),
+                    ),
                   ),
                 ),
               ),

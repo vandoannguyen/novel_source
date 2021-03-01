@@ -20,7 +20,6 @@ class SearchScreen extends BaseWidget<SearchController> {
       {'name': 'Michael', 'tel': '9011'},
       {'name': 'Jane', 'tel': '9013'},
     ];
-    print("builllldddddddddd");
     ValueNotifier<List<Map>> filtered = ValueNotifier<List<Map>>([]);
     bool searching = false;
     controller.getNewest();
@@ -58,7 +57,9 @@ class SearchScreen extends BaseWidget<SearchController> {
                       borderRadius: BorderRadius.all(Radius.circular(50.0)),
                     ),
                     child: Center(
-                      child: MyBottomSheet(textcontroller: controller.textcontroller,),
+                      child: MyBottomSheet(
+                        textcontroller: controller.textcontroller,
+                      ),
                       // child: TextField(
                       //   // onTap: () {
                       //   //   controller.isFocus = true;
@@ -139,9 +140,13 @@ class SearchScreen extends BaseWidget<SearchController> {
                       builder: (context, value, _) {
                         return Container(
                           child: ListView.builder(
-                              itemCount: controller.isFocus ? filtered.value.length : users.length,
+                              itemCount: controller.isFocus
+                                  ? filtered.value.length
+                                  : users.length,
                               itemBuilder: (context, index) {
-                                final item = controller.isFocus ? filtered.value[index] : users[index];
+                                final item = controller.isFocus
+                                    ? filtered.value[index]
+                                    : users[index];
                                 return ListTile(
                                   leading: Image.asset(
                                     Common.pathImg + "bg_btn_checkined.jpg",
@@ -159,10 +164,12 @@ class SearchScreen extends BaseWidget<SearchController> {
                       child: Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                            margin:
+                                EdgeInsets.only(top: 10, left: 10, right: 10),
                             child: Row(
                               children: [
-                                Image.asset(Common.pathImg + "promotional.png", height: 20.0, width: 20.0),
+                                Image.asset(Common.pathImg + "promotional.png",
+                                    height: 20.0, width: 20.0),
                                 Container(
                                   margin: EdgeInsets.only(left: 5.0),
                                   child: Text(
@@ -183,20 +190,34 @@ class SearchScreen extends BaseWidget<SearchController> {
                                 : Container(
                                     height: 120,
                                     child: GridView.builder(
-                                        physics: AlwaysScrollableScrollPhysics(),
+                                        physics:
+                                            AlwaysScrollableScrollPhysics(),
                                         shrinkWrap: true,
                                         scrollDirection: Axis.vertical,
-                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          childAspectRatio: MediaQuery.of(context).size.width / (MediaQuery.of(context).size.height / 8),
+                                          childAspectRatio:
+                                              MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  (MediaQuery.of(context)
+                                                          .size
+                                                          .height /
+                                                      8),
                                         ),
                                         itemCount: 4,
-                                        itemBuilder: (BuildContext context, int index) {
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
                                           int ind = index + 1;
                                           return GestureDetector(
                                             onTap: () {
                                               //clickItem(index, item)
-                                              Navigator.push(context, MaterialPageRoute(builder: (context) => DetailComicBook()));
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DetailComicBook()));
                                             },
                                             child: Container(
                                               margin: EdgeInsets.only(left: 10),
@@ -207,17 +228,26 @@ class SearchScreen extends BaseWidget<SearchController> {
                                                     width: 20,
                                                     color: Colors.red,
                                                     child: Center(
-                                                      child: Text("$ind", style: TextStyle(color: Colors.white)),
+                                                      child: Text("$ind",
+                                                          style: TextStyle(
+                                                              color: Colors
+                                                                  .white)),
                                                     ),
                                                   ),
                                                   Container(
-                                                    margin: EdgeInsets.only(left: 5.0),
+                                                    margin: EdgeInsets.only(
+                                                        left: 5.0),
                                                     child: Center(
                                                       child: Text(
                                                         "${_.listNewest[index].name}",
-                                                        overflow: TextOverflow.ellipsis,
-                                                        textAlign: TextAlign.center,
-                                                        style: TextStyle(color: Colors.grey[800], fontSize: 11.0),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .grey[800],
+                                                            fontSize: 11.0),
                                                       ),
                                                     ),
                                                   ),
@@ -232,7 +262,8 @@ class SearchScreen extends BaseWidget<SearchController> {
                             margin: EdgeInsets.only(left: 10),
                             child: Row(
                               children: [
-                                Image.asset(Common.pathImg + "like.png", height: 20.0, width: 20.0),
+                                Image.asset(Common.pathImg + "like.png",
+                                    height: 20.0, width: 20.0),
                                 Container(
                                   margin: EdgeInsets.only(left: 5.0),
                                   child: Text(
@@ -247,12 +278,16 @@ class SearchScreen extends BaseWidget<SearchController> {
                             child: GetBuilder<SearchController>(
                               builder: (_) {
                                 return _.listHotest == null
-                                    ? Container(height: 180, alignment: Alignment.center, child: CircularProgressIndicator())
+                                    ? Container(
+                                        height: 180,
+                                        alignment: Alignment.center,
+                                        child: CircularProgressIndicator())
                                     : GridView.builder(
                                         // physics: AlwaysScrollableScrollPhysics(),
                                         shrinkWrap: true,
                                         scrollDirection: Axis.vertical,
-                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 3,
                                           mainAxisSpacing: 10,
                                           childAspectRatio: 0.75,
@@ -260,16 +295,19 @@ class SearchScreen extends BaseWidget<SearchController> {
                                           //     (MediaQuery.of(context).size.height),
                                         ),
                                         itemCount: 6,
-                                        itemBuilder: (BuildContext context, int index) {
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
                                           int ind = index + 1;
                                           return GestureDetector(
                                             onTap: () {
                                               //clickItem(index, item)
                                             },
                                             child: Container(
-                                              margin: EdgeInsets.only(left: 10, right: 10),
+                                              margin: EdgeInsets.only(
+                                                  left: 10, right: 10),
                                               child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Image.network(
                                                     "${_.listHotest[index].bpic}",
@@ -279,13 +317,19 @@ class SearchScreen extends BaseWidget<SearchController> {
                                                   //   Common.pathImg + "bg_checkin.jpg",
                                                   // ),
                                                   Container(
-                                                    margin: EdgeInsets.only(top: 5.0),
+                                                    margin: EdgeInsets.only(
+                                                        top: 5.0),
                                                     child: Center(
                                                       child: Text(
                                                         "${_.listHotest[index].name}",
-                                                        overflow: TextOverflow.ellipsis,
-                                                        textAlign: TextAlign.center,
-                                                        style: TextStyle(color: Colors.grey[800], fontSize: 13.0),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .grey[800],
+                                                            fontSize: 13.0),
                                                       ),
                                                     ),
                                                   ),
@@ -307,6 +351,7 @@ class SearchScreen extends BaseWidget<SearchController> {
     );
   }
 }
+
 class MyBottomSheet extends StatefulWidget {
   final TextEditingController textcontroller;
   const MyBottomSheet({Key key, this.textcontroller}) : super(key: key);
@@ -316,7 +361,6 @@ class MyBottomSheet extends StatefulWidget {
 }
 
 class _MyBottomSheetState extends State<MyBottomSheet> {
-
   @override
   Widget build(BuildContext context) {
     return Container(

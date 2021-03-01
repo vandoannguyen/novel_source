@@ -21,9 +21,9 @@ class SearchController extends BaseController {
   var limitPerpage = 9;
 
   void onClickSearch() {
-    textcontroller.clear();
-    FocusScope.of(context).requestFocus(new FocusNode());
-    isFocus = false;
+    // textcontroller.clear();
+    // FocusScope.of(context).requestFocus(new FocusNode());
+    isFocus = !isFocus;
     update();
   }
 

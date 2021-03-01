@@ -15,7 +15,7 @@ class BookstoreScreen extends StatefulWidget {
 }
 
 class _BookstoreState extends State<BookstoreScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _controller;
 
   @override
@@ -46,7 +46,8 @@ class _BookstoreState extends State<BookstoreScreen>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    AppLocalizations.of(context).translate("search for books or authors"),
+                    AppLocalizations.of(context)
+                        .translate("search for books or authors"),
                     style: TextStyle(color: Colors.grey[400]),
                   ),
                   Icon(
@@ -109,4 +110,8 @@ class _BookstoreState extends State<BookstoreScreen>
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

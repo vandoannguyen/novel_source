@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:init_app/common/common.dart';
 
 void onDialogBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-      context: context,
-      builder: (_) => dialogReward(context)
-  );
+  showModalBottomSheet(context: context, builder: (_) => dialogReward(context));
 }
-Widget dialogReward(BuildContext context){
+
+Widget dialogReward(BuildContext context, {callback}) {
   return Container(
     height: 200,
     child: Column(
@@ -16,9 +13,9 @@ Widget dialogReward(BuildContext context){
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         GestureDetector(
-          onTap: (){
-            Fluttertoast.showToast(msg: "-15 coin", toastLength: Toast.LENGTH_SHORT, textColor: Colors.white, backgroundColor: Colors.grey, gravity: ToastGravity.CENTER);
+          onTap: () {
             Navigator.pop(context);
+            if (callback != null) callback(15);
           },
           child: Container(
             height: 49,
@@ -43,9 +40,9 @@ Widget dialogReward(BuildContext context){
           color: Colors.grey[400],
         ),
         GestureDetector(
-          onTap: (){
-            Fluttertoast.showToast(msg: "-50 coin", toastLength: Toast.LENGTH_SHORT, textColor: Colors.white, backgroundColor: Colors.grey, gravity: ToastGravity.CENTER);
+          onTap: () {
             Navigator.pop(context);
+            if (callback != null) callback(50);
           },
           child: Container(
             height: 49,
@@ -70,9 +67,9 @@ Widget dialogReward(BuildContext context){
           color: Colors.grey[400],
         ),
         GestureDetector(
-          onTap: (){
-            Fluttertoast.showToast(msg: "-150 coin", toastLength: Toast.LENGTH_SHORT, textColor: Colors.white, backgroundColor: Colors.grey, gravity: ToastGravity.CENTER);
+          onTap: () {
             Navigator.pop(context);
+            if (callback != null) callback(150);
           },
           child: Container(
             height: 49,

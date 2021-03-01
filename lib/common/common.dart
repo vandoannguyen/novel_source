@@ -1,5 +1,6 @@
 import 'package:init_app/data/network/NovalModel.dart';
 import 'package:init_app/data/network/UserModel.dart';
+import 'package:installed_apps/app_info.dart';
 
 class Common {
   static final String CHANNEL = "com.example.init_app";

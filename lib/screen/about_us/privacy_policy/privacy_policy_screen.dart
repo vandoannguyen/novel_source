@@ -1,7 +1,5 @@
 // import 'dart:io';
 
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/app_localizations.dart';
@@ -20,7 +18,7 @@ class PrivacyPolicyScreen extends BaseWidget<PrivacyPolicyController> {
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: PrivacyPolicyController());
-    
+    controller.changePolicy();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -28,9 +26,9 @@ class PrivacyPolicyScreen extends BaseWidget<PrivacyPolicyController> {
           children: [
             appbarSecond(AppLocalizations.of(context).translate(name)),
             Expanded(
-              child: GetBuilder(builder: (_)=> 
-                WebView(
-                   key: key ,
+              child: GetBuilder(
+                builder: (_) => WebView(
+                  key: key,
                   initialUrl: controller.url,
                   javascriptMode: JavascriptMode.unrestricted,
 

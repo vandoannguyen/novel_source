@@ -235,4 +235,16 @@ class RepositoryImpl implements IRepository {
   Future inviteFriend({idUser}) {
     return _api.inviteFriend(idUser: idUser);
   }
+
+  @override
+  Future search(String data) {
+    // TODO: implement search
+    return _api.search(data);
+  }
+
+  @override
+  Future searchAutoComplete(String data) {
+    // TODO: implement searchAutoComplete
+    return _api.searchAutoComplete(data);
+  }
 }

@@ -18,6 +18,8 @@ class _HomeState extends State<HomeScreen> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[];
 
+  PageController _pageController;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -34,9 +36,11 @@ class _HomeState extends State<HomeScreen> {
       TaskScreen(callBack: callBack),
       PersonalScreen()
     ];
+    _pageController = new PageController(initialPage: 0, keepPage: true);
   }
 
   void _onItemTapped(int index) {
+    _pageController.jumpToPage(index);
     setState(() {
       _selectedIndex = index;
     });
@@ -55,7 +59,13 @@ class _HomeState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: PageView(
+          physics: NeverScrollableScrollPhysics(),
+          controller: _pageController,
+          children: _widgetOptions,
+          onPageChanged: (page) {},
+        ),
+        // child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
@@ -72,7 +82,6 @@ class _HomeState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
             label: AppLocalizations.of(context).translate("bookstore"),
-            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.fact_check_outlined),

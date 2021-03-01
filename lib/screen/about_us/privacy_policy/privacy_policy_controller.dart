@@ -8,7 +8,7 @@ class PrivacyPolicyController extends BaseController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    changePolicy();
+    // changePolicy();
   }
   //  doneLoading(String A) {
   //     position = 0;
@@ -21,6 +21,7 @@ class PrivacyPolicyController extends BaseController {
   // }
   void changePolicy() {
     print("changePolicy");
+    print("Common.langNow${Common.langNow}");
     switch (Common.langNow) {
       case "en":
         url = "https://sites.google.com/view/privacy-policy-book-en/home";
@@ -37,5 +38,6 @@ class PrivacyPolicyController extends BaseController {
       default:
         break;
     }
+    update();
   }
 }

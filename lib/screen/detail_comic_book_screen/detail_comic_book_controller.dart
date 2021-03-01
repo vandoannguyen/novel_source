@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
@@ -12,7 +13,9 @@ import 'package:init_app/screen/login/login_screen.dart';
 import 'package:init_app/screen/table_content/table_content_screen.dart';
 import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_screen.dart';
 import 'package:init_app/utils/intent_animation.dart';
+import 'package:init_app/widgets/bottom_sheet_coin.dart';
 import 'package:init_app/widgets/dialog_loading.dart';
+import 'package:init_app/widgets/dialog_not_enough_coin.dart';
 
 class DetailComicBookController extends BaseController {
   bool textShowFlag = true;
@@ -43,14 +46,16 @@ class DetailComicBookController extends BaseController {
         break;
       case "TABLE_CONTENT":
         // Get.to(TableContentScreen());
-        IntentAnimation.intentNomal(context: context, screen: TableContentScreen(value));
+        IntentAnimation.intentNomal(
+            context: context, screen: TableContentScreen(value));
         break;
       case "INVITE":
         inviteFriend();
         break;
       case "HOW_ADD_COIN":
         {
-          IntentAnimation.intentNomal(context: context, screen: TutorialBuyCoinScreen());
+          IntentAnimation.intentNomal(
+              context: context, screen: TutorialBuyCoinScreen());
         }
         break;
       case "COMMENT":
@@ -77,7 +82,10 @@ class DetailComicBookController extends BaseController {
   }
 
   void getComments(String idBook) {
-    RepositoryImpl.getInstance().getComments(idBook: idBook, page: 1, limit: 20, increase: true).then((value) {}).catchError((err) {});
+    RepositoryImpl.getInstance()
+        .getComments(idBook: idBook, page: 1, limit: 20, increase: true)
+        .then((value) {})
+        .catchError((err) {});
   }
 
   void clickShowMore(bool textShowFlag) {
@@ -88,8 +96,14 @@ class DetailComicBookController extends BaseController {
 
   void postFollow(String idBook) {
     showDialogLoading(context);
-    if (Common.myBooks.where((element) => element.id == idBook).toList().length == 0) {
-      RepositoryImpl.getInstance().addBookIntoMyBooks(idBook: idBook).then((value) {
+    if (Common.myBooks
+            .where((element) => element.id == idBook)
+            .toList()
+            .length ==
+        0) {
+      RepositoryImpl.getInstance()
+          .addBookIntoMyBooks(idBook: idBook)
+          .then((value) {
         if (value != null) {
           print(value);
           Navigator.of(context).pop();
@@ -100,10 +114,13 @@ class DetailComicBookController extends BaseController {
         Navigator.of(context).pop();
       });
     } else {
-      RepositoryImpl.getInstance().removeBookFromMyBook(idBook: idBook).then((value) {
+      RepositoryImpl.getInstance()
+          .removeBookFromMyBook(idBook: idBook)
+          .then((value) {
         print(value);
         Navigator.of(context).pop();
-        Common.myBooks = Common.myBooks.where((e) => e.id != detail.id).toList();
+        Common.myBooks =
+            Common.myBooks.where((e) => e.id != detail.id).toList();
         update();
       }).catchError((err) {
         Navigator.of(context).pop();
@@ -112,7 +129,9 @@ class DetailComicBookController extends BaseController {
   }
 
   void getHotest() {
-    RepositoryImpl.getInstance().getNovelHotest(language: Common.language, page: 1, limitPerPage: 4).then((value) {
+    RepositoryImpl.getInstance()
+        .getNovelHotest(language: Common.language, page: 1, limitPerPage: 4)
+        .then((value) {
       hotest = value;
       update();
     }).catchError((err) {});
@@ -124,5 +143,24 @@ class DetailComicBookController extends BaseController {
     } else {
       IntentAnimation.intentNomal(context: context, screen: LoginScreen());
     }
+  }
+
+  void showDialogReward() {
+    showModalBottomSheet(
+        context: context,
+        builder: (_) => dialogReward(context, callback: (value) {
+              // if (Common.coin > value) {
+              //   showDialogLoading(context);
+              //   RepositoryImpl.getInstance()
+              //       .donateForWrite(idBook: detail.id, coin: value)
+              //       .then((data) {
+              //     showMess("+$value coin", TypeMess.INFORMATION);
+              //     Navigator.pop(context);
+              //     Common.coin -= value;
+              //   }).catchError((err) {});
+              // } else {
+              showDialogNotEnough(context, (value) {});
+              // }
+            }));
   }
 }

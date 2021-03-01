@@ -59,6 +59,10 @@ abstract class IApi {
   Future inviteFriend({idUser});
 
   Future donateForWrite({idBook, coin});
+
+  Future searchAutoComplete(String data);
+
+  Future search(String data);
 }
 
 class ApiImpl implements IApi {
@@ -638,6 +642,47 @@ class ApiImpl implements IApi {
         throw ("data null");
     }).catchError((err) {
       completer.completeError((err));
+    });
+    return completer.future;
+  }
+
+  @override
+  Future search(String data) {
+    // TODO: implement search
+    Completer completer = new Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/books/complete/search?q=$data&timestamp=$time");
+    Dio()
+        .get(
+            "${ROOT_API}/books/complete/search?q=$data&timestamp=$time}&oneadx_token=$token")
+        .then((value) {
+      if (value.data["code"] == 1)
+        completer.complete(value.data["result"]);
+      else
+        throw ("data null");
+    }).catchError((err) {
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future searchAutoComplete(String data) {
+    Completer completer = new Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/books/composer/autocomplete?q=$data&timestamp=$time");
+    Dio()
+        .get(
+            "${ROOT_API}/books/composer/autocomplete?q=$data&timestamp=$time}&oneadx_token=$token")
+        .then((value) {
+      if (value.data["code"] == 1)
+        completer.complete(value.data["result"]);
+      else
+        throw ("data null");
+    }).catchError((err) {
+      completer.completeError(err);
     });
     return completer.future;
   }
