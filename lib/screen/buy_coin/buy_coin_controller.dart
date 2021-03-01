@@ -62,7 +62,6 @@ class BuyCoinController extends BaseController {
   Map<String, String> value;
 
   BuyCoinController();
-
   onInit() {
     value = paymentMethods[0];
   }
@@ -80,14 +79,12 @@ class BuyCoinController extends BaseController {
 
     print("coinDemo ${coinDemo}");
     Get.back();
-    Get.snackbar(
-      '',
-      'Deposit coins success! You have ${Common.coin}!',
-      titleText: Text(
-        "SUCCESS",
-        style: TextStyle(color: Colors.green, fontSize: 18.0),
-      ),
-    );
+    Get.snackbar('', 'Deposit coins success! You have ${Common.coin}!',
+        titleText: Text(
+          "SUCCESS",
+          style: TextStyle(color: Colors.green, fontSize: 18.0),
+        ),
+        snackPosition: SnackPosition.BOTTOM);
   }
 
   void goTutorialBuyCoin() {

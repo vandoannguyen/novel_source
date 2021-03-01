@@ -27,92 +27,96 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: FeedbackController());
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
-            Stack(
-              children: [
-                Container(
-                  margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
-                  // padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  child: TextField(
-                    maxLines: 8,
-                    controller: ctlTextEditContent,
-                    onChanged: (text) {
-                      controller.countWord(text.length);
-                    },
-                    decoration: InputDecoration(
-                      hintText:
-                          AppLocalizations.of(context).translate('please send us your feedback') + "(${Common.fanpageName}), " +AppLocalizations.of(context).translate('thanks') ,
-                      hintStyle: TextStyle(
-                        fontSize: 15.0,
-                        color: Color(Constant.colorTxtDefault).withOpacity(0.8),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+              appbarSecond(AppLocalizations.of(context).translate(name)),
+              Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+                    // padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    child: TextField(
+                      maxLines: 8,
+                      controller: ctlTextEditContent,
+                      onChanged: (text) {
+                        controller.countWord(text.length);
+                      },
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)
+                                .translate('please send us your feedback') +
+                            "(${Common.fanpageName}), " +
+                            AppLocalizations.of(context).translate('thanks'),
+                        hintStyle: TextStyle(
+                          fontSize: 15.0,
+                          color:
+                              Color(Constant.colorTxtDefault).withOpacity(0.8),
+                        ),
+                        contentPadding: EdgeInsets.all(10.0),
+                        border: InputBorder.none,
                       ),
-                      contentPadding: EdgeInsets.all(10.0),
-                      border: InputBorder.none,
                     ),
                   ),
-                ),
-                Positioned(
-                  right: 18,
-                  bottom: 0,
-                  child: GetBuilder<FeedbackController>(
-                    builder: (controller) => Text(
-                      (controller.maxCount - controller.count).toString(),
-                      style: TextStyle(fontSize: 10.0),
+                  Positioned(
+                    right: 18,
+                    bottom: 0,
+                    child: GetBuilder<FeedbackController>(
+                      builder: (controller) => Text(
+                        (controller.maxCount - controller.count).toString(),
+                        style: TextStyle(fontSize: 10.0),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(15.0, 25.0, 15.0, 25.0),
-              // padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ],
               ),
-              child: TextField(
-                maxLines: 1,
-                controller: ctlTextEditContent,
-                onChanged: (text) {
-                  controller.countWord(text.length);
-                },
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context).translate("please enter your email"),
-                  hintStyle: TextStyle(
-                    fontSize: 15.0,
-                    color: Color(Constant.colorTxtDefault).withOpacity(0.8),
+              Container(
+                margin: EdgeInsets.fromLTRB(15.0, 25.0, 15.0, 25.0),
+                // padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
+                child: TextField(
+                  maxLines: 1,
+                  controller: ctlTextEditEmail,
+                  onChanged: (text) {
+                    controller.countWord(text.length);
+                  },
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context)
+                        .translate("please enter your email"),
+                    hintStyle: TextStyle(
+                      fontSize: 15.0,
+                      color: Color(Constant.colorTxtDefault).withOpacity(0.8),
+                    ),
+                    contentPadding: EdgeInsets.all(10.0),
+                    border: InputBorder.none,
                   ),
-                  contentPadding: EdgeInsets.all(10.0),
-                  border: InputBorder.none,
                 ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 25.0),
-              width: double.infinity,
-              height: 40.0,
-              child: ButtonMain(
-                name: AppLocalizations.of(context).translate('send'),
-                color: Color(Constant.colorTxtSecond),
-                func: () {
-                  controller.send(
-                      ctlTextEditEmail.text, ctlTextEditContent.text);
-                },
+              Container(
+                margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 25.0),
+                width: double.infinity,
+                height: 40.0,
+                child: ButtonMain(
+                  name: AppLocalizations.of(context).translate('send'),
+                  color: Color(Constant.colorTxtSecond),
+                  func: () {
+                    controller.send(
+                        ctlTextEditEmail.text, ctlTextEditContent.text);
+                  },
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 25.0),
-              width: double.infinity,
-              height: 50.0,
-              child: FlatButton(
+              Container(
+                margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 25.0),
+                width: double.infinity,
+                height: 50.0,
+                child: FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50.0),
                     side: BorderSide(
@@ -147,9 +151,11 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                         ),
                       ),
                     ],
-                  )),
-            ),
-          ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

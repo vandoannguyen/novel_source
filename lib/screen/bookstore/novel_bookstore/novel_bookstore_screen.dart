@@ -19,6 +19,8 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
   final CarouselController controllerCarousel = CarouselController();
   final CarouselController controllerCarouselNewest = CarouselController();
 
+  var _scrollController;
+
   void clickItem(index, item) {
     print("object ${item.toJson()}");
   }
@@ -29,6 +31,16 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
     controller.getBanner();
     controller.getNewest();
     controller.getHotest();
+    _scrollController = new ScrollController()
+      ..addListener(() {
+        if (_scrollController.offset >=
+                _scrollController.position.maxScrollExtent &&
+            !_scrollController.position.outOfRange) {
+          print("Scroll to bottom");
+          // controller.loadMore(id);
+          controller.loadMoreHotest();
+        }
+      });
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -271,9 +283,11 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                                           "${_.listNewest[_.currentCarouselNewest].desc}",
                                           style: TextStyle(
                                               color: Color(
-                                                  Constant.colorTxtDefault), fontSize: 13.5, height: 1.25),
+                                                  Constant.colorTxtDefault),
+                                              fontSize: 13.5,
+                                              height: 1.25),
                                           maxLines: 3,
-                                          
+
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.center,
                                         ),
@@ -315,7 +329,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
               checkAll: true,
               icon: "ic_edit.png",
               name: AppLocalizations.of(context).translate("hot selling books"),
-              nameAll:AppLocalizations.of(context).translate("read more"),
+              nameAll: AppLocalizations.of(context).translate("read more"),
               funcAll: () {
                 IntentAnimation.intentNomal(
                     context: context,
@@ -335,19 +349,28 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                   : ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: _.listHotest.length,
+                      itemCount: _.listHotest.length + 1,
                       itemBuilder: (BuildContext context, int index) {
-                        return itemBookHor(
-                            index: index,
-                            item: _.listHotest[index],
-                            func: () {
-                              controller.clickItem(index, _.listHotest[index]);
-                            });
+                        return index == _.listHotest.length
+                            ? _.isLoadAll
+                                ? Container()
+                                : Container(
+                                    height: 50,
+                                    child: CircularProgressIndicator(),
+                                    alignment: Alignment.center)
+                            : itemBookHor(
+                                index: index,
+                                item: _.listHotest[index],
+                                func: () {
+                                  controller.clickItem(
+                                      index, _.listHotest[index]);
+                                });
                       });
             },
           ),
         ],
       ),
+      controller: _scrollController,
     );
   }
 

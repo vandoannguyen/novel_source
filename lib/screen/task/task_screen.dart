@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/screen/survey_question/survey_question_screen.dart';
 import 'package:init_app/screen/task/task_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
 
@@ -18,7 +19,7 @@ class TaskScreen extends BaseWidget<TaskController> {
   static const String routeName = '/tasks';
   static const String name = 'tasks';
   TextStyle styleTitle =
-      TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
+      TextStyle(fontSize: 16.0, color: Color(Constant.colorTxtPrimary));
 
   // TaskController controller = Get.put(TaskController());
 
@@ -41,30 +42,39 @@ class TaskScreen extends BaseWidget<TaskController> {
   void funcTask(String key, BuildContext context) {
     switch (key) {
       case "ANSWER":
+        onClickIntent(context, "ANSWER");
         break;
       case "INVITE":
-        onClickInviteFriend(context);
+        onClickIntent(context, "INVITE");
         break;
       case "COIN_FOR_FRIEND":
-        onClickCoinFriend(context);
+        onClickIntent(context, "COIN_FOR_FRIEND");
         break;
       case "WATCH_ADS":
         break;
       case "READ_BOOK":
-        callBack("GOTO_BOOKCASE", "");
+        callBack("GOTO_TAB", 0);
         break;
       default:
     }
   }
 
-  void onClickCoinFriend(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => LoadedCoin()));
-  }
+  void onClickIntent(BuildContext context, String name) {
+    switch(name){
+      case "ANSWER":
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SurveyQuestionScreen()));
+        break;
+      case "INVITE":
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => InviteFriend()));
+        break;
+      case "COIN_FOR_FRIEND":
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoadedCoin()));
+        break;
+    }
 
-  void onClickInviteFriend(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => InviteFriend()));
   }
 
   @override
@@ -103,7 +113,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(
-                                      Common.pathImg + "bg_btn_checkined.jpg"),
+                                      Common.pathImg + "bg_btn_checkined.png"),
                                   fit: BoxFit.fill,
                                 ),
                                 shape: BoxShape.circle,
@@ -112,7 +122,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
-                                    "Điểm danh",
+                                    AppLocalizations.of(context).translate("checkin"),
                                     style: TextStyle(
                                       color: Color(Constant.colorTxtPrimary),
                                     ),
@@ -133,15 +143,15 @@ class TaskScreen extends BaseWidget<TaskController> {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: AssetImage(
-                                      Common.pathImg + "bg_btn_checkin.jpg"),
+                                      Common.pathImg + "bg_btn_checkin.png"),
                                   fit: BoxFit.fill,
                                 ),
                                 shape: BoxShape.circle,
                               ),
                               child: Text(
-                                "Điểm danh",
+                              AppLocalizations.of(context).translate("checkin"),
                                 style: TextStyle(
-                                  color: Color(Constant.colorTxtPrimary),
+                                  color: Colors.white,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -224,7 +234,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: _.coinDaily
                             .map((item) => new Text(
-                                  item["title"],
+                                  item["title"] + " ${AppLocalizations.of(context).translate("day")}",
                                   style: TextStyle(
                                     fontSize: 10.0,
                                     color: Color(Constant.colorTxtDefault)
@@ -242,7 +252,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Điểm danh liên tục 7 ngày được thưởng gấp đôi",
+                             AppLocalizations.of(context).translate("7 consecutive days attendance will be rewarded twice as much"),
                             style: TextStyle(
                               fontSize: 12.0,
                               color: Color(Constant.colorTxtDefault),
@@ -262,58 +272,59 @@ class TaskScreen extends BaseWidget<TaskController> {
             Container(
               color: Colors.white,
               width: size.width,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
               child: Text(
-                "NHIỆM VỤ NGƯỜI MỚI",
+                AppLocalizations.of(context).translate("tasks for new user"),
                 style: styleTitle,
               ),
             ),
             itemTask(
-                icon: "ic_edit.png",
-                name: "Câu hỏi khảo sát",
-                des: "Thưởng 50",
-                btnName: "Trả lời",
+                icon: "conversation.png",
+                name: AppLocalizations.of(context).translate("survey question"),
+                des: "${AppLocalizations.of(context).translate("reward")} 50",
+                btnName: AppLocalizations.of(context).translate("answer"),
                 func: () {
                   funcTask("ANSWER", context);
                 }),
             // Daily Task
+            SizedBox(height: 5.0),
             Container(
               color: Colors.white,
               width: size.width,
-              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
               child: Text(
-                "NHIỆM VỤ HẰNG NGÀY",
+                AppLocalizations.of(context).translate("daily tasks"),
                 style: styleTitle,
               ),
             ),
             itemTask(
-                icon: "ic_edit.png",
-                name: "Mời bạn bè",
-                des: "Mời mỗi bạn thưởng 500",
+                icon: "adduser.png",
+                name:  AppLocalizations.of(context).translate("Invite friends"),
+                des: "${ AppLocalizations.of(context).translate("Invite each friend to reward")} 500",
                 btnName: AppLocalizations.of(context).translate("invite"),
                 func: () {
                   funcTask("INVITE", context);
                 }),
             itemTask(
-                icon: "ic_edit.png",
-                name: "Thay bạn bè nạp xu",
-                des: "Trả lại 20%",
+                icon: "income.png",
+                name:  AppLocalizations.of(context).translate("Replace your friends to deposit coins"),
+                des: "${ AppLocalizations.of(context).translate("Receive")} 20%",
                 btnName: AppLocalizations.of(context).translate("deposit coin"),
                 func: () {
                   funcTask("COIN_FOR_FRIEND", context);
                 }),
             itemTask(
-                icon: "ic_edit.png",
-                name: "Xem quảng cáo nhận xu",
-                des: "Mỗi lần xem thưởng 200",
+                icon: "onlinevideo.png",
+                name:  AppLocalizations.of(context).translate("Watch ads to receive coins"),
+                des:  "${AppLocalizations.of(context).translate("Each view rewards")} 200",
                 btnName: AppLocalizations.of(context).translate("watch"),
                 func: () {
                   funcTask("WATCH_ADS", context);
                 }),
             itemTask(
-                icon: "ic_edit.png",
-                name: "Đọc hằng ngày",
-                des: "Đọc 20 phút, thưởng 200",
+                icon: "bookday.png",
+                name:  AppLocalizations.of(context).translate("Read every day"),
+                des:  AppLocalizations.of(context).translate("Read 20 minutes, reward 200"),
                 btnName: AppLocalizations.of(context).translate("read now"),
                 func: () {
                   funcTask("READ_BOOK", context);
@@ -326,7 +337,7 @@ class TaskScreen extends BaseWidget<TaskController> {
 
   Widget itemTask({icon, name, des, btnName, func}) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(
@@ -341,9 +352,10 @@ class TaskScreen extends BaseWidget<TaskController> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            "assets/images/" + icon,
-            width: 30.0,
-            height: 30.0,
+            Common.pathImg + icon,
+            width: 20.0,
+            height: 20.0,
+            color: Colors.pink,
           ),
           Expanded(
             child: Container(
@@ -380,6 +392,7 @@ class TaskScreen extends BaseWidget<TaskController> {
           ),
           Container(
             width: 100.0,
+            height: 30.0,
             child: ButtonMain(
               name: btnName,
               func: func,

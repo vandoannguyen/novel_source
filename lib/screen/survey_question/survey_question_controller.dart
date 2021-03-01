@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 
@@ -15,7 +16,6 @@ class SurveyQuestionController extends BaseController {
 
   void changeAnswers(index, value) {
     answers[index] = value;
-
     update();
   }
 
@@ -28,6 +28,7 @@ class SurveyQuestionController extends BaseController {
           "ERROR",
           style: TextStyle(color: Colors.redAccent, fontSize: 18.0),
         ),
+          snackPosition: SnackPosition.BOTTOM
       );
     } else {
       String body = "";

@@ -1,41 +1,41 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class PrivacyPolicyController extends BaseController {
-  String url = "https://sites.google.com/view/privacy-policy-book-en/home";
-  // int position = 1 ;
+  String url = "assets/html/policy-en.html";
+  WebViewController _controller;
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    changePolicy();
+    loadHtmlFromAssets();
   }
-  //  doneLoading(String A) {
-  //     position = 0;
-  //     update();
-  // }
 
-  // startLoading(String A){
-  //     position = 1;
-  //   update();
-  // }
-  void changePolicy() {
-    print("changePolicy");
+  loadHtmlFromAssets() async {
     switch (Common.langNow) {
       case "en":
-        url = "https://sites.google.com/view/privacy-policy-book-en/home";
+        url = "assets/html/policy-en.html";
         break;
       case "vi":
-        url = "https://sites.google.com/view/privacy-policy-book-vi/home";
+        url = "assets/html/policy-vi.html";
         break;
       case "th":
-        url = "https://sites.google.com/view/privacy-policy-book-th/home";
+        url = "assets/html/policy-th.html";
         break;
       case "id":
-        url = "https://sites.google.com/view/rahasia-pribadi/home";
+        url = "assets/html/policy-id.html";
         break;
       default:
         break;
     }
+    update();
+    String fileText = await rootBundle.loadString(url);
+    _controller.loadUrl(Uri.dataFromString(fileText,
+            mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
+        .toString());
   }
 }

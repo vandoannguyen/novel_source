@@ -8,8 +8,8 @@ import 'package:init_app/screen/task/task_screen.dart';
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
 
-  HomeScreen({Key key}) : super(key: key);
-
+  HomeScreen({Key key, this.index}) : super(key: key);
+  int index;
   @override
   _HomeState createState() => _HomeState();
 }
@@ -17,6 +17,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeState extends State<HomeScreen> {
   int _selectedIndex = 0;
   List<Widget> _widgetOptions = <Widget>[];
+
+  PageController _pageController;
 
   @override
   void initState() {
@@ -31,11 +33,19 @@ class _HomeState extends State<HomeScreen> {
           ),
       BookstoreScreen(),
       TaskScreen(callBack: callBack),
-      PersonalScreen()
+      PersonalScreen(callBack: callBack)
     ];
+    if(widget.index != null) {
+      _pageController = new PageController(initialPage: widget.index, keepPage: true);
+    } else {
+       _pageController = new PageController(initialPage: 0, keepPage: true);
+    }
+   
+
   }
 
   void _onItemTapped(int index) {
+    _pageController.jumpToPage(index);
     setState(() {
       _selectedIndex = index;
     });
@@ -43,8 +53,8 @@ class _HomeState extends State<HomeScreen> {
 
   void callBack(key, value) {
     switch (key) {
-      case "GOTO_BOOKCASE":
-        _onItemTapped(0);
+      case "GOTO_TAB":
+        _onItemTapped(value);
         break;
       default:
     }
@@ -54,9 +64,16 @@ class _HomeState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: PageView(
+          physics: NeverScrollableScrollPhysics(),
+          controller: _pageController,
+          children: _widgetOptions,
+          onPageChanged: (page) {},
+        ),
+        // child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

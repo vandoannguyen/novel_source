@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/bookstore/detail_comic/invite_friend.dart';
+import 'package:init_app/screen/comment/comment_screen.dart';
+import 'package:init_app/screen/comment_all/comment_all_screen.dart';
 import 'package:init_app/screen/tutorials/tutorial_loaded_coin.dart';
 import 'package:init_app/widgets/description_text.dart';
+import 'package:init_app/widgets/bottom_sheet_coin.dart';
 
 class DetailWidget extends StatefulWidget {
   DetailWidget({Key key}) : super(key: key);
@@ -12,100 +15,6 @@ class DetailWidget extends StatefulWidget {
 }
 
 class _DetailWidgetState extends State<DetailWidget> {
-  void _onReward() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-            height: 200,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 49,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Common.pathImg + "ic_coin.png",
-                        width: 18.0,
-                        height: 18.0,
-                      ),
-                      Text(
-                        "15",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  height: 1,
-                  color: Colors.grey[400],
-                ),
-                Container(
-                  height: 49,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Common.pathImg + "ic_coin.png",
-                        width: 18.0,
-                        height: 18.0,
-                      ),
-                      Text(
-                        "50",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  height: 1,
-                  color: Colors.grey[400],
-                ),
-                Container(
-                  height: 49,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        Common.pathImg + "ic_coin.png",
-                        width: 18.0,
-                        height: 18.0,
-                      ),
-                      Text(
-                        "150",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  height: 1,
-                  color: Colors.grey[400],
-                ),
-                Container(
-                  color: Colors.grey[200],
-                  height: 50,
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    selectedTileColor: Colors.grey[200],
-                    title: Text(
-                      "No",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey[800]),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -168,7 +77,9 @@ class _DetailWidgetState extends State<DetailWidget> {
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 10, right: 10),
-                    child: DescriptionTextWidget(text: "Pin của iPhone sử dụng công nghệ lithium-ion. So với các thế hệ công nghệ pin trước đây, pin lithium-ion sạc nhanh hơn, tuổi thọ cao hơn và có mật độ năng lượng lớn hơn giúp tăng thời lượng và giảm trọng lượng. Công nghệ pin sạc lithium-ion hiện nay là công nghệ tốt nhất cho thiết bị của bạn. Tìm hiểu thêm về pin lithium-ion."),
+                    child: DescriptionTextWidget(
+                        text:
+                            "Pin của iPhone sử dụng công nghệ lithium-ion. So với các thế hệ công nghệ pin trước đây, pin lithium-ion sạc nhanh hơn, tuổi thọ cao hơn và có mật độ năng lượng lớn hơn giúp tăng thời lượng và giảm trọng lượng. Công nghệ pin sạc lithium-ion hiện nay là công nghệ tốt nhất cho thiết bị của bạn. Tìm hiểu thêm về pin lithium-ion."),
                   ),
                 ],
               ),
@@ -247,38 +158,32 @@ class _DetailWidgetState extends State<DetailWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Row(children: <Widget>[
-                    Expanded(
-                        child: Container(
-                            margin: EdgeInsets.only(left: 10, right: 10),
-                            child: Divider())),
+                    Expanded(child: Container(margin: EdgeInsets.only(left: 10, right: 10), child: Divider())),
                     Text(
                       "Reward",
                       style: TextStyle(color: Colors.pink),
                     ),
-                    Expanded(
-                        child: Container(
-                            margin: EdgeInsets.only(left: 10, right: 10),
-                            child: Divider())),
+                    Expanded(child: Container(margin: EdgeInsets.only(left: 10, right: 10), child: Divider())),
                   ]),
                   Container(
-                      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-                      height: 30,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 12,
-                        itemBuilder: (context, i) {
-                          return Container(
-                            margin: EdgeInsets.all(3),
-                            child: Image.asset(
-                              Common.pathImg + "ic_user.png",
-                              height: 20,
-                              width: 20,
-                            ),
-                          );
-                        },
-                      ),
-                      ),
+                    margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                    height: 30,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 12,
+                      itemBuilder: (context, i) {
+                        return Container(
+                          margin: EdgeInsets.all(3),
+                          child: Image.asset(
+                            Common.pathImg + "ic_user.png",
+                            height: 20,
+                            width: 20,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                   Container(
                     margin: EdgeInsets.only(bottom: 10),
                     child: Row(
@@ -288,7 +193,11 @@ class _DetailWidgetState extends State<DetailWidget> {
                           margin: EdgeInsets.all(10),
                           child: Row(
                             children: <Widget>[
-                              Image.asset(Common.pathImg + "ic_coin.png", height: 20, width: 20,),
+                              Image.asset(
+                                Common.pathImg + "ic_coin.png",
+                                height: 20,
+                                width: 20,
+                              ),
                               Text("3720",
                                   style: TextStyle(
                                     color: Colors.pink,
@@ -298,7 +207,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            _onReward();
+                            onDialogBottomSheet(context);
                           },
                           child: Container(
                             height: 30,
@@ -329,8 +238,7 @@ class _DetailWidgetState extends State<DetailWidget> {
             ),
             ListTile(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => InviteFriend()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => InviteFriend()));
               },
               title: Text(
                 "Invite friends to receive coins",
@@ -347,10 +255,7 @@ class _DetailWidgetState extends State<DetailWidget> {
             ),
             ListTile(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TutorialLoadedCoin()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => TutorialLoadedCoin()));
               },
               title: Text(
                 "How to make a coin?",
@@ -365,43 +270,53 @@ class _DetailWidgetState extends State<DetailWidget> {
               height: 1,
               color: Colors.grey[400],
             ),
-            Container(
-              margin: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
-              height: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    "Comment",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  Image.asset(
-                    Common.pathImg + "ic_edit.png",
-                    height: 20,
-                    width: 20,
-                  ),
-                ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CommentScreen("test")));
+              },
+              child: Container(
+                margin: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+                height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Comment",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    Image.asset(
+                      Common.pathImg + "ic_edit.png",
+                      height: 20,
+                      width: 20,
+                    ),
+                  ],
+                ),
               ),
             ),
             Divider(
               height: 1,
               color: Colors.grey[400],
             ),
-            Container(
-              margin: EdgeInsets.all(10),
-              height: 30,
-              child: Center(
-                child: Text(
-                  "Watch all to comment",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CommentAllScreen()));
+              },
+              child: Container(
+                margin: EdgeInsets.all(10),
+                height: 30,
+                child: Center(
+                  child: Text(
+                    "Watch all to comment",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.grey),
+                  ),
                 ),
               ),
             ),
             SizedBox(
               height: 20,
-              child:Container(
-                color : Colors.grey[200],
+              child: Container(
+                color: Colors.grey[200],
               ),
             ),
             Container(

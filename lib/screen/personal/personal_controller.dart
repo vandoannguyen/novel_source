@@ -55,6 +55,14 @@ class PersonalController extends BaseController {
     }
   }
 
+  void goFrequentlyQuestion(callBack) async {
+    var data = await Get.to(FrequentlyQuestionScreen());
+    print("======================== ${data}");
+    if (data == 1) {
+      callBack;
+    }
+  }
+
   void goBuyCoin() async {
     if (isLogin) {
       await Get.to(BuyCoinScreen());

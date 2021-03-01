@@ -17,7 +17,9 @@ class _LoadedCoinState extends State<LoadedCoin> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: Colors.black,), onPressed: (){
+          Navigator.pop(context);
+        }),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -33,17 +35,39 @@ class _LoadedCoinState extends State<LoadedCoin> {
                 ),
               ),
               Container(
+                margin: EdgeInsets.all(10.0),
+                height: 20,
+                child: Center(
+                  child: Text("Name", style: TextStyle(color: Colors.black, fontSize: 20.0),),
+                ),
+              ),
+              Container(
                 margin:
-                    EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 10),
+                    EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
                 child: TextField(
+                  autofocus: true,
                   decoration: InputDecoration(
-                    hintText: "Enter your number",
+                    hintText: "ID cua ban be",
                     hintStyle: TextStyle(color: Colors.pink[200]),
-                    border: new OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Colors.grey, width: 1.0),
                       borderRadius: const BorderRadius.all(
                         const Radius.circular(32.0),
                       ),
                     ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Colors.redAccent, width: 1.0),
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(32.0),
+                        ),
+                    ),
+                    // border: new OutlineInputBorder(
+                    //   borderRadius: const BorderRadius.all(
+                    //     const Radius.circular(32.0),
+                    //   ),
+                    // ),
                   ),
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,

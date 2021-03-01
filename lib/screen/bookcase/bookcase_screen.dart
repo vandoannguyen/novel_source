@@ -84,7 +84,7 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
                                     width: 20.0,
                                     height: 20.0,
                                   ),
-                                  Text("Manage"),
+                                  Text(AppLocalizations.of(context).translate("manager")),
                                 ],
                               ),
                       ),
@@ -113,7 +113,7 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
                         ),
                       ],
                     ),
-                  ),
+            ),
           ),
           Expanded(
             child: GetBuilder<BookCaseController>(
