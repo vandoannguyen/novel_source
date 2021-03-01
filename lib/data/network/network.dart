@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/network/BannerNovelModel.dart';
 import 'package:init_app/utils/crypt_utils.dart';
+
 import 'NovalChapterModel.dart';
 import 'NovalModel.dart';
 
@@ -613,11 +614,10 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      if (value.data["code"] == 1){
+      if (value.data["code"] == 1) {
         print("inviteFriend $value");
         completer.complete((value.data));
-      }
-      else
+      } else
         throw ("data null ");
     }).catchError((err) {
       completer.completeError((err));
@@ -650,6 +650,7 @@ class ApiImpl implements IApi {
   @override
   Future search(String data) {
     // TODO: implement search
+    data = data.replaceAll(" ", "%20");
     Completer completer = new Completer();
     String time = _getTimeStamp();
     String token = CryptUtils.genSha256(
@@ -657,14 +658,12 @@ class ApiImpl implements IApi {
     Dio()
         .get(
             "${ROOT_API}/books/complete/search?q=$data&timestamp=$time&oneadx_token=$token",
-        options:
-        Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      if (value.data["code"] == 1){
+      if (value.data["code"] == 1) {
         completer.complete(value.data["result"]);
-      }
-
-      else
+      } else
         throw ("data null");
     }).catchError((err) {
       completer.completeError(err);
@@ -681,14 +680,13 @@ class ApiImpl implements IApi {
     Dio()
         .get(
             "${ROOT_API}/books/composer/autocomplete?q=$data&timestamp=$time&oneadx_token=$token",
-        options:
-        Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      if (value.data["code"] == 1){
+      if (value.data["code"] == 1) {
         print("getSearchComplete $value");
         completer.complete(value.data["result"]);
-      }
-      else
+      } else
         throw ("data null");
     }).catchError((err) {
       completer.completeError(err);
