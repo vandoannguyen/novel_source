@@ -3,6 +3,8 @@ import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/network/NovalModel.dart';
 import 'package:init_app/data/repository.dart';
+import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_screen.dart';
+import 'package:init_app/utils/intent_animation.dart';
 
 class SearchController extends BaseController {
   SearchController();
@@ -11,34 +13,32 @@ class SearchController extends BaseController {
   FocusNode searchFocus = FocusNode();
   List<NovelModel> listHotest;
   List<NovelModel> listNewest;
+  List<NovelModel> listSearch;
+
   bool isFocus = false;
   var page = 1;
   bool isLoadAll = false;
-
   bool isLoading = false;
-
   bool isLoadMore = false;
-  var limitPerpage = 9;
+  bool isSearch = false;
+  var limitPerpage = 20;
 
   void onClickSearch() {
-    // textcontroller.clear();
-    // FocusScope.of(context).requestFocus(new FocusNode());
+    textcontroller.clear();
+    FocusScope.of(context).requestFocus(new FocusNode());
     isFocus = !isFocus;
     update();
   }
 
-  // void clickItem(index, NovelModel item) {
-//     print(item.id);
-//     IntentAnimation.intentNomal(
-//         context: context,
-//         screen: DetailComicBookScreen(idBook: item.id),
-//         option: IntentAnimationOption.RIGHT_TO_LEFT,
-//         duration: Duration(milliseconds: 800));
-//   }
-//   void changeCarouselNewest(index, reason) {
-//     currentCarouselNewest = index;
-//     update();
-//   }
+  void clickItem(index, NovelModel item) {
+    print(item.id);
+    IntentAnimation.intentNomal(
+        context: context,
+        screen: DetailComicBookScreen(idBook: item.id),
+        option: IntentAnimationOption.RIGHT_TO_LEFT,
+        duration: Duration(milliseconds: 800));
+  }
+
   void getNewest() {
     RepositoryImpl.getInstance()
         .getNovelNewest(language: Common.language, page: 1, limitPerPage: 20)
@@ -53,7 +53,7 @@ class SearchController extends BaseController {
     isLoading = true;
     RepositoryImpl.getInstance()
         .getNovelHotest(
-            language: Common.language, page: page, limitPerPage: limitPerpage)
+        language: Common.language, page: page, limitPerPage: limitPerpage)
         .then((value) {
       isLoading = false;
       if (isLoadMore) {
@@ -67,4 +67,29 @@ class SearchController extends BaseController {
       }
     }).catchError((err) {});
   }
+
+  void getSearch(String data) {
+    RepositoryImpl.getInstance().search(data).then((value) {
+      listSearch =
+          (value as List).map((element) => NovelModel.fromJson(element)).toList();
+      if(listSearch.toString() == "[]"){
+        isSearch = true;
+        print("isSearch1 $value");
+        print("isSearch2 $listSearch");
+      }else{
+        isSearch = false;
+      }
+      update();
+    }).catchError((err) {
+      print(err);
+    });
+  }
+// void getSearchComplete(String data){
+//   RepositoryImpl.getInstance().searchAutoComplete(data).then((value) {
+//     listSearch = value;
+//     update();
+//     print("getSearchComplete $value");
+//   }).catchError((err){print(err);});
+// }
+
 }

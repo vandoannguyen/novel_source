@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/network/BannerNovelModel.dart';
 import 'package:init_app/utils/crypt_utils.dart';
-
 import 'NovalChapterModel.dart';
 import 'NovalModel.dart';
 
@@ -614,8 +613,10 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      if (value.data["code"] == 1)
+      if (value.data["code"] == 1){
+        print("inviteFriend $value");
         completer.complete((value.data));
+      }
       else
         throw ("data null ");
     }).catchError((err) {
@@ -655,10 +656,14 @@ class ApiImpl implements IApi {
         "${Common.EXTEND_ONEADX_KEY}/books/complete/search?q=$data&timestamp=$time");
     Dio()
         .get(
-            "${ROOT_API}/books/complete/search?q=$data&timestamp=$time}&oneadx_token=$token")
+            "${ROOT_API}/books/complete/search?q=$data&timestamp=$time&oneadx_token=$token",
+        options:
+        Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      if (value.data["code"] == 1)
+      if (value.data["code"] == 1){
         completer.complete(value.data["result"]);
+      }
+
       else
         throw ("data null");
     }).catchError((err) {
@@ -675,10 +680,14 @@ class ApiImpl implements IApi {
         "${Common.EXTEND_ONEADX_KEY}/books/composer/autocomplete?q=$data&timestamp=$time");
     Dio()
         .get(
-            "${ROOT_API}/books/composer/autocomplete?q=$data&timestamp=$time}&oneadx_token=$token")
+            "${ROOT_API}/books/composer/autocomplete?q=$data&timestamp=$time&oneadx_token=$token",
+        options:
+        Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      if (value.data["code"] == 1)
+      if (value.data["code"] == 1){
+        print("getSearchComplete $value");
         completer.complete(value.data["result"]);
+      }
       else
         throw ("data null");
     }).catchError((err) {

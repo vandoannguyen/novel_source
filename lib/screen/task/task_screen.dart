@@ -6,11 +6,8 @@ import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/survey_question/survey_question_screen.dart';
 import 'package:init_app/screen/task/task_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
-
 import '../../common/common.dart';
 import '../../common/constant.dart';
-import '../bookstore/detail_comic/invite_friend.dart';
-import '../bookstore/detail_comic/loaded_coin.dart';
 
 class TaskScreen extends BaseWidget<TaskController> {
   TaskScreen({this.callBack});
@@ -20,20 +17,6 @@ class TaskScreen extends BaseWidget<TaskController> {
   static const String name = 'tasks';
   TextStyle styleTitle =
       TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
-
-  // TaskController controller = Get.put(TaskController());
-
-  // TaskController _controller = Get.find();
-  // List<Map<String, dynamic>> coinDaily = [
-  //   {"title": "1 Ngày", "name": "20", "value": 20, "status": false},
-  //   {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
-  //   {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-  //   {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-  //   {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-  //   {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-  //   {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
-  // ];
-
   void _incrementDate() {
     controller.incrementDate();
   }
@@ -66,12 +49,12 @@ class TaskScreen extends BaseWidget<TaskController> {
             context, MaterialPageRoute(builder: (context) => SurveyQuestionScreen()));
         break;
       case "INVITE":
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => InviteFriend()));
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => InviteFriend()));
+        controller.inviteNext("invite");
         break;
       case "COIN_FOR_FRIEND":
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoadedCoin()));
+        controller.inviteNext("loadedcoin");
         break;
     }
 
