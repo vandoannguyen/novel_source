@@ -12,47 +12,47 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
   static const String routeName = '/buy-coin';
   static const String name = 'select a payment method';
   BuildContext dialogContext;
-  
+
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: BuyCoinController());
+    if (Common.listInapp == null) controller.getSubscription();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
             appbarSecond(AppLocalizations.of(context).translate(name)),
-              GetBuilder<BuyCoinController>(
+            GetBuilder<BuyCoinController>(
               builder: (_) => Column(
-              children: controller.paymentMethods
-                  .map((e) => Container(
-                        padding: EdgeInsets.fromLTRB(20.0, 10, 10, 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.asset(
-                              Common.pathImg + e["icon"],
-                              width: 30.0,
-                              fit: BoxFit.contain,
-                            ),
-                            Text(
-                              e["name"],
-                              style: TextStyle(fontSize: 16.0),
-                            ),
-                            Radio(
-                              value: e["value"],
-                              groupValue: controller.value["value"],
-                              onChanged: (String value) {
-                                controller.selectMethod(e);
-                              },
-                            ),
-                          ],
-                        ),
-                      ))
-                  .toList(),
+                children: controller.paymentMethods
+                    .map((e) => Container(
+                          padding: EdgeInsets.fromLTRB(20.0, 10, 10, 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Image.asset(
+                                Common.pathImg + e["icon"],
+                                width: 30.0,
+                                fit: BoxFit.contain,
+                              ),
+                              Text(
+                                e["name"],
+                                style: TextStyle(fontSize: 16.0),
+                              ),
+                              Radio(
+                                value: e["value"],
+                                groupValue: controller.value["value"],
+                                onChanged: (String value) {
+                                  controller.selectMethod(e);
+                                },
+                              ),
+                            ],
+                          ),
+                        ))
+                    .toList(),
+              ),
             ),
-            ),
-            
             Container(
               width: double.infinity,
               height: 50.0,

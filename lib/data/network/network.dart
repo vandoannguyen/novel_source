@@ -63,10 +63,13 @@ abstract class IApi {
   Future searchAutoComplete(String data);
 
   Future search(String data);
+
+  Future getChapterBought({bookId});
 }
 
 class ApiImpl implements IApi {
-  static final String ROOT_API = "https://api.oneadx.com/novel";
+  // static final String ROOT_API = "https://api.oneadx.com/novel";
+  static final String ROOT_API = "http://192.168.0.163:5012";
 
   @override
   Future getData() {
@@ -569,7 +572,7 @@ class ApiImpl implements IApi {
         .then((value) {
       print(value);
       if (value.data["code"] == 1)
-        completer.complete((value.data));
+        completer.complete((value.data["result"]));
       else
         throw ("data null ");
     }).catchError((err) {
@@ -655,7 +658,9 @@ class ApiImpl implements IApi {
         "${Common.EXTEND_ONEADX_KEY}/books/complete/search?q=$data&timestamp=$time");
     Dio()
         .get(
-            "${ROOT_API}/books/complete/search?q=$data&timestamp=$time}&oneadx_token=$token")
+            "${ROOT_API}/books/complete/search?q=$data&timestamp=$time&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
       if (value.data["code"] == 1)
         completer.complete(value.data["result"]);
@@ -675,7 +680,31 @@ class ApiImpl implements IApi {
         "${Common.EXTEND_ONEADX_KEY}/books/composer/autocomplete?q=$data&timestamp=$time");
     Dio()
         .get(
-            "${ROOT_API}/books/composer/autocomplete?q=$data&timestamp=$time}&oneadx_token=$token")
+            "${ROOT_API}/books/composer/autocomplete?q=$data&timestamp=$time&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
+        .then((value) {
+      if (value.data["code"] == 1)
+        completer.complete(value.data["result"]);
+      else
+        throw ("data null");
+    }).catchError((err) {
+      completer.completeError(err);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future getChapterBought({bookId}) {
+    Completer completer = new Completer();
+    String time = _getTimeStamp();
+    String token = CryptUtils.genSha256(
+        "${Common.EXTEND_ONEADX_KEY}/sections/purchased/$bookId?timestamp=$time");
+    Dio()
+        .get(
+            "$ROOT_API/sections/purchased/$bookId?timestamp=$time&oneadx_token=$token",
+            options:
+                Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
       if (value.data["code"] == 1)
         completer.complete(value.data["result"]);

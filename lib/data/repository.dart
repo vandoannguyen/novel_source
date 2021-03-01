@@ -247,4 +247,21 @@ class RepositoryImpl implements IRepository {
     // TODO: implement searchAutoComplete
     return _api.searchAutoComplete(data);
   }
+
+  @override
+  Future getReadNovel() {
+    // TODO: implement getReadNovel
+    return _sharef.getReadNovel();
+  }
+
+  @override
+  Future setReadNovel(String data) {
+    // TODO: implement setReadNovel
+    return _sharef.setReadNovel(data);
+  }
+
+  @override
+  Future getChapterBought({bookId}) {
+    return _api.getChapterBought(bookId: bookId);
+  }
 }

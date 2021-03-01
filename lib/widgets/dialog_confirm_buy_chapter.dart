@@ -1,34 +1,32 @@
 import 'package:flutter/material.dart';
 
-void showDialogNotEnough(context, callback) {
+void showDialogConfirmBuyChapter(context, coin, {callback}) {
   showDialog(
-      context: context, builder: (_) => dialogNotEnoughCoin(context, callback));
+      context: context,
+      builder: (_) => dialogConfirmBuyChap(_, coin, callback: callback));
 }
 
-Widget dialogNotEnoughCoin(context, callback) {
+dialogConfirmBuyChap(context, coin, {callback}) {
   return Dialog(
     child: Container(
-      color: Colors.white,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-              padding: EdgeInsets.all(10),
-              child: Text("Not enough coin!",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w800))),
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.only(top: 10, bottom: 10, left: 10),
-            child: Text("Do you want to get more?", style: textStyle()),
+            padding: EdgeInsets.all(15),
+            alignment: Alignment.centerLeft,
+            child: Text("Read this chapter with $coin coins?",
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500)),
           ),
           SizedBox(
             height: 10,
           ),
           Container(
-            height: 40,
+            height: 30,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -38,11 +36,11 @@ Widget dialogNotEnoughCoin(context, callback) {
                     callback(false);
                   },
                   child: Container(
-                    height: 40,
+                    width: 100,
                     color: Colors.transparent,
+                    height: 40,
                     alignment: Alignment.center,
-                    padding: EdgeInsets.only(top: 10, bottom: 10, left: 10),
-                    child: Text("No", style: textStyle()),
+                    child: Text("No"),
                   ),
                 ),
                 GestureDetector(
@@ -51,23 +49,24 @@ Widget dialogNotEnoughCoin(context, callback) {
                     callback(true);
                   },
                   child: Container(
+                    width: 100,
+                    color: Colors.transparent,
                     height: 40,
                     alignment: Alignment.center,
-                    color: Colors.transparent,
-                    padding: EdgeInsets.all(10),
-                    child: Text("Yes",
-                        style: TextStyle(fontSize: 15, color: Colors.red)),
+                    child: Text(
+                      "Yes",
+                      style: TextStyle(color: Colors.red),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
         ],
       ),
     ),
   );
-}
-
-textStyle() {
-  return TextStyle(fontSize: 15, color: Colors.black);
 }

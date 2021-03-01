@@ -113,7 +113,7 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
                         ),
                       ],
                     ),
-            ),
+                  ),
           ),
           Expanded(
             child: GetBuilder<BookCaseController>(

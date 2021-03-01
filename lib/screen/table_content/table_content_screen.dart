@@ -19,6 +19,7 @@ class TableContentScreen extends BaseWidget<TableContentController> {
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: TableContentController());
     controller.getChapter(id);
+    controller.getChapterBought(id);
     _scrollController = ScrollController()
       ..addListener(() {
         if (_scrollController.offset >=
@@ -48,35 +49,46 @@ class TableContentScreen extends BaseWidget<TableContentController> {
                         controller: _scrollController,
                         physics: AlwaysScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: _.listChaps == null ? 0 : _.listChaps.length,
+                        itemCount:
+                            _.listChaps == null ? 0 : _.listChaps.length + 1,
                         itemBuilder: (BuildContext context, int index) {
                           return GestureDetector(
                             onTap: () {
                               controller.read(_.listChaps[index]);
                             },
-                            child: Container(
-                              color: Colors.transparent,
-                              padding: EdgeInsets.all(15.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      _.listChaps[index].title,
+                            child: index < _.listChaps.length
+                                ? Container(
+                                    color: Colors.transparent,
+                                    padding: EdgeInsets.all(15.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            "${_.listChaps[index].title}",
+                                          ),
+                                        ),
+                                        _.listChaps[index].coin > 0 &&
+                                                !_.listChapterBought.contains(
+                                                    _.listChaps[index].id)
+                                            ? Icon(
+                                                Icons.lock_outline_rounded,
+                                                size: 20.0,
+                                                color: Color(
+                                                    Constant.colorTxtDefault),
+                                              )
+                                            : Container(
+                                                width: 20,
+                                              )
+                                      ],
                                     ),
-                                  ),
-                                  _.listChaps[index].coin > 0
-                                      ? Icon(
-                                          Icons.lock_outline_rounded,
-                                          size: 20.0,
-                                          color:
-                                              Color(Constant.colorTxtDefault),
-                                        )
-                                      : Container(
-                                          width: 20,
-                                        )
-                                ],
-                              ),
-                            ),
+                                  )
+                                : _.isLoadAll
+                                    ? Container()
+                                    : Container(
+                                        height: 40,
+                                        alignment: Alignment.center,
+                                        child: CircularProgressIndicator(),
+                                      ),
                           );
                         }),
                     GetBuilder<TableContentController>(

@@ -12,6 +12,8 @@ import 'package:init_app/screen/comment_all/comment_all_screen.dart';
 import 'package:init_app/screen/login/login_screen.dart';
 import 'package:init_app/screen/table_content/table_content_screen.dart';
 import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_screen.dart';
+import 'package:init_app/utils/call_native_utils.dart';
+import 'package:init_app/utils/crypt_utils.dart';
 import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/bottom_sheet_coin.dart';
 import 'package:init_app/widgets/dialog_loading.dart';
@@ -64,6 +66,11 @@ class DetailComicBookController extends BaseController {
       case "ALL_COMMENT":
         Get.to(CommentAllScreen());
         break;
+      case "READ_NOW":
+        {
+          getChapter(value);
+          break;
+        }
       default:
     }
   }
@@ -162,5 +169,33 @@ class DetailComicBookController extends BaseController {
               showDialogNotEnough(context, (value) {});
               // }
             }));
+  }
+
+  void getChapter(id) {
+    RepositoryImpl.getInstance()
+        .chapByNoval(id: id, page: 1, limit: 1)
+        .then((value) {
+      if (value.length > 0) {
+        readChapter(value[0].id);
+      } else
+        showMess("Can not get chapter", TypeMess.WARNING);
+    });
+  }
+
+  void readChapter(String id) {
+    showDialogLoading(context);
+    RepositoryImpl.getInstance().readNoval(id: id).then((value) {
+      print(value);
+      String data = CryptUtils.decryptAESCryptoJS(
+          value["result"]["content_text"], Common.ONEADX_KEY);
+      var chap = value["result"]["title"];
+      var read = CryptUtils.decodeBase4(data);
+      print(read);
+      Navigator.of(context).pop();
+      CallNativeUtils.invokeMethod(
+          method: "read", aguments: {"title": chap, "content": read});
+    }).catchError((err) {
+      print(err);
+    });
   }
 }

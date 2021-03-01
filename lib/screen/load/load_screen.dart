@@ -13,6 +13,7 @@ class LoadScreen extends BaseWidget<LoadController> {
     Future.delayed(Duration(seconds: 1)).then((value) {
       controller.login(context);
       controller.getLaguage(context);
+      controller.getReadChapter();
     });
     return Scaffold(
       body: SafeArea(

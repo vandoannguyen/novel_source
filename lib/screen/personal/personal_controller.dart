@@ -102,6 +102,7 @@ class PersonalController extends BaseController {
       profile = value;
       Common.coin = profile["coin"];
       isLogin = Common.isLogedIn;
+      Common.coin = profile["coin"];
       update();
     }).catchError((err) {
       profile = null;

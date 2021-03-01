@@ -18,14 +18,22 @@ class Common {
   static var config = {};
 
   static var isLogedIn = false;
+
   //checkin
   static int coin_checkin = 0;
   static int coin = 0;
+
   // static bool isCheckin = false;
   static int days = 0;
   static int date = 0;
 
   static String langNow = "en";
+
   //getList
   static List<AppInfo> apps = [];
+
+//[{"idBook":"dsdsd","chapterNum":"chappter"}]
+  static dynamic listReadChapter;
+
+  static List<dynamic> listInapp;
 }

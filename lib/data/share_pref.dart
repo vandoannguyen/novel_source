@@ -19,9 +19,16 @@ abstract class ISharePref {
   Future<String> getLogedData();
 
   Future<void> setCheckin(day);
+
   Future<String> getCheckin();
+
   Future<void> setDatetime(date);
+
   Future<String> getDatetime();
+
+  Future getReadNovel();
+
+  Future setReadNovel(String data);
 }
 
 class SharePrefImpl extends ISharePref {
@@ -34,6 +41,8 @@ class SharePrefImpl extends ISharePref {
   final _GET_DATA_SHAREPREF = "getDataShare";
 
   final LOGIN_TYPE = "LOGIN_TYPE";
+
+  final String READ_NOVEL = "READ_NOVEL";
 
   SharePrefImpl() {
     SharedPreferences.setMockInitialValues({});
@@ -143,8 +152,7 @@ class SharePrefImpl extends ISharePref {
   Future<String> getCheckin() {
     Completer<String> completer = new Completer();
     CallNativeUtils.invokeMethod(
-        method: _GET_DATA_SHAREPREF,
-        aguments: {"key": _CHECKIN}).then((value) {
+        method: _GET_DATA_SHAREPREF, aguments: {"key": _CHECKIN}).then((value) {
       completer.complete(value == "" ? null : value);
     });
     return completer.future;
@@ -178,6 +186,28 @@ class SharePrefImpl extends ISharePref {
     CallNativeUtils.invokeMethod(
         method: _SET_DATA_SHAREPREF,
         aguments: {"key": _DATETIME, "data": date}).then((value) {
+      completer.complete();
+    });
+    return completer.future;
+  }
+
+  @override
+  Future getReadNovel() {
+    Completer completer = new Completer();
+    CallNativeUtils.invokeMethod(
+        method: _GET_DATA_SHAREPREF,
+        aguments: {"key": READ_NOVEL}).then((value) {
+      completer.complete(value == null ? "" : value);
+    });
+    return completer.future;
+  }
+
+  @override
+  Future setReadNovel(String data) {
+    Completer completer = new Completer();
+    CallNativeUtils.invokeMethod(
+        method: _SET_DATA_SHAREPREF,
+        aguments: {"key": READ_NOVEL, "data": data}).then((value) {
       completer.complete();
     });
     return completer.future;

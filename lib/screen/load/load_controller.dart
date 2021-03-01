@@ -1,15 +1,14 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/network/UserModel.dart';
 import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/home/home_screen.dart';
-import 'package:init_app/screen/login/login_controller.dart';
 import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/dialog_language.dart';
 
@@ -20,15 +19,18 @@ class LoadController extends BaseController {
 
   bool _isGetCountrySuccess = false;
 
+  bool isUserProfile = false;
+
+  bool _isGetDataSuccess = false;
+
+  bool isGetReadNovelSuccess = false;
+
   LoadController();
 
   void login(context) async {
-    print("loginnnnn");
     String logedType = await RepositoryImpl.getInstance().getLogedData();
-    print("logedType$logedType");
     if (logedType == null) {
       String email = await getRandomEmail();
-      print("emailcreated$email");
       String timestamp =
           (DateTime.now().millisecondsSinceEpoch / 1000).round().toString();
       // login
@@ -40,8 +42,9 @@ class LoadController extends BaseController {
           String token = value["result"]["token"];
           Common.token = token;
           Common.user = UserModel.fromJson(value["result"]["user"]);
-    
+
           _isLoginSuccess = true;
+          _getAccDetail();
           _getData(context);
         } else {
           showMess("Login Failed", TypeMess.WARNING);
@@ -102,7 +105,7 @@ class LoadController extends BaseController {
   }
 
   void _getData(context) {
-    if (_isLoginSuccess && _isGetCountrySuccess) {
+    if (_isLoginSuccess && _isGetCountrySuccess && isGetReadNovelSuccess) {
       if (isCreateEmail) {
         RepositoryImpl.getInstance()
             .createMyBooks(
@@ -115,8 +118,15 @@ class LoadController extends BaseController {
                       (DateTime.now().millisecondsSinceEpoch / 1000).toString())
               .then((value) {
             Common.myBooks = value;
+            _isGetDataSuccess = true;
             intentToHome(context);
+          }).catchError((err) {
+            print("Get my book failed");
+            showMess("Load data null", TypeMess.WARNING);
           });
+        }).catchError((err) {
+          print("Create my book failed");
+          showMess("Load data null", TypeMess.WARNING);
         });
       } else {
         RepositoryImpl.getInstance()
@@ -125,17 +135,15 @@ class LoadController extends BaseController {
                     (DateTime.now().millisecondsSinceEpoch / 1000).toString())
             .then((value) {
           Common.myBooks = value;
-          print(value);
-          print("okok");
+          _isGetDataSuccess = true;
           intentToHome(context);
-          print("okok");
         });
       }
     }
   }
 
   void intentToHome(context) {
-    print("okokok");
+    if (_isGetDataSuccess && _isGetCountrySuccess) ;
     IntentAnimation.intentPushReplacement(
         context: context,
         screen: HomeScreen(),
@@ -157,11 +165,11 @@ class LoadController extends BaseController {
             .then((value) {
           Common.token = value["token"];
           Common.isLogedIn = true;
-
           RepositoryImpl.getInstance()
               .setLogedData(type: "google")
               .then((value) {});
           _isLoginSuccess = true;
+          _getAccDetail();
           _getData(context);
         }).catchError((err) {
           Navigator.of(context).pop();
@@ -176,24 +184,16 @@ class LoadController extends BaseController {
     final result = await facebookLogin.logIn(['email']);
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
-        print("result.accessToken.token  ${result.accessToken.token}");
         RepositoryImpl.getInstance()
             .loginWithFaceBook(access_token: result.accessToken.token)
             .then((value) {
-          print("00");
           Common.token = value;
-          print("0");
           Common.isLogedIn = true;
-
-
-          print("1");
           RepositoryImpl.getInstance().setLogedData(type: "facebook");
           _isLoginSuccess = true;
-          print("2");
+          _getAccDetail();
           _getData(context);
-          print("3");
         }).catchError((err) {
-          print("111111err$err");
           showMess("Login failed", TypeMess.WARNING);
           Navigator.of(context).pop();
         });
@@ -204,5 +204,31 @@ class LoadController extends BaseController {
         showMess("Login failed", TypeMess.WARNING);
         break;
     }
+  }
+
+  void _getAccDetail() {
+    isUserProfile = false;
+    RepositoryImpl.getInstance().getUserProfile().then((value) {
+      isUserProfile = true;
+      Common.coin = value["coin"];
+      Common.user = UserModel.fromJson(value);
+    }).catchError((err) {
+      showMess("Load data null", TypeMess.WARNING);
+    });
+  }
+
+  void getReadChapter() {
+    RepositoryImpl.getInstance().getReadNovel().then((value) {
+      if (value != "") {
+        Common.listReadChapter = jsonDecode(value);
+      } else
+        Common.listReadChapter = [];
+      isGetReadNovelSuccess = true;
+      _getData(context);
+    }).catchError((err) {
+      Common.listReadChapter = [];
+      isGetReadNovelSuccess = true;
+      _getData(context);
+    });
   }
 }

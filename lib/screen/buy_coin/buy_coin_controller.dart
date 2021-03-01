@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_screen.dart';
 
 class BuyCoinController extends BaseController {
@@ -89,5 +90,14 @@ class BuyCoinController extends BaseController {
 
   void goTutorialBuyCoin() {
     Get.to(TutorialBuyCoinScreen());
+  }
+
+  void getSubscription() {
+    RepositoryImpl.getInstance().getSubscription().then((value) {
+      print(value);
+      Common.listInapp = value;
+    }).catchError((err) {
+      print(err);
+    });
   }
 }
