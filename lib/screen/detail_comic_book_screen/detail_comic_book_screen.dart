@@ -523,7 +523,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
 //                 ),
                 GetBuilder<DetailComicBookController>(
                     builder: (_) => _.hotest != null
-                        ? hotBook(_.hotest)
+                        ? hotBook(_.hotest, context)
                         : Container(
                             height: 180,
                             alignment: Alignment.center,
@@ -620,7 +620,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
     ));
   }
 
-  Widget hotBook(hotest) {
+  Widget hotBook(hotest, context) {
     return Container(
       margin: EdgeInsets.only(top: 10),
       color: Colors.white,

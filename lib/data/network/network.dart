@@ -68,8 +68,8 @@ abstract class IApi {
 }
 
 class ApiImpl implements IApi {
-  // static final String ROOT_API = "https://api.oneadx.com/novel";
-  static final String ROOT_API = "http://192.168.0.163:5012";
+  static final String ROOT_API = "https://api.oneadx.com/novel";
+  // static final String ROOT_API = "http://192.168.0.163:5012";
 
   @override
   Future getData() {
