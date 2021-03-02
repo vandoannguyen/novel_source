@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/common/common.dart';
 
 void onDialogBottomSheet(BuildContext context) {
@@ -102,7 +103,7 @@ Widget dialogReward(BuildContext context, {callback}) {
             },
             selectedTileColor: Colors.grey[200],
             title: Text(
-              "No",
+              AppLocalizations.of(context).translate("No"),
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.grey[800]),
             ),

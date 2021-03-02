@@ -9,6 +9,7 @@ import 'package:init_app/screen/feedback/feedback_screen.dart';
 import 'package:init_app/screen/frequently_question/frequently_question_screen.dart';
 import 'package:init_app/screen/login/login_screen.dart';
 import 'package:init_app/screen/setting/setting_screen.dart';
+import 'package:init_app/utils/url_launcher.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PersonalController extends BaseController {
@@ -36,7 +37,7 @@ class PersonalController extends BaseController {
         Get.to(DetailTransactionScreen());
         break;
       case "SUPPORT":
-        _launchInBrowser(Common.fanpageLink);
+        launchInBrowser(Common.fanpageLink, false);
         break;
       case "COME_AUTHOR":
         Get.to(ComeAuthorScreen());
@@ -57,10 +58,12 @@ class PersonalController extends BaseController {
 
   void goFrequentlyQuestion(callBack) async {
     var data = await Get.to(FrequentlyQuestionScreen());
-    print("======================== ${data}");
+  
     if (data == 1) {
-      callBack;
+        print("======================== ${data}");
+      callBack();
     }
+    return;
   }
 
   void goBuyCoin() async {
@@ -73,20 +76,6 @@ class PersonalController extends BaseController {
     }
   }
 
-  Future<void> _launchInBrowser(String url) async {
-    if (await canLaunch(url)) {
-      await launch(
-        url,
-        forceSafariVC: true,
-        forceWebView: true,
-        enableJavaScript: true,
-        enableDomStorage: true,
-        //  headers: <String, String>{'my_header_key': 'my_header_value'},
-      );
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   void goLogin() async {
     var data = await Get.to(LoginScreen());

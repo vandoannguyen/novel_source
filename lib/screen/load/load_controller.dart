@@ -29,6 +29,7 @@ class LoadController extends BaseController {
 
   void login(context) async {
     String logedType = await RepositoryImpl.getInstance().getLogedData();
+    Common.logedType = logedType;
     if (logedType == null) {
       String email = await getRandomEmail();
       String timestamp =

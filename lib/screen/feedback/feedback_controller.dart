@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/utils/url_launcher.dart';
 
 class FeedbackController extends BaseController {
   // ignore: must_call_super
@@ -23,21 +24,22 @@ class FeedbackController extends BaseController {
     Get.back();
   }
 
-  void send(String email, String content) async {
-    Pattern pattern =
-        r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-        r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-        r"{0,253}[a-zA-Z0-9])?)*$";
-    RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(email) || email == null) {
-      Get.snackbar('', 'Enter a valid email address',
-          titleText: Text(
-            "ERROR",
-            style: TextStyle(color: Colors.red, fontSize: 18.0),
-          ),
-          snackPosition: SnackPosition.BOTTOM);
-    }
-    else if (content.isEmpty) {
+  void send(String content) async {
+    // Pattern pattern =
+    //     r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+    //     r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
+    //     r"{0,253}[a-zA-Z0-9])?)*$";
+    // RegExp regex = new RegExp(pattern);
+    // if (!regex.hasMatch(email) || email == null) {
+    //   Get.snackbar('', 'Enter a valid email address',
+    //       titleText: Text(
+    //         "ERROR",
+    //         style: TextStyle(color: Colors.red, fontSize: 18.0),
+    //       ),
+    //       snackPosition: SnackPosition.BOTTOM);
+    // }
+    // else 
+    if (content.isEmpty) {
       Get.snackbar('', 'You must fill out all information!',
           titleText: Text(
             "ERROR",
@@ -57,6 +59,6 @@ class FeedbackController extends BaseController {
   }
 
   void contactsFB() {
-    back();
+    launchInBrowser(Common.fanpageLink, false);
   }
 }

@@ -372,6 +372,7 @@ class TaskController extends BaseController {
   }
   // invited friend
   void inviteNext(String tex) async{
+
     if (isLogin) {
       if(tex.contains("invite")){
         await Get.to(InviteFriend());

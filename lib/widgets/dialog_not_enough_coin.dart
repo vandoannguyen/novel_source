@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 
 void showDialogNotEnough(context, callback) {
   showDialog(
@@ -14,7 +15,7 @@ Widget dialogNotEnoughCoin(context, callback) {
         children: [
           Container(
               padding: EdgeInsets.all(10),
-              child: Text("Not enough coin!",
+              child: Text("${AppLocalizations.of(context).translate("Not enough coin")}!",
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
@@ -22,7 +23,7 @@ Widget dialogNotEnoughCoin(context, callback) {
           Container(
             width: double.infinity,
             padding: EdgeInsets.only(top: 10, bottom: 10, left: 10),
-            child: Text("Do you want to get more?", style: textStyle()),
+            child: Text("${AppLocalizations.of(context).translate("Do you want to get more")}?", style: textStyle()),
           ),
           SizedBox(
             height: 10,
@@ -42,7 +43,7 @@ Widget dialogNotEnoughCoin(context, callback) {
                     color: Colors.transparent,
                     alignment: Alignment.center,
                     padding: EdgeInsets.only(top: 10, bottom: 10, left: 10),
-                    child: Text("No", style: textStyle()),
+                    child: Text(AppLocalizations.of(context).translate("No"), style: textStyle()),
                   ),
                 ),
                 GestureDetector(
@@ -55,7 +56,7 @@ Widget dialogNotEnoughCoin(context, callback) {
                     alignment: Alignment.center,
                     color: Colors.transparent,
                     padding: EdgeInsets.all(10),
-                    child: Text("Yes",
+                    child: Text(AppLocalizations.of(context).translate("Yes"),
                         style: TextStyle(fontSize: 15, color: Colors.red)),
                   ),
                 ),

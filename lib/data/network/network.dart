@@ -52,7 +52,7 @@ abstract class IApi {
 
   Future getUserProfile();
 
-  Future getSubscription();
+  Future getSubscription({lang});
 
   Future buySubscription({idSub});
 
@@ -558,20 +558,19 @@ class ApiImpl implements IApi {
   }
 
   @override
-  Future getSubscription() {
+  Future getSubscription({lang}) {
     // TODO: implement getSubcryption
     Completer completer = new Completer();
     String time = _getTimeStamp();
     String token = CryptUtils.genSha256(
-        "${Common.EXTEND_ONEADX_KEY}/subscriptions?timestamp=$time");
+        "${Common.EXTEND_ONEADX_KEY}/subscriptions?language=$lang&timestamp=$time");
     Dio()
-        .get("${ROOT_API}/subscriptions?timestamp=$time&oneadx_token=$token",
+        .get("${ROOT_API}/subscriptions?language=$lang&timestamp=$time&oneadx_token=$token",
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      print(value);
       if (value.data["code"] == 1)
-        completer.complete((value.data));
+        completer.complete((value.data["result"]));
       else
         throw ("data null ");
     }).catchError((err) {
@@ -582,11 +581,12 @@ class ApiImpl implements IApi {
 
   @override
   Future buySubscription({idSub}) {
+    print("id11111111 $idSub");
     // TODO: implement buySubscription
     Completer completer = Completer();
     String time = _getTimeStamp();
     String token = CryptUtils.genSha256(
-        "${Common.EXTEND_ONEADX_KEY}/payments/buy/$idSub?timestamp=$time");
+        "${Common.EXTEND_ONEADX_KEY}/payments/buy/$idSub?timestamp=$time");//payments/buy/601fb86359ef2609ecacbc08?timestamp=1612586520
     Dio()
         .post(
             "$ROOT_API}/payments/buy/$idSub?timestamp=$time&oneadx_token=$token",

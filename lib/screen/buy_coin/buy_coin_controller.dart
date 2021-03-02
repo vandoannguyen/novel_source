@@ -65,6 +65,8 @@ class BuyCoinController extends BaseController {
   BuyCoinController();
   onInit() {
     value = paymentMethods[0];
+    if (Common.listInapp == null || Common.listInapp.length == 0)
+      getSubscription();
   }
 
   void selectMethod(item) {
@@ -74,18 +76,32 @@ class BuyCoinController extends BaseController {
 
   void buyCoin(value) {
     print(value);
-    Common.coin += value["coin"] + value["coinExtra"];
+    Get.back();
+    RepositoryImpl.getInstance()
+        .buySubscription(idSub: value["id"])
+        .then((value) {
+      print("getSubscription ${value}");
+
+      Get.snackbar('', 'Deposit coins success! You have ${Common.coin}!',
+          titleText: Text(
+            "SUCCESS",
+            style: TextStyle(color: Colors.green, fontSize: 18.0),
+          ),
+          snackPosition: SnackPosition.BOTTOM);
+    }).catchError((err) {
+      print(err);
+      Get.snackbar('', err,
+          titleText: Text(
+            "ERROR",
+            style: TextStyle(color: Colors.red, fontSize: 18.0),
+          ),
+          snackPosition: SnackPosition.BOTTOM);
+    });
+    // Common.coin += value["coin"] + value["coinExtra"];
     // coinDemo =Common.coin.obs;
     // setCoin(Common.coin);
 
-    print("coinDemo ${coinDemo}");
-    Get.back();
-    Get.snackbar('', 'Deposit coins success! You have ${Common.coin}!',
-        titleText: Text(
-          "SUCCESS",
-          style: TextStyle(color: Colors.green, fontSize: 18.0),
-        ),
-        snackPosition: SnackPosition.BOTTOM);
+    // print("coinDemo ${coinDemo}");
   }
 
   void goTutorialBuyCoin() {
@@ -93,8 +109,10 @@ class BuyCoinController extends BaseController {
   }
 
   void getSubscription() {
-    RepositoryImpl.getInstance().getSubscription().then((value) {
-      print(value);
+    RepositoryImpl.getInstance()
+        .getSubscription(lang: Common.language)
+        .then((value) {
+      print("getSubscription ${value}");
       Common.listInapp = value;
     }).catchError((err) {
       print(err);

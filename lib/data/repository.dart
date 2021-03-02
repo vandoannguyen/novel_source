@@ -214,9 +214,9 @@ class RepositoryImpl implements IRepository {
   }
 
   @override
-  Future getSubscription() {
+  Future getSubscription({lang}) {
     // TODO: implement getSubcryption
-    return _api.getSubscription();
+    return _api.getSubscription(lang: lang);
   }
 
   @override

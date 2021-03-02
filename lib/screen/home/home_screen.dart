@@ -52,6 +52,7 @@ class _HomeState extends State<HomeScreen> {
   }
 
   void callBack(key, value) {
+    print(key +  value.toString());
     switch (key) {
       case "GOTO_TAB":
         _onItemTapped(value);

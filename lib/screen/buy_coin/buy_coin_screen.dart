@@ -16,7 +16,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: BuyCoinController());
-    if (Common.listInapp == null) controller.getSubscription();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -67,7 +67,8 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                 color: Color(Constant.colorTxtSecond),
                 textColor: Colors.white,
                 child: Text(
-                  "Deposit coins",
+                  AppLocalizations.of(context)
+                              .translate("deposit coin"),
                   style: TextStyle(
                     fontSize: 16.0,
                   ),
@@ -117,7 +118,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                 childAspectRatio: 1.5,
                                 crossAxisCount: 2,
                                 children: List.generate(
-                                    controller.coinPackage.length, (index) {
+                                    Common.listInapp.length, (index) {
                                   return GestureDetector(
                                     onTap: () {
                                       Navigator.pop(context);
@@ -148,12 +149,12 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                 ),
                                                 Container(
                                                   padding: EdgeInsets.fromLTRB(
-                                                      10.0, 0.0, 10.0, 15.0),
+                                                      10.0, 5.0, 10.0, 20.0),
                                                   child: Row(
                                                     children: [
                                                       Expanded(
                                                         child: Text(
-                                                          "Buy coins",
+                                                          AppLocalizations.of(context).translate("Buy coin"),
                                                           style: TextStyle(
                                                               color: Color(Constant
                                                                   .colorTxtDefault),
@@ -165,7 +166,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                             children: [
                                                               new TextSpan(
                                                                 text:
-                                                                    '${controller.coinPackage[index]["coin"]}',
+                                                                    '${Common.listInapp[index]["coin"]}',
                                                                 style: TextStyle(
                                                                     color: Colors
                                                                         .black,
@@ -174,7 +175,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                               ),
                                                               new TextSpan(
                                                                 text:
-                                                                    ' + ${controller.coinPackage[index]["coinExtra"]}',
+                                                                    ' + ${int.parse((Common.listInapp[index]["coin"]*Common.listInapp[index]["x_percent"]/100).toStringAsFixed(0))}',
                                                                 style: TextStyle(
                                                                     color: Color(
                                                                         Constant
@@ -195,12 +196,15 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                 ),
                                                 Container(
                                                   padding: EdgeInsets.fromLTRB(
-                                                      10.0, 0.0, 10.0, 15.0),
+                                                      10.0, 0.0, 10.0, 20.0),
                                                   child: Row(
                                                     children: [
                                                       Expanded(
                                                         child: Text(
-                                                          "Price",
+                                                          AppLocalizations.of(
+                                                                  context)
+                                                              .translate(
+                                                                  "Price"),
                                                           style: TextStyle(
                                                               color: Color(Constant
                                                                   .colorTxtDefault),
@@ -208,8 +212,8 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                         ),
                                                       ),
                                                       Text(
-                                                        controller.coinPackage[
-                                                            index]["moneyVN"],
+                                                        Common.listInapp[
+                                                            index]["title"],
                                                         style: TextStyle(
                                                             color: Color(Constant
                                                                 .colorTxtDefault),
@@ -218,46 +222,50 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                     ],
                                                   ),
                                                 ),
-                                                Container(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      10.0, 0.0, 10.0, 20.0),
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Text(
-                                                          "International prices",
-                                                          style: TextStyle(
-                                                              color: Color(Constant
-                                                                  .colorTxtDefault),
-                                                              fontSize: 16.0),
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        controller.coinPackage[
-                                                                index]
-                                                            ["moneyForeign"],
-                                                        style: TextStyle(
-                                                            color: Color(Constant
-                                                                .colorTxtSecond),
-                                                            fontSize: 16.0),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
+                                                // Container(
+                                                //   padding: EdgeInsets.fromLTRB(
+                                                //       10.0, 0.0, 10.0, 20.0),
+                                                //   child: Row(
+                                                //     children: [
+                                                //       Expanded(
+                                                //         child: Text(
+                                                //           AppLocalizations.of(
+                                                //                   context)
+                                                //               .translate(
+                                                //                   "International price"),
+                                                //           style: TextStyle(
+                                                //               color: Color(Constant
+                                                //                   .colorTxtDefault),
+                                                //               fontSize: 16.0),
+                                                //         ),
+                                                //       ),
+                                                      // Text(
+                                                      //   Common.listInapp[
+                                                      //           index]
+                                                      //       ["moneyForeign"],
+                                                      //   style: TextStyle(
+                                                      //       color: Color(Constant
+                                                      //           .colorTxtSecond),
+                                                      //       fontSize: 16.0),
+                                                      // )
+                                                //     ],
+                                                //   ),
+                                                // ),
                                                 Container(
                                                   width: double.infinity,
                                                   height: 50.0,
                                                   child: RaisedButton(
                                                     onPressed: () {
                                                       controller.buyCoin(
-                                                          controller
-                                                                  .coinPackage[
-                                                              index]);
+                                                          Common.listInapp[index]);
                                                     },
                                                     color: Color(Constant
                                                         .colorTxtSecond),
                                                     textColor: Colors.white,
-                                                    child: Text("Thanh toán",
+                                                    child: Text(
+                                                        AppLocalizations.of(
+                                                                context)
+                                                            .translate("pay"),
                                                         style: TextStyle(
                                                           fontSize: 16.0,
                                                         )),
@@ -273,8 +281,8 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                       children: [
                                         Container(
                                           width: double.infinity,
-                                          color: controller.coinPackage[index]
-                                                  ["sale"]
+                                          color: Common.listInapp[index]
+                                                  ["bestChoice"]
                                               ? Color(Constant.colorTxtSecond)
                                                   .withOpacity(0.3)
                                               : Colors.white,
@@ -295,14 +303,14 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                   text: new TextSpan(children: [
                                                     new TextSpan(
                                                       text:
-                                                          '${controller.coinPackage[index]["coin"]}',
+                                                          '${Common.listInapp[index]["coin"]}',
                                                       style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 16.0),
                                                     ),
                                                     new TextSpan(
                                                       text:
-                                                          ' + ${controller.coinPackage[index]["coinExtra"]}',
+                                                          ' + ${int.parse((Common.listInapp[index]["coin"]*Common.listInapp[index]["x_percent"]/100).toStringAsFixed(0))}',
                                                       style: TextStyle(
                                                           color: Color(Constant
                                                               .colorTxtSecond),
@@ -312,8 +320,8 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                 ),
                                               ),
                                               Text(
-                                                controller.coinPackage[index]
-                                                    ["moneyVN"],
+                                                Common.listInapp[index]
+                                                    ["title"],
                                                 style: TextStyle(
                                                   color: Color(
                                                       Constant.colorTxtDefault),
@@ -322,7 +330,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                             ],
                                           ),
                                         ),
-                                        controller.coinPackage[index]["sale"]
+                                        Common.listInapp[index]["bestChoice"]
                                             ? Positioned(
                                                 top: 0,
                                                 right: 0,
@@ -345,7 +353,8 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(vertical: 15.0),
                                   child: Text(
-                                    'How to deposit coins?',
+                                    AppLocalizations.of(context)
+                                        .translate("How to deposit coins?"),
                                     style: TextStyle(
                                         decoration: TextDecoration.underline,
                                         color: Color(Constant.colorTxtDefault)),

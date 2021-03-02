@@ -90,9 +90,10 @@ class TaskScreen extends BaseWidget<TaskController> {
                       // init: TaskController(), // INIT IT ONLY THE FIRST TIME
                       builder: (_) => _.isCheckdInScreen
                           ? Container(
-                              height: 80.0,
-                              width: 80.0,
+                              height: 90.0,
+                              width: 90.0,
                               margin: EdgeInsets.only(top: 60.0, bottom: 20.0),
+                              padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 10.0),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
@@ -116,14 +117,15 @@ class TaskScreen extends BaseWidget<TaskController> {
                                   Icon(
                                     Icons.check_rounded,
                                     color: Color(Constant.colorTxtPrimary),
-                                    size: 30.0,
-                                  )
+                                    size: 26.0,
+                                  ),
                                 ],
                               ))
                           : Container(
-                              height: 80.0,
-                              width: 80.0,
+                              height: 90.0,
+                              width: 90.0,
                               margin: EdgeInsets.only(top: 60.0, bottom: 20.0),
+                                 padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 image: DecorationImage(

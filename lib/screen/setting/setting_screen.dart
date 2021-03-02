@@ -232,7 +232,8 @@ class SettingScreen extends BaseWidget<SettingController> {
                 name: AppLocalizations.of(context).translate("logout"),
                 color: Color(Constant.colorTxtSecond),
                 txtSize: 16.0,
-                func: () {},
+                func: () {
+                },
               ),
             ),
           ],

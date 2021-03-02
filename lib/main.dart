@@ -23,95 +23,97 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 //     Locale myLocale = Localizations.localeOf(context);
 // print("myLocale myLocale myLocale $myLocale");
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        Locale('en', 'US'),
-        Locale('vi', 'VN'),
-        Locale('id', 'ID'),
-        Locale('th', 'TH'),
-      ],
-      localeResolutionCallback: (locale, supportedLocales) {
-        for (var supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale.languageCode &&
-              supportedLocale.countryCode == locale.countryCode) {
-            Common.langNow = supportedLocale.languageCode;
-            print(
-                "myLocale myLocale myLocale ${supportedLocale.countryCode} ${supportedLocale.languageCode}");
-            return supportedLocale;
+    return RestartWidget(
+          child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en', 'US'),
+          Locale('vi', 'VN'),
+          Locale('id', 'ID'),
+          Locale('th', 'TH'),
+        ],
+        localeResolutionCallback: (locale, supportedLocales) {
+          for (var supportedLocale in supportedLocales) {
+            if (supportedLocale.languageCode == locale.languageCode &&
+                supportedLocale.countryCode == locale.countryCode) {
+              Common.langNow = supportedLocale.languageCode;
+              print(
+                  "myLocale myLocale myLocale ${supportedLocale.countryCode} ${supportedLocale.languageCode}");
+              return supportedLocale;
+            }
           }
-        }
-        return supportedLocales.first;
-      },
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+          return supportedLocales.first;
+        },
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
 // home: HomePage(),
-      initialRoute: Routes.load,
-      getPages: [
-        GetPage(
-          name: Routes.home,
-          page: () => HomeScreen(),
-        ),
-        // GetPage(
-        //   name: Routes.bookcase,
-        //   page: () => BookcaseScreen((_) {}),
-        // ),
-        GetPage(
-          name: Routes.bookstore,
-          page: () => BookstoreScreen(),
-        ),
-        GetPage(
-          name: Routes.tasks,
-          page: () => TaskScreen(),
-        ),
-        GetPage(
-          name: Routes.personal,
-          page: () => PersonalScreen(),
-        ),
-        GetPage(
-          name: Routes.load,
-          page: () => LoadScreen(),
-        ),
-      ],
+        initialRoute: Routes.load,
+        getPages: [
+          GetPage(
+            name: Routes.home,
+            page: () => HomeScreen(),
+          ),
+          // GetPage(
+          //   name: Routes.bookcase,
+          //   page: () => BookcaseScreen((_) {}),
+          // ),
+          GetPage(
+            name: Routes.bookstore,
+            page: () => BookstoreScreen(),
+          ),
+          GetPage(
+            name: Routes.tasks,
+            page: () => TaskScreen(),
+          ),
+          GetPage(
+            name: Routes.personal,
+            page: () => PersonalScreen(),
+          ),
+          GetPage(
+            name: Routes.load,
+            page: () => LoadScreen(),
+          ),
+        ],
+      ),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class RestartWidget extends StatefulWidget {
+  RestartWidget({this.child});
+
+  final Widget child;
+
+  static void restartApp(BuildContext context) {
+    context.findAncestorStateOfType<_RestartWidgetState>().restartApp();
+  }
+
+  @override
+  _RestartWidgetState createState() => _RestartWidgetState();
+}
+
+class _RestartWidgetState extends State<RestartWidget> {
+  Key key = UniqueKey();
+
+  void restartApp() {
+    setState(() {
+      key = UniqueKey();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter demo app'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Text(
-            AppLocalizations.of(context).translate('coin balance'),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 24.0,
-            ),
-          ),
-          Text(
-            'Chào mừng bạn đến với Flutter',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20.0,
-            ),
-          )
-        ],
-      ),
+    return KeyedSubtree(
+      key: key,
+      child: widget.child,
     );
   }
 }
