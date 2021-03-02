@@ -3,24 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
-import 'package:init_app/screen/detail_transaction/task_history/task_history_controller.dart';
+import 'package:init_app/screen/detail_transaction/misson_widget/mission_widget_controller.dart';
+
+import '../../../common/common.dart';
 
 // ignore: must_be_immutable
-class TaskHistoryScreen extends BaseWidget<TaskHistoryController> {
-  static const String routeName = '/task-history';
-  static const String name = 'tasks';
+class MissionWidgetScreen extends BaseWidget<MissionWidgetController> {
+  static const String routeName = '/mission-widget';
+  static const String name = 'mission';
 
   @override
   void dispose() {}
   @override
   Widget build(BuildContext context, {controllerSuper}) {
-    super.build(context, controllerSuper: TaskHistoryController());
+    super.build(context, controllerSuper: MissionWidgetController());
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      body: controller.loadedcoin.isNotEmpty ? ListView.builder(
+      body: controller.missions.isNotEmpty ? ListView.builder(
           physics: AlwaysScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: controller.loadedcoin.length,
+          itemCount: controller.missions.length,
           itemBuilder: (BuildContext context, int index) {
             return ExpandablePanel(
               theme: ExpandableThemeData(
@@ -38,20 +40,20 @@ class TaskHistoryScreen extends BaseWidget<TaskHistoryController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
 
-                      Text(
-                          "${controller.loadedcoin[index]["datetime"]}",
-                          style: TextStyle(
-                              fontSize: 13.0, fontWeight: FontWeight.w500)),
+                       Text(
+                            "${controller.missions[index]["datetime"]}",
+                            style: TextStyle(
+                                fontSize: 13.0, fontWeight: FontWeight.w500)),
 
 
-                      Row(
-                        children: [
-                          Text(
-                              "Tong xu thu vao: +${controller.loadedcoin[index]["coin"]}",
-                              style: TextStyle(
-                                  fontSize: 15.0, fontWeight: FontWeight.w500)),
-                          Image.asset(Common.pathImg + "ic_coin.png", height: 13.0, width: 13.0,)
-                        ],
+                         Row(
+                          children: [
+                            Text(
+                                "Tong xu thu vao: +${controller.missions[index]["coin"]}",
+                                style: TextStyle(
+                                    fontSize: 15.0, fontWeight: FontWeight.w500)),
+                            Image.asset(Common.pathImg + "ic_coin.png", height: 13.0, width: 13.0,)
+                          ],
                       ),
                     ],
                   ),
@@ -62,13 +64,13 @@ class TaskHistoryScreen extends BaseWidget<TaskHistoryController> {
                   EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
                   color: Colors.white,
                   child: Column(
-                    children: (controller.loadedcoin[index]["answer"] as List)
+                    children: (controller.missions[index]["answer"] as List)
                         .map((item) => Container(
                       margin: EdgeInsets.only(top: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("${item["napxu"]}", style: TextStyle(color: Colors.black)),
+                          Text("${item["mission"]}", style: TextStyle(color: Colors.black)),
                           Row(
                             children: [
                               Text(
@@ -90,9 +92,9 @@ class TaskHistoryScreen extends BaseWidget<TaskHistoryController> {
                   )),
             );
           }) : Container(
-          child: Center(
-            child: Text("Data null"),
-          )
+        child: Center(
+          child: Text("Data null"),
+        )
       ),
     );
   }

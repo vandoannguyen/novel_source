@@ -1,18 +1,17 @@
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
-import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_screen.dart';
 
-class TaskHistoryController extends BaseController {
-  List<Map<String, dynamic>> loadedcoin = [
+class ExpenseWidgetController extends BaseController {
+  List<Map<String, dynamic>> expenses = [
     {
       "datetime": "12-02-2020",
       "answer": [
         {
-          "napxu" : "Nap bang tai khoan google",
+          "expense" : "Tru phi doc truyen",
           "coin": "30",
         },
         {
-          "napxu" : "Nap bang the cao viettel",
+          "expense" : "Tru phi thuong  ",
           "coin": "50",
         }
       ],
@@ -21,11 +20,11 @@ class TaskHistoryController extends BaseController {
       "datetime": "13-02-2020",
       "answer": [
         {
-          "napxu" : "Nap bang the cao viettel",
+          "expense" : "Tru phi doc truyen ",
           "coin": "30",
         },
         {
-          "napxu" : "Nap bang tai khoan google ",
+          "expense" : "Tru phi thuong  ",
           "coin": "50",
         }
       ],
@@ -34,11 +33,11 @@ class TaskHistoryController extends BaseController {
       "datetime": "14-02-2020",
       "answer": [
         {
-          "napxu" : "Nap bang the cao viettel",
+          "expense" : "Tru phi doc truyen ",
           "coin": "30",
         },
         {
-          "napxu" : "Nap bang tai khoan google  ",
+          "expense" : "Tru phi thuong  ",
           "coin": "50",
         }
       ],
@@ -47,22 +46,19 @@ class TaskHistoryController extends BaseController {
       "datetime": "15-02-2020",
       "answer": [
         {
-          "napxu" : "Nap bang the cao viettel ",
+          "expense" : "Tru phi doc truyen ",
           "coin": "30",
         },
         {
-          "napxu" : "Nap bang the cao viettel ",
+          "expense" : "Tru phi thuong  ",
           "coin": "50",
         }
       ],
     }
   ];
 
-  TaskHistoryController();
+  ExpenseWidgetController();
 
   onInit() {}
 
-  void goTutorial() {
-    Get.to(TutorialBuyCoinScreen());
-  }
 }

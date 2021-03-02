@@ -3,6 +3,8 @@ import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/detail_transaction/detail_transaction_controller.dart';
+import 'package:init_app/screen/detail_transaction/expense_widget/expense_widget_screen.dart';
+import 'package:init_app/screen/detail_transaction/misson_widget/mission_widget_screen.dart';
 import 'package:init_app/screen/detail_transaction/task_history/task_history_screen.dart';
 import 'package:init_app/widgets/appbar_second.dart';
 
@@ -42,8 +44,8 @@ class DetailTransactionScreen extends BaseWidget<DetailTransactionController> {
                 controller: controller.controllerTab,
                 children: <Widget>[
                   TaskHistoryScreen(),
-                  TaskHistoryScreen(),
-                  TaskHistoryScreen(),
+                  MissionWidgetScreen(),
+                  ExpenseWidgetScreen(),
                 ],
               ),
             )

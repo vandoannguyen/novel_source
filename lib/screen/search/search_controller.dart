@@ -6,22 +6,26 @@ import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_screen.dart';
 import 'package:init_app/utils/intent_animation.dart';
 
-class SearchController extends BaseController {
-  SearchController();
+import '../../data/network/NovalModel.dart';
 
+class SearchController extends BaseController {
   TextEditingController textcontroller = new TextEditingController();
   FocusNode searchFocus = FocusNode();
   List<NovelModel> listHotest;
   List<NovelModel> listNewest;
   List<NovelModel> listSearch;
-
   bool isFocus = false;
   var page = 1;
   bool isLoadAll = false;
   bool isLoading = false;
   bool isLoadMore = false;
-  bool isSearch = false;
+
+  // bool isSearch = false;
   var limitPerpage = 20;
+
+  SearchController() {
+    listSearch = new List();
+  }
 
   void onClickSearch() {
     textcontroller.clear();
@@ -53,7 +57,7 @@ class SearchController extends BaseController {
     isLoading = true;
     RepositoryImpl.getInstance()
         .getNovelHotest(
-            language: Common.language, page: page, limitPerPage: limitPerpage)
+        language: Common.language, page: page, limitPerPage: limitPerpage)
         .then((value) {
       isLoading = false;
       if (isLoadMore) {
@@ -69,17 +73,13 @@ class SearchController extends BaseController {
   }
 
   void getSearch(String data) {
+    listSearch = null;
+    update();
     RepositoryImpl.getInstance().search(data).then((value) {
       listSearch = (value as List)
           .map((element) => NovelModel.fromJson(element))
           .toList();
-      if (listSearch.length == 0) {
-        isSearch = true;
-        print("isSearch1 $value");
-        print("isSearch2 $listSearch");
-      } else {
-        isSearch = false;
-      }
+      if(listSearch == null) listSearch= [];
       update();
     }).catchError((err) {
       print(err);
@@ -87,10 +87,9 @@ class SearchController extends BaseController {
   }
 // void getSearchComplete(String data){
 //   RepositoryImpl.getInstance().searchAutoComplete(data).then((value) {
-//     listSearch = value;
+//     listSearch = (value as List).map((e) => NovelModel.fromJson(e)).toList();
 //     update();
 //     print("getSearchComplete $value");
 //   }).catchError((err){print(err);});
 // }
-
 }

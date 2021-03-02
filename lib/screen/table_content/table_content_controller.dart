@@ -57,9 +57,7 @@ class TableContentController extends BaseController {
     setIsLoading();
     isLoadChapterSuccess = false;
     if (!isLoadMore) update();
-    RepositoryImpl.getInstance()
-        .chapByNoval(id: id, page: page, limit: limit)
-        .then((value) {
+    RepositoryImpl.getInstance().chapByNoval(id: id, page: page, limit: limit).then((value) {
       if (isLoadMore) {
         isLoadMore = false;
         update();
@@ -97,8 +95,7 @@ class TableContentController extends BaseController {
     print("listChapterBought.contains(chapter.id)${listChapterBought}");
     if (chapter.coin > 0 && !listChapterBought.contains(chapter.id)) {
       if (Common.coin > chapter.coin) {
-        showDialogConfirmBuyChapter(context, chapter.coin,
-            callback: (isAccept) {
+        showDialogConfirmBuyChapter(context, chapter.coin, callback: (isAccept) {
           if (isAccept) {
             Common.coin -= chapter.coin;
             listChapterBought.add(chapter.id);
@@ -110,10 +107,7 @@ class TableContentController extends BaseController {
       } else {
         showDialogNotEnough(context, (isAccept) {
           if (isAccept) {
-            IntentAnimation.intentNomal(
-                context: (context),
-                screen: BuyCoinScreen(),
-                option: IntentAnimationOption.RIGHT_TO_LEFT);
+            IntentAnimation.intentNomal(context: (context), screen: BuyCoinScreen(), option: IntentAnimationOption.RIGHT_TO_LEFT);
           }
         });
         return;
@@ -126,14 +120,12 @@ class TableContentController extends BaseController {
     showDialogLoading(context);
     RepositoryImpl.getInstance().readNoval(id: chapter.id).then((value) {
       print(value);
-      String data = CryptUtils.decryptAESCryptoJS(
-          value["result"]["content_text"], Common.ONEADX_KEY);
+      String data = CryptUtils.decryptAESCryptoJS(value["result"]["content_text"], Common.ONEADX_KEY);
       var chap = value["result"]["title"];
       var read = CryptUtils.decodeBase4(data);
       _insertChapterRead(chapter, value["result"]);
       Navigator.of(context).pop();
-      CallNativeUtils.invokeMethod(
-          method: "read", aguments: {"title": chap, "content": read});
+      CallNativeUtils.invokeMethod(method: "read", aguments: {"title": chap, "content": read});
     }).catchError((err) {
       print(err);
     });
@@ -155,26 +147,16 @@ class TableContentController extends BaseController {
   }
 
   void _insertChapterRead(NovalChapterModel chapter, read) {
-    List datas = Common.listReadChapter
-        .where((element) => element["idBook"] == chapter.bookId)
-        .toList();
+    List datas = Common.listReadChapter.where((element) => element["idBook"] == chapter.bookId).toList();
     // kiểm tra xem sách đã có trong list đã đọc hay chưa
     if (datas.length > 0) {
       if (datas[0]["chapterNum"] != chapter.num) {
-        Common.listReadChapter = Common.listReadChapter
-            .where((e) => e["idBook"] != chapter.bookId)
-            .toList();
-        Common.listReadChapter.add({
-          "idBook": chapter.bookId,
-          "chapterNum": chapter.num,
-          "read": read
-        });
+        Common.listReadChapter = Common.listReadChapter.where((e) => e["idBook"] != chapter.bookId).toList();
+        Common.listReadChapter.add({"idBook": chapter.bookId, "chapterNum": chapter.num, "read": read});
       }
     } else {
-      Common.listReadChapter.add(
-          {"idBook": chapter.bookId, "chapterNum": chapter.num, "read": read});
+      Common.listReadChapter.add({"idBook": chapter.bookId, "chapterNum": chapter.num, "read": read});
     }
-    RepositoryImpl.getInstance()
-        .setReadNovel(jsonEncode(Common.listReadChapter));
+    RepositoryImpl.getInstance().setReadNovel(jsonEncode(Common.listReadChapter));
   }
 }

@@ -96,6 +96,24 @@ class PersonalController extends BaseController {
     }
   }
 
+  void goDetailTransaction() async {
+    if (isLogin) {
+      Get.to(DetailTransactionScreen());
+      update();
+    } else {
+      goLogin();
+    }
+  }
+
+  void goFeedback() {
+    if (isLogin) {
+      Get.to(FeedbackScreen());
+      update();
+    } else {
+      goLogin();
+    }
+  }
+
   void goBuyCoin() async {
     if (isLogin) {
       await Get.to(BuyCoinScreen());

@@ -7,6 +7,7 @@ import 'package:init_app/screen/login/login_screen.dart';
 import 'package:init_app/screen/task/dialog_checkin.dart';
 import 'package:get/get.dart';
 import '../../common/common.dart';
+import '../../common/common.dart';
 import '../../data/repository.dart';
 
 class TaskController extends BaseController {
@@ -360,7 +361,7 @@ class TaskController extends BaseController {
   void setCheckIn(int days) async {
     Common.days = days;
     await RepositoryImpl.getInstance().setCheckin("${Common.days}");
-    Common.coin_checkin += getCoin(Common.days);
+    Common.coin += getCoin(Common.days);
     await RepositoryImpl.getInstance().setDatetime(date);
     Fluttertoast.showToast(
         msg: "You have +${getCoin(Common.days)} coin",
@@ -372,7 +373,7 @@ class TaskController extends BaseController {
   }
   // invited friend
   void inviteNext(String tex) async{
-    if (isLogin) {
+    if (Common.isLogedIn) {
       if(tex.contains("invite")){
         await Get.to(InviteFriend());
       }else{

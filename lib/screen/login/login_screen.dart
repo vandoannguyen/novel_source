@@ -6,12 +6,14 @@ import 'package:init_app/common/common.dart';
 
 import 'login_controller.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends BaseWidget<LoginController> {
-  Future<void> loginFaebook() async {
-    controller.loginFaceook();
+  static const String routeName = "/login";
+  Future<void> loginFacebook() async {
+    controller.loginFacebook();
   }
 
-  void logiGoogle() {
+  void loginGoogle() {
     controller.loginGoogle();
   }
 
@@ -34,7 +36,7 @@ class LoginScreen extends BaseWidget<LoginController> {
             ),
             GestureDetector(
               onTap: () {
-                loginFaebook();
+                loginFacebook();
               },
               child: Container(
                 margin: EdgeInsets.only(left: 30, right: 30, bottom: 10),
@@ -87,7 +89,7 @@ class LoginScreen extends BaseWidget<LoginController> {
             // ),
             GestureDetector(
               onTap: () {
-                logiGoogle();
+                loginGoogle();
               },
               child: Container(
                 margin: EdgeInsets.only(left: 30, right: 30, bottom: 10),

@@ -1,10 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
-import 'package:init_app/data/network/NovalModel.dart';
 import 'package:init_app/screen/search/search_controller.dart';
 
 // ignore: must_be_immutable
@@ -17,9 +15,10 @@ class SearchScreen extends BaseWidget<SearchController> {
     super.build(context, controllerSuper: SearchController());
     controller.getNewest();
     controller.getHotest();
-    // List<NovelModel> users;
-    ValueNotifier<List<NovelModel>> filtered =
-        ValueNotifier<List<NovelModel>>([]);
+    // ValueNotifier<List<NovelModel>> filtered =
+    //     ValueNotifier<List<NovelModel>>([]);
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: 30),
@@ -46,8 +45,8 @@ class SearchScreen extends BaseWidget<SearchController> {
                     height: 30,
                     width: MediaQuery.of(context).size.width * 0.72,
                     margin: EdgeInsets.only(top: 6, bottom: 6),
-                    //margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
-                    //padding: EdgeInsets.symmetric(vertical: 5.0),
+                    // margin: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
+                    // padding: EdgeInsets.symmetric(vertical: 5.0),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -62,41 +61,9 @@ class SearchScreen extends BaseWidget<SearchController> {
                             controller: _.textcontroller,
                             onChanged: (text) {
                               if (text.length > 0) {
-                                filtered.value = [];
                                 controller.getSearch(text);
-                                for (int i = 0;
-                                    i < controller.listSearch.length;
-                                    i++) {
-                                  if (controller.listSearch[i].name
-                                      .toString()
-                                      .toLowerCase()
-                                      .contains(text.toLowerCase())) {
-                                    filtered.value
-                                        .add(controller.listSearch[i]);
-                                    controller.update();
-                                  }
-                                }
-                              } else {
-                                filtered.value = [];
-                                controller.update();
                               }
                             },
-                            // onSubmitted: (value){
-                            //     if (value.length > 0) {
-                            //         filtered.value = [];
-                            //         controller.getSearch(value);
-                            //         print("onChanged $controller.listSearch");
-                            //         for (int i = 0; i < controller.listSearch.length; i++) {
-                            //           if (controller.listSearch[i].name.toString().toLowerCase().contains(value.toLowerCase())) {
-                            //             filtered.value.add(controller.listSearch[i]);
-                            //             controller.update();
-                            //           }
-                            //         }
-                            //       } else {
-                            //         filtered.value = [];
-                            //         controller.update();
-                            //       }
-                            // },
                             decoration: InputDecoration(
                               contentPadding:
                                   EdgeInsets.only(top: 3, left: 15.0),
@@ -135,7 +102,7 @@ class SearchScreen extends BaseWidget<SearchController> {
                         padding: EdgeInsets.all(10),
                         child: Center(
                             child: Text(
-                          "No",
+                              "No",
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 12),
                         ))),
@@ -146,54 +113,54 @@ class SearchScreen extends BaseWidget<SearchController> {
             Expanded(child: GetBuilder<SearchController>(
                 // global: false,
                 builder: (__) {
-              print(__.isFocus);
               return __.isFocus
-                  ?
-                  // ValueListenableBuilder<List>(
-                  //         valueListenable: filtered,
-                  //         builder: (context, value, _) {
-                  //           return Container(
-                  Container(
-                      child: filtered.value.length > 0
-                          ? ListView.builder(
-                              itemCount: filtered.value.length,
-                              itemBuilder: (context, index) {
-                                final item = filtered.value[index];
-                                return ListTile(
-                                  leading: Image.network(
-                                    "${item.bpic}",
-                                    fit: BoxFit.cover,
-                                    height: 100,
-                                    width: 100,
-                                  ),
-                                  title: Text(item.name),
-                                  subtitle: Text(
-                                    item.desc,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.grey[800],
-                                        fontSize: 13.0),
-                                  ),
-                                  onTap: () {
-                                    __.clickItem(index, item);
-                                    __.onClickSearch();
-                                  },
-                                );
-                              })
+                  ? Container(
+                      child: __.listSearch != null
+                          ? Container(
+                              child: __.listSearch.length > 0
+                                  ? ListView.builder(
+                                      itemCount: controller.listSearch.length,
+                                      itemBuilder: (context, index) {
+                                        final item =
+                                            controller.listSearch[index];
+                                        return ListTile(
+                                          leading: Image.network(
+                                            "${item.bpic}",
+                                            fit: BoxFit.cover,
+                                            height: 100,
+                                            width: 100,
+                                          ),
+                                          title: Text(item.name),
+                                          subtitle: Text(
+                                            item.desc,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: Colors.grey[800],
+                                                fontSize: 13.0),
+                                          ),
+                                          onTap: () {
+                                            __.clickItem(index, item);
+                                            __.onClickSearch();
+                                          },
+                                        );
+                                      })
+                                  : Container(
+                                      child: Text(
+                                        "List is empty",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15.0),
+                                      ),
+                                    ),
+                            )
                           : Container(
-                              margin: EdgeInsets.all(110.0),
-                              height: 30.0,
-                              child: __.isSearch
-                                  ? Text(
-                                      "khong co sach nao khop",
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 15.0),
-                                    )
-                                  : CircularProgressIndicator()),
+                        alignment: Alignment.topCenter,
+                              child: Container(
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
                     )
-                  //);
-                  //})
                   : Container(
                       child: Column(
                         children: [
@@ -377,50 +344,6 @@ class SearchScreen extends BaseWidget<SearchController> {
                     );
             }))
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class MyBottomSheet extends StatefulWidget {
-  final TextEditingController textcontroller;
-  const MyBottomSheet({Key key, this.textcontroller}) : super(key: key);
-
-  @override
-  _MyBottomSheetState createState() => _MyBottomSheetState();
-}
-
-class _MyBottomSheetState extends State<MyBottomSheet> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: TextField(
-        // onTap: () {
-        //   controller.isFocus = true;
-        // },
-        controller: widget.textcontroller,
-        // textAlign: TextAlign.center,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(top: 3, left: 15.0),
-          fillColor: Colors.grey[400],
-          hintText: "Search book, author",
-          hintStyle: TextStyle(
-            color: Colors.grey[400],
-            fontSize: 12,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(32.0),
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1.0),
-            borderRadius: const BorderRadius.all(
-              const Radius.circular(32.0),
-            ),
-          ),
         ),
       ),
     );

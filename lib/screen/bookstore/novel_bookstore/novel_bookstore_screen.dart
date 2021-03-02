@@ -287,7 +287,6 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                                               fontSize: 13.5,
                                               height: 1.25),
                                           maxLines: 3,
-
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.center,
                                         ),
