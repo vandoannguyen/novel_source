@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:init_app/common/common.dart';
-import 'package:init_app/widgets/dialog_loading.dart';
-import 'package:installed_apps/app_info.dart';
+import 'package:init_app/data/repository.dart';
 import 'package:installed_apps/installed_apps.dart';
 import 'package:social_share_plugin/social_share_plugin.dart';
 
@@ -17,11 +16,18 @@ class InviteFriendWidget extends StatefulWidget {
 
 class _InviteFriendWidgetState extends State<InviteFriendWidget> {
   // List<AppInfo> apps = [];
+  String idInvite = "";
   @override
   void setState(fn) async{
     // TODO: implement setState
     super.setState(fn);
 
+  }
+  void getInviteFriend(String idUser){
+    RepositoryImpl.getInstance().inviteFriend(idUser: idUser).then((value) {
+      print("getInviteFriend $value");
+      idInvite = value;
+    }).catchError((err){});
   }
   //copylink
   void _copyLink(String text){
@@ -105,7 +111,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
   Widget build(BuildContext context) {
     if(Common.apps.isEmpty){
     _getList();
-    };
+    }
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: 10),
@@ -140,7 +146,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: (){
-                          _shareOnFacebook("https");
+                          _shareOnFacebook(idInvite);
                         },
                         child: Container(
                           child: Image.asset(
@@ -160,7 +166,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: (){
-                          _shareTwitter("https");
+                          _shareTwitter(idInvite);
                         },
                         child: Container(
                           child: Image.asset(
@@ -180,7 +186,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: (){
-                            _shareMore("https");
+                            _shareMore(idInvite);
                         },
                         child: Container(
                           child: Image.asset(
@@ -200,6 +206,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: (){
+                          _copyLink(idInvite);
                         },
                         child: Container(
                           child: Image.asset(

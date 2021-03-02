@@ -5,6 +5,7 @@ import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/personal/personal_controller.dart';
 import 'package:init_app/widgets/button_main.dart';
+
 import '../../common/constant.dart';
 
 // ignore: must_be_immutable
@@ -13,7 +14,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
   final Function callBack;
   static const String routeName = '/personal';
   static const String name = 'personal';
-  
+
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: PersonalController());
@@ -114,7 +115,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
               ),
             ),
             // Obx(()=> Text("Coin Deme: " + controller.coinDemo.toString())),
-         
+
             Container(
               color: Colors.white,
               padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),

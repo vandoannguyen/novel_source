@@ -9,8 +9,6 @@ import 'package:init_app/widgets/button_main.dart';
 
 import '../../common/common.dart';
 import '../../common/constant.dart';
-import '../bookstore/detail_comic/invite_friend.dart';
-import '../bookstore/detail_comic/loaded_coin.dart';
 
 class TaskScreen extends BaseWidget<TaskController> {
   TaskScreen({this.callBack});
@@ -19,20 +17,7 @@ class TaskScreen extends BaseWidget<TaskController> {
   static const String routeName = '/tasks';
   static const String name = 'tasks';
   TextStyle styleTitle =
-      TextStyle(fontSize: 16.0, color: Color(Constant.colorTxtPrimary));
-
-  // TaskController controller = Get.put(TaskController());
-
-  // TaskController _controller = Get.find();
-  // List<Map<String, dynamic>> coinDaily = [
-  //   {"title": "1 Ngày", "name": "20", "value": 20, "status": false},
-  //   {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
-  //   {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-  //   {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-  //   {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-  //   {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-  //   {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
-  // ];
+      TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
 
   void _incrementDate() {
     controller.incrementDate();
@@ -53,28 +38,27 @@ class TaskScreen extends BaseWidget<TaskController> {
       case "WATCH_ADS":
         break;
       case "READ_BOOK":
-        callBack("GOTO_TAB", 0);
+        callBack("GOTO_BOOKCASE", "");
         break;
       default:
     }
   }
 
   void onClickIntent(BuildContext context, String name) {
-    switch(name){
+    switch (name) {
       case "ANSWER":
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SurveyQuestionScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SurveyQuestionScreen()));
         break;
       case "INVITE":
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => InviteFriend()));
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => InviteFriend()));
+        controller.inviteNext("invite");
         break;
       case "COIN_FOR_FRIEND":
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoadedCoin()));
+        controller.inviteNext("loadedcoin");
         break;
     }
-
   }
 
   @override
@@ -122,7 +106,8 @@ class TaskScreen extends BaseWidget<TaskController> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context).translate("checkin"),
+                                    AppLocalizations.of(context)
+                                        .translate("checkin"),
                                     style: TextStyle(
                                       color: Color(Constant.colorTxtPrimary),
                                     ),
@@ -149,7 +134,8 @@ class TaskScreen extends BaseWidget<TaskController> {
                                 shape: BoxShape.circle,
                               ),
                               child: Text(
-                              AppLocalizations.of(context).translate("checkin"),
+                                AppLocalizations.of(context)
+                                    .translate("checkin"),
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),
@@ -234,7 +220,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: _.coinDaily
                             .map((item) => new Text(
-                                  item["title"] + " ${AppLocalizations.of(context).translate("day")}",
+                                  "${_.coinDaily.indexOf(item) + 1} ${AppLocalizations.of(context).translate("day")}",
                                   style: TextStyle(
                                     fontSize: 10.0,
                                     color: Color(Constant.colorTxtDefault)
@@ -252,7 +238,8 @@ class TaskScreen extends BaseWidget<TaskController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                             AppLocalizations.of(context).translate("7 consecutive days attendance will be rewarded twice as much"),
+                            AppLocalizations.of(context).translate(
+                                "7 consecutive days attendance will be rewarded twice as much"),
                             style: TextStyle(
                               fontSize: 12.0,
                               color: Color(Constant.colorTxtDefault),
@@ -299,32 +286,37 @@ class TaskScreen extends BaseWidget<TaskController> {
             ),
             itemTask(
                 icon: "adduser.png",
-                name:  AppLocalizations.of(context).translate("Invite friends"),
-                des: "${ AppLocalizations.of(context).translate("Invite each friend to reward")} 500",
+                name: AppLocalizations.of(context).translate("Invite friends"),
+                des:
+                    "${AppLocalizations.of(context).translate("Invite each friend to reward")} 500",
                 btnName: AppLocalizations.of(context).translate("invite"),
                 func: () {
                   funcTask("INVITE", context);
                 }),
             itemTask(
                 icon: "income.png",
-                name:  AppLocalizations.of(context).translate("Replace your friends to deposit coins"),
-                des: "${ AppLocalizations.of(context).translate("Receive")} 20%",
+                name: AppLocalizations.of(context)
+                    .translate("Replace your friends to deposit coins"),
+                des: "${AppLocalizations.of(context).translate("Receive")} 20%",
                 btnName: AppLocalizations.of(context).translate("deposit coin"),
                 func: () {
                   funcTask("COIN_FOR_FRIEND", context);
                 }),
             itemTask(
                 icon: "onlinevideo.png",
-                name:  AppLocalizations.of(context).translate("Watch ads to receive coins"),
-                des:  "${AppLocalizations.of(context).translate("Each view rewards")} 200",
+                name: AppLocalizations.of(context)
+                    .translate("Watch ads to receive coins"),
+                des:
+                    "${AppLocalizations.of(context).translate("Each view rewards")} 200",
                 btnName: AppLocalizations.of(context).translate("watch"),
                 func: () {
                   funcTask("WATCH_ADS", context);
                 }),
             itemTask(
                 icon: "bookday.png",
-                name:  AppLocalizations.of(context).translate("Read every day"),
-                des:  AppLocalizations.of(context).translate("Read 20 minutes, reward 200"),
+                name: AppLocalizations.of(context).translate("Read every day"),
+                des: AppLocalizations.of(context)
+                    .translate("Read 20 minutes, reward 200"),
                 btnName: AppLocalizations.of(context).translate("read now"),
                 func: () {
                   funcTask("READ_BOOK", context);

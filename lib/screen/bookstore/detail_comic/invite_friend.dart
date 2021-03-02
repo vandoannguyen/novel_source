@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/bookstore/detail_comic/invite_friend_widget.dart';
-import 'package:init_app/screen/bookstore/detail_comic/myfriend_widget.dart';
 
 class InviteFriend extends StatefulWidget {
   InviteFriend({Key key}) : super(key: key);
@@ -10,8 +8,7 @@ class InviteFriend extends StatefulWidget {
   _InviteFriendState createState() => _InviteFriendState();
 }
 
-class _InviteFriendState extends State<InviteFriend>
-    with SingleTickerProviderStateMixin {
+class _InviteFriendState extends State<InviteFriend> with SingleTickerProviderStateMixin {
   TabController _controller;
   @override
   void initState() {
@@ -41,29 +38,30 @@ class _InviteFriendState extends State<InviteFriend>
       body: Container(
         child: Column(
           children: <Widget>[
-            TabBar(
-              controller: _controller,
-              indicatorColor: Color(Constant.colorTxtPrimary),
-              indicatorSize: TabBarIndicatorSize.label,
-              unselectedLabelColor: Color(Constant.colorTxtDefault),
-              labelColor: Color(Constant.colorTxtPrimary),
-              tabs: [
-                new Tab(
-                  text: 'Invite friend',
-                ),
-                new Tab(
-                  text: 'My friend',
-                ),
-              ],
-            ),
+            // TabBar(
+            //   controller: _controller,
+            //   indicatorColor: Color(Constant.colorTxtPrimary),
+            //   indicatorSize: TabBarIndicatorSize.label,
+            //   unselectedLabelColor: Color(Constant.colorTxtDefault),
+            //   labelColor: Color(Constant.colorTxtPrimary),
+            //   tabs: [
+            //     new Tab(
+            //       text: 'Invite friend',
+            //     ),
+            //     new Tab(
+            //       text: 'My friend',
+            //     ),
+            //   ],
+            // ),
             Expanded(
-              child: new TabBarView(
-                controller: _controller,
-                children: <Widget>[
-                  InviteFriendWidget(),
-                  MyFriendWidget(),
-                ],
-              ),
+              child: InviteFriendWidget(),
+              // child: new TabBarView(
+              //   controller: _controller,
+              //   children: <Widget>[
+              //InviteFriendWidget(),
+              //MyFriendWidget(),
+              //],
+              //),
             ),
           ],
         ),

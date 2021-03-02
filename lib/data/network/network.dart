@@ -69,7 +69,6 @@ abstract class IApi {
 
 class ApiImpl implements IApi {
   static final String ROOT_API = "https://api.oneadx.com/novel";
-  // static final String ROOT_API = "http://192.168.0.163:5012";
 
   @override
   Future getData() {
@@ -572,7 +571,7 @@ class ApiImpl implements IApi {
         .then((value) {
       print(value);
       if (value.data["code"] == 1)
-        completer.complete((value.data["result"]));
+        completer.complete((value.data));
       else
         throw ("data null ");
     }).catchError((err) {
@@ -652,6 +651,7 @@ class ApiImpl implements IApi {
   @override
   Future search(String data) {
     // TODO: implement search
+    data = data.replaceAll(" ", "%20");
     Completer completer = new Completer();
     String time = _getTimeStamp();
     String token = CryptUtils.genSha256(
@@ -662,9 +662,9 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      if (value.data["code"] == 1)
+      if (value.data["code"] == 1) {
         completer.complete(value.data["result"]);
-      else
+      } else
         throw ("data null");
     }).catchError((err) {
       completer.completeError(err);
@@ -706,9 +706,10 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      if (value.data["code"] == 1)
+      if (value.data["code"] == 1) {
+        print("getSearchComplete $value");
         completer.complete(value.data["result"]);
-      else
+      } else
         throw ("data null");
     }).catchError((err) {
       completer.completeError(err);
