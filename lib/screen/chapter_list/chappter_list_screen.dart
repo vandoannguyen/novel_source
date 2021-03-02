@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/data/network/NovalChapterModel.dart';
 import 'package:init_app/screen/chapter_list/chapter_list_controller.dart';
@@ -34,7 +35,7 @@ class ChapterList extends BaseWidget<ChapterListController> {
                         onPressed: () => Navigator.of(context).pop()),
                     Expanded(
                         child: Text(
-                      "Chapter list".toUpperCase(),
+                      AppLocalizations.of(context).translate("Chapter list"),
                       style: TextStyle(color: Colors.black, fontSize: 20),
                     ))
                   ],

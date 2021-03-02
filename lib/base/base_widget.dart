@@ -13,6 +13,7 @@ abstract class BaseWidget<C extends BaseController> extends GetWidget<C> {
   Widget build(BuildContext context, {C controllerSuper}) {
     try {
       controller = Get.find();
+      controller.context = context;
       print("get controller ${controller}");
     } catch (err) {
       controllerSuper.context = context;
@@ -22,6 +23,6 @@ abstract class BaseWidget<C extends BaseController> extends GetWidget<C> {
   }
 
   initState({@required C controller}) {
-    Get.lazyPut(() => controller);
+    Get.put(controller);
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 
@@ -59,7 +60,7 @@ class LoginScreen extends BaseWidget<LoginController> {
                     ),
                     Container(
                         margin: EdgeInsets.only(left: 30),
-                        child: Text("Sign in with Facebook"))
+                        child: Text("${AppLocalizations.of(context).translate("Sign in with")} Facebook"))
                   ],
                 ),
               ),
@@ -112,7 +113,7 @@ class LoginScreen extends BaseWidget<LoginController> {
                     ),
                     Container(
                         margin: EdgeInsets.only(left: 30),
-                        child: Text("Sign in with Google"))
+                        child: Text("${AppLocalizations.of(context).translate("Sign in with")} Google"))
                   ],
                 ),
               ),

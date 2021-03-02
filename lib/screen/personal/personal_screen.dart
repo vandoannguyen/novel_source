@@ -116,8 +116,6 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                         ),
                 ),
               ),
-              // Obx(()=> Text("Coin Deme: " + controller.coinDemo.toString())),
-
               Container(
                 color: Colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
@@ -130,14 +128,10 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                         children: [
                           GetBuilder<PersonalController>(
                             builder: (_) => controller.isLogin
-                                ? Text(AppLocalizations.of(context)
-                                        .translate('coin balance') +
-                                    ": " +
-                                    controller.profile["coin"].toString())
-                                : Text(AppLocalizations.of(context)
-                                        .translate('coin balance') +
-                                    ": " +
-                                    "0.0"),
+                                ? Text(
+                                    "${AppLocalizations.of(context).translate('coin balance')}: ${controller.profile["coin"]}")
+                                : Text(
+                                    "${AppLocalizations.of(context).translate('coin balance')}: 0.0"),
                           ),
                           Image.asset(
                             Common.pathImg + "ic_coin.png",
@@ -191,7 +185,10 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                   name: "frequently question",
                   icon: "ic_question.png",
                   func: () {
-                    controller.goFrequentlyQuestion(callBack("GOTO_TAB", 2));
+                    controller.goFrequentlyQuestion(() {
+                      callBack("GOTO_TAB", 2);
+                      print("callBack GOTO_TAB");
+                    });
                   }),
               item(
                   context: context,

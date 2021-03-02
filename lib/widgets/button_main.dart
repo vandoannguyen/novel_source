@@ -34,7 +34,7 @@ class _ButtonMainState extends State<ButtonMain> {
             : Color(Constant.colorTxtPrimary),
         textColor: Colors.white,
         child: Text(widget.name,
-         
+         textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: widget.txtSize != null ? widget.txtSize : 13.0)),
       ),

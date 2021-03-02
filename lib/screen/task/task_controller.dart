@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/screen/bookstore/detail_comic/invite_friend.dart';
 import 'package:init_app/screen/bookstore/detail_comic/loaded_coin.dart';
 import 'package:init_app/screen/login/login_screen.dart';
 import 'package:init_app/screen/task/dialog_checkin.dart';
-import 'package:get/get.dart';
-import '../../common/common.dart';
+
 import '../../common/common.dart';
 import '../../data/repository.dart';
 
@@ -159,32 +159,32 @@ class TaskController extends BaseController {
             // }
           } else {
             // print("Commondys${Common.days}");
-              switch (Common.days) {
-                case 0:
-                  setCheckIn(1);
-                  break;
-                case 1:
-                  setCheckIn(2);
-                  break;
-                case 2:
-                  setCheckIn(3);
-                  break;
-                case 3:
-                  setCheckIn(4);
-                  break;
-                case 4:
-                  setCheckIn(5);
-                  break;
-                case 5:
-                  setCheckIn(6);
-                  break;
-                case 6:
-                  setCheckIn(7);
-                  break;
-                case 7:
-                  setCheckIn(0);
-                  break;
-              }
+            switch (Common.days) {
+              case 0:
+                setCheckIn(1);
+                break;
+              case 1:
+                setCheckIn(2);
+                break;
+              case 2:
+                setCheckIn(3);
+                break;
+              case 3:
+                setCheckIn(4);
+                break;
+              case 4:
+                setCheckIn(5);
+                break;
+              case 5:
+                setCheckIn(6);
+                break;
+              case 6:
+                setCheckIn(7);
+                break;
+              case 7:
+                setCheckIn(0);
+                break;
+            }
             // }
           }
         }).catchError((err) {
@@ -202,7 +202,8 @@ class TaskController extends BaseController {
         builder: (BuildContext context) {
           return CustomDialogBox(
             title: "Messenger",
-            descriptions: "Bạn đã đăng nhập hôm nay rồi. Quay trở lại vào ngày mai nhé!!!",
+            descriptions:
+                "Bạn đã đăng nhập hôm nay rồi. Quay trở lại vào ngày mai nhé!!!",
             text: "OK",
             img: Image.asset(Common.pathImg + "icon.png"),
           );
@@ -241,7 +242,12 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
+                {
+                  "title": "7 Ngày",
+                  "name": "60x2",
+                  "value": 120,
+                  "status": false
+                },
               ];
               break;
             }
@@ -254,7 +260,12 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
+                {
+                  "title": "7 Ngày",
+                  "name": "60x2",
+                  "value": 120,
+                  "status": false
+                },
               ];
               break;
             }
@@ -267,7 +278,12 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
+                {
+                  "title": "7 Ngày",
+                  "name": "60x2",
+                  "value": 120,
+                  "status": false
+                },
               ];
               break;
             }
@@ -280,7 +296,12 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
+                {
+                  "title": "7 Ngày",
+                  "name": "60x2",
+                  "value": 120,
+                  "status": false
+                },
               ];
               break;
             }
@@ -293,7 +314,12 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
+                {
+                  "title": "7 Ngày",
+                  "name": "60x2",
+                  "value": 120,
+                  "status": false
+                },
               ];
               break;
             }
@@ -306,7 +332,12 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
+                {
+                  "title": "7 Ngày",
+                  "name": "60x2",
+                  "value": 120,
+                  "status": false
+                },
               ];
               break;
             }
@@ -319,7 +350,12 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": true},
-                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
+                {
+                  "title": "7 Ngày",
+                  "name": "60x2",
+                  "value": 120,
+                  "status": false
+                },
               ];
               break;
             }
@@ -332,7 +368,12 @@ class TaskController extends BaseController {
                 {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
                 {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
                 {"title": "6 Ngày", "name": "40", "value": 40, "status": true},
-                {"title": "7 Ngày", "name": "60x2", "value": 120, "status": true},
+                {
+                  "title": "7 Ngày",
+                  "name": "60x2",
+                  "value": 120,
+                  "status": true
+                },
               ];
               break;
             }
@@ -371,12 +412,13 @@ class TaskController extends BaseController {
         gravity: ToastGravity.CENTER);
     incrementDate();
   }
+
   // invited friend
-  void inviteNext(String tex) async{
+  void inviteNext(String tex) async {
     if (Common.isLogedIn) {
-      if(tex.contains("invite")){
+      if (tex.contains("invite")) {
         await Get.to(InviteFriend());
-      }else{
+      } else {
         await Get.to(LoadedCoin());
       }
       profile["coin"] = Common.coin;
@@ -385,6 +427,7 @@ class TaskController extends BaseController {
       goLogin();
     }
   }
+
   void goLogin() async {
     var data = await Get.to(LoginScreen());
     if (data != null) {

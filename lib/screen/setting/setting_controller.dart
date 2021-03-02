@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:init_app/base/base_controller.dart';
@@ -6,11 +7,10 @@ import 'package:init_app/common/common.dart';
 import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/about_us/about_us_screen.dart';
 import 'package:init_app/screen/load/load_controller.dart';
+import 'package:init_app/screen/load/load_screen.dart';
 import 'package:init_app/screen/login/login_screen.dart';
 import 'package:init_app/screen/ownership/ownership_screen.dart';
 import 'package:init_app/widgets/dialog_language.dart';
-
-import '../load/load_screen.dart';
 
 class SettingController extends BaseController {
   LoadController ctl = Get.put(LoadController());
@@ -34,6 +34,7 @@ class SettingController extends BaseController {
 
   void changeLanguage(context) {
     showDialogLanguage(context, (value) {
+      Common.language = value;
       RepositoryImpl.getInstance()
           .setLanguage(value)
           .then((value) {})
@@ -42,7 +43,6 @@ class SettingController extends BaseController {
           timestamp:
               (DateTime.now().microsecondsSinceEpoch / 1000).round().toString(),
           data: Common.language);
-      Common.language = value;
       selectedLanguage();
       isChangedLanguage = true;
       update();
@@ -85,8 +85,10 @@ class SettingController extends BaseController {
     }
   }
 
-  void goSignOut() {
-    if (Common.isLogedIn) {
+  void goSignOut() async {
+    String logedType = await RepositoryImpl.getInstance().getLogedData();
+
+    if (logedType != null) {
       _showMyDialogSignOut();
     } else {
       _showMyDialogSignIn();
@@ -100,13 +102,29 @@ class SettingController extends BaseController {
     //   Common.isLogedIn = true;
     //   update();
     // }
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (BuildContext context) => LoadScreen()),
-        ModalRoute.withName('/'));
+    // Navigator.pushAndRemoveUntil(
+    //     context,
+    //     MaterialPageRoute(builder: (BuildContext context) => LoadScreen()),
+    //     ModalRoute.withName('/'));
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => LoadScreen()),
+        (Route<dynamic> route) => false);
   }
 
-  Future<void> _handleSignOut() => _googleSignIn.disconnect();
+  Future<void> _handleSignOut() async {
+    String logedType = await RepositoryImpl.getInstance().getLogedData();
+    if (logedType != null) {
+      if (logedType == "google") {
+        await _googleSignIn.disconnect();
+      }
+      if (logedType == "facebook") {
+        final FacebookLogin facebookLogin = FacebookLogin();
+        if (await facebookLogin.isLoggedIn) {
+          await facebookLogin.logOut();
+        }
+      }
+    }
+  }
 
   Future<void> _showMyDialogSignIn() async {
     return showDialog<void>(
@@ -126,6 +144,7 @@ class SettingController extends BaseController {
                 TextButton(
                   child: Text('Dang nhap ngay'),
                   onPressed: () {
+                    Navigator.pop(context);
                     goLogin();
                   },
                 ),
@@ -161,11 +180,13 @@ class SettingController extends BaseController {
               children: [
                 TextButton(
                   child: Text('Co'),
-                  onPressed: () {
-                    _handleSignOut();
+                  onPressed: () async {
+                    await _handleSignOut();
+                    Common.isLogedIn = false;
                     RepositoryImpl.getInstance()
-                        .setLogedData(type: null)
+                        .setLogedData(type: "")
                         .then((value) {
+                      Navigator.pop(context);
                       goLoading();
                     }).catchError((err) {
                       print(err);

@@ -67,10 +67,10 @@ class _itemBookVerState extends State<itemBookVer> {
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis),
                 ),
-                Text(
-                  false ? "Chương 1 đã đọc" : "",
-                  style: TextStyle(color: Colors.grey, fontSize: 11.0),
-                ),
+                // Text(
+                //   false ? "Chương 1 đã đọc" : "",
+                //   style: TextStyle(color: Colors.grey, fontSize: 11.0),
+                // ),
               ],
             ),
           ),

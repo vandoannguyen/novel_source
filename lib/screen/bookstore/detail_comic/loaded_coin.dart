@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:init_app/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:init_app/common/common.dart';
@@ -34,20 +34,20 @@ class _LoadedCoinState extends State<LoadedCoin> {
                   width: 100,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.all(10.0),
-                height: 20,
-                child: Center(
-                  child: Text("Name", style: TextStyle(color: Colors.black, fontSize: 20.0),),
-                ),
-              ),
+              // Container(
+              //   margin: EdgeInsets.all(10.0),
+              //   height: 20,
+              //   child: Center(
+              //     child: Text("Name", style: TextStyle(color: Colors.black, fontSize: 20.0),),
+              //   ),
+              // ),
               Container(
                 margin:
                     EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
                 child: TextField(
                   autofocus: true,
                   decoration: InputDecoration(
-                    hintText: "ID cua ban be",
+                    hintText: AppLocalizations.of(context).translate( "ID of a friend"),
                     hintStyle: TextStyle(color: Colors.pink[200]),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -86,7 +86,7 @@ class _LoadedCoinState extends State<LoadedCoin> {
                 ),
                 child: Center(
                   child: Text(
-                    "Nap Xu",
+                    AppLocalizations.of(context).translate("deposit coin"),
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white),
                   ),
@@ -95,7 +95,7 @@ class _LoadedCoinState extends State<LoadedCoin> {
               Container(
                 margin: EdgeInsets.all(10),
                 child: Text(
-                  "Thuong moi lan thay ban be nap xu thanh cong, ban duoc thuong 20% so xu nap",
+                  AppLocalizations.of(context).translate("Bonus every time you replace your friends successfully loaded coins"),
                   style: TextStyle(color: Colors.pink),
                 ),
               ),
@@ -106,21 +106,21 @@ class _LoadedCoinState extends State<LoadedCoin> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Huong dan thay ban nap xu:",
+                      AppLocalizations.of(context).translate("Instructions on behalf of you to load coins"),
                       style: TextStyle(color: Colors.black),
                     ),
-                    Text(
-                      "1. Xin ban nhap vao ID cua ban be",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    Text(
-                      "2. Xin ban xac nhan ID va Ten cua ban be",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    Text(
-                      "3. Xac nhan xong xin ban bam nut nap xu giup ban be hoan thanh nap xu",
-                      style: TextStyle(color: Colors.black),
-                    ),
+                    // Text(
+                    //   "1. Xin ban nhap vao ID cua ban be",
+                    //   style: TextStyle(color: Colors.black),
+                    // ),
+                    // Text(
+                    //   "2. Xin ban xac nhan ID va Ten cua ban be",
+                    //   style: TextStyle(color: Colors.black),
+                    // ),
+                    // Text(
+                    //   "3. Xac nhan xong xin ban bam nut nap xu giup ban be hoan thanh nap xu",
+                    //   style: TextStyle(color: Colors.black),
+                    // ),
                   ],
                 ),
               ),

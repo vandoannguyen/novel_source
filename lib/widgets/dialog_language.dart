@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 
 void showDialogLanguage(context, callback) {
   showDialog(
@@ -16,7 +17,7 @@ Widget dialogLanguage(context, callback) {
           Container(
               width: double.infinity,
               padding: EdgeInsets.all(10),
-              child: Text("Choose language",
+              child: Text(AppLocalizations.of(context).translate("choose language"),
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 20,

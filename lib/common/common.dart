@@ -12,13 +12,13 @@ class Common {
   static UserModel user = null;
   static List<NovelModel> myBooks = null;
   static String appName = "ĐỌc SÁCH";
-  static String fanpageName = "SÁCH";
-  static String fanpageLink = "https://www.facebook.com/";
-  static String email = "tahanh.aib@gmail.com";
+  static String fanpageName = "Hotnovel";
+  static String fanpageLink = "https://www.facebook.com/Hotnovel-100817905411136";
+  static String email = "vandoannguyenhaui@gmail.com";
   static var config = {};
 
   static var isLogedIn = false;
-
+static String logedType;
   //checkin
   // static int coin_checkin = 0;
   static int coin = 0;
@@ -39,5 +39,5 @@ class Common {
 //   }
   static List listReadChapter;
 
-  static List<dynamic> listInapp;
+  static List<dynamic> listInapp = [];
 }

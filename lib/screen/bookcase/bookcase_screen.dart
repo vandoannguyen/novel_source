@@ -102,7 +102,7 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Login to read more!",
+                          "${AppLocalizations.of(context).translate("Login to read more")}!",
                           style: TextStyle(color: Colors.grey[400]),
                         ),
                         ButtonMain(

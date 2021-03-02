@@ -19,6 +19,7 @@ class BookCaseController extends BaseController {
 
   void getMybook() {
     if (isLogedinSuccess) {
+      print("isLogedinSuccess true");
       isLoading = true;
       update();
       // lấy sách tron tủ sách
@@ -29,6 +30,8 @@ class BookCaseController extends BaseController {
           .then((value) {
         // kiểm tra list rỗng hay k
         if (value.length > 0) {
+          isLoading = false;
+          update();
           // nếu có thì update;
           // List<NovelModel> list = Common.myBooks
           //     .where((e) =>
@@ -40,6 +43,8 @@ class BookCaseController extends BaseController {
           Common.myBooks = value;
           myBooks = Common.myBooks;
           update();
+          print("mybook $myBooks");
+          isLogedinSuccess = false;
           // list.forEach((element) {
           //   RepositoryImpl.getInstance()
           //       .addBookIntoMyBooks(idBook: element.id);
@@ -58,6 +63,7 @@ class BookCaseController extends BaseController {
         }
       }).catchError((err) {});
     } else {
+      print("isLogedinSuccess false");
       myBooks = Common.myBooks;
       update();
     }
@@ -66,10 +72,9 @@ class BookCaseController extends BaseController {
   void login() {
     IntentAnimation.intentNomal(context: context, screen: LoginScreen())
         .then((value) {
-      if (value == "ok") {
+      if (value != null) {
         //   nếu ok thì kiểm tra xem list sách mới có chưa
         // nếu chưa có thì thêm vào
-        Common.isLogedIn = true;
         isLogedIn = Common.isLogedIn;
         getLogedIn();
         for (int i = 0; i < Common.myBooks.length; i++) {
@@ -93,7 +98,8 @@ class BookCaseController extends BaseController {
     } else {
       IntentAnimation.intentNomal(context: context, screen: LoginScreen())
           .then((value) {
-        if (value == "ok") {
+        print("valueloginSuccess$value");
+        if (value != null) {
           print("valueloginSuccess $value");
           Common.isLogedIn = true;
           isLogedIn = Common.isLogedIn;
@@ -154,6 +160,8 @@ class BookCaseController extends BaseController {
   }
 
   void reloadData() {
+    print("reload data ");
+    isLogedinSuccess = true;
     getMybook();
   }
 }

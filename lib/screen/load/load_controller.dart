@@ -29,7 +29,11 @@ class LoadController extends BaseController {
 
   void login(context) async {
     String logedType = await RepositoryImpl.getInstance().getLogedData();
+    Common.logedType = logedType;
+    print("logedType   $logedType");
     if (logedType == null) {
+      print("logedType   $logedType");
+
       String email = await getRandomEmail();
       String timestamp =
           (DateTime.now().millisecondsSinceEpoch / 1000).round().toString();
@@ -51,6 +55,7 @@ class LoadController extends BaseController {
         }
       });
     } else {
+      print("logedType!= null $logedType");
       if (logedType == "google") {
         loginGoogle();
       }

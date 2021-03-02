@@ -14,6 +14,7 @@ import 'app_localizations.dart';
 
 void main() {
   CallNativeUtils.setChannel(Common.CHANNEL);
+
   return runApp(MyApp());
 }
 

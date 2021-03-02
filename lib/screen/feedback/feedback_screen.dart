@@ -54,7 +54,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                             "(${Common.fanpageName}), " +
                             AppLocalizations.of(context).translate('thanks'),
                         hintStyle: TextStyle(
-                          fontSize: 15.0,
+                          fontSize: 13.0,
                           color:
                               Color(Constant.colorTxtDefault).withOpacity(0.8),
                         ),
@@ -75,41 +75,42 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                   ),
                 ],
               ),
+              // Container(
+              //   margin: EdgeInsets.fromLTRB(15.0, 25.0, 15.0, 25.0),
+              //   // padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+              //   decoration: BoxDecoration(
+              //     color: Colors.grey[200],
+              //     borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              //   ),
+              //   child: TextField(
+              //     maxLines: 1,
+              //     controller: ctlTextEditEmail,
+              //     onChanged: (text) {
+              //       controller.countWord(text.length);
+              //     },
+              //     decoration: InputDecoration(
+              //       hintText: AppLocalizations.of(context)
+              //           .translate("please enter your email"),
+              //       hintStyle: TextStyle(
+              //         fontSize: 15.0,
+              //         color: Color(Constant.colorTxtDefault).withOpacity(0.8),
+              //       ),
+              //       contentPadding: EdgeInsets.all(10.0),
+              //       border: InputBorder.none,
+              //     ),
+              //   ),
+              // ),
               Container(
                 margin: EdgeInsets.fromLTRB(15.0, 25.0, 15.0, 25.0),
-                // padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                ),
-                child: TextField(
-                  maxLines: 1,
-                  controller: ctlTextEditEmail,
-                  onChanged: (text) {
-                    controller.countWord(text.length);
-                  },
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)
-                        .translate("please enter your email"),
-                    hintStyle: TextStyle(
-                      fontSize: 15.0,
-                      color: Color(Constant.colorTxtDefault).withOpacity(0.8),
-                    ),
-                    contentPadding: EdgeInsets.all(10.0),
-                    border: InputBorder.none,
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 25.0),
                 width: double.infinity,
                 height: 40.0,
                 child: ButtonMain(
                   name: AppLocalizations.of(context).translate('send'),
                   color: Color(Constant.colorTxtSecond),
+                  txtSize: 16.0,
                   func: () {
-                    controller.send(
-                        ctlTextEditEmail.text, ctlTextEditContent.text);
+                    FocusScope.of(context).unfocus();
+                    controller.send(ctlTextEditContent.text);
                   },
                 ),
               ),
@@ -128,6 +129,7 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
                   color: Colors.white,
                   padding: EdgeInsets.all(0.0),
                   onPressed: () {
+                    FocusScope.of(context).unfocus();
                     controller.contactsFB();
                   },
                   child: Stack(

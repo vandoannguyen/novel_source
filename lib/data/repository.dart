@@ -141,7 +141,7 @@ class RepositoryImpl implements IRepository {
   }
 
   @override
-  Future<String> loginWithFaceBook({access_token}) {
+  Future loginWithFaceBook({access_token}) {
     // TODO: implement loginWithFaceBook
     return _api.loginWithFaceBook(access_token: access_token);
   }
@@ -214,9 +214,9 @@ class RepositoryImpl implements IRepository {
   }
 
   @override
-  Future getSubscription() {
+  Future getSubscription({lang}) {
     // TODO: implement getSubcryption
-    return _api.getSubscription();
+    return _api.getSubscription(lang: lang);
   }
 
   @override
