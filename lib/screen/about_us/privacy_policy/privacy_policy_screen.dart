@@ -33,7 +33,7 @@ class PrivacyPolicyScreen extends BaseWidget<PrivacyPolicyController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             Expanded(
               child: GetBuilder(
                 builder: (_) => WebView(

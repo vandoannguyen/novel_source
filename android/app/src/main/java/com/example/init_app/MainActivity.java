@@ -24,6 +24,9 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
 public class MainActivity extends FlutterActivity implements RatingDialog.RatingDialogInterFace {
     private static final String CHANNEL = "com.example.init_app";
     private static final String ONEADX_KEY = "gmBUYwLTV2VDu5Y8Dg5S9WpuaNDZvRaZ";
+    MethodChannel.MethodCallHandler methodCallHandler;
+
+    InappMethodEvent.InAppMetholCallHandler inAppMetholCallHandler = new InappMethodEvent.InAppMetholCallHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +35,10 @@ public class MainActivity extends FlutterActivity implements RatingDialog.Rating
 //        AppEventsLogger.activateApp(this);
 
         GeneratedPluginRegistrant.registerWith(this);
-        new MethodChannel(getFlutterView(), CHANNEL).setMethodCallHandler(new MethodChannel.MethodCallHandler() {
+        new MethodChannel(getFlutterView(), CHANNEL).setMethodCallHandler((methodCallHandler = new MethodChannel.MethodCallHandler() {
             @Override
             public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
+                inAppMetholCallHandler.onMethodCall(methodCall, result);
                 switch (methodCall.method) {
                     case "rateManual": {
                         rateManual();
@@ -99,7 +103,7 @@ public class MainActivity extends FlutterActivity implements RatingDialog.Rating
                     }
                 }
             }
-        });
+        }));
 
     }
 

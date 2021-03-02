@@ -128,4 +128,11 @@ class NovelBookController extends BaseController {
       getHotest(page: page);
     }
   }
+
+  void reloadData() {
+    page = 1;
+    getHotest();
+    getNewest();
+    getBanner();
+  }
 }

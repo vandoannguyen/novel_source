@@ -7,20 +7,37 @@ import 'package:init_app/screen/search/search_screen.dart';
 class BookstoreScreen extends StatefulWidget {
   static const String routeName = '/bookstore';
   static const String name = 'bookstore';
+  _BookstoreState state;
+  // dynamic isChangeLanguage = false;
 
   BookstoreScreen({Key key}) : super(key: key);
 
   @override
-  _BookstoreState createState() => _BookstoreState();
+  _BookstoreState createState() {
+    print("okok create state");
+    state = _BookstoreState();
+    return state;
+  }
+
+  void changeLanguage() {
+    // isChangeLanguage = true;
+    print("okok changeLanguage0");
+    if (state != null) {
+      print("okok changeLanguage1");
+      state.changeLanguage();
+    }
+  }
 }
 
 class _BookstoreState extends State<BookstoreScreen>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _controller;
+  NovelBookstoreScreen novelBookstoreScreen;
 
   @override
   void initState() {
     super.initState();
+    novelBookstoreScreen = NovelBookstoreScreen();
     _controller = new TabController(length: 1, vsync: this);
   }
 
@@ -100,7 +117,7 @@ class _BookstoreState extends State<BookstoreScreen>
             child: new TabBarView(
               controller: _controller,
               children: <Widget>[
-                NovelBookstoreScreen(),
+                novelBookstoreScreen
                 // FreeBookstoreScreen(),
                 // ComicBookstoreScreen(),
               ],
@@ -114,4 +131,9 @@ class _BookstoreState extends State<BookstoreScreen>
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+
+  void changeLanguage() {
+    print("okok changeLanguage2");
+    if (novelBookstoreScreen != null) novelBookstoreScreen.changeLanguage();
+  }
 }

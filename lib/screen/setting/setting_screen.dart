@@ -5,7 +5,6 @@ import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/setting/setting_controller.dart';
-import 'package:init_app/widgets/appbar_second.dart';
 import 'package:init_app/widgets/button_main.dart';
 
 // ignore: must_be_immutable
@@ -21,7 +20,7 @@ class SettingScreen extends BaseWidget<SettingController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             Container(
               padding: EdgeInsets.symmetric(vertical: 0.0),
               decoration: BoxDecoration(
@@ -44,7 +43,9 @@ class SettingScreen extends BaseWidget<SettingController> {
                       fit: BoxFit.contain,
                     ),
                   ),
-                  Expanded(child: Text(AppLocalizations.of(context).translate("auto unlock"))),
+                  Expanded(
+                      child: Text(AppLocalizations.of(context)
+                          .translate("auto unlock"))),
                   Container(
                     margin: EdgeInsets.all(5.0),
                     child: GetBuilder<SettingController>(
@@ -87,7 +88,9 @@ class SettingScreen extends BaseWidget<SettingController> {
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(child: Text(AppLocalizations.of(context).translate("delete memory"))),
+                    Expanded(
+                        child: Text(AppLocalizations.of(context)
+                            .translate("delete memory"))),
                     Text(
                       "0B",
                       style: TextStyle(
@@ -131,7 +134,11 @@ class SettingScreen extends BaseWidget<SettingController> {
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(child: Text(AppLocalizations.of(context).translate("ownership"),),),
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.of(context).translate("ownership"),
+                      ),
+                    ),
                     Container(
                       margin: EdgeInsets.all(5.0),
                       child: Icon(
@@ -169,7 +176,11 @@ class SettingScreen extends BaseWidget<SettingController> {
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(child: Text(AppLocalizations.of(context).translate("about us"),),),
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.of(context).translate("about us"),
+                      ),
+                    ),
                     Container(
                       margin: EdgeInsets.all(5.0),
                       child: Icon(
@@ -237,6 +248,37 @@ class SettingScreen extends BaseWidget<SettingController> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  appbarSecond(name, context) {
+    return Container(
+      color: Colors.white,
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              name,
+              style: TextStyle(fontSize: 18.0),
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: IconButton(
+              padding: EdgeInsets.all(10.0),
+              onPressed: () {
+                if (controller.isChangedLanguage != null)
+                  Navigator.pop(context, controller.isChangedLanguage);
+                else
+                  Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back_ios_rounded),
+            ),
+          ),
+        ],
       ),
     );
   }

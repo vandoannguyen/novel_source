@@ -29,22 +29,22 @@ class BookCaseController extends BaseController {
           .then((value) {
         // kiểm tra list rỗng hay k
         if (value.length > 0) {
-          // nếu có thì thêm thêm sách mới đã thêm vào tủ sách
-          // lọc tất cả sách đã thêm nhưng chưa có trong tài khoản login
-          List<NovelModel> list = Common.myBooks
-              .where((e) =>
-                  value.where((element) => e.id != element.id).toList().length >
-                  0)
-              .toList();
-          if (list.length > 0) {
-            Common.myBooks = new List();
-            Common.myBooks = value + list;
-            myBooks = Common.myBooks;
-            list.forEach((element) {
-              RepositoryImpl.getInstance()
-                  .addBookIntoMyBooks(idBook: element.id);
-            });
-          }
+          // nếu có thì update;
+          // List<NovelModel> list = Common.myBooks
+          //     .where((e) =>
+          //         value.where((element) => e.id != element.id).toList().length >
+          //         0)
+          //     .toList();
+          // if (list.length > 0) {
+          //   Common.myBooks = new List();
+          Common.myBooks = value;
+          myBooks = Common.myBooks;
+          update();
+          // list.forEach((element) {
+          //   RepositoryImpl.getInstance()
+          //       .addBookIntoMyBooks(idBook: element.id);
+          // });
+          // }
         } else {
           isLoading = false;
           update();
@@ -151,5 +151,9 @@ class BookCaseController extends BaseController {
     }).catchError((err) {
       print(err);
     });
+  }
+
+  void reloadData() {
+    getMybook();
   }
 }

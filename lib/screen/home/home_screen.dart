@@ -10,6 +10,7 @@ class HomeScreen extends StatefulWidget {
 
   HomeScreen({Key key, this.index}) : super(key: key);
   int index;
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -19,29 +20,37 @@ class _HomeState extends State<HomeScreen> {
   List<Widget> _widgetOptions = <Widget>[];
 
   PageController _pageController;
+  BookcaseScreen bookcaseScreen;
+  BookstoreScreen bookstoreScreen;
+  TaskScreen taskScreen;
+  PersonalScreen personalScreen;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    bookcaseScreen = BookcaseScreen((value) {
+      _selectedIndex = 1;
+      setState(() {});
+      if (_pageController != null) _pageController.jumpToPage(_selectedIndex);
+      _widgetOptions.elementAt(_selectedIndex);
+    } //callback change page
+        );
+    createBookStore();
+    taskScreen = TaskScreen(callBack: callBack);
+    personalScreen = PersonalScreen(callBack: callBack);
     _widgetOptions = <Widget>[
-      BookcaseScreen((value) {
-        _selectedIndex = 1;
-        setState(() {});
-        _widgetOptions.elementAt(_selectedIndex);
-      } //callback change page
-          ),
-      BookstoreScreen(),
-      TaskScreen(callBack: callBack),
-      PersonalScreen(callBack: callBack)
+      bookcaseScreen,
+      bookstoreScreen,
+      taskScreen,
+      personalScreen
     ];
-    if(widget.index != null) {
-      _pageController = new PageController(initialPage: widget.index, keepPage: true);
+    if (widget.index != null) {
+      _pageController =
+          new PageController(initialPage: widget.index, keepPage: true);
     } else {
-       _pageController = new PageController(initialPage: 0, keepPage: true);
+      _pageController = new PageController(initialPage: 0, keepPage: true);
     }
-   
-
   }
 
   void _onItemTapped(int index) {
@@ -52,9 +61,14 @@ class _HomeState extends State<HomeScreen> {
   }
 
   void callBack(key, value) {
+    print("callback${key}");
     switch (key) {
       case "GOTO_TAB":
         _onItemTapped(value);
+        break;
+      case "CHANGE_LANGUAGE":
+        bookstoreScreen.changeLanguage();
+        createBookStore();
         break;
       default:
     }
@@ -88,7 +102,6 @@ class _HomeState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
             label: AppLocalizations.of(context).translate("bookstore"),
-            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.fact_check_outlined),
@@ -108,5 +121,9 @@ class _HomeState extends State<HomeScreen> {
         unselectedLabelStyle: TextStyle(fontSize: 10.0),
       ),
     );
+  }
+
+  void createBookStore() {
+    bookstoreScreen = BookstoreScreen();
   }
 }

@@ -571,7 +571,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
               flex: 1,
               child: GestureDetector(
                 onTap: () {
-                  controller.callBack("TABLE_CONTENT", idBook);
+                  controller.callBack("READ_NOW", idBook);
                 },
                 child: Container(
                   alignment: Alignment.center,

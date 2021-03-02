@@ -17,7 +17,7 @@ class OwnershipScreen extends BaseWidget<OwnershipController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             Container(
               padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
               alignment: Alignment.center,

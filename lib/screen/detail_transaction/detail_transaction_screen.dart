@@ -18,7 +18,7 @@ class DetailTransactionScreen extends BaseWidget<DetailTransactionController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             new TabBar(
               controller: controller.controllerTab,
               indicatorColor: Color(Constant.colorTxtPrimary),

@@ -18,7 +18,7 @@ class TutorialBuyCoinScreen extends BaseWidget<TutorialBuyCoinController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             Expanded(
               child: ListView.builder(
                   physics: AlwaysScrollableScrollPhysics(),

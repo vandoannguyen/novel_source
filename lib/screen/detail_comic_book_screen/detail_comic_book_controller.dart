@@ -156,33 +156,52 @@ class DetailComicBookController extends BaseController {
     showModalBottomSheet(
         context: context,
         builder: (_) => dialogReward(context, callback: (value) {
-              // if (Common.coin > value) {
-              //   showDialogLoading(context);
-              //   RepositoryImpl.getInstance()
-              //       .donateForWrite(idBook: detail.id, coin: value)
-              //       .then((data) {
-              //     showMess("+$value coin", TypeMess.INFORMATION);
-              //     Navigator.pop(context);
-              //     Common.coin -= value;
-              //   }).catchError((err) {});
-              // } else {
-              showDialogNotEnough(context, (value) {});
-              // }
+              if (Common.coin > value) {
+                showDialogLoading(context);
+                RepositoryImpl.getInstance()
+                    .donateForWrite(idBook: detail.id, coin: value)
+                    .then((data) {
+                  showMess("+$value coin", TypeMess.INFORMATION);
+                  Navigator.pop(context);
+                  Common.coin -= value;
+                }).catchError((err) {
+                  showMess("Donate error", TypeMess.WARNING);
+                });
+              } else {
+                showDialogNotEnough(context, (value) {});
+              }
             }));
   }
 
   void getChapter(id) {
-    RepositoryImpl.getInstance()
-        .chapByNoval(id: id, page: 1, limit: 1)
-        .then((value) {
-      if (value.length > 0) {
-        readChapter(value[0].id);
-      } else
-        showMess("Can not get chapter", TypeMess.WARNING);
-    });
+    print("chapterrrrr$id");
+    var chapter = Common.listReadChapter
+        .firstWhere((element) => element["idBook"] == id, orElse: () => null);
+    if (chapter == null)
+      RepositoryImpl.getInstance()
+          .chapByNoval(id: id, page: 1, limit: 1)
+          .then((value) {
+        if (value.length > 0) {
+          readChapter(id: value[0].id);
+        } else
+          showMess("Can not get chapter", TypeMess.WARNING);
+      });
+    else {
+      print(chapter);
+      var chap = chapter["read"]["title"];
+      print(chap);
+      String data = CryptUtils.decryptAESCryptoJS(
+          chapter["read"]["content_text"], Common.ONEADX_KEY);
+      print("data$data");
+      var read = CryptUtils.decodeBase4(data);
+      print(read);
+      Navigator.of(context).pop();
+      CallNativeUtils.invokeMethod(
+          method: "read", aguments: {"title": chap, "content": read});
+    }
   }
 
-  void readChapter(String id) {
+  void readChapter({String id}) {
     showDialogLoading(context);
     RepositoryImpl.getInstance().readNoval(id: id).then((value) {
       print(value);

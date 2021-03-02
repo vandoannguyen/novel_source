@@ -18,7 +18,7 @@ class BuyCoinMonoScreen extends BaseWidget<BuyCoinMonoController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             Expanded(
                 child: Container(
               padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
@@ -30,7 +30,7 @@ class BuyCoinMonoScreen extends BaseWidget<BuyCoinMonoController> {
                       name,
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
+                      textAlign: TextAlign.center,
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 10.0, 0.0, 10.0),
@@ -43,16 +43,16 @@ class BuyCoinMonoScreen extends BaseWidget<BuyCoinMonoController> {
                       "After you click to select the menu bar located in the left corner on Google",
                       style: TextStyle(),
                     ),
-                      Image.asset(Common.pathImg + "img_ch1.png"),
-                    
-                  //   Container(
-                  //     padding: EdgeInsets.fromLTRB(0, 10.0, 0.0, 10.0),
-                  //     child: Text(
-                  //       'Step 2: Select "Account"',
-                  //       style: TextStyle(color: Colors.blue),
-                  //     ),
-                  //   ),
-                  //  Image.asset(Common.pathImg + "img_ch2.png"),
+                    Image.asset(Common.pathImg + "img_ch1.png"),
+
+                    //   Container(
+                    //     padding: EdgeInsets.fromLTRB(0, 10.0, 0.0, 10.0),
+                    //     child: Text(
+                    //       'Step 2: Select "Account"',
+                    //       style: TextStyle(color: Colors.blue),
+                    //     ),
+                    //   ),
+                    //  Image.asset(Common.pathImg + "img_ch2.png"),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 10.0, 0.0, 10.0),
                       child: Text(
@@ -64,7 +64,7 @@ class BuyCoinMonoScreen extends BaseWidget<BuyCoinMonoController> {
                       "Select the payment method you want to associate with your Google Play account.",
                       style: TextStyle(),
                     ),
-                   Image.asset(Common.pathImg + "img_ch2.png"),
+                    Image.asset(Common.pathImg + "img_ch2.png"),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 10.0, 0.0, 10.0),
                       child: Text(

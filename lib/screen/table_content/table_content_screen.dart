@@ -33,7 +33,7 @@ class TableContentScreen extends BaseWidget<TableContentController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             Expanded(
               child: GetBuilder<TableContentController>(
                 builder: (_) =>

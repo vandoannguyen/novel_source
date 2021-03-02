@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:init_app/app_localizations.dart';
 
-Widget appbarSecond(name) {
+Widget appbarSecond(name, context, {isChangedLanguage}) {
   return Container(
     color: Colors.white,
     child: Stack(
@@ -20,7 +18,10 @@ Widget appbarSecond(name) {
           child: IconButton(
             padding: EdgeInsets.all(10.0),
             onPressed: () {
-              Get.back();
+              if (isChangedLanguage != null)
+                Navigator.pop(context, isChangedLanguage);
+              else
+                Navigator.pop(context);
             },
             icon: Icon(Icons.arrow_back_ios_rounded),
           ),

@@ -31,7 +31,8 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
         child: SafeArea(
           child: Column(
             children: [
-              appbarSecond(AppLocalizations.of(context).translate(name)),
+              appbarSecond(
+                  AppLocalizations.of(context).translate(name), context),
               Stack(
                 children: [
                   Container(

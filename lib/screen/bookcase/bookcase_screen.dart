@@ -6,7 +6,7 @@ import 'package:init_app/common/common.dart';
 import 'package:init_app/common/images.dart';
 import 'package:init_app/data/network/NovalModel.dart';
 import 'package:init_app/screen/bookcase/book_case_cotroller.dart';
-import 'package:init_app/screen/table_content/table_content_screen.dart';
+import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_screen.dart';
 import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/button_main.dart';
 import 'package:init_app/widgets/item_book_ver.dart';
@@ -22,7 +22,7 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
     print("item.id${item.id}");
     IntentAnimation.intentNomal(
         context: context,
-        screen: TableContentScreen(item.id),
+        screen: DetailComicBookScreen(idBook: item.id),
         option: IntentAnimationOption.RIGHT_TO_LEFT,
         duration: Duration(milliseconds: 500));
   }
@@ -84,7 +84,8 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
                                     width: 20.0,
                                     height: 20.0,
                                   ),
-                                  Text(AppLocalizations.of(context).translate("manager")),
+                                  Text(AppLocalizations.of(context)
+                                      .translate("manager")),
                                 ],
                               ),
                       ),

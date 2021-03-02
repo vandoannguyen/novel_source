@@ -18,7 +18,7 @@ class AboutUsScreen extends BaseWidget<AboutUsController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             Container(
               padding: EdgeInsets.symmetric(vertical: 30.0),
               width: 100.0,
@@ -64,7 +64,12 @@ class AboutUsScreen extends BaseWidget<AboutUsController> {
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Expanded(child: Text(AppLocalizations.of(context).translate("privacy policy menu"),),),
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.of(context)
+                            .translate("privacy policy menu"),
+                      ),
+                    ),
                     Container(
                       margin: EdgeInsets.all(5.0),
                       child: Icon(

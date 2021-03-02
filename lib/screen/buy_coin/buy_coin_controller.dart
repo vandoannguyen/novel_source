@@ -62,7 +62,8 @@ class BuyCoinController extends BaseController {
   ];
   Map<String, String> value;
 
-  BuyCoinController();
+  BuyCoinController() {}
+
   onInit() {
     value = paymentMethods[0];
   }

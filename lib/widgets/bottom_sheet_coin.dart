@@ -18,6 +18,7 @@ Widget dialogReward(BuildContext context, {callback}) {
             if (callback != null) callback(15);
           },
           child: Container(
+            color: Colors.transparent,
             height: 49,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -45,6 +46,7 @@ Widget dialogReward(BuildContext context, {callback}) {
             if (callback != null) callback(50);
           },
           child: Container(
+            color: Colors.transparent,
             height: 49,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -72,6 +74,7 @@ Widget dialogReward(BuildContext context, {callback}) {
             if (callback != null) callback(150);
           },
           child: Container(
+            color: Colors.transparent,
             height: 49,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -32,8 +32,12 @@ class Common {
   //getList
   static List<AppInfo> apps = [];
 
-//[{"idBook":"dsdsd","chapterNum":"chappter"}]
-  static dynamic listReadChapter;
+//   {
+//   "idBook": chapter.bookId,
+//   "chapterNum": chapter.num,
+//   "read": read
+//   }
+  static List listReadChapter;
 
   static List<dynamic> listInapp;
 }

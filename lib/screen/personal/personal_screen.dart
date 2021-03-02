@@ -11,6 +11,7 @@ import '../../common/constant.dart';
 // ignore: must_be_immutable
 class PersonalScreen extends BaseWidget<PersonalController> {
   PersonalScreen({this.callBack});
+
   final Function callBack;
   static const String routeName = '/personal';
   static const String name = 'personal';
@@ -19,6 +20,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: PersonalController());
     var size = MediaQuery.of(context).size;
+    controller.callBack = callBack;
     return Container(
       color: Colors.grey[200],
       child: SafeArea(

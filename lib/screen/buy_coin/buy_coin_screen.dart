@@ -22,7 +22,7 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             GetBuilder<BuyCoinController>(
               builder: (_) => Column(
                 children: controller.paymentMethods

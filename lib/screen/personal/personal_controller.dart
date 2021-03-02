@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/repository.dart';
+import 'package:init_app/screen/bookcase/book_case_cotroller.dart';
+import 'package:init_app/screen/bookstore/novel_bookstore/novel_book_controller.dart';
 import 'package:init_app/screen/buy_coin/buy_coin_screen.dart';
 import 'package:init_app/screen/come_author/come_author_screen.dart';
 import 'package:init_app/screen/detail_transaction/detail_transaction_screen.dart';
@@ -9,11 +11,14 @@ import 'package:init_app/screen/feedback/feedback_screen.dart';
 import 'package:init_app/screen/frequently_question/frequently_question_screen.dart';
 import 'package:init_app/screen/login/login_screen.dart';
 import 'package:init_app/screen/setting/setting_screen.dart';
+import 'package:init_app/utils/intent_animation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PersonalController extends BaseController {
   dynamic profile;
   bool isLogin = false;
+  dynamic callBack;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -48,7 +53,35 @@ class PersonalController extends BaseController {
         Get.to(FeedbackScreen());
         break;
       case "SETTING":
-        Get.to(SettingScreen());
+        IntentAnimation.intentNomal(
+                context: context,
+                screen: SettingScreen(),
+                option: IntentAnimationOption.RIGHT_TO_LEFT)
+            .then((value) {
+          if (value != null && value) {
+            callBack("CHANGE_LANGUAGE", "");
+            NovelBookController controller = null;
+            BookCaseController bookCaseController = null;
+            try {
+              controller = Get.find();
+            } catch (err) {
+              controller = null;
+            }
+            try {
+              bookCaseController = Get.find();
+            } catch (err) {
+              bookCaseController = null;
+            }
+            print("controller != null${controller != null}");
+            if (controller != null) {
+              controller.reloadData();
+            }
+            print("controller != null${bookCaseController != null}");
+            if (bookCaseController != null) {
+              bookCaseController.reloadData();
+            }
+          }
+        }).catchError((err) {});
         break;
 
       default:

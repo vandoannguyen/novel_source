@@ -71,5 +71,5 @@ dependencies {
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.facebook.android:facebook-login:[8.1)'
-
+    implementation 'com.android.billingclient:billing:3.0.1'
 }

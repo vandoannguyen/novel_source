@@ -422,4 +422,8 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
       ),
     );
   }
+
+  void changeLanguage() {
+    print("okok changeLanguage");
+  }
 }

@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:init_app/app_localizations.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
 import 'package:init_app/widgets/appbar_second.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../base/base_widget.dart';
 import 'come_author_controller.dart';
@@ -16,7 +12,6 @@ class ComeAuthorScreen extends BaseWidget<ComeAuthorController> {
   static const String routeName = '/bookcase';
   static const String name = "become author";
   int color = 0xFFfdf1f1;
-  
 
   build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: ComeAuthorController());
@@ -26,7 +21,7 @@ class ComeAuthorScreen extends BaseWidget<ComeAuthorController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             // Expanded(
             //   child: WebView(
             //     initialUrl: 'about:blank',
@@ -55,7 +50,10 @@ class ComeAuthorScreen extends BaseWidget<ComeAuthorController> {
                             padding: EdgeInsets.only(top: 20.0),
                             child: Text(
                               AppLocalizations.of(context).translate(name),
-                              style: TextStyle(color: Color(Constant.colorTxtPrimary), fontSize: 25.0, fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Color(Constant.colorTxtPrimary),
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -157,7 +155,7 @@ class ComeAuthorScreen extends BaseWidget<ComeAuthorController> {
                             padding: EdgeInsets.only(top: 25.0, bottom: 15.0),
                             child: Row(
                               children: [
-                              Expanded(
+                                Expanded(
                                   flex: 1,
                                   child: Container(
                                     height: 1,

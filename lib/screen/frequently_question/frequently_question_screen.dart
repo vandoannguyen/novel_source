@@ -22,7 +22,7 @@ class FrequentlyQuestionScreen
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(

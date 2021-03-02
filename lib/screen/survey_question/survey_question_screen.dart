@@ -30,7 +30,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
       body: SafeArea(
         child: Column(
           children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
+            appbarSecond(AppLocalizations.of(context).translate(name), context),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -506,7 +506,8 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                           margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
                           height: 40.0,
                           child: ButtonMain(
-                            name: AppLocalizations.of(context).translate("done"),
+                            name:
+                                AppLocalizations.of(context).translate("done"),
                             color: Color(Constant.colorTxtSecond),
                             txtSize: 16.0,
                             func: () {
