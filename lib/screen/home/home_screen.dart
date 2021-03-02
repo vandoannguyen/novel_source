@@ -88,7 +88,6 @@ class _HomeState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
             label: AppLocalizations.of(context).translate("bookstore"),
-            
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.fact_check_outlined),

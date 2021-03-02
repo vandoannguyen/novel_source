@@ -1,18 +1,17 @@
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
-import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_screen.dart';
 
-class TaskHistoryController extends BaseController {
-  List<Map<String, dynamic>> loadedcoin = [
+class MissionWidgetController extends BaseController {
+  List<Map<String, dynamic>> missions = [
     {
       "datetime": "12-02-2020",
       "answer": [
         {
-          "napxu" : "Nap bang tai khoan google",
+          "mission" : "Diem danh hang ngay ",
           "coin": "30",
         },
         {
-          "napxu" : "Nap bang the cao viettel",
+          "mission" : "Xem quang cao nhan thuong ",
           "coin": "50",
         }
       ],
@@ -21,11 +20,11 @@ class TaskHistoryController extends BaseController {
       "datetime": "13-02-2020",
       "answer": [
         {
-          "napxu" : "Nap bang the cao viettel",
+          "mission" : "Diem danh hang ngay ",
           "coin": "30",
         },
         {
-          "napxu" : "Nap bang tai khoan google ",
+          "mission" : "Xem quang cao nhan thuong ",
           "coin": "50",
         }
       ],
@@ -34,11 +33,11 @@ class TaskHistoryController extends BaseController {
       "datetime": "14-02-2020",
       "answer": [
         {
-          "napxu" : "Nap bang the cao viettel",
+          "mission" : "Diem danh hang ngay ",
           "coin": "30",
         },
         {
-          "napxu" : "Nap bang tai khoan google  ",
+          "mission" : "Xem quang cao nhan thuong ",
           "coin": "50",
         }
       ],
@@ -47,22 +46,19 @@ class TaskHistoryController extends BaseController {
       "datetime": "15-02-2020",
       "answer": [
         {
-          "napxu" : "Nap bang the cao viettel ",
+          "mission" : "Diem danh hang ngay ",
           "coin": "30",
         },
         {
-          "napxu" : "Nap bang the cao viettel ",
+          "mission" : "Xem quang cao nhan thuong ",
           "coin": "50",
         }
       ],
-    }
+    },
   ];
 
-  TaskHistoryController();
+  MissionWidgetController();
 
   onInit() {}
 
-  void goTutorial() {
-    Get.to(TutorialBuyCoinScreen());
-  }
 }

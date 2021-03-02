@@ -1,3 +1,4 @@
+
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
@@ -14,6 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 class PersonalController extends BaseController {
   dynamic profile;
   bool isLogin = false;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -34,6 +36,7 @@ class PersonalController extends BaseController {
         break;
       case "DETAIL_TRANSACTION":
         Get.to(DetailTransactionScreen());
+        // goDetailTransaction();
         break;
       case "SUPPORT":
         _launchInBrowser(Common.fanpageLink);
@@ -45,12 +48,11 @@ class PersonalController extends BaseController {
         Get.to(FrequentlyQuestionScreen());
         break;
       case "FEEDBACK":
-        Get.to(FeedbackScreen());
+        goFeedback();
         break;
       case "SETTING":
         Get.to(SettingScreen());
         break;
-
       default:
     }
   }
@@ -62,7 +64,22 @@ class PersonalController extends BaseController {
       callBack;
     }
   }
-
+  void goDetailTransaction() async{
+    if (isLogin) {
+      Get.to(DetailTransactionScreen());
+      update();
+    } else {
+      goLogin();
+    }
+  }
+  void goFeedback(){
+    if (isLogin) {
+      Get.to(FeedbackScreen());
+      update();
+    } else {
+      goLogin();
+    }
+  }
   void goBuyCoin() async {
     if (isLogin) {
       await Get.to(BuyCoinScreen());
@@ -109,4 +126,5 @@ class PersonalController extends BaseController {
       update();
     });
   }
+
 }

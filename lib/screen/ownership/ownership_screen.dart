@@ -14,28 +14,30 @@ class OwnershipScreen extends BaseWidget<OwnershipController> {
     super.build(context, controllerSuper: OwnershipController());
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            appbarSecond(AppLocalizations.of(context).translate(name)),
-            Container(
-              padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-              alignment: Alignment.center,
-              child: Text(
-                AppLocalizations.of(context).translate(name),
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+              appbarSecond(AppLocalizations.of(context).translate(name)),
+              Container(
+                padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                alignment: Alignment.center,
+                child: Text(
+                  AppLocalizations.of(context).translate(name),
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 30.0),
-              child: Text(
-                AppLocalizations.of(context).translate('app') +
-                    " ${Common.appName} " +
-                    AppLocalizations.of(context).translate('ownership content'),
-                style: TextStyle(height: 2),
+              Container(
+                padding: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 30.0),
+                child: Text(
+                  AppLocalizations.of(context).translate('app') +
+                      " ${Common.appName} " +
+                      AppLocalizations.of(context).translate('ownership content'),
+                  style: TextStyle(height: 2),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

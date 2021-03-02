@@ -16,8 +16,7 @@ class TaskScreen extends BaseWidget<TaskController> {
   final Function callBack;
   static const String routeName = '/tasks';
   static const String name = 'tasks';
-  TextStyle styleTitle =
-      TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
+  TextStyle styleTitle = TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
 
   void _incrementDate() {
     controller.incrementDate();
@@ -47,8 +46,7 @@ class TaskScreen extends BaseWidget<TaskController> {
   void onClickIntent(BuildContext context, String name) {
     switch (name) {
       case "ANSWER":
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SurveyQuestionScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SurveyQuestionScreen()));
         break;
       case "INVITE":
         // Navigator.push(
@@ -96,8 +94,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(
-                                      Common.pathImg + "bg_btn_checkined.png"),
+                                  image: AssetImage(Common.pathImg + "bg_btn_checkined.png"),
                                   fit: BoxFit.fill,
                                 ),
                                 shape: BoxShape.circle,
@@ -106,8 +103,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)
-                                        .translate("checkin"),
+                                    AppLocalizations.of(context).translate("checkin"),
                                     style: TextStyle(
                                       color: Color(Constant.colorTxtPrimary),
                                     ),
@@ -127,15 +123,13 @@ class TaskScreen extends BaseWidget<TaskController> {
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(
-                                      Common.pathImg + "bg_btn_checkin.png"),
+                                  image: AssetImage(Common.pathImg + "bg_btn_checkin.png"),
                                   fit: BoxFit.fill,
                                 ),
                                 shape: BoxShape.circle,
                               ),
                               child: Text(
-                                AppLocalizations.of(context)
-                                    .translate("checkin"),
+                                AppLocalizations.of(context).translate("checkin"),
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),
@@ -168,26 +162,18 @@ class TaskScreen extends BaseWidget<TaskController> {
                                       height: 35.0,
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
-                                        color: item["status"]
-                                            ? Color(Constant.colorTxtSecond)
-                                            : Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(50.0),
+                                        color: item["status"] ? Color(Constant.colorTxtSecond) : Colors.white,
+                                        borderRadius: BorderRadius.circular(50.0),
                                         border: Border.all(
                                           width: item["status"] ? 0 : 1,
-                                          color: Color(Constant.colorTxtDefault)
-                                              .withOpacity(0.5),
+                                          color: Color(Constant.colorTxtDefault).withOpacity(0.5),
                                         ),
                                       ),
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Image.asset(
-                                            item["status"]
-                                                ? Common.pathImg + "ic_coin.png"
-                                                : Common.pathImg +
-                                                    "ic_coin_grey.png",
+                                            item["status"] ? Common.pathImg + "ic_coin.png" : Common.pathImg + "ic_coin_grey.png",
                                             width: 12.0,
                                             fit: BoxFit.contain,
                                           ),
@@ -195,11 +181,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                                             item["name"],
                                             style: TextStyle(
                                               fontSize: 10.0,
-                                              color: item["status"]
-                                                  ? Colors.white
-                                                  : Color(Constant
-                                                          .colorTxtDefault)
-                                                      .withOpacity(0.6),
+                                              color: item["status"] ? Colors.white : Color(Constant.colorTxtDefault).withOpacity(0.6),
                                             ),
                                           ),
                                         ],
@@ -223,23 +205,20 @@ class TaskScreen extends BaseWidget<TaskController> {
                                   "${_.coinDaily.indexOf(item) + 1} ${AppLocalizations.of(context).translate("day")}",
                                   style: TextStyle(
                                     fontSize: 10.0,
-                                    color: Color(Constant.colorTxtDefault)
-                                        .withOpacity(0.6),
+                                    color: Color(Constant.colorTxtDefault).withOpacity(0.6),
                                   ),
                                 ))
                             .toList(),
                       ),
                     ),
                   ),
-                  //
                   Container(
                       margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            AppLocalizations.of(context).translate(
-                                "7 consecutive days attendance will be rewarded twice as much"),
+                            AppLocalizations.of(context).translate("7 consecutive days attendance will be rewarded twice as much"),
                             style: TextStyle(
                               fontSize: 12.0,
                               color: Color(Constant.colorTxtDefault),
@@ -251,7 +230,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                             height: 18.0,
                           ),
                         ],
-                      ))
+                      ),),
                 ],
               ),
             ),
@@ -287,16 +266,14 @@ class TaskScreen extends BaseWidget<TaskController> {
             itemTask(
                 icon: "adduser.png",
                 name: AppLocalizations.of(context).translate("Invite friends"),
-                des:
-                    "${AppLocalizations.of(context).translate("Invite each friend to reward")} 500",
+                des: "${AppLocalizations.of(context).translate("Invite each friend to reward")} 500",
                 btnName: AppLocalizations.of(context).translate("invite"),
                 func: () {
                   funcTask("INVITE", context);
                 }),
             itemTask(
                 icon: "income.png",
-                name: AppLocalizations.of(context)
-                    .translate("Replace your friends to deposit coins"),
+                name: AppLocalizations.of(context).translate("Replace your friends to deposit coins"),
                 des: "${AppLocalizations.of(context).translate("Receive")} 20%",
                 btnName: AppLocalizations.of(context).translate("deposit coin"),
                 func: () {
@@ -304,10 +281,8 @@ class TaskScreen extends BaseWidget<TaskController> {
                 }),
             itemTask(
                 icon: "onlinevideo.png",
-                name: AppLocalizations.of(context)
-                    .translate("Watch ads to receive coins"),
-                des:
-                    "${AppLocalizations.of(context).translate("Each view rewards")} 200",
+                name: AppLocalizations.of(context).translate("Watch ads to receive coins"),
+                des: "${AppLocalizations.of(context).translate("Each view rewards")} 200",
                 btnName: AppLocalizations.of(context).translate("watch"),
                 func: () {
                   funcTask("WATCH_ADS", context);
@@ -315,8 +290,7 @@ class TaskScreen extends BaseWidget<TaskController> {
             itemTask(
                 icon: "bookday.png",
                 name: AppLocalizations.of(context).translate("Read every day"),
-                des: AppLocalizations.of(context)
-                    .translate("Read 20 minutes, reward 200"),
+                des: AppLocalizations.of(context).translate("Read 20 minutes, reward 200"),
                 btnName: AppLocalizations.of(context).translate("read now"),
                 func: () {
                   funcTask("READ_BOOK", context);
@@ -367,9 +341,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                     children: [
                       Text(
                         des,
-                        style: TextStyle(
-                            fontSize: 13.0,
-                            color: Color(Constant.colorTxtPrimary)),
+                        style: TextStyle(fontSize: 13.0, color: Color(Constant.colorTxtPrimary)),
                       ),
                       Image.asset(
                         Common.pathImg + "ic_coin.png",

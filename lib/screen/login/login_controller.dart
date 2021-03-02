@@ -21,7 +21,7 @@ class LoginController extends BaseController {
   //   print("setLogin ${isLogedIn}");
   //   update();
   // }
-  void loginFaceook() async {
+  void loginFacebook() async {
     final FacebookLogin facebookLogin = FacebookLogin();
     final result = await facebookLogin.logIn(['email']);
     switch (result.status) {
@@ -34,7 +34,7 @@ class LoginController extends BaseController {
             .loginWithFaceBook(access_token: result.accessToken.token)
             .then((value) {
           Common.isLogedIn = true;
-        print("loginFaceook ============ ${value}");
+        print("loginFacebook ============ ${value}");
           Navigator.of(context).pop();
           Navigator.of(context).pop("ok");
           //  Navigator.of(context).pop({"code": 1, value: value['user']});

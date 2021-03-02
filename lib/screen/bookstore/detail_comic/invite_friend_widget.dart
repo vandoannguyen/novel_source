@@ -23,23 +23,25 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
     super.setState(fn);
 
   }
+  //get id invite
   void getInviteFriend(String idUser){
     RepositoryImpl.getInstance().inviteFriend(idUser: idUser).then((value) {
       print("getInviteFriend $value");
       idInvite = value;
     }).catchError((err){});
   }
-  //copylink
+  //copy link
   void _copyLink(String text){
     Clipboard.setData(new ClipboardData(text: text)).then((_){
       Scaffold.of(context).showSnackBar(
           SnackBar(content:Text("Link copied to clipboard")));
     });
   }
+  //get lis app installed
   void _getList() async{
      Common.apps = await InstalledApps.getInstalledApps(true, true);
   }
-  //shareface
+  //share face
   Future<void> _shareOnFacebook(String text) async {
     //List<AppInfo> apps = await InstalledApps.getInstalledApps(true, true);
     for(int i=0; i < Common.apps.length; i++){
@@ -71,7 +73,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
       }
     }
   }
-  //sharetwitter
+  //share twitter
   void _shareTwitter(String text) async {
     // List<AppInfo> apps = await InstalledApps.getInstalledApps(true, true);
     for(int i=0; i < Common.apps.length; i++){
@@ -98,11 +100,11 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
       }
     }
   }
-  //sharemore
+  //share more
   Future<void> _shareMore(String text) async {
         await FlutterShare.share(
             title: 'Share more app',
-            text: 'Example share text',
+            text: 'Example share link',
             linkUrl: text,
             chooserTitle: 'Choose app share link'
         );

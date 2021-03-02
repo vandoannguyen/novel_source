@@ -134,7 +134,7 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
                         if (index == _.myBooks.length)
                           return GestureDetector(
                             onTap: () {
-                              callback("okok");
+                              callback("bookstore");
                             },
                             child: addBook(),
                           );
