@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/search/search_controller.dart';
@@ -17,8 +18,7 @@ class SearchScreen extends BaseWidget<SearchController> {
     controller.getHotest();
     // ValueNotifier<List<NovelModel>> filtered =
     //     ValueNotifier<List<NovelModel>>([]);
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+  
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: 30),
@@ -68,7 +68,7 @@ class SearchScreen extends BaseWidget<SearchController> {
                               contentPadding:
                                   EdgeInsets.only(top: 3, left: 15.0),
                               fillColor: Colors.grey[400],
-                              hintText: "Search book, author",
+                              hintText: AppLocalizations.of(context).translate("search for books or authors"),
                               hintStyle: TextStyle(
                                 color: Colors.grey[400],
                                 fontSize: 12,
@@ -102,7 +102,7 @@ class SearchScreen extends BaseWidget<SearchController> {
                         padding: EdgeInsets.all(10),
                         child: Center(
                             child: Text(
-                              "No",
+                              AppLocalizations.of(context).translate("No"),
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 12),
                         ))),
@@ -147,7 +147,7 @@ class SearchScreen extends BaseWidget<SearchController> {
                                       })
                                   : Container(
                                       child: Text(
-                                        "List is empty",
+                                        AppLocalizations.of(context).translate("List is empty"),
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 15.0),
@@ -174,7 +174,7 @@ class SearchScreen extends BaseWidget<SearchController> {
                                 Container(
                                   margin: EdgeInsets.only(left: 5.0),
                                   child: Text(
-                                    "HOTTEST",
+                                    AppLocalizations.of(context).translate("hotest"),
                                     style: TextStyle(color: Colors.pink),
                                   ),
                                 ),
@@ -264,7 +264,7 @@ class SearchScreen extends BaseWidget<SearchController> {
                                 Container(
                                   margin: EdgeInsets.only(left: 5.0),
                                   child: Text(
-                                    "Sach hot ban chay",
+                                    AppLocalizations.of(context).translate("hot selling books"),
                                     style: TextStyle(color: Colors.pink),
                                   ),
                                 ),

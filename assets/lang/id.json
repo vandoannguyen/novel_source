@@ -60,6 +60,23 @@
   "select a payment method": "Pilih metode pembayaran",
   "become author": "Menjadi penulis",
   "survey question": "Pertanyaan survei",
+  "survey question 1":"How much time do you spend reading each day?",
+  "survey question 1 answers 1":"Less than 1 hour",
+  "survey question 1 answers 2":"2 hours",
+  "survey question 1 answers 3":"3 hours",
+  "survey question 1 answers 4":"3 or more hours",
+  "survey question 2":"Which stories do you like best in this application",
+  "Please enter the Story you like best": "Please enter the Story you like best",
+  "survey question 3":"What kind of stories do you hope to be able to read in the future?",
+  "survey question 3 answers 1":"Modern Romance",
+  "survey question 3 answers 2":"Ancient Fiction/ Fantasy",
+  "survey question 3 answers 3":"Urban/City",
+  "survey question 3 answers 4":"Other",
+  "survey question 4":"What online payment methods do you usually use ?",
+  "Payment methods":"Payment methods",
+  "survey question 5":"For our app, do you have anything to comment on?",
+  "Please write in your comments":"Please write in your comments",
+
   "table content": "Daftar isi",
   "tutorial buy coin": "Cara memuat koin",
   "Payment by momo": "Instruksi pembayaran melalui MoMo",
@@ -110,5 +127,7 @@
   "Invite friends to receive bonus coins detail":"Undang teman untuk menerima koin bonus\n1. Undang 1 teman untuk memberi hadiah 10 koin\n2. Setiap kali seorang teman menyetor koin, Anda akan diberi hadiah 10% dari koin yang disimpan teman Anda.\n\nPengingat\n1. Satu nomor telepon hanya dapat diundang sekali\n2. Teman-teman Anda telah berhasil memasuki undangan untuk menerima koin",
   "Login to read more":"Masuk untuk membaca lebih lanjut",
   "Chapter list": "DAFTAR BAB",
-  "Anonymous": "Anonim"
+  "Anonymous": "Anonim",
+  "List is empty": "Danh sách trống",
+  "":""
 }

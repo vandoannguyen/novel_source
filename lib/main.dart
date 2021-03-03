@@ -7,6 +7,7 @@ import 'package:init_app/routes/routes.dart';
 import 'package:init_app/screen/bookstore/bookstore_screen.dart';
 import 'package:init_app/screen/home/home_screen.dart';
 import 'package:init_app/screen/load/load_screen.dart';
+import 'package:init_app/screen/survey_question/survey_question_screen.dart';
 import 'package:init_app/screen/task/task_screen.dart';
 import 'package:init_app/utils/call_native_utils.dart';
 
@@ -53,8 +54,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-// home: HomePage(),
-      initialRoute: Routes.load,
+home: SurveyQuestionScreen(),
+      // initialRoute: Routes.load,
       getPages: [
         GetPage(
           name: Routes.home,
@@ -82,33 +83,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter demo app'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Text(
-            AppLocalizations.of(context).translate('coin balance'),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 24.0,
-            ),
-          ),
-          Text(
-            'Chào mừng bạn đến với Flutter',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20.0,
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}

@@ -60,6 +60,25 @@
   "select a payment method": "Select a payment method",
   "become author": "Become Author",
   "survey question": "Survey question",
+  "survey question 1":"How much time do you spend reading each day?",
+  "survey question 1 answers 1":"Less than 1 hour",
+  "survey question 1 answers 2":"2 hours",
+  "survey question 1 answers 3":"3 hours",
+  "survey question 1 answers 4":"3 or more hours",
+  "survey question 2":"Which stories do you like best in this application",
+  "Please enter the Story you like best": "Please enter the Story you like best",
+  "survey question 3":"What kind of stories do you hope to be able to read in the future?",
+  "survey question 3 answers 1":"Modern Romance",
+  "survey question 3 answers 2":"Ancient Fiction/ Fantasy",
+  "survey question 3 answers 3":"Urban/City",
+  "survey question 3 answers 4":"Other",
+  "survey question 4":"What online payment methods do you usually use ?",
+  "Payment methods":"Payment methods",
+  "survey question 5":"For our app, do you have anything to comment on?",
+  "Please write in your comments":"Please write in your comments",
+
+
+
   "table content": "Table content",
   "tutorial buy coin": "Tutorial buy coin",
   "Payment by momo": "Payment by momo",
@@ -110,5 +129,7 @@
   "Invite friends to receive bonus coins detail":"Invite friends to receive bonus coins\n1. Invite 1 friend to reward 10coin\n2. Every time a friend deposits coins, you will be rewarded with 10% of the coins your friends deposit.\n\nReminder \n1. One phone number can only be invited once \n2. Your friends have successfully entered the invitation to receive coins",
   "Login to read more":"Login to read bookcase",
   "Chapter list": "CHAPTER LIST",
-  "Anonymous": "Anonymous"
+  "Anonymous": "Anonymous",
+  "List is empty": "List is empty",
+  "":""
 }

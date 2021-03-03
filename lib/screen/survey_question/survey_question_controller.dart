@@ -11,8 +11,19 @@ class SurveyQuestionController extends BaseController {
   // ignore: must_call_super
 
   List<Map<String, dynamic>> questions = [];
-  List<dynamic> answers = ["2 hours", "", "Modern love language", "", "", ""];
-  onInit() {}
+  List<dynamic> answers = ["2 hours", "", "Modern Romance", "", "", ""];
+  // ignore: must_call_super
+  onInit() {
+    Get.snackbar(
+        '',
+        'You must fill out all information!',
+        titleText: Text(
+          "ERROR",
+          style: TextStyle(color: Colors.redAccent, fontSize: 18.0),
+        ),
+          snackPosition: SnackPosition.BOTTOM
+      );
+  }
 
   void changeAnswers(index, value) {
     answers[index] = value;

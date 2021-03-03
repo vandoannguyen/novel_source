@@ -60,6 +60,23 @@
   "select a payment method": "เลือกวิธีการชำระเงิน",
   "become author": "เป็นผู้แต่ง",
   "survey question": "คำถามแบบสำรวจ",
+  "survey question 1":"How much time do you spend reading each day?",
+  "survey question 1 answers 1":"Less than 1 hour",
+  "survey question 1 answers 2":"2 hours",
+  "survey question 1 answers 3":"3 hours",
+  "survey question 1 answers 4":"3 or more hours",
+  "survey question 2":"Which stories do you like best in this application",
+  "Please enter the Story you like best": "Please enter the Story you like best",
+  "survey question 3":"What kind of stories do you hope to be able to read in the future?",
+  "survey question 3 answers 1":"Modern Romance",
+  "survey question 3 answers 2":"Ancient Fiction/ Fantasy",
+  "survey question 3 answers 3":"Urban/City",
+  "survey question 3 answers 4":"Other",
+  "survey question 4":"What online payment methods do you usually use ?",
+  "Payment methods":"Payment methods",
+  "survey question 5":"For our app, do you have anything to comment on?",
+  "Please write in your comments":"Please write in your comments",
+
   "table content": "เนื้อหาตาราง",
   "tutorial buy coin": "บทช่วยสอนซื้อเหรียญ",
   "Payment by momo": "การชำระเงินโดย momo",
@@ -110,5 +127,7 @@
   "Invite friends to receive bonus coins detail":"เชิญเพื่อนเพื่อรับเหรียญโบนัส\n1 เชิญเพื่อน 1 คนเพื่อรับรางวัล 10coin\n2 ทุกครั้งที่เพื่อนฝากเหรียญคุณจะได้รับ 10% ของเหรียญที่เพื่อนของคุณฝาก\n\n เตือนความจำ\n1 สามารถเชิญหมายเลขโทรศัพท์หนึ่งหมายเลขได้เพียงครั้งเดียว\n2 เพื่อนของคุณได้กรอกคำเชิญเพื่อรับเหรียญเรียบร้อยแล้ว",
   "Login to read more":"เข้าสู่ระบบเพื่ออ่านเพิ่มเติม",
   "Chapter list": "บทรายการ",
-  "Anonymous": "ไม่ระบุชื่อ"
+  "Anonymous": "ไม่ระบุชื่อ",
+  "List is empty": "Danh sách trống",
+  "":""
 }
