@@ -177,9 +177,9 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
               width: 30,
               fit: BoxFit.fill,
             ),
-          )),
+          ),),
           Container(
-            height: 60.0,
+            height: 45.0,
           ),
         ],
       ),

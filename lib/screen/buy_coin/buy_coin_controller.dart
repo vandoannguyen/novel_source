@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/repository.dart';
@@ -14,50 +15,44 @@ class BuyCoinController extends BaseController {
     {
       "id": "",
       "coin": 550,
-      "coinExtra": 825,
-      "moneyVN": "đ23.000",
-      "moneyForeign": "\$0.99",
-      "sale": false,
+      "x_percent": 20,
+      "title": "\$0.99",
+      "bestChoice": false,
     },
     {
       "id": "",
       "coin": 1200,
-      "coinExtra": 720,
-      "moneyVN": "đ50.000",
-      "moneyForeign": "\$2.2",
-      "sale": false,
+      "x_percent": 30,
+      "title": "\$2.2",
+      "bestChoice": false,
     },
     {
       "id": "",
       "coin": 2400,
-      "coinExtra": 960,
-      "moneyVN": "đ100.000",
-      "moneyForeign": "\$4.4",
-      "sale": true,
+      "x_percent": 40,
+      "title": "\$4.4",
+      "bestChoice": true,
     },
     {
       "id": "",
       "coin": 4800,
-      "coinExtra": 3840,
-      "moneyVN": "đ200.000",
-      "moneyForeign": "\$8.81",
-      "sale": false,
+      "x_percent": 50,
+      "title": "\$8.81",
+      "bestChoice": false,
     },
     {
       "id": "",
       "coin": 12000,
-      "coinExtra": 3600,
-      "moneyVN": "đ500.000",
-      "moneyForeign": "\$22.01",
-      "sale": false,
+      "x_percent": 50,
+      "title": "\$22.01",
+      "bestChoice": false,
     },
     {
       "id": "",
       "coin": 24000,
-      "coinExtra": 12000,
-      "moneyVN": "đ1.000.000",
-      "moneyForeign": "\$44.03",
-      "sale": false,
+      "x_percent": 50,
+      "title": "\$44.03",
+      "bestChoice": false,
     },
   ];
   Map<String, String> value;
@@ -66,8 +61,8 @@ class BuyCoinController extends BaseController {
 
   onInit() {
     value = paymentMethods[0];
-    // if (Common.listInapp == null || Common.listInapp.length == 0)
-      // getSubscription();
+    if (Common.listInapp == null || Common.listInapp.length == 0)
+      getSubscription();
   }
 
   void selectMethod(item) {
@@ -76,14 +71,12 @@ class BuyCoinController extends BaseController {
   }
 
   void buyCoin(value) {
-    print(value);
     Get.back();
     RepositoryImpl.getInstance()
         .buySubscription(idSub: value["id"])
         .then((value) {
-      print("getSubscription ${value}");
-
-      Get.snackbar('', 'Deposit coins success! You have ${Common.coin}!',
+      Get.snackbar('',
+          '${AppLocalizations.of(context).translate("Deposit coins success! You have")} ${Common.coin}!',
           titleText: Text(
             "SUCCESS",
             style: TextStyle(color: Colors.green, fontSize: 18.0),
@@ -98,11 +91,9 @@ class BuyCoinController extends BaseController {
           ),
           snackPosition: SnackPosition.BOTTOM);
     });
-    // Common.coin += value["coin"] + value["coinExtra"];
+    // Common.coin += value["coin"] + value["x_percent"];
     // coinDemo =Common.coin.obs;
     // setCoin(Common.coin);
-
-    // print("coinDemo ${coinDemo}");
   }
 
   void goTutorialBuyCoin() {
@@ -110,11 +101,13 @@ class BuyCoinController extends BaseController {
   }
 
   void getSubscription() {
+Common.listInapp = coinPackage;
+return;
     if (Common.listInapp == null || Common.listInapp.length == 0)
       RepositoryImpl.getInstance()
           .getSubscription(lang: Common.language)
           .then((value) {
-        print("getSubscription ${value}");
+        print("======== $value");
         Common.listInapp = value;
       }).catchError((err) {
         print(err);

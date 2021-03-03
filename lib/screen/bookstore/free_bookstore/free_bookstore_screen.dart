@@ -98,7 +98,7 @@ class FreeBookstoreScreen extends BaseWidget<FreeBookstoreController> {
                                 fontSize: 13.0),
                           ),
                           Image.asset(
-                            Common.pathImg + "ic_comic_book.jpg",
+                            Common.pathImg + "ic_comic_book.png",
                             height: 25.0,
                             fit: BoxFit.contain,
                           ),
@@ -203,7 +203,7 @@ class FreeBookstoreScreen extends BaseWidget<FreeBookstoreController> {
           right: 5.0,
           top: 40.0,
           child: Image.asset(
-            Common.pathImg + "ic_comic_book.jpg",
+            Common.pathImg + "ic_comic_book.png",
             height: 25.0,
             fit: BoxFit.contain,
           ),

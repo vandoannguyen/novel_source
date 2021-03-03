@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:init_app/app_localizations.dart';
+import 'package:init_app/common/constant.dart';
 import 'package:init_app/screen/bookcase/bookcase_screen.dart';
 import 'package:init_app/screen/bookstore/bookstore_screen.dart';
 import 'package:init_app/screen/personal/personal_screen.dart';
@@ -90,17 +91,31 @@ class _HomeState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            activeIcon: Image.asset(
-              "assets/images/ic_edit.png",
-              width: 25.0,
+            icon:  Image.asset(
+              "assets/images/ic_menu_bookcase.png",
               height: 25.0,
-              color: Colors.pink,
+               fit: BoxFit.contain,
+            ),
+               
+           
+            activeIcon: Image.asset(
+              "assets/images/ic_menu_bookcase_ac.png",
+              height: 25.0,
+              fit: BoxFit.contain,
             ),
             label: AppLocalizations.of(context).translate("bookcase"),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
+              icon:  Image.asset(
+              "assets/images/ic_menu_bookstore.png",
+             fit: BoxFit.contain,
+              height: 25.0,
+            ),
+            activeIcon: Image.asset(
+              "assets/images/ic_menu_bookstore_ac.png",
+              height: 25.0,
+                fit: BoxFit.contain,
+            ),
             label: AppLocalizations.of(context).translate("bookstore"),
           ),
           BottomNavigationBarItem(
@@ -113,7 +128,7 @@ class _HomeState extends State<HomeScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.pink,
+        selectedItemColor: Color(Constant.colorTxtSecond),
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         onTap: _onItemTapped,

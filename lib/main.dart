@@ -7,7 +7,6 @@ import 'package:init_app/routes/routes.dart';
 import 'package:init_app/screen/bookstore/bookstore_screen.dart';
 import 'package:init_app/screen/home/home_screen.dart';
 import 'package:init_app/screen/load/load_screen.dart';
-import 'package:init_app/screen/survey_question/survey_question_screen.dart';
 import 'package:init_app/screen/task/task_screen.dart';
 import 'package:init_app/utils/call_native_utils.dart';
 
@@ -22,8 +21,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-//     Locale myLocale = Localizations.localeOf(context);
-// print("myLocale myLocale myLocale $myLocale");
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
@@ -43,8 +40,7 @@ class MyApp extends StatelessWidget {
           if (supportedLocale.languageCode == locale.languageCode &&
               supportedLocale.countryCode == locale.countryCode) {
             Common.langNow = supportedLocale.languageCode;
-            print(
-                "myLocale myLocale myLocale ${supportedLocale.countryCode} ${supportedLocale.languageCode}");
+         
             return supportedLocale;
           }
         }
@@ -54,8 +50,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-home: SurveyQuestionScreen(),
-      // initialRoute: Routes.load,
+      initialRoute: Routes.load,
       getPages: [
         GetPage(
           name: Routes.home,

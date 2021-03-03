@@ -16,7 +16,7 @@ class TaskScreen extends BaseWidget<TaskController> {
   final Function callBack;
   static const String routeName = '/tasks';
   static const String name = 'tasks';
-  TextStyle styleTitle = TextStyle(fontSize: 18.0, color: Color(Constant.colorTxtPrimary));
+  TextStyle styleTitle = TextStyle(fontSize: 17.0, color: Color(Constant.colorTxtPrimary));
 
   void _incrementDate() {
     controller.incrementDate();
@@ -322,8 +322,8 @@ class TaskScreen extends BaseWidget<TaskController> {
           Image.asset(
             Common.pathImg + icon,
             width: 20.0,
-            height: 20.0,
             color: Colors.pink,
+            fit: BoxFit.contain,
           ),
           Expanded(
             child: Container(
@@ -358,7 +358,7 @@ class TaskScreen extends BaseWidget<TaskController> {
           ),
           Container(
             width: 100.0,
-            height: 30.0,
+            height: 35.0,
             child: ButtonMain(
               name: btnName,
               func: func,

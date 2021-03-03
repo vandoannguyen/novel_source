@@ -78,7 +78,10 @@
   "Please write in your comments":"Mời ghi vào ý kiến góp ý của mình",
   "table content": "Mục lục",
   "tutorial buy coin": "Hướng dẫn nạp xu",
-  "Payment by momo": "Hướng dẫn thanh toán bằng MoMo",
+  "step1": "Bước 1: Mở tab ''Personal'', Chọn ''Nạp xu'' > Chọn gói bạn muốn mua.",
+  "step2": "Bước 2: Bấm vào 'Thanh toán'.",
+  "step3": "Bước 3: Bạn bấm 'Mua' sẽ mua xu thành công. Bạn có thế chọn phương thức thanh toán khác trong tùy chọn phía trên nút 'Mua'",
+  "Thank you for using":"Thank you for using",
   "answer": "Trả lời",
   "newest": "Mới nhất",
   "free": "Khu vực miễn phí",
@@ -128,5 +131,7 @@
   "Chapter list": "DANH SÁCH CHƯƠNG",
   "Anonymous": "Ẩn danh",
   "List is empty": "Danh sách trống",
-  "":""
+  "ERROR": "Không thành công",
+  "SUCCESS": "Thành công",
+  "Deposit coins success! You have": "Nạp xu thành công! Bạn đang có"
 }
