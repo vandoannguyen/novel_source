@@ -479,10 +479,9 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
-      print("object");
       if (value.data["code"] == 1) {
-        completer.complete(value);
-        print("object ${value.data["result"]}");
+        completer.complete(value.data["result"]);
+        // print("object ${value.data["result"]}");
       } else
         throw ("data null");
     }).catchError((err) {
@@ -667,6 +666,7 @@ class ApiImpl implements IApi {
         completer.complete(value.data["result"]);
       } else
         throw ("data null");
+      print("search $value");
     }).catchError((err) {
       completer.completeError(err);
     });

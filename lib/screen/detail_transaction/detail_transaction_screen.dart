@@ -15,39 +15,40 @@ class DetailTransactionScreen extends BaseWidget<DetailTransactionController> {
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: DetailTransactionController());
-    controller.getHistory();
+    // controller.getHistory();
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             appbarSecond(AppLocalizations.of(context).translate(name), context),
-            new TabBar(
-              controller: controller.controllerTab,
-              indicatorColor: Color(Constant.colorTxtPrimary),
-              indicatorSize: TabBarIndicatorSize.label,
-              unselectedLabelColor: Color(Constant.colorTxtDefault),
-              labelColor: Color(Constant.colorTxtPrimary),
-              tabs: [
-                new Tab(
-                  text: 'Nạp Xu',
-                ),
-                new Tab(
-                  text: 'Nhiệm Vụ',
-                ),
-                new Tab(
-                  text: 'Tiêu Phí',
-                ),
-              ],
-            ),
+            // new TabBar(
+            //   controller: controller.controllerTab,
+            //   indicatorColor: Color(Constant.colorTxtPrimary),
+            //   indicatorSize: TabBarIndicatorSize.label,
+            //   unselectedLabelColor: Color(Constant.colorTxtDefault),
+            //   labelColor: Color(Constant.colorTxtPrimary),
+            //   tabs: [
+            //     new Tab(
+            //       text: 'Nạp Xu',
+            //     ),
+            //     new Tab(
+            //       text: 'Nhiệm Vụ',
+            //     ),
+            //     new Tab(
+            //       text: 'Tiêu Phí',
+            //     ),
+            //   ],
+            // ),
             Expanded(
-              child: new TabBarView(
-                controller: controller.controllerTab,
-                children: <Widget>[
-                  TaskHistoryScreen(),
-                  MissionWidgetScreen(),
-                  ExpenseWidgetScreen(),
-                ],
-              ),
+              child: TaskHistoryScreen(),
+              // child: new TabBarView(
+              //   controller: controller.controllerTab,
+              //   children: <Widget>[
+              //     TaskHistoryScreen(),
+              //     MissionWidgetScreen(),
+              //     ExpenseWidgetScreen(),
+              //   ],
+              // ),
             )
           ],
         ),

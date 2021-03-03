@@ -38,7 +38,8 @@ class PersonalController extends BaseController {
         Get.to(BuyCoinScreen());
         break;
       case "DETAIL_TRANSACTION":
-        Get.to(DetailTransactionScreen());
+         // Get.to(DetailTransactionScreen());
+        goDetailTransaction();
         break;
       case "SUPPORT":
         launchInBrowser(Common.fanpageLink, false);
@@ -50,7 +51,8 @@ class PersonalController extends BaseController {
         Get.to(FrequentlyQuestionScreen());
         break;
       case "FEEDBACK":
-        Get.to(FeedbackScreen());
+        // Get.to(FeedbackScreen());
+        goFeedback();
         break;
       case "SETTING":
         IntentAnimation.intentNomal(
@@ -91,7 +93,6 @@ class PersonalController extends BaseController {
 
   void goFrequentlyQuestion(callBack) async {
     var data = await Get.to(FrequentlyQuestionScreen());
-
     if (data == 1) {
       print("======================== ${data}");
       callBack();

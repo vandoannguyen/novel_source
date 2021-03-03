@@ -10,13 +10,14 @@ import '../../../common/common.dart';
 // ignore: must_be_immutable
 class MissionWidgetScreen extends BaseWidget<MissionWidgetController> {
   static const String routeName = '/mission-widget';
-  static const String name = 'mission';
+  static const String name = 'missions';
 
   @override
   void dispose() {}
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: MissionWidgetController());
+    controller.getMissionHistory();
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: controller.missions.isNotEmpty ? ListView.builder(
@@ -24,6 +25,11 @@ class MissionWidgetScreen extends BaseWidget<MissionWidgetController> {
           shrinkWrap: true,
           itemCount: controller.missions.length,
           itemBuilder: (BuildContext context, int index) {
+            Map<String, dynamic> sum = controller.missions[index]["answer"].reduce((value, element){
+              return {
+                "coin" : value["coin"] + element["coin"],
+              };
+            });
             return ExpandablePanel(
               theme: ExpandableThemeData(
                 headerAlignment: ExpandablePanelHeaderAlignment.center,
@@ -33,6 +39,7 @@ class MissionWidgetScreen extends BaseWidget<MissionWidgetController> {
                 tapHeaderToExpand: true,
               ),
               header: Container(
+                height: 50.0,
                 child: Padding(
                   padding:
                   EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -44,15 +51,13 @@ class MissionWidgetScreen extends BaseWidget<MissionWidgetController> {
                             "${controller.missions[index]["datetime"]}",
                             style: TextStyle(
                                 fontSize: 13.0, fontWeight: FontWeight.w500)),
-
-
                          Row(
                           children: [
                             Text(
-                                "Tong xu thu vao: +${controller.missions[index]["coin"]}",
+                                "Tong xu thu vao: +${sum["coin"]}",
                                 style: TextStyle(
                                     fontSize: 15.0, fontWeight: FontWeight.w500)),
-                            Image.asset(Common.pathImg + "ic_coin.png", height: 13.0, width: 13.0,)
+                            Image.asset(Common.pathImg + "ic_coin.png", height: 15.0, width: 15.0,)
                           ],
                       ),
                     ],
@@ -70,18 +75,21 @@ class MissionWidgetScreen extends BaseWidget<MissionWidgetController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("${item["mission"]}", style: TextStyle(color: Colors.black)),
+                          Text("${item["mission"]}", style: TextStyle(color: Colors.black, fontSize: 16.0)),
                           Row(
                             children: [
-                              Text(
-                                "+${item["coin"]}",
-                                style: TextStyle(
-                                    color:
-                                    Color(Constant.colorTxtSecond)),
+                              Container(
+                                margin: EdgeInsets.all(5.0),
+                                child: Text(
+                                  "+${item["coin"]}",
+                                  style: TextStyle(
+                                      color:
+                                      Color(Constant.colorTxtSecond), fontSize: 16.0),
+                                ),
                               ),
                               Image.asset(
                                 Common.pathImg + "ic_coin.png",
-                                width: 13.0,
+                                width: 16.0,
                                 fit: BoxFit.contain,
                               ),
                             ],

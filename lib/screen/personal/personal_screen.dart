@@ -19,6 +19,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: PersonalController());
     var size = MediaQuery.of(context).size;
+    controller.getProfile();
     return SingleChildScrollView(
       child: Container(
         color: Colors.grey[200],
