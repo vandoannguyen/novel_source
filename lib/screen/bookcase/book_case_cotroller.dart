@@ -143,6 +143,10 @@ class BookCaseController extends BaseController {
     myBooks = Common.myBooks;
     update();
     print(Common.myBooks.length);
+    for (int i = 0; i < listSelected.length; i++) {
+      RepositoryImpl.getInstance()
+          .removeBookFromMyBook(idBook: listSelected[i].id);
+    }
   }
 
   void cancelDelete() {

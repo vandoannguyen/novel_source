@@ -81,7 +81,12 @@ public class InAppMetholCallHandler implements MethodChannel.MethodCallHandler, 
                 for (Map.Entry<String, SkuDetails> entry : InAppUtil.mapSkus.entrySet()) {
                     skus.add(entry.getValue().getSku());
                 }
-                result.success(new Gson().toJson(skus));
+                Log.e(TAG, "onSuccess: Gson().toJson(skus)" );
+                try{
+                    result.success(new Gson().toJson(skus));
+                }catch (Exception e){
+                    Log.e(TAG, "onSuccess: " + e.getMessage() );
+                }
             }
 
             @Override

@@ -175,16 +175,19 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                                     fontSize:
                                                                         16.0),
                                                               ),
-                                                              new TextSpan(
-                                                                text:
-                                                                    ' + ${int.parse((Common.listInapp[index]["coin"] * Common.listInapp[index]["x_percent"] / 100).toStringAsFixed(0))}',
-                                                                style: TextStyle(
-                                                                    color: Color(
-                                                                        Constant
-                                                                            .colorTxtSecond),
-                                                                    fontSize:
-                                                                        16.0),
-                                                              ),
+                                                             new TextSpan(
+                                                                      text:
+                                                                            Common.listInapp[index]
+                                                                ["x_percent"] >
+                                                            0
+                                                        ?' + ${int.parse((Common.listInapp[index]["coin"] * Common.listInapp[index]["x_percent"] / 100).toStringAsFixed(0))}' : "",
+                                                                      style: TextStyle(
+                                                                          color: Color(Constant
+                                                                              .colorTxtSecond),
+                                                                          fontSize:
+                                                                              16.0),
+                                                                    )
+                                                                 ,
                                                             ]),
                                                       ),
                                                       Image.asset(
@@ -311,13 +314,18 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                                                           fontSize: 16.0),
                                                     ),
                                                     new TextSpan(
-                                                      text:
-                                                          ' + ${int.parse((Common.listInapp[index]["coin"] * Common.listInapp[index]["x_percent"] / 100).toStringAsFixed(0))}',
-                                                      style: TextStyle(
-                                                          color: Color(Constant
-                                                              .colorTxtSecond),
-                                                          fontSize: 16.0),
-                                                    ),
+                                                            text:
+                                                                 Common.listInapp[index]
+                                                                ["x_percent"] >
+                                                            0
+                                                        ?' + ${int.parse((Common.listInapp[index]["coin"] * Common.listInapp[index]["x_percent"] / 100).toStringAsFixed(0))}' : "",
+                                                            style: TextStyle(
+                                                                color: Color(
+                                                                    Constant
+                                                                        .colorTxtSecond),
+                                                                fontSize: 16.0),
+                                                          )
+                                                        ,
                                                   ]),
                                                 ),
                                               ),

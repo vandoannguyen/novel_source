@@ -145,6 +145,8 @@ class LoadController extends BaseController {
           Common.myBooks = value;
           _isGetDataSuccess = true;
           intentToHome(context);
+        }).catchError((err) {
+          print(("error$err"));
         });
       }
       getInapp();
@@ -173,6 +175,7 @@ class LoadController extends BaseController {
             .loginWithGoogle(access_token: token.accessToken)
             .then((value) {
           Common.token = value["token"];
+          Common.user = UserModel.fromJson(value["user"]);
           Common.isLogedIn = true;
           RepositoryImpl.getInstance()
               .setLogedData(type: "google")
@@ -196,13 +199,15 @@ class LoadController extends BaseController {
         RepositoryImpl.getInstance()
             .loginWithFaceBook(access_token: result.accessToken.token)
             .then((value) {
-          Common.token = value;
+          Common.token = value["token"];
+          Common.user = UserModel.fromJson(value["user"]);
           Common.isLogedIn = true;
           RepositoryImpl.getInstance().setLogedData(type: "facebook");
           _isLoginSuccess = true;
           _getAccDetail();
           _getData(context);
         }).catchError((err) {
+          print("error$err");
           showMess("Login failed", TypeMess.WARNING);
           Navigator.of(context).pop();
         });
@@ -210,7 +215,10 @@ class LoadController extends BaseController {
       case FacebookLoginStatus.cancelledByUser:
         break;
       case FacebookLoginStatus.error:
-        showMess("Login failed", TypeMess.WARNING);
+        {
+          showMess("Login failed", TypeMess.WARNING);
+          print("login failed");
+        }
         break;
     }
   }
@@ -253,7 +261,7 @@ class LoadController extends BaseController {
       CallNativeUtils.invokeMethod(
           method: "initInapp",
           aguments: {"data": jsonEncode(list)}).then((value) {
-            value  = jsonDecode(value);
+        value = jsonDecode(value);
         Common.listInapp = Common.listInapp
             .where((e) =>
                 (value as List)

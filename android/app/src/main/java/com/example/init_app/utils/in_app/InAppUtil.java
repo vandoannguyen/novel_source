@@ -46,9 +46,17 @@ public class InAppUtil {
         skusList = sku;
         mapSkus = new HashMap<>();
         Log.d(TAG, "configPurchase: " + sku);
-        configBillingClient(context, sku);
-        configBillingClientOneTime(context, sku);
-        configBillingClientBuy(context, sku);
+        if (!isBillingClientSuccess || !isBillingClientBuyOneTimeSuccess || !isBillingClientBuySuccess) {
+            isBillingClientBuyOneTimeSuccess=false;
+            isBillingClientSuccess = false;
+            isBillingClientBuySuccess = false;
+            configBillingClient(context, sku);
+            configBillingClientOneTime(context, sku);
+            configBillingClientBuy(context, sku);
+        }
+        else{
+            callSuccess();
+        }
     }
 
     /**
@@ -79,7 +87,7 @@ public class InAppUtil {
             public void onBillingSetupFinished(BillingResult billingResult) {
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     if (billingClient.isReady()) {
-                        loadAllSkul(context);
+                        loadAllSkulBuy(context);
                         Log.e(TAG, "onBillingSetupFinishedbillingClientBuy: ");
                         Purchase.PurchasesResult result =
                                 billingClient.queryPurchases(BillingClient.SkuType.INAPP);
@@ -127,7 +135,7 @@ public class InAppUtil {
             public void onBillingSetupFinished(BillingResult billingResult) {
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     if (billingClient.isReady()) {
-                        loadAllSkul(context);
+                        loadAllSkulBuyOneTime(context);
                         Log.e(TAG, "onBillingSetupFinished billingClientBuyOneTime: ");
                         Purchase.PurchasesResult result =
                                 billingClient.queryPurchases(BillingClient.SkuType.INAPP);
@@ -262,6 +270,40 @@ public class InAppUtil {
             Log.e(TAG, "loadAllSkul: " + skusList);
             SkuDetailsParams params = SkuDetailsParams.newBuilder().setSkusList(skusList).setType(BillingClient.SkuType.SUBS).build();
             billingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
+                @Override
+                public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
+                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK)
+                        for (SkuDetails sku : list) {
+                            mapSkus.put(sku.getSku(), sku);
+                        }
+                    Log.e(TAG, "onSkuDetailsResponse: " + list.size());
+                }
+            });
+        }
+    }
+
+    private static void loadAllSkulBuy(Context context) {
+        if (billingClientBuy.isReady()) {
+            Log.e(TAG, "loadAllSkul: " + skusList);
+            SkuDetailsParams params = SkuDetailsParams.newBuilder().setSkusList(skusList).setType(BillingClient.SkuType.INAPP).build();
+            billingClientBuy.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
+                @Override
+                public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
+                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK)
+                        for (SkuDetails sku : list) {
+                            mapSkus.put(sku.getSku(), sku);
+                        }
+                    Log.e(TAG, "onSkuDetailsResponse: " + list.size());
+                }
+            });
+        }
+    }
+
+    private static void loadAllSkulBuyOneTime(Context context) {
+        if (billingClientBuyOneTime.isReady()) {
+            Log.e(TAG, "loadAllSkul: " + skusList);
+            SkuDetailsParams params = SkuDetailsParams.newBuilder().setSkusList(skusList).setType(BillingClient.SkuType.INAPP).build();
+            billingClientBuyOneTime.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
                 @Override
                 public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
                     if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK)

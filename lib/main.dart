@@ -46,8 +46,7 @@ class MyApp extends StatelessWidget {
           if (supportedLocale.languageCode == locale.languageCode &&
               supportedLocale.countryCode == locale.countryCode) {
             Common.langNow = supportedLocale.languageCode;
-            print(
-                "myLocale myLocale myLocale ${supportedLocale.countryCode} ${supportedLocale.languageCode}");
+
             return supportedLocale;
           }
         }
@@ -82,37 +81,6 @@ class MyApp extends StatelessWidget {
           page: () => LoadScreen(),
         ),
       ],
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter demo app'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Text(
-            AppLocalizations.of(context).translate('coin balance'),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 24.0,
-            ),
-          ),
-          Text(
-            'Chào mừng bạn đến với Flutter',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20.0,
-            ),
-          )
-        ],
-      ),
     );
   }
 }

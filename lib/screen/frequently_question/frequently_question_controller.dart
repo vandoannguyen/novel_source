@@ -1,8 +1,5 @@
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
-import 'package:init_app/common/common.dart';
-import 'package:init_app/main.dart';
-import 'package:init_app/screen/home/home_screen.dart';
 import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_screen.dart';
 
 class FrequentlyQuestionController extends BaseController {

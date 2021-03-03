@@ -130,7 +130,8 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                 IntentAnimation.intentNomal(
                     context: context,
                     screen: ListAllNovel(
-                      title: "NOVEL NEWEST",
+                      title: AppLocalizations.of(context)
+                          .translate("NOVEL NEWEST"),
                       type: ListAllNovel.NEW,
                     ));
               }),
@@ -140,7 +141,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                     height: 180,
                     alignment: Alignment.center,
                     child: CircularProgressIndicator(),
-                )
+                  )
                 : GetBuilder<NovelBookController>(
                     // init: controller,
                     builder: (_) {
@@ -333,7 +334,8 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                 IntentAnimation.intentNomal(
                     context: context,
                     screen: ListAllNovel(
-                      title: "NOVEL HOTEST",
+                      title: AppLocalizations.of(context)
+                          .translate("NOVEL HOTTEST"),
                       type: ListAllNovel.HOT,
                     ));
               }),
