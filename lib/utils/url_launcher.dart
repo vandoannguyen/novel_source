@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-Future<void> launchInBrowser(String url, bool forceWebView) async {
-  if (await canLaunch(url)) {
-    if (forceWebView) {
+Future<void> launchInBrowser(String url, bool forceWebView,context) async {
+   if (await canLaunch(url)) {
+    if (forceWebView) { // mở brower tại app
       await launch(
         url,
         forceSafariVC: forceWebView,

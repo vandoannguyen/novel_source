@@ -62,7 +62,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                           child: Column(
                             children: [
                               Text(
-                                "1. Bạn mỗi ngày dành bao nhiêu thời gian đọc truyện?",
+                                "1. ${AppLocalizations.of(context).translate("survey question 1")}",
                                 style: TextStyle(
                                   fontSize: 18.0,
                                   color: Color(Constant.colorTxtSecond),
@@ -79,7 +79,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                     activeColor: Color(Constant.colorTxtSecond),
                                   ),
                                   Text(
-                                    "A. Less than 1 hour",
+                                    "A. ${AppLocalizations.of(context).translate("survey question 1 answers 1")}",
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       color: Color(Constant.colorTxtSecond),
@@ -98,7 +98,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                     activeColor: Color(Constant.colorTxtSecond),
                                   ),
                                   Text(
-                                    "B. 2 hours",
+                                    "B. ${AppLocalizations.of(context).translate("survey question 1 answers 2")}",
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       color: Color(Constant.colorTxtSecond),
@@ -117,7 +117,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                     activeColor: Color(Constant.colorTxtSecond),
                                   ),
                                   Text(
-                                    "C. 3 hours",
+                                    "C. ${AppLocalizations.of(context).translate("survey question 1 answers 3")}",
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       color: Color(Constant.colorTxtSecond),
@@ -136,7 +136,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                     activeColor: Color(Constant.colorTxtSecond),
                                   ),
                                   Text(
-                                    "D. 3 or more hours",
+                                    "D. ${AppLocalizations.of(context).translate("survey question 1 answers 4")}",
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       color: Color(Constant.colorTxtSecond),
@@ -164,7 +164,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                           child: Column(
                             children: [
                               Text(
-                                "2. Which stories do you like best in ${Common.fanpageName}?",
+                                "2. ${AppLocalizations.of(context).translate("survey question 2")}",
                                 style: TextStyle(
                                   fontSize: 18.0,
                                   color: Color(Constant.colorTxtSecond),
@@ -198,7 +198,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                         color: Color(Constant.colorTxtSecond)),
                                   ),
                                   hintText:
-                                      "Please enter the Story you like best",
+                                      "${AppLocalizations.of(context).translate("Please enter the Story you like best")}",
                                   hintStyle: TextStyle(
                                     fontSize: 16.0,
                                     color: Color(Constant.colorTxtSecond)
@@ -228,7 +228,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "3. What kind of stories do you hope to be able to read at ${Common.fanpageName} later?",
+                                "3. ${AppLocalizations.of(context).translate("survey question 3")}",
                                 style: TextStyle(
                                   fontSize: 18.0,
                                   color: Color(Constant.colorTxtSecond),
@@ -237,7 +237,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                               Row(
                                 children: [
                                   Radio(
-                                    value: "Modern love language",
+                                    value: "Modern Romance",
                                     groupValue: controller.answers[2],
                                     onChanged: (value) {
                                       controller.changeAnswers(2, value);
@@ -245,7 +245,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                     activeColor: Color(Constant.colorTxtSecond),
                                   ),
                                   Text(
-                                    "A. Modern love language",
+                                    "A. ${AppLocalizations.of(context).translate("survey question 3 answers 1")}",
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       color: Color(Constant.colorTxtSecond),
@@ -264,7 +264,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                     activeColor: Color(Constant.colorTxtSecond),
                                   ),
                                   Text(
-                                    "B. Ancient Fiction/ Fantasy",
+                                    "B. ${AppLocalizations.of(context).translate("survey question 3 answers 2")}",
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       color: Color(Constant.colorTxtSecond),
@@ -283,7 +283,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                     activeColor: Color(Constant.colorTxtSecond),
                                   ),
                                   Text(
-                                    "C. Urban/City",
+                                    "C. ${AppLocalizations.of(context).translate("survey question 3 answers 3")}",
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       color: Color(Constant.colorTxtSecond),
@@ -302,7 +302,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                     activeColor: Color(Constant.colorTxtSecond),
                                   ),
                                   Text(
-                                    "D. Other",
+                                    "D. ${AppLocalizations.of(context).translate("survey question 3 answers 4")}",
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       color: Color(Constant.colorTxtSecond),
@@ -315,8 +315,9 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                 margin: EdgeInsets.only(left: 15.0),
                                 child: TextField(
                                   maxLines: 1,
+                                  enabled:  controller.answers[2] == "Other" ? true: false,
                                   onChanged: (text) {
-                                    controller.changeAnswers(2, text);
+                                    controller.changeAnswers(3, text);
                                   },
                                   cursorColor: Color(Constant.colorTxtSecond),
                                   style: TextStyle(
@@ -363,45 +364,10 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                           child: Column(
                             children: [
                               Text(
-                                "4. What online payment methods do you usually use ?",
+                                "4. ${AppLocalizations.of(context).translate("survey question 4")}",
                                 style: TextStyle(
                                   fontSize: 18.0,
                                   color: Color(Constant.colorTxtSecond),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20.0,
-                              ),
-                              TextField(
-                                // maxLines: 1,
-                                onChanged: (text) {
-                                  controller.changeAnswers(3, text);
-                                },
-                                style: TextStyle(
-                                    color: Color(Constant.colorTxtSecond),
-                                    fontSize: 16.0),
-                                cursorColor: Color(Constant.colorTxtSecond),
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color(Constant.colorTxtSecond)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    borderSide: BorderSide(
-                                        color: Color(Constant.colorTxtSecond)),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    borderSide: BorderSide(
-                                        color: Color(Constant.colorTxtSecond)),
-                                  ),
-                                  hintText: "Payment methods",
-                                  hintStyle: TextStyle(
-                                      fontSize: 16.0,
-                                      color: Color(Constant.colorTxtSecond)
-                                          .withOpacity(0.6)),
-                                  contentPadding: EdgeInsets.all(10.0),
                                 ),
                               ),
                               SizedBox(
@@ -431,7 +397,44 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                     borderSide: BorderSide(
                                         color: Color(Constant.colorTxtSecond)),
                                   ),
-                                  hintText: "Payment methods",
+                                  hintText:
+                                      "${AppLocalizations.of(context).translate("Payment methods")}",
+                                  hintStyle: TextStyle(
+                                      fontSize: 16.0,
+                                      color: Color(Constant.colorTxtSecond)
+                                          .withOpacity(0.6)),
+                                  contentPadding: EdgeInsets.all(10.0),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20.0,
+                              ),
+                              TextField(
+                                // maxLines: 1,
+                                onChanged: (text) {
+                                  controller.changeAnswers(5, text);
+                                },
+                                style: TextStyle(
+                                    color: Color(Constant.colorTxtSecond),
+                                    fontSize: 16.0),
+                                cursorColor: Color(Constant.colorTxtSecond),
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color(Constant.colorTxtSecond)),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    borderSide: BorderSide(
+                                        color: Color(Constant.colorTxtSecond)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    borderSide: BorderSide(
+                                        color: Color(Constant.colorTxtSecond)),
+                                  ),
+                                  hintText:
+                                      "${AppLocalizations.of(context).translate("Payment methods")}",
                                   hintStyle: TextStyle(
                                       fontSize: 16.0,
                                       color: Color(Constant.colorTxtSecond)
@@ -458,7 +461,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                           child: Column(
                             children: [
                               Text(
-                                "5. For our app, do you have anything to comment on?",
+                                "5. ${AppLocalizations.of(context).translate("survey question 5")}",
                                 style: TextStyle(
                                   fontSize: 18.0,
                                   color: Color(Constant.colorTxtSecond),
@@ -470,7 +473,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                               TextField(
                                 maxLines: 5,
                                 onChanged: (text) {
-                                  controller.changeAnswers(5, text);
+                                  controller.changeAnswers(6, text);
                                 },
                                 style: TextStyle(
                                     color: Color(Constant.colorTxtSecond),
@@ -491,7 +494,8 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                                     borderSide: BorderSide(
                                         color: Color(Constant.colorTxtSecond)),
                                   ),
-                                  hintText: "Please write in your comments",
+                                  hintText:
+                                      "${AppLocalizations.of(context).translate("Please write in your comments")}",
                                   hintStyle: TextStyle(
                                       fontSize: 16.0,
                                       color: Color(Constant.colorTxtSecond)
@@ -511,6 +515,7 @@ class SurveyQuestionScreen extends BaseWidget<SurveyQuestionController> {
                             color: Color(Constant.colorTxtSecond),
                             txtSize: 16.0,
                             func: () {
+                               FocusScope.of(context).unfocus();
                               controller.done();
                             },
                           ),

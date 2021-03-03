@@ -11,7 +11,8 @@ class SurveyQuestionController extends BaseController {
   // ignore: must_call_super
 
   List<Map<String, dynamic>> questions = [];
-  List<dynamic> answers = ["2 hours", "", "Modern love language", "", "", ""];
+  List<dynamic> answers = ["2 hours", "", "Modern Romance", "", "", "", ""];
+  // ignore: must_call_super
   onInit() {}
 
   void changeAnswers(index, value) {
@@ -20,27 +21,29 @@ class SurveyQuestionController extends BaseController {
   }
 
   void done() async {
-    if (answers[1].isEmpty || answers[2] == "Other" || answers[5].isEmpty) {
+    if ((answers[2] == "Other" && answers[3].isEmpty) ||
+        answers[1].isEmpty ||
+        answers[6].isEmpty) {
       Get.snackbar(
-        '',
-        'You must fill out all information!',
-        titleText: Text(
           "ERROR",
-          style: TextStyle(color: Colors.redAccent, fontSize: 18.0),
-        ),
-          snackPosition: SnackPosition.BOTTOM
-      );
+          AppLocalizations.of(context)
+              .translate("You must fill out all information"),
+          titleText: Text(
+            "ERROR",
+            style: TextStyle(color: Colors.redAccent, fontSize: 18.0),
+          ),
+         duration: Duration(seconds: 2),
+          snackPosition: SnackPosition.TOP);
     } else {
       String body = "";
-      print(answers);
       List<dynamic> mid = new List<dynamic>();
       mid.addAll(answers);
       mid[0] = mid[0] + " per day";
       mid[1] = "Like most: " + mid[1];
-      mid[2] = "Hope to have: " + mid[2];
-      mid[3] = "Payment 1: " + mid[3];
-      mid[4] = "Payment 2: " + mid[4];
-      mid[5] = "Comments: " + mid[5];
+      mid[2] = "Hope to have: " + mid[2] + " - ${mid[3]}";
+      mid[3] = "Payment 1: " + mid[4];
+      mid[4] = "Payment 2: " + mid[5];
+      mid[5] = "Comments: " + mid[6];
       for (var item in mid) {
         body += item + "<br/>";
       }

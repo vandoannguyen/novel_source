@@ -40,7 +40,7 @@ class FeedbackController extends BaseController {
     // }
     // else 
     if (content.isEmpty) {
-      Get.snackbar('', 'You must fill out all information!',
+      Get.snackbar('',  AppLocalizations.of(context).translate("You must fill out all information"),
           titleText: Text(
             "ERROR",
             style: TextStyle(color: Colors.red, fontSize: 18.0),
@@ -59,6 +59,6 @@ class FeedbackController extends BaseController {
   }
 
   void contactsFB() {
-    launchInBrowser(Common.fanpageLink, false);
+    launchInBrowser( Common.fanpageLink, false, context);
   }
 }

@@ -39,7 +39,7 @@ class PersonalController extends BaseController {
         goDetailTransaction();
         break;
       case "SUPPORT":
-        launchInBrowser(Common.fanpageLink, false);
+        launchInBrowser(Common.fanpageLink, false, context);
         break;
       case "COME_AUTHOR":
         Get.to(ComeAuthorScreen());
