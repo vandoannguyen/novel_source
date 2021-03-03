@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
+import 'package:init_app/common/constant.dart';
+import 'package:init_app/data/network/NovalModel.dart';
 import 'package:init_app/screen/search/search_controller.dart';
-
+import 'package:init_app/common/images.dart';
 // ignore: must_be_immutable
 class SearchScreen extends BaseWidget<SearchController> {
   static const String routeName = '/search';
@@ -15,8 +17,6 @@ class SearchScreen extends BaseWidget<SearchController> {
     super.build(context, controllerSuper: SearchController());
     controller.getNewest();
     controller.getHotest();
-    // ValueNotifier<List<NovelModel>> filtered =
-    //     ValueNotifier<List<NovelModel>>([]);
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -123,27 +123,13 @@ class SearchScreen extends BaseWidget<SearchController> {
                                       itemBuilder: (context, index) {
                                         final item =
                                             controller.listSearch[index];
-                                        return ListTile(
-                                          leading: Image.network(
-                                            "${item.bpic}",
-                                            fit: BoxFit.cover,
-                                            height: 100,
-                                            width: 100,
-                                          ),
-                                          title: Text(item.name),
-                                          subtitle: Text(
-                                            item.desc,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                color: Colors.grey[800],
-                                                fontSize: 13.0),
-                                          ),
-                                          onTap: () {
-                                            __.clickItem(index, item);
-                                            __.onClickSearch();
-                                          },
-                                        );
+                                        return itemBookSearch(
+                                            index: index,
+                                            item: item,
+                                            func: () {
+                                              __.clickItem(index, item);
+                                              __.onClickSearch();
+                                            });
                                       })
                                   : Container(
                                       child: Text(
@@ -311,9 +297,6 @@ class SearchScreen extends BaseWidget<SearchController> {
                                                     "${_.listHotest[index].bpic}",
                                                     fit: BoxFit.cover,
                                                   ),
-                                                  // Image.asset(
-                                                  //   Common.pathImg + "bg_checkin.jpg",
-                                                  // ),
                                                   Container(
                                                     margin: EdgeInsets.only(
                                                         top: 5.0),
@@ -348,4 +331,105 @@ class SearchScreen extends BaseWidget<SearchController> {
       ),
     );
   }
+}
+Widget itemBookSearch({NovelModel item, index, func}) {
+  return GestureDetector(
+    onTap: func,
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+            width: 0.3,
+          ),
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(Constant.colorTxtDefault).withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5.0),
+              child: FadeInImage.assetNetwork(
+                placeholder: ic_loading,
+                image: item.bpic,
+                fit: BoxFit.cover,
+                width: 80.0,
+                height: 120.0,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.only(left: 10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text("${item.name}",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis),
+                  Container(
+                    margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("${item.writerName}",
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.red,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis),
+                        Container(
+                          padding: EdgeInsets.all(5.0),
+                          decoration: BoxDecoration(
+                            color: Colors.redAccent,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Text("Tieu thuyet",
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                color: Colors.white,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+                    child: Text("${item.desc}",
+                        style: TextStyle(
+                            fontSize: 12.0,
+                            color: Color(Constant.colorTxtDefault),
+                            height: 1.25
+                        ),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }

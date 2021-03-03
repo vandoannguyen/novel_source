@@ -81,6 +81,7 @@ class SearchController extends BaseController {
           .toList();
       if(listSearch == null) listSearch= [];
       update();
+      print(listSearch);
     }).catchError((err) {
       print(err);
     });

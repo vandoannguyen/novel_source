@@ -140,7 +140,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                     height: 180,
                     alignment: Alignment.center,
                     child: CircularProgressIndicator(),
-                  )
+                )
                 : GetBuilder<NovelBookController>(
                     // init: controller,
                     builder: (_) {
