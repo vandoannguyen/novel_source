@@ -570,6 +570,7 @@ class ApiImpl implements IApi {
             options:
                 Options(headers: {"Authorization": "Bearer ${Common.token}"}))
         .then((value) {
+      print(value);
       if (value.data["code"] == 1)
         completer.complete((value.data["result"]));
       else

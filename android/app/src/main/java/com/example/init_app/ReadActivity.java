@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -81,6 +82,8 @@ public class ReadActivity extends Activity {
     }
 
     private void initView() {
+        Log.e(TAG, "initView: 1" + "sssldkfjlsdfjlsdjflskdjflksdjf");
+
         mPvPage = findViewById(R.id.read_pv_page);
         mSbChapterProgress = findViewById(R.id.read_sb_chapter_progress);
         mLlBottomMenu = findViewById(R.id.read_ll_bottom_menu);
@@ -103,9 +106,12 @@ public class ReadActivity extends Activity {
         registerReceiver(mReceiver, intentFilter);
         //设置当前Activity的Brightness
         if (ReadSettingManager.getInstance(this).isBrightnessAuto()) {
-            BrightnessUtils.setDefaultBrightness(this);
+//            BrightnessUtils.setDefaultBrightness(this);
+            BrightnessUtils.setBrightness(this, BrightnessUtils.getScreenBrightness(this));
+//              Log.e(TAG, "initView: 2" + "sssldkfjlsdfjlsdjflskdjflksdjf");
         } else {
-            BrightnessUtils.setBrightness(this, ReadSettingManager.getInstance(this).getBrightness());
+            BrightnessUtils.setBrightness(this, ReadSettingManager.getInstance(this).getBrightness(BrightnessUtils.getScreenBrightness(this)));
+//            Log.e(TAG, "initView: 3" + "sssldkfjlsdfjlsdjflskdjflksdjf");
         }
         initClick();
         mPageLoader.refreshChapterList();

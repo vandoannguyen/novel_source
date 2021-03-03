@@ -6,6 +6,8 @@ import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/about_us/about_us_screen.dart';
+import 'package:init_app/screen/bookcase/book_case_cotroller.dart';
+import 'package:init_app/screen/bookstore/novel_bookstore/novel_book_controller.dart';
 import 'package:init_app/screen/load/load_controller.dart';
 import 'package:init_app/screen/load/load_screen.dart';
 import 'package:init_app/screen/login/login_screen.dart';
@@ -32,6 +34,12 @@ class SettingController extends BaseController {
     selectedLanguage();
   }
 
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+  }
+
   void changeLanguage(context) {
     showDialogLanguage(context, (value) {
       Common.language = value;
@@ -45,6 +53,30 @@ class SettingController extends BaseController {
           data: Common.language);
       selectedLanguage();
       isChangedLanguage = true;
+      if (isChangedLanguage) {
+        // callBack("CHANGE_LANGUAGE", "");
+        NovelBookController controller = null;
+        BookCaseController bookCaseController = null;
+        try {
+          controller = Get.find();
+        } catch (err) {
+          controller = null;
+        }
+        try {
+          bookCaseController = Get.find();
+        } catch (err) {
+          print(err);
+          bookCaseController = null;
+        }
+        print("controller != null${controller != null}");
+        if (controller != null) {
+          controller.reloadData();
+        }
+        print("bookCaseController != null${bookCaseController != null}");
+        if (bookCaseController != null) {
+          bookCaseController.reloadData();
+        }
+      }
       update();
     });
   }

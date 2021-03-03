@@ -2,8 +2,6 @@ import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/repository.dart';
-import 'package:init_app/screen/bookcase/book_case_cotroller.dart';
-import 'package:init_app/screen/bookstore/novel_bookstore/novel_book_controller.dart';
 import 'package:init_app/screen/buy_coin/buy_coin_screen.dart';
 import 'package:init_app/screen/come_author/come_author_screen.dart';
 import 'package:init_app/screen/detail_transaction/detail_transaction_screen.dart';
@@ -23,7 +21,6 @@ class PersonalController extends BaseController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    getProfile();
   }
 
   @override
@@ -58,30 +55,30 @@ class PersonalController extends BaseController {
                 screen: SettingScreen(),
                 option: IntentAnimationOption.RIGHT_TO_LEFT)
             .then((value) {
-          if (value != null && value) {
-            // callBack("CHANGE_LANGUAGE", "");
-            NovelBookController controller = null;
-            BookCaseController bookCaseController = null;
-            try {
-              controller = Get.find();
-            } catch (err) {
-              controller = null;
-            }
-            try {
-              bookCaseController = Get.find();
-            } catch (err) {
-              print(err);
-              bookCaseController = null;
-            }
-            print("controller != null${controller != null}");
-            if (controller != null) {
-              controller.reloadData();
-            }
-            print("bookCaseController != null${bookCaseController != null}");
-            if (bookCaseController != null) {
-              bookCaseController.reloadData();
-            }
-          }
+          // if (value != null && value) {
+          //   // callBack("CHANGE_LANGUAGE", "");
+          //   NovelBookController controller = null;
+          //   BookCaseController bookCaseController = null;
+          //   try {
+          //     controller = Get.find();
+          //   } catch (err) {
+          //     controller = null;
+          //   }
+          //   try {
+          //     bookCaseController = Get.find();
+          //   } catch (err) {
+          //     print(err);
+          //     bookCaseController = null;
+          //   }
+          //   print("controller != null${controller != null}");
+          //   if (controller != null) {
+          //     controller.reloadData();
+          //   }
+          //   print("bookCaseController != null${bookCaseController != null}");
+          //   if (bookCaseController != null) {
+          //     bookCaseController.reloadData();
+          //   }
+          // }
         }).catchError((err) {});
         break;
 
@@ -147,5 +144,9 @@ class PersonalController extends BaseController {
       profile = null;
       update();
     });
+  }
+
+  void updateProfile() {
+    getProfile();
   }
 }

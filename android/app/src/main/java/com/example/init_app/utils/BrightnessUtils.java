@@ -99,7 +99,7 @@ public class BrightnessUtils {
     public static void setDefaultBrightness(Activity activity) {
         try {
             WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
-            lp.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL;
+            lp.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE;
             activity.getWindow().setAttributes(lp);
         } catch (Exception ex) {
             ex.printStackTrace();

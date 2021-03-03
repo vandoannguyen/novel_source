@@ -80,13 +80,16 @@ public class ReadSettingManager {
     public int getBrightness() {
         return sharedPreUtils.getInt(SHARED_READ_BRIGHTNESS, 40);
     }
+    public int getBrightness(int defaultt) {
+        return sharedPreUtils.getInt(SHARED_READ_BRIGHTNESS, defaultt);
+    }
 
     public boolean isBrightnessAuto() {
         return sharedPreUtils.getBoolean(SHARED_READ_IS_BRIGHTNESS_AUTO);
     }
 
     public int getTextSize() {
-        return sharedPreUtils.getInt(SHARED_READ_TEXT_SIZE, ScreenUtils.spToPx(28));
+        return sharedPreUtils.getInt(SHARED_READ_TEXT_SIZE, ScreenUtils.spToPx(16));
     }
 
     public boolean isDefaultTextSize() {

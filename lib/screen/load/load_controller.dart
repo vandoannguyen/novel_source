@@ -9,6 +9,7 @@ import 'package:init_app/common/common.dart';
 import 'package:init_app/data/network/UserModel.dart';
 import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/home/home_screen.dart';
+import 'package:init_app/utils/call_native_utils.dart';
 import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/dialog_language.dart';
 
@@ -24,6 +25,8 @@ class LoadController extends BaseController {
   bool _isGetDataSuccess = false;
 
   bool isGetReadNovelSuccess = false;
+
+  bool isGetInappSuccess = false;
 
   LoadController();
 
@@ -144,16 +147,17 @@ class LoadController extends BaseController {
           intentToHome(context);
         });
       }
+      getInapp();
     }
   }
 
   void intentToHome(context) {
-    if (_isGetDataSuccess && _isGetCountrySuccess) ;
-    IntentAnimation.intentPushReplacement(
-        context: context,
-        screen: HomeScreen(),
-        option: IntentAnimationOption.RIGHT_TO_LEFT,
-        duration: Duration(milliseconds: 500));
+    if (_isGetDataSuccess && _isGetCountrySuccess && isGetInappSuccess)
+      IntentAnimation.intentPushReplacement(
+          context: context,
+          screen: HomeScreen(),
+          option: IntentAnimationOption.RIGHT_TO_LEFT,
+          duration: Duration(milliseconds: 500));
   }
 
   void loginGoogle() {
@@ -234,6 +238,39 @@ class LoadController extends BaseController {
       Common.listReadChapter = [];
       isGetReadNovelSuccess = true;
       _getData(context);
+    });
+  }
+
+  void getInapp() {
+    RepositoryImpl.getInstance()
+        .getSubscription(lang: Common.language)
+        .then((value) {
+      Common.listInapp = value;
+      var list = (Common.listInapp as List)
+          .map((element) => element["google_inapp_id"])
+          .toList();
+      print("listinapp $list");
+      CallNativeUtils.invokeMethod(
+          method: "initInapp",
+          aguments: {"data": jsonEncode(list)}).then((value) {
+            value  = jsonDecode(value);
+        Common.listInapp = Common.listInapp
+            .where((e) =>
+                (value as List)
+                    .where((element) => element == e["google_inapp_id"])
+                    .toList()
+                    .length >
+                0)
+            .toList();
+        print("Common.listInapp    ${Common.listInapp}");
+        isGetInappSuccess = true;
+        intentToHome(context);
+      }).catchError((err) {
+        print(err);
+        print("notokok");
+      });
+    }).catchError((err) {
+      print(err);
     });
   }
 }

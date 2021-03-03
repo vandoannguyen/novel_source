@@ -5,6 +5,7 @@ import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_screen.dart';
+import 'package:init_app/utils/call_native_utils.dart';
 
 class BuyCoinController extends BaseController {
   List<Map<String, String>> paymentMethods = [
@@ -67,7 +68,7 @@ class BuyCoinController extends BaseController {
   onInit() {
     value = paymentMethods[0];
     // if (Common.listInapp == null || Common.listInapp.length == 0)
-      // getSubscription();
+    // getSubscription();
   }
 
   void selectMethod(item) {
@@ -78,11 +79,12 @@ class BuyCoinController extends BaseController {
   void buyCoin(value) {
     print(value);
     Get.back();
+    CallNativeUtils.invokeMethod(
+        method: "buyInapp", aguments: {"id": value["google_inapp_id"]});
     RepositoryImpl.getInstance()
         .buySubscription(idSub: value["id"])
         .then((value) {
       print("getSubscription ${value}");
-
       Get.snackbar('', 'Deposit coins success! You have ${Common.coin}!',
           titleText: Text(
             "SUCCESS",
