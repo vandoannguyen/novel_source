@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
@@ -34,6 +33,7 @@ class TaskHistoryController extends BaseController {
             list.firstWhere((e) => e["id"] == element["subscription_id"]);
             return {"date": element["createdAt"], ...a};
           }).toList();
+          // print("${{...value[0], ...list[0]}}");
           return value;
         } else
           return [];
@@ -69,11 +69,11 @@ class TaskHistoryController extends BaseController {
       if (coinHis == null) coinHis = [];
       update();
     }).catchError((err) {
-      print(err);
       coinHis = null;
       update();
     });
   }
+
   void getDetailHistory() {
     // RepositoryImpl.getInstance()
     //     .getSubscription(lang: Common.language)

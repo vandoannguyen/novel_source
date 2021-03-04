@@ -101,7 +101,15 @@ class DetailComicBookController extends BaseController {
     update();
   }
 
-  void postFollow(String idBook) {
+  void postFollow(String idBook) async {
+    String loginType = await RepositoryImpl.getInstance().getLogedData();
+    if (loginType == null) {
+      IntentAnimation.intentNomal(
+          context: context,
+          screen: LoginScreen(),
+          option: IntentAnimationOption.RIGHT_TO_LEFT);
+      return;
+    }
     showDialogLoading(context);
     if (Common.myBooks
             .where((element) => element.id == idBook)
