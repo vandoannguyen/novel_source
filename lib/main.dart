@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:init_app/app_localizations.dart';
@@ -14,13 +15,18 @@ import 'app_localizations.dart';
 
 void main() {
   CallNativeUtils.setChannel(Common.CHANNEL);
-
   return runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    EventChannel eventChannel = new EventChannel("INAPP_EVENT");
+    eventChannel.receiveBroadcastStream().listen((event) {
+      print(event);
+    });
+//     Locale myLocale = Localizations.localeOf(context);
+// print("myLocale myLocale myLocale $myLocale");
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
@@ -40,7 +46,7 @@ class MyApp extends StatelessWidget {
           if (supportedLocale.languageCode == locale.languageCode &&
               supportedLocale.countryCode == locale.countryCode) {
             Common.langNow = supportedLocale.languageCode;
-         
+
             return supportedLocale;
           }
         }
@@ -50,6 +56,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+// home: HomePage(),
       initialRoute: Routes.load,
       getPages: [
         GetPage(
@@ -77,4 +84,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

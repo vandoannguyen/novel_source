@@ -14,10 +14,10 @@ class ExpenseWidgetScreen extends BaseWidget<ExpenseWidgetController> {
 
   @override
   void dispose() {}
-
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: ExpenseWidgetController());
+    controller.getExpenseHistory();
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: controller.expenses.isNotEmpty ? ListView.builder(
@@ -25,6 +25,11 @@ class ExpenseWidgetScreen extends BaseWidget<ExpenseWidgetController> {
           shrinkWrap: true,
           itemCount: controller.expenses.length,
           itemBuilder: (BuildContext context, int index) {
+            Map<String, dynamic> sum = controller.expenses[index]["answer"].reduce((value, element){
+              return {
+                "coin" : value["coin"] + element["coin"],
+              };
+            });
             return ExpandablePanel(
               theme: ExpandableThemeData(
                 headerAlignment: ExpandablePanelHeaderAlignment.center,
@@ -34,6 +39,7 @@ class ExpenseWidgetScreen extends BaseWidget<ExpenseWidgetController> {
                 tapHeaderToExpand: true,
               ),
               header: Container(
+                height: 50.0,
                 child: Padding(
                   padding:
                   EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
@@ -44,14 +50,13 @@ class ExpenseWidgetScreen extends BaseWidget<ExpenseWidgetController> {
                             "${controller.expenses[index]["datetime"]}",
                             style: TextStyle(
                                 fontSize: 13.0, fontWeight: FontWeight.w500)),
-
                      Row(
                           children: [
                             Text(
-                                "Tong xu da tieu: -${controller.expenses[index]["coin"]}",
+                                "Tong xu da tieu: -${sum["coin"]}",
                                 style: TextStyle(
                                     fontSize: 15.0, fontWeight: FontWeight.w500)),
-                            Image.asset(Common.pathImg + "ic_coin.png", height: 13.0, width: 13.0,)
+                            Image.asset(Common.pathImg + "ic_coin.png", height: 15.0, width: 15.0,)
                           ],
                         ),
                     ],
@@ -69,18 +74,21 @@ class ExpenseWidgetScreen extends BaseWidget<ExpenseWidgetController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("${item["expense"]}", style: TextStyle(color: Colors.black)),
+                          Text("${item["expense"]}", style: TextStyle(color: Colors.black, fontSize: 16.0)),
                           Row(
                             children: [
-                              Text(
-                                "-${item["coin"]}",
-                                style: TextStyle(
-                                    color:
-                                    Color(Constant.colorTxtSecond)),
+                              Container(
+                                margin: EdgeInsets.all(5.0),
+                                child: Text(
+                                  "-${item["coin"]}",
+                                  style: TextStyle(
+                                      color:
+                                      Color(Constant.colorTxtSecond), fontSize: 16.0),
+                                ),
                               ),
                               Image.asset(
                                 Common.pathImg + "ic_coin.png",
-                                width: 13.0,
+                                width: 16.0,
                                 fit: BoxFit.contain,
                               ),
                             ],

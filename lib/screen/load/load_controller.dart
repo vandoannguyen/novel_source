@@ -9,6 +9,7 @@ import 'package:init_app/common/common.dart';
 import 'package:init_app/data/network/UserModel.dart';
 import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/home/home_screen.dart';
+import 'package:init_app/utils/call_native_utils.dart';
 import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/dialog_language.dart';
 
@@ -24,6 +25,8 @@ class LoadController extends BaseController {
   bool _isGetDataSuccess = false;
 
   bool isGetReadNovelSuccess = false;
+
+  bool isGetInappSuccess = false;
 
   LoadController();
 
@@ -142,18 +145,21 @@ class LoadController extends BaseController {
           Common.myBooks = value;
           _isGetDataSuccess = true;
           intentToHome(context);
+        }).catchError((err) {
+          print(("error$err"));
         });
       }
+      getInapp();
     }
   }
 
   void intentToHome(context) {
-    if (_isGetDataSuccess && _isGetCountrySuccess) ;
-    IntentAnimation.intentPushReplacement(
-        context: context,
-        screen: HomeScreen(),
-        option: IntentAnimationOption.RIGHT_TO_LEFT,
-        duration: Duration(milliseconds: 500));
+    if (_isGetDataSuccess && _isGetCountrySuccess && isGetInappSuccess)
+      IntentAnimation.intentPushReplacement(
+          context: context,
+          screen: HomeScreen(),
+          option: IntentAnimationOption.RIGHT_TO_LEFT,
+          duration: Duration(milliseconds: 500));
   }
 
   void loginGoogle() {
@@ -169,6 +175,7 @@ class LoadController extends BaseController {
             .loginWithGoogle(access_token: token.accessToken)
             .then((value) {
           Common.token = value["token"];
+          Common.user = UserModel.fromJson(value["user"]);
           Common.isLogedIn = true;
           RepositoryImpl.getInstance()
               .setLogedData(type: "google")
@@ -192,13 +199,15 @@ class LoadController extends BaseController {
         RepositoryImpl.getInstance()
             .loginWithFaceBook(access_token: result.accessToken.token)
             .then((value) {
-          Common.token = value;
+          Common.token = value["token"];
+          Common.user = UserModel.fromJson(value["user"]);
           Common.isLogedIn = true;
           RepositoryImpl.getInstance().setLogedData(type: "facebook");
           _isLoginSuccess = true;
           _getAccDetail();
           _getData(context);
         }).catchError((err) {
+          print("error$err");
           showMess("Login failed", TypeMess.WARNING);
           Navigator.of(context).pop();
         });
@@ -206,7 +215,10 @@ class LoadController extends BaseController {
       case FacebookLoginStatus.cancelledByUser:
         break;
       case FacebookLoginStatus.error:
-        showMess("Login failed", TypeMess.WARNING);
+        {
+          showMess("Login failed", TypeMess.WARNING);
+          print("login failed");
+        }
         break;
     }
   }
@@ -234,6 +246,39 @@ class LoadController extends BaseController {
       Common.listReadChapter = [];
       isGetReadNovelSuccess = true;
       _getData(context);
+    });
+  }
+
+  void getInapp() {
+    RepositoryImpl.getInstance()
+        .getSubscription(lang: Common.language)
+        .then((value) {
+      Common.listInapp = value;
+      var list = (Common.listInapp as List)
+          .map((element) => element["google_inapp_id"])
+          .toList();
+      print("listinapp $list");
+      CallNativeUtils.invokeMethod(
+          method: "initInapp",
+          aguments: {"data": jsonEncode(list)}).then((value) {
+        value = jsonDecode(value);
+        Common.listInapp = Common.listInapp
+            .where((e) =>
+                (value as List)
+                    .where((element) => element == e["google_inapp_id"])
+                    .toList()
+                    .length >
+                0)
+            .toList();
+        print("Common.listInapp    ${Common.listInapp}");
+        isGetInappSuccess = true;
+        intentToHome(context);
+      }).catchError((err) {
+        print(err);
+        print("notokok");
+      });
+    }).catchError((err) {
+      print(err);
     });
   }
 }

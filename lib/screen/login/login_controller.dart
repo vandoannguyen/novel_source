@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/network/UserModel.dart';
 import 'package:init_app/data/repository.dart';
+import 'package:init_app/screen/personal/personal_controller.dart';
 import 'package:init_app/widgets/dialog_loading.dart';
 
 class LoginController extends BaseController {
@@ -40,6 +42,7 @@ class LoginController extends BaseController {
           Navigator.of(context).pop();
           Navigator.of(context).pop({"code": 1, "value": value["user"]});
           Common.user = UserModel.fromJson(value["user"]);
+          updateProfile();
         }).catchError((err) {
           print(err);
           showMess("Login failed", TypeMess.WARNING);
@@ -73,6 +76,7 @@ class LoginController extends BaseController {
             Navigator.of(context).pop();
             Navigator.of(context).pop({"code": 1, "value": value["user"]});
             Common.user = UserModel.fromJson(value["user"]);
+            updateProfile();
           }).catchError((err) {
             print(err);
             Navigator.of(context).pop();
@@ -83,5 +87,13 @@ class LoginController extends BaseController {
     } catch (error) {
       print("errorRRRRR$error");
     }
+  }
+
+  void updateProfile() {
+    PersonalController ctl = null;
+    try {
+      ctl = Get.find();
+    } catch (err) {}
+    if (ctl != null) ctl.updateProfile();
   }
 }

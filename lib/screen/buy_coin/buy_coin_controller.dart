@@ -6,6 +6,7 @@ import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/repository.dart';
 import 'package:init_app/screen/tutorial_buy_coin/tutorial_buy_coin_screen.dart';
+import 'package:init_app/utils/call_native_utils.dart';
 
 class BuyCoinController extends BaseController {
   List<Map<String, String>> paymentMethods = [
@@ -61,8 +62,8 @@ class BuyCoinController extends BaseController {
 
   onInit() {
     value = paymentMethods[0];
-    if (Common.listInapp == null || Common.listInapp.length == 0)
-      getSubscription();
+    // if (Common.listInapp == null || Common.listInapp.length == 0)
+    // getSubscription();
   }
 
   void selectMethod(item) {
@@ -71,7 +72,10 @@ class BuyCoinController extends BaseController {
   }
 
   void buyCoin(value) {
+    print(value);
     Get.back();
+    CallNativeUtils.invokeMethod(
+        method: "buyInapp", aguments: {"id": value["google_inapp_id"]});
     RepositoryImpl.getInstance()
         .buySubscription(idSub: value["id"])
         .then((value) {
@@ -91,9 +95,11 @@ class BuyCoinController extends BaseController {
           ),
           snackPosition: SnackPosition.BOTTOM);
     });
-    // Common.coin += value["coin"] + value["x_percent"];
+    // Common.coin += value["coin"] + value["coinExtra"];
     // coinDemo =Common.coin.obs;
     // setCoin(Common.coin);
+
+    // print("coinDemo ${coinDemo}");
   }
 
   void goTutorialBuyCoin() {
@@ -101,13 +107,11 @@ class BuyCoinController extends BaseController {
   }
 
   void getSubscription() {
-Common.listInapp = coinPackage;
-return;
     if (Common.listInapp == null || Common.listInapp.length == 0)
       RepositoryImpl.getInstance()
           .getSubscription(lang: Common.language)
           .then((value) {
-        print("======== $value");
+        print("getSubscription ${value}");
         Common.listInapp = value;
       }).catchError((err) {
         print(err);

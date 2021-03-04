@@ -26,7 +26,6 @@ import java.util.List;
 
 
 public class InAppUtil {
-    ConnectSuccessListener connectSuccessListener;
 
     private static final String TAG = "InAppUtil";
     public static BillingClient billingClient, billingClientBuy, billingClientBuyOneTime;
@@ -37,12 +36,131 @@ public class InAppUtil {
     private static PurchasesUpdatedListener listener;
     private static int count = 0;
     public static boolean isRegisted = false;
+    private static ConnectSuccessListener connectSuccessListener;
+    private static boolean isBillingClientSuccess = false;
+    private static boolean isBillingClientBuyOneTimeSuccess = false;
+    private static boolean isBillingClientBuySuccess = false;
 
-    public static void configPurchase(final Context context, final ConnectSuccessListener connectSuccessListener, List<String> sku) {
-        count = 0;
+    public static void configPurchase(final Context context, ConnectSuccessListener connectSuccessListener, List<String> sku) {
+        InAppUtil.connectSuccessListener = connectSuccessListener;
         skusList = sku;
         mapSkus = new HashMap<>();
         Log.d(TAG, "configPurchase: " + sku);
+        if (!isBillingClientSuccess || !isBillingClientBuyOneTimeSuccess || !isBillingClientBuySuccess) {
+            isBillingClientBuyOneTimeSuccess=false;
+            isBillingClientSuccess = false;
+            isBillingClientBuySuccess = false;
+            configBillingClient(context, sku);
+            configBillingClientOneTime(context, sku);
+            configBillingClientBuy(context, sku);
+        }
+        else{
+            callSuccess();
+        }
+    }
+
+    /**
+     * @param context
+     * @param sku     dùng cho inapp mua nhiều lần
+     */
+    private static void configBillingClientBuy(Context context, List<String> sku) {
+        billingClientBuy = BillingClient.newBuilder(context).enablePendingPurchases().setListener(new PurchasesUpdatedListener() {
+            @Override
+            public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> list) {
+                Log.e(TAG, "onPurchasesUpdated: 1");
+                if (listener != null) {
+                    listener.onPurchasesUpdated(billingResult, list);
+                }
+                if (list != null)
+                    for (Purchase purchase : list) {
+                        Log.e(TAG, "onPurchasesUpdated: " + purchase.getPurchaseToken());
+                        if (!verifyValidSignature(purchase.getOriginalJson(), purchase.getSignature())) {
+                            Log.i(TAG, "Got a purchase: " + purchase + "; but signature is bad. Skipping...");
+                            return;
+                        }
+                        handlePurchaseBuy(purchase);
+                    }
+            }
+        }).build();
+        billingClientBuy.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingSetupFinished(BillingResult billingResult) {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                    if (billingClient.isReady()) {
+                        loadAllSkulBuy(context);
+                        Log.e(TAG, "onBillingSetupFinishedbillingClientBuy: ");
+                        Purchase.PurchasesResult result =
+                                billingClient.queryPurchases(BillingClient.SkuType.INAPP);
+                        isBillingClientBuySuccess = true;
+                        callSuccess();
+//                        if (result.getPurchasesList().size() > 0) {
+//                            isRegisted = true;
+//                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onBillingServiceDisconnected() {
+                connectSuccessListener.disConnected();
+            }
+        });
+    }
+
+    /**
+     * @param context
+     * @param sku     dùng cho inapp mua 1 lần
+     */
+    private static void configBillingClientOneTime(Context context, List<String> sku) {
+        billingClientBuyOneTime = BillingClient.newBuilder(context).enablePendingPurchases().setListener(new PurchasesUpdatedListener() {
+            @Override
+            public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> list) {
+                Log.e(TAG, "onPurchasesUpdated: 1");
+                if (listener != null) {
+                    listener.onPurchasesUpdated(billingResult, list);
+                }
+                if (list != null)
+                    for (Purchase purchase : list) {
+                        Log.e(TAG, "onPurchasesUpdated: " + purchase.getPurchaseToken());
+                        if (!verifyValidSignature(purchase.getOriginalJson(), purchase.getSignature())) {
+                            Log.i(TAG, "Got a purchase: " + purchase + "; but signature is bad. Skipping...");
+                            return;
+                        }
+                        handlePurchaseBuyOneTime(purchase);
+                    }
+            }
+        }).build();
+        billingClientBuyOneTime.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingSetupFinished(BillingResult billingResult) {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                    if (billingClient.isReady()) {
+                        loadAllSkulBuyOneTime(context);
+                        Log.e(TAG, "onBillingSetupFinished billingClientBuyOneTime: ");
+                        Purchase.PurchasesResult result =
+                                billingClient.queryPurchases(BillingClient.SkuType.INAPP);
+                        isBillingClientBuyOneTimeSuccess = true;
+                        callSuccess();
+                        if (result.getPurchasesList().size() > 0) {
+                            isRegisted = true;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onBillingServiceDisconnected() {
+                connectSuccessListener.disConnected();
+            }
+        });
+    }
+
+    /**
+     * @param context
+     * @param sku     dùng cho inapp subscription
+     */
+
+    private static void configBillingClient(Context context, List<String> sku) {
         billingClient = BillingClient.newBuilder(context).enablePendingPurchases().setListener(new PurchasesUpdatedListener() {
             @Override
             public void onPurchasesUpdated(BillingResult billingResult, @Nullable List<Purchase> list) {
@@ -90,7 +208,7 @@ public class InAppUtil {
 ////                Toast.makeText(this, "USER_CANCELED", Toast.LENGTH_SHORT).show();
 //                        break;
 //                    }
-//                }
+//
             }
         }).build();
         billingClient.startConnection(new BillingClientStateListener() {
@@ -99,10 +217,11 @@ public class InAppUtil {
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     if (billingClient.isReady()) {
                         loadAllSkul(context);
-                        Log.e(TAG, "onBillingSetupFinished: ");
+                        Log.e(TAG, "onBillingSetupFinished billingClient: ");
                         Purchase.PurchasesResult result =
                                 billingClient.queryPurchases(BillingClient.SkuType.SUBS);
-                        connectSuccessListener.onSuccess();
+                        isBillingClientSuccess = true;
+                        callSuccess();
                         if (result.getPurchasesList().size() > 0) {
                             isRegisted = true;
                         }
@@ -115,6 +234,16 @@ public class InAppUtil {
                 connectSuccessListener.disConnected();
             }
         });
+    }
+
+    private static void callSuccess() {
+        if (isBillingClientSuccess
+                && isBillingClientBuySuccess
+                && isBillingClientBuyOneTimeSuccess
+                && connectSuccessListener != null) {
+            Log.e(TAG, "callSuccess: ");
+            connectSuccessListener.onSuccess();
+        }
     }
 
     private static void handlePurchaseBuy(Purchase purchase) {
@@ -132,32 +261,6 @@ public class InAppUtil {
         });
     }
 
-    private static void handlePurchaseBuyOneTime(Purchase purchase) {
-//        ConsumeParams consumeParams =
-//                ConsumeParams.newBuilder()
-//                        .setPurchaseToken(purchase.getPurchaseToken())
-//                        .build();
-//        billingClientBuy.consumeAsync(consumeParams, new ConsumeResponseListener() {
-//            @Override
-//            public void onConsumeResponse(BillingResult billingResult, String purchaseToken) {
-//                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-//                    Log.e(TAG, "onConsumeResponse: " + "consumeAsync");
-//                }
-//            }
-//        });
-        AcknowledgePurchaseParams params = AcknowledgePurchaseParams.newBuilder()
-                .setPurchaseToken(purchase.getPurchaseToken())
-                .build();
-        billingClientBuyOneTime.acknowledgePurchase(params, new AcknowledgePurchaseResponseListener() {
-            @Override
-            public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    Log.e(TAG, "onAcknowledgePurchaseResponse: handlePurchase" + billingResult.getDebugMessage() + "   " + billingResult.getResponseCode());
-                }
-            }
-        });
-    }
-
     public static void setPurchaseUpdatedListener(PurchasesUpdatedListener l) {
         listener = l;
     }
@@ -167,6 +270,40 @@ public class InAppUtil {
             Log.e(TAG, "loadAllSkul: " + skusList);
             SkuDetailsParams params = SkuDetailsParams.newBuilder().setSkusList(skusList).setType(BillingClient.SkuType.SUBS).build();
             billingClient.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
+                @Override
+                public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
+                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK)
+                        for (SkuDetails sku : list) {
+                            mapSkus.put(sku.getSku(), sku);
+                        }
+                    Log.e(TAG, "onSkuDetailsResponse: " + list.size());
+                }
+            });
+        }
+    }
+
+    private static void loadAllSkulBuy(Context context) {
+        if (billingClientBuy.isReady()) {
+            Log.e(TAG, "loadAllSkul: " + skusList);
+            SkuDetailsParams params = SkuDetailsParams.newBuilder().setSkusList(skusList).setType(BillingClient.SkuType.INAPP).build();
+            billingClientBuy.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
+                @Override
+                public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
+                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK)
+                        for (SkuDetails sku : list) {
+                            mapSkus.put(sku.getSku(), sku);
+                        }
+                    Log.e(TAG, "onSkuDetailsResponse: " + list.size());
+                }
+            });
+        }
+    }
+
+    private static void loadAllSkulBuyOneTime(Context context) {
+        if (billingClientBuyOneTime.isReady()) {
+            Log.e(TAG, "loadAllSkul: " + skusList);
+            SkuDetailsParams params = SkuDetailsParams.newBuilder().setSkusList(skusList).setType(BillingClient.SkuType.INAPP).build();
+            billingClientBuyOneTime.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
                 @Override
                 public void onSkuDetailsResponse(BillingResult billingResult, List<SkuDetails> list) {
                     if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK)
@@ -194,6 +331,21 @@ public class InAppUtil {
 
     }
 
+    private static void handlePurchaseBuyOneTime(Purchase purchase) {
+        AcknowledgePurchaseParams params = AcknowledgePurchaseParams.newBuilder()
+                .setPurchaseToken(purchase.getPurchaseToken())
+                .build();
+        billingClientBuyOneTime.acknowledgePurchase(params, new AcknowledgePurchaseResponseListener() {
+            @Override
+            public void onAcknowledgePurchaseResponse(BillingResult billingResult) {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                    Log.e(TAG, "onAcknowledgePurchaseResponse: handlePurchase" + billingResult.getDebugMessage() + "   " + billingResult.getResponseCode());
+                }
+            }
+        });
+
+    }
+
     private static boolean verifyValidSignature(String signedData, String signature) {
         try {
             return Security.verifyPurchase(Configs.base64InApp, signedData, signature);
@@ -211,16 +363,23 @@ public class InAppUtil {
 
     public static void buyOneTime(Activity activity, String sku) {
         BillingFlowParams billingFlowParams;
-        if (!InAppUtil.mapSkus.isEmpty() && InAppUtil.mapSkus.get(sku) != null) {
+        if (checkValidSku(sku)) {
             billingFlowParams = BillingFlowParams.newBuilder().setSkuDetails(InAppUtil.mapSkus.get(sku)).build();
             billingClientBuyOneTime.launchBillingFlow(activity, billingFlowParams);
         }
     }
 
+    private static boolean checkValidSku(String sku) {
+        return !InAppUtil.mapSkus.isEmpty()
+                && InAppUtil.mapSkus.get(sku) != null
+                && !InAppUtil.mapSkus.isEmpty()
+                && InAppUtil.mapSkus.get(sku) != null;
+    }
+
     public static void subscription(Activity activity, String sku) {
         BillingFlowParams billingFlowParams;
         Log.d(TAG, "subscription: " + sku);
-        if (InAppUtil.mapSkus != null && InAppUtil.mapSkus != null && !InAppUtil.mapSkus.isEmpty() && InAppUtil.mapSkus.get(sku) != null) {
+        if (checkValidSku(sku)) {
             billingFlowParams = BillingFlowParams.newBuilder().setSkuDetails(InAppUtil.mapSkus.get(sku)).build();
             billingClient.launchBillingFlow(activity, billingFlowParams);
         } else {
@@ -230,7 +389,7 @@ public class InAppUtil {
 
     public static void buy(Activity activity, String sku) {
         BillingFlowParams billingFlowParams;
-        if (!InAppUtil.mapSkus.isEmpty() && InAppUtil.mapSkus.get(sku) != null) {
+        if (checkValidSku(sku)) {
             billingFlowParams = BillingFlowParams.newBuilder().setSkuDetails(InAppUtil.mapSkus.get(sku)).build();
             billingClientBuy.launchBillingFlow(activity, billingFlowParams);
         } else {

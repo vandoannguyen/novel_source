@@ -26,7 +26,7 @@ public class MainActivity extends FlutterActivity implements RatingDialog.Rating
     private static final String ONEADX_KEY = "gmBUYwLTV2VDu5Y8Dg5S9WpuaNDZvRaZ";
     MethodChannel.MethodCallHandler methodCallHandler;
 
-    InappMethodEvent.InAppMetholCallHandler inAppMetholCallHandler = new InappMethodEvent.InAppMetholCallHandler(this);
+    InAppMetholCallHandler inAppMetholCallHandler = new InAppMetholCallHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class MainActivity extends FlutterActivity implements RatingDialog.Rating
 //        AppEventsLogger.activateApp(this);
 
         GeneratedPluginRegistrant.registerWith(this);
+        inAppMetholCallHandler.initEventChannel("INAPP_EVENT", getFlutterView());
         new MethodChannel(getFlutterView(), CHANNEL).setMethodCallHandler((methodCallHandler = new MethodChannel.MethodCallHandler() {
             @Override
             public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {

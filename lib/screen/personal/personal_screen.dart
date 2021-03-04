@@ -11,6 +11,7 @@ import '../../common/constant.dart';
 // ignore: must_be_immutable
 class PersonalScreen extends BaseWidget<PersonalController> {
   PersonalScreen({this.callBack});
+
   final Function callBack;
   static const String routeName = '/personal';
   static const String name = 'personal';
@@ -19,6 +20,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: PersonalController());
     var size = MediaQuery.of(context).size;
+    controller.getProfile();
     return SingleChildScrollView(
       child: Container(
         color: Colors.grey[200],
@@ -49,7 +51,7 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                   ),
                 ),
                 child: GetBuilder<PersonalController>(
-                  builder: (_) => controller.isLogin
+                  builder: (_) => _.profile != null
                       ? Row(
                           children: [
                             Container(
@@ -127,9 +129,9 @@ class PersonalScreen extends BaseWidget<PersonalController> {
                       child: Row(
                         children: [
                           GetBuilder<PersonalController>(
-                            builder: (_) => controller.isLogin
+                            builder: (_) => _.profile != null
                                 ? Text(
-                                    "${AppLocalizations.of(context).translate('coin balance')}: ${controller.profile["coin"]}")
+                                    "${AppLocalizations.of(context).translate('coin balance')}: ${_.profile["coin"]}")
                                 : Text(
                                     "${AppLocalizations.of(context).translate('coin balance')}: 0.0"),
                           ),
