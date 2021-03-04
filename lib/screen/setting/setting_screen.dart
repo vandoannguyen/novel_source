@@ -272,10 +272,7 @@ class SettingScreen extends BaseWidget<SettingController> {
             child: IconButton(
               padding: EdgeInsets.all(10.0),
               onPressed: () {
-                if (controller.isChangedLanguage != null)
-                  Navigator.pop(context, controller.isChangedLanguage);
-                else
-                  Navigator.pop(context);
+                Navigator.pop(context);
               },
               icon: Icon(Icons.arrow_back_ios_rounded),
             ),

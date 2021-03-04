@@ -12,7 +12,9 @@ import 'package:init_app/screen/load/load_controller.dart';
 import 'package:init_app/screen/load/load_screen.dart';
 import 'package:init_app/screen/login/login_screen.dart';
 import 'package:init_app/screen/ownership/ownership_screen.dart';
+import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/dialog_language.dart';
+import 'package:init_app/widgets/dialog_loading.dart';
 
 class SettingController extends BaseController {
   LoadController ctl = Get.put(LoadController());
@@ -47,37 +49,43 @@ class SettingController extends BaseController {
           .setLanguage(value)
           .then((value) {})
           .catchError((err) {});
-      RepositoryImpl.getInstance().createMyBooks(
-          timestamp:
-              (DateTime.now().microsecondsSinceEpoch / 1000).round().toString(),
-          data: Common.language);
-      selectedLanguage();
-      isChangedLanguage = true;
-      if (isChangedLanguage) {
-        // callBack("CHANGE_LANGUAGE", "");
-        NovelBookController controller = null;
-        BookCaseController bookCaseController = null;
-        try {
-          controller = Get.find();
-        } catch (err) {
-          controller = null;
+      showDialogLoading(context);
+      RepositoryImpl.getInstance()
+          .createMyBooks(
+              timestamp: (DateTime.now().microsecondsSinceEpoch / 1000)
+                  .round()
+                  .toString(),
+              data: Common.language)
+          .then((value) {
+            Navigator.pop(context);
+        selectedLanguage();
+        isChangedLanguage = true;
+        if (isChangedLanguage) {
+          // callBack("CHANGE_LANGUAGE", "");
+          NovelBookController controller = null;
+          BookCaseController bookCaseController = null;
+          try {
+            controller = Get.find();
+          } catch (err) {
+            controller = null;
+          }
+          try {
+            bookCaseController = Get.find();
+          } catch (err) {
+            print(err);
+            bookCaseController = null;
+          }
+          print("controller != null${controller != null}");
+          if (controller != null) {
+            controller.reloadData();
+          }
+          print("bookCaseController != null${bookCaseController != null}");
+          if (bookCaseController != null) {
+            bookCaseController.reloadData();
+          }
         }
-        try {
-          bookCaseController = Get.find();
-        } catch (err) {
-          print(err);
-          bookCaseController = null;
-        }
-        print("controller != null${controller != null}");
-        if (controller != null) {
-          controller.reloadData();
-        }
-        print("bookCaseController != null${bookCaseController != null}");
-        if (bookCaseController != null) {
-          bookCaseController.reloadData();
-        }
-      }
-      update();
+        update();
+      });
     });
   }
 
@@ -123,7 +131,10 @@ class SettingController extends BaseController {
     if (logedType != null) {
       _showMyDialogSignOut();
     } else {
-      _showMyDialogSignIn();
+      IntentAnimation.intentNomal(
+          context: context,
+          screen: LoginScreen(),
+          option: IntentAnimationOption.RIGHT_TO_LEFT);
     }
   }
 
