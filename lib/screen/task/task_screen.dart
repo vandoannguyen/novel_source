@@ -27,13 +27,14 @@ class TaskScreen extends BaseWidget<TaskController> {
   void funcTask(String key, BuildContext context) {
     switch (key) {
       case "ANSWER":
+      
         onClickIntent(context, "ANSWER");
         break;
       case "INVITE":
         onClickIntent(context, "INVITE");
         break;
       case "COIN_FOR_FRIEND":
-        onClickIntent(context, "COIN_FOR_FRIEND");
+        onClickIntent(context, "COIN_FOR_FERIEND");
         break;
       case "WATCH_ADS":
         break;
@@ -108,7 +109,7 @@ class TaskScreen extends BaseWidget<TaskController> {
                                 children: [
                                   Text(
                                     AppLocalizations.of(context)
-                                        .translate("checkin"),
+                                        .translate("checkined"),
                                     style: TextStyle(
                                       color: Color(Constant.colorTxtPrimary),
                                     ),
@@ -139,7 +140,8 @@ class TaskScreen extends BaseWidget<TaskController> {
                                 AppLocalizations.of(context)
                                     .translate("checkin"),
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Color(Constant.colorTxtPrimary),
+                                  fontWeight: FontWeight.bold
                                 ),
                                 textAlign: TextAlign.center,
                               ),

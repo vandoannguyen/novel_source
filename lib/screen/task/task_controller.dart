@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/screen/bookstore/detail_comic/invite_friend.dart';
 import 'package:init_app/screen/bookstore/detail_comic/loaded_coin.dart';
@@ -20,19 +21,20 @@ class TaskController extends BaseController {
   TaskController() {
     coinDaily = new List();
     coinDaily += [
-      {"title": "1 Ngày", "name": "20", "value": 20, "status": false},
-      {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
-      {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-      {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-      {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-      {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-      {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
+      {"name": "20", "value": 20, "status": false},
+      {"name": "20", "value": 20, "status": false},
+      {"name": "30", "value": 30, "status": false},
+      {"name": "30", "value": 30, "status": false},
+      {"name": "40", "value": 40, "status": false},
+      {"name": "40", "value": 40, "status": false},
+      {"name": "60x2", "value": 120, "status": false},
     ];
   }
 
   // ignore: must_call_super
   onInit() {
     print(" object TaskController");
+
     DateTime today = DateTime.now();
     date = today.day.toString();
     print(today.day);
@@ -56,17 +58,22 @@ class TaskController extends BaseController {
     update();
     DateTime today = DateTime.now();
     date = today.day.toString();
-    print("checkInToday");
+
     RepositoryImpl.getInstance().getCheckin().then((value) {
       print(value);
       // nếu value== null thì set checkin
       if (value != null) {
         print("valuelanguage$value");
         Common.days = int.parse(value);
+
         RepositoryImpl.getInstance().getDatetime().then((value) async {
           if (value != null && today.day.toString() == value) {
             // checkValue = value;
-            _dialog(context);
+            _dialog(
+                context,
+                "",
+                AppLocalizations.of(context).translate(
+                    "You have logged in today. Come back tomorrow!"), "img_coin_checked.png");
             // switch (Common.days) {
             //   case 0:
             //     RepositoryImpl.getInstance().setCheckin("1");
@@ -185,6 +192,7 @@ class TaskController extends BaseController {
                 setCheckIn(0);
                 break;
             }
+
             // }
           }
         }).catchError((err) {
@@ -196,34 +204,17 @@ class TaskController extends BaseController {
     });
   }
 
-  void _dialog(BuildContext context) {
+  void _dialog(BuildContext context, title, descriptions,image ) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: "Messenger",
-            descriptions:
-                "Bạn đã đăng nhập hôm nay rồi. Quay trở lại vào ngày mai nhé!!!",
+            title: title,
+            descriptions: descriptions,
             text: "OK",
-            img: Image.asset(Common.pathImg + "icon.png"),
+            img: image,
           );
         });
-  }
-
-  void funcTask(String key) {
-    switch (key) {
-      case "ANSWER":
-        break;
-      case "INVITE":
-        break;
-      case "COIN_FOR_FRIEND":
-        break;
-      case "WATCH_ADS":
-        break;
-      case "READ_BOOK":
-        break;
-      default:
-    }
   }
 
   void incrementDate() {
@@ -236,144 +227,104 @@ class TaskController extends BaseController {
           case 0:
             {
               coinDaily = [
-                {"title": "1 Ngày", "name": "20", "value": 20, "status": false},
-                {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
-                {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-                {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-                {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-                {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"name": "20", "value": 20, "status": false},
+                {"name": "20", "value": 20, "status": false},
+                {"name": "30", "value": 30, "status": false},
+                {"name": "30", "value": 30, "status": false},
+                {"name": "40", "value": 40, "status": false},
+                {"name": "40", "value": 40, "status": false},
+                {"name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
           case 1:
             {
               coinDaily = [
-                {"title": "1 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
-                {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-                {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-                {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-                {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"name": "20", "value": 20, "status": true},
+                {"name": "20", "value": 20, "status": false},
+                {"name": "30", "value": 30, "status": false},
+                {"name": "30", "value": 30, "status": false},
+                {"name": "40", "value": 40, "status": false},
+                {"name": "40", "value": 40, "status": false},
+                {"name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
           case 2:
             {
               coinDaily = [
-                {"title": "1 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-                {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-                {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-                {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"name": "20", "value": 20, "status": true},
+                {"name": "20", "value": 20, "status": true},
+                {"name": "30", "value": 30, "status": false},
+                {"name": "30", "value": 30, "status": false},
+                {"name": "40", "value": 40, "status": false},
+                {"name": "40", "value": 40, "status": false},
+                {"name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
           case 3:
             {
               coinDaily = [
-                {"title": "1 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "3 Ngày", "name": "30", "value": 30, "status": true},
-                {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-                {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-                {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"name": "20", "value": 20, "status": true},
+                {"name": "20", "value": 20, "status": true},
+                {"name": "30", "value": 30, "status": true},
+                {"name": "30", "value": 30, "status": false},
+                {"name": "40", "value": 40, "status": false},
+                {"name": "40", "value": 40, "status": false},
+                {"name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
           case 4:
             {
               coinDaily = [
-                {"title": "1 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "3 Ngày", "name": "30", "value": 30, "status": true},
-                {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
-                {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-                {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"name": "20", "value": 20, "status": true},
+                {"name": "20", "value": 20, "status": true},
+                {"name": "30", "value": 30, "status": true},
+                {"name": "30", "value": 30, "status": true},
+                {"name": "40", "value": 40, "status": false},
+                {"name": "40", "value": 40, "status": false},
+                {"name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
           case 5:
             {
               coinDaily = [
-                {"title": "1 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "3 Ngày", "name": "30", "value": 30, "status": true},
-                {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
-                {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
-                {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"name": "20", "value": 20, "status": true},
+                {"name": "20", "value": 20, "status": true},
+                {"name": "30", "value": 30, "status": true},
+                {"name": "30", "value": 30, "status": true},
+                {"name": "40", "value": 40, "status": true},
+                {"name": "40", "value": 40, "status": false},
+                {"name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
           case 6:
             {
               coinDaily = [
-                {"title": "1 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "3 Ngày", "name": "30", "value": 30, "status": true},
-                {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
-                {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
-                {"title": "6 Ngày", "name": "40", "value": 40, "status": true},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": false
-                },
+                {"name": "20", "value": 20, "status": true},
+                {"name": "20", "value": 20, "status": true},
+                {"name": "30", "value": 30, "status": true},
+                {"name": "30", "value": 30, "status": true},
+                {"name": "40", "value": 40, "status": true},
+                {"name": "40", "value": 40, "status": true},
+                {"name": "60x2", "value": 120, "status": false},
               ];
               break;
             }
           case 7:
             {
               coinDaily = [
-                {"title": "1 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "2 Ngày", "name": "20", "value": 20, "status": true},
-                {"title": "3 Ngày", "name": "30", "value": 30, "status": true},
-                {"title": "4 Ngày", "name": "30", "value": 30, "status": true},
-                {"title": "5 Ngày", "name": "40", "value": 40, "status": true},
-                {"title": "6 Ngày", "name": "40", "value": 40, "status": true},
-                {
-                  "title": "7 Ngày",
-                  "name": "60x2",
-                  "value": 120,
-                  "status": true
-                },
+                {"name": "20", "value": 20, "status": true},
+                {"name": "20", "value": 20, "status": true},
+                {"name": "30", "value": 30, "status": true},
+                {"name": "30", "value": 30, "status": true},
+                {"name": "40", "value": 40, "status": true},
+                {"name": "40", "value": 40, "status": true},
+                {"name": "60x2", "value": 120, "status": true},
               ];
               break;
             }
@@ -382,13 +333,13 @@ class TaskController extends BaseController {
         update(["check"]);
       } else {
         coinDaily = [
-          {"title": "1 Ngày", "name": "20", "value": 20, "status": false},
-          {"title": "2 Ngày", "name": "20", "value": 20, "status": false},
-          {"title": "3 Ngày", "name": "30", "value": 30, "status": false},
-          {"title": "4 Ngày", "name": "30", "value": 30, "status": false},
-          {"title": "5 Ngày", "name": "40", "value": 40, "status": false},
-          {"title": "6 Ngày", "name": "40", "value": 40, "status": false},
-          {"title": "7 Ngày", "name": "60x2", "value": 120, "status": false},
+          {"name": "20", "value": 20, "status": false},
+          {"name": "20", "value": 20, "status": false},
+          {"name": "30", "value": 30, "status": false},
+          {"name": "30", "value": 30, "status": false},
+          {"name": "40", "value": 40, "status": false},
+          {"name": "40", "value": 40, "status": false},
+          {"name": "60x2", "value": 120, "status": false},
         ];
         update();
       }
@@ -404,12 +355,14 @@ class TaskController extends BaseController {
     await RepositoryImpl.getInstance().setCheckin("${Common.days}");
     Common.coin += getCoin(Common.days);
     await RepositoryImpl.getInstance().setDatetime(date);
-    Fluttertoast.showToast(
-        msg: "You have +${getCoin(Common.days)} coin",
-        toastLength: Toast.LENGTH_SHORT,
-        textColor: Colors.white,
-        backgroundColor: Colors.grey,
-        gravity: ToastGravity.CENTER);
+    // Fluttertoast.showToast(
+    //     msg: "You have +${getCoin(Common.days)} coin",
+    //     toastLength: Toast.LENGTH_SHORT,
+    //     textColor: Colors.white,
+    //     backgroundColor: Colors.grey,
+    //     gravity: ToastGravity.CENTER);
+    _dialog(context, "",
+        "${AppLocalizations.of(context).translate("Successful attendance! You get")} ${getCoin(Common.days)} coins", "img_coin.png");
     incrementDate();
   }
 
