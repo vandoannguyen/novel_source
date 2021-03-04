@@ -19,7 +19,6 @@ class BookCaseController extends BaseController {
 
   void getMybook() {
     if (isLogedinSuccess) {
-      print("isLogedinSuccess true");
       isLoading = true;
       update();
       // lấy sách tron tủ sách

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/screen/bookstore/free_bookstore/free_bookstore_controller.dart';
@@ -86,7 +87,7 @@ class FreeBookstoreScreen extends BaseWidget<FreeBookstoreController> {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis),
                     Container(
-                      padding: EdgeInsets.only(top: 5.0),
+                      margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,11 +98,29 @@ class FreeBookstoreScreen extends BaseWidget<FreeBookstoreController> {
                                 color: Color(Constant.colorTxtPrimary),
                                 fontSize: 13.0),
                           ),
-                          Image.asset(
-                            Common.pathImg + "ic_comic_book.png",
-                            height: 25.0,
-                            fit: BoxFit.contain,
+                           Container(
+                                padding:
+                                  EdgeInsets.fromLTRB(20.0, 5.0, 10.0, 5.0),
+                            decoration: BoxDecoration(
+                              image: new DecorationImage(
+                                image: new ExactAssetImage(
+                                    'assets/images/ic_comic_book.png'),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                     
+                              child: Text(
+                                  AppLocalizations.of(controller.context)
+                                      .translate("novel"),
+                                  style: TextStyle(
+                                    fontSize: 12.0,
+                                    color: Colors.white,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis),
+                           
                           ),
+                         
                         ],
                       ),
                     ),

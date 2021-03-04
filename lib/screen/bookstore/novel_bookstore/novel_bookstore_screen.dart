@@ -131,7 +131,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                     context: context,
                     screen: ListAllNovel(
                       title: AppLocalizations.of(context)
-                          .translate("NOVEL NEWEST"),
+                          .translate("NEWEST NOVELS"),
                       type: ListAllNovel.NEW,
                     ));
               }),

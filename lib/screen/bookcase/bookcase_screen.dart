@@ -116,6 +116,54 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
                     ),
                   ),
           ),
+          // Shimmer.fromColors(
+          //   enabled: true,
+          //     baseColor: Colors.grey[300],
+          //     highlightColor: Colors.grey[100],
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(bottom: 8.0),
+          //       child: Row(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: <Widget>[
+          //           Container(
+          //             width: 48.0,
+          //             height: 48.0,
+          //             color: Colors.white,
+          //           ),
+          //           const Padding(
+          //             padding: EdgeInsets.symmetric(horizontal: 8.0),
+          //           ),
+          //           Expanded(
+          //             child: Column(
+          //               crossAxisAlignment: CrossAxisAlignment.start,
+          //               children: <Widget>[
+          //                 Container(
+          //                   width: double.infinity,
+          //                   height: 8.0,
+          //                   color: Colors.white,
+          //                 ),
+          //                 const Padding(
+          //                   padding: EdgeInsets.symmetric(vertical: 2.0),
+          //                 ),
+          //                 Container(
+          //                   width: double.infinity,
+          //                   height: 8.0,
+          //                   color: Colors.white,
+          //                 ),
+          //                 const Padding(
+          //                   padding: EdgeInsets.symmetric(vertical: 2.0),
+          //                 ),
+          //                 Container(
+          //                   width: 40.0,
+          //                   height: 8.0,
+          //                   color: Colors.white,
+          //                 ),
+          //               ],
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //     )),
           Expanded(
             child: GetBuilder<BookCaseController>(
               builder: (_) => _.myBooks == null || _.isLoading
@@ -166,18 +214,19 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
-              child: Container(
-            decoration: BoxDecoration(
-                color: Colors.black12,
-                borderRadius: BorderRadius.all(Radius.circular(5))),
-            alignment: Alignment.center,
-            child: Image.asset(
-              ic_add,
-              height: 30,
-              width: 30,
-              fit: BoxFit.fill,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.black12,
+                  borderRadius: BorderRadius.all(Radius.circular(5))),
+              alignment: Alignment.center,
+              child: Image.asset(
+                ic_add,
+                height: 30,
+                width: 30,
+                fit: BoxFit.fill,
+              ),
             ),
-          ),),
+          ),
           Container(
             height: 45.0,
           ),

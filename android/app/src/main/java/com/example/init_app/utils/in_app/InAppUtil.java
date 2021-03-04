@@ -85,12 +85,14 @@ public class InAppUtil {
         billingClientBuy.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(BillingResult billingResult) {
+                Log.e(TAG, "onBillingSetupFinished: billingClientBuy" +  billingResult.getResponseCode());
+
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    if (billingClient.isReady()) {
+                    if (billingClientBuy.isReady()) {
                         loadAllSkulBuy(context);
                         Log.e(TAG, "onBillingSetupFinishedbillingClientBuy: ");
                         Purchase.PurchasesResult result =
-                                billingClient.queryPurchases(BillingClient.SkuType.INAPP);
+                                billingClientBuy.queryPurchases(BillingClient.SkuType.INAPP);
                         isBillingClientBuySuccess = true;
                         callSuccess();
 //                        if (result.getPurchasesList().size() > 0) {
@@ -133,12 +135,14 @@ public class InAppUtil {
         billingClientBuyOneTime.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(BillingResult billingResult) {
+                Log.e(TAG, "onBillingSetupFinished: billingClientBuyOneTime" +  billingResult.getResponseCode());
+
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    if (billingClient.isReady()) {
+                    if (billingClientBuyOneTime.isReady()) {
                         loadAllSkulBuyOneTime(context);
                         Log.e(TAG, "onBillingSetupFinished billingClientBuyOneTime: ");
                         Purchase.PurchasesResult result =
-                                billingClient.queryPurchases(BillingClient.SkuType.INAPP);
+                                billingClientBuyOneTime.queryPurchases(BillingClient.SkuType.INAPP);
                         isBillingClientBuyOneTimeSuccess = true;
                         callSuccess();
                         if (result.getPurchasesList().size() > 0) {
@@ -214,6 +218,8 @@ public class InAppUtil {
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(BillingResult billingResult) {
+                Log.e(TAG, "onBillingSetupFinished: billingClient" +  billingResult.getResponseCode());
+                Log.e(TAG, "onBillingSetupFinished: billingClient" +  billingClient.isReady());
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     if (billingClient.isReady()) {
                         loadAllSkul(context);
@@ -284,7 +290,7 @@ public class InAppUtil {
 
     private static void loadAllSkulBuy(Context context) {
         if (billingClientBuy.isReady()) {
-            Log.e(TAG, "loadAllSkul: " + skusList);
+            Log.e(TAG, "loadAllSkulBuy: " + skusList);
             SkuDetailsParams params = SkuDetailsParams.newBuilder().setSkusList(skusList).setType(BillingClient.SkuType.INAPP).build();
             billingClientBuy.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
                 @Override
@@ -301,7 +307,7 @@ public class InAppUtil {
 
     private static void loadAllSkulBuyOneTime(Context context) {
         if (billingClientBuyOneTime.isReady()) {
-            Log.e(TAG, "loadAllSkul: " + skusList);
+            Log.e(TAG, "loadAllSkulBuyOneTime: " + skusList);
             SkuDetailsParams params = SkuDetailsParams.newBuilder().setSkusList(skusList).setType(BillingClient.SkuType.INAPP).build();
             billingClientBuyOneTime.querySkuDetailsAsync(params, new SkuDetailsResponseListener() {
                 @Override

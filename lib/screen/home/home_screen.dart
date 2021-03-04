@@ -71,6 +71,7 @@ class _HomeState extends State<HomeScreen> {
         bookstoreScreen.changeLanguage();
         createBookStore();
         break;
+
       default:
     }
   }
@@ -91,13 +92,11 @@ class _HomeState extends State<HomeScreen> {
         backgroundColor: Colors.white,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon:  Image.asset(
+            icon: Image.asset(
               "assets/images/ic_menu_bookcase.png",
               height: 25.0,
-               fit: BoxFit.contain,
+              fit: BoxFit.contain,
             ),
-               
-           
             activeIcon: Image.asset(
               "assets/images/ic_menu_bookcase_ac.png",
               height: 25.0,
@@ -106,15 +105,15 @@ class _HomeState extends State<HomeScreen> {
             label: AppLocalizations.of(context).translate("bookcase"),
           ),
           BottomNavigationBarItem(
-              icon:  Image.asset(
+            icon: Image.asset(
               "assets/images/ic_menu_bookstore.png",
-             fit: BoxFit.contain,
+              fit: BoxFit.contain,
               height: 25.0,
             ),
             activeIcon: Image.asset(
               "assets/images/ic_menu_bookstore_ac.png",
               height: 25.0,
-                fit: BoxFit.contain,
+              fit: BoxFit.contain,
             ),
             label: AppLocalizations.of(context).translate("bookstore"),
           ),
