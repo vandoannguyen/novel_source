@@ -135,5 +135,7 @@
   "SUCCESS": "SUCCESS",
   "Deposit coins success! You have": "Deposit coins success! You have",
   "NOVEL HOTTEST":"NOVEL HOTTEST",
-  "NOVEL NEWEST":"NOVEL NEWEST"
+  "NOVEL NEWEST":"NOVEL NEWEST",
+  "TOTAL_COIN_BOUGHT": "Total coin bought",
+  "DATA_IS_NULL": "Data is null"
 }

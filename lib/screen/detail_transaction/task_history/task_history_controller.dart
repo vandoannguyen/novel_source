@@ -17,7 +17,6 @@ class TaskHistoryController extends BaseController {
     RepositoryImpl.getInstance()
         .historyBuy(page: 1, limit: 10)
         .then((value) async {
-      print("getTaskHistory1 $value");
       // var listSub = [];
       try {
         var list = await RepositoryImpl.getInstance()
@@ -55,7 +54,6 @@ class TaskHistoryController extends BaseController {
           double sum  = 0;
           print(l.length);
           l.forEach((el) {
-            print("0000000000000000$el");
             sum+= el["coin"];
           });
           list.add({
@@ -67,10 +65,8 @@ class TaskHistoryController extends BaseController {
       }
       return list;
     }).then((value) {
-      print("000000000$value");
       coinHis = value;
       if (coinHis == null) coinHis = [];
-      print("value$value");
       update();
     }).catchError((err) {
       print(err);

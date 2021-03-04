@@ -135,5 +135,9 @@
   "SUCCESS": "KEBERHASILAN",
   "Deposit coins success! You have": "Berhasil deposit koin! Kamu punya",
   "NOVEL HOTTEST":"NOVEL HOTTEST",
-  "NOVEL NEWEST":"NOVEL TERBARU"
+  "NOVEL NEWEST":"NOVEL TERBARU",
+  "TOTAL_COIN_BOUGHT": "Total koin yang dibeli",
+  "DATA_IS_NULL": "Data tidak ada"
+
+
 }

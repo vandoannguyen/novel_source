@@ -4,7 +4,10 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:init_app/base/base_widget.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/common/constant.dart';
+import 'package:init_app/common/images.dart';
 import 'package:init_app/screen/detail_transaction/task_history/task_history_controller.dart';
+
+import '../../../app_localizations.dart';
 
 // ignore: must_be_immutable
 class TaskHistoryScreen extends BaseWidget<TaskHistoryController> {
@@ -13,6 +16,7 @@ class TaskHistoryScreen extends BaseWidget<TaskHistoryController> {
 
   @override
   void dispose() {}
+
   @override
   Widget build(BuildContext context, {controllerSuper}) {
     super.build(context, controllerSuper: TaskHistoryController());
@@ -56,7 +60,7 @@ class TaskHistoryScreen extends BaseWidget<TaskHistoryController> {
                                         Row(
                                           children: [
                                             Text(
-                                                "Tong xu thu vao: +${__.coinHis[index]["sum"]}",
+                                                "${AppLocalizations.of(context).translate('TOTAL_COIN_BOUGHT')}: +${__.coinHis[index]["sum"]}",
                                                 style: TextStyle(
                                                     fontSize: 15.0,
                                                     fontWeight:
@@ -126,7 +130,25 @@ class TaskHistoryScreen extends BaseWidget<TaskHistoryController> {
                         })
                     : Container(
                         child: Center(
-                        child: Text("Data null"),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              child: Image.asset(
+                                ic_empty,
+                                width: 80,
+                                height: 80,
+                              ),
+                            ),
+                            Container(
+                                child: Text(
+                              "${AppLocalizations.of(context).translate('DATA_IS_NULL')}",
+                              style: TextStyle(
+                                  color: Color(0xFFFF9B93),
+                                  fontWeight: FontWeight.w800),
+                            ))
+                          ],
+                        ),
                       )),
               )
             : Container(

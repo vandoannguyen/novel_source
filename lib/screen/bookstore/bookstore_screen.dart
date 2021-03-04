@@ -14,16 +14,13 @@ class BookstoreScreen extends StatefulWidget {
 
   @override
   _BookstoreState createState() {
-    print("okok create state");
     state = _BookstoreState();
     return state;
   }
 
   void changeLanguage() {
     // isChangeLanguage = true;
-    print("okok changeLanguage0");
     if (state != null) {
-      print("okok changeLanguage1");
       state.changeLanguage();
     }
   }
@@ -133,7 +130,6 @@ class _BookstoreState extends State<BookstoreScreen>
   bool get wantKeepAlive => true;
 
   void changeLanguage() {
-    print("okok changeLanguage2");
     if (novelBookstoreScreen != null) novelBookstoreScreen.changeLanguage();
   }
 }

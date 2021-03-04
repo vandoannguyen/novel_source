@@ -8,3 +8,4 @@ var ic_launcher =
 var ic_loading = "assets/gif/book_preloader.gif";
 var ic_seleted = "assets/images/ic_selected.png";
 var ic_unselect = "assets/images/ic_unselect.png";
+var ic_empty = "assets/images/ic_empty_list.png";

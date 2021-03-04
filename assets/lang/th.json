@@ -135,5 +135,7 @@
   "SUCCESS": "ความสำเร็จ",
   "Deposit coins success! You have": "ฝากเหรียญสำเร็จ! คุณมี",
   "NOVEL HOTTEST":"นวนิยายที่ร้อนแรงที่สุด",
-  "NOVEL NEWEST":"นวนิยายใหม่ล่าสุด"
+  "NOVEL NEWEST":"นวนิยายใหม่ล่าสุด",
+  "TOTAL_COIN_BOUGHT": "รวมเหรียญที่ซื้อ",
+  "DATA_IS_NULL": "ข้อมูลเป็นโมฆะ"
 }

@@ -22,9 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     EventChannel eventChannel = new EventChannel("INAPP_EVENT");
-    eventChannel.receiveBroadcastStream().listen((event) {
-      print(event);
-    });
+    eventChannel.receiveBroadcastStream().listen((event) {});
 //     Locale myLocale = Localizations.localeOf(context);
 // print("myLocale myLocale myLocale $myLocale");
     return GetMaterialApp(
