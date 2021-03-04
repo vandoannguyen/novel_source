@@ -558,7 +558,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                 },
                 child: Container(
                   alignment: Alignment.center,
-                  height: 40.0,
+                  height: 45.0,
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Color(Constant.colorTxtDefault).withOpacity(0.5),
@@ -576,7 +576,9 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                           : AppLocalizations.of(context).translate("Follow"),
                       style: TextStyle(
                         color: Color(Constant.colorTxtSecond),
+                        
                       ),
+                      textAlign: TextAlign.center
                     ),
                   ),
                 ),
@@ -590,7 +592,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                 },
                 child: Container(
                   alignment: Alignment.center,
-                  height: 40.0,
+                  height: 45.0,
                   // decoration: BoxDecoration(
                   color: Color(Constant.colorTxtSecond),
                   //   border: Border.all(
@@ -601,6 +603,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                   child: Text(
                     AppLocalizations.of(context).translate("read now"),
                     style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center
                   ),
                 ),
               ),
@@ -613,7 +616,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                 },
                 child: Container(
                   alignment: Alignment.center,
-                  height: 40.0,
+                  height: 45.0,
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Color(Constant.colorTxtDefault).withOpacity(0.5),
@@ -625,6 +628,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
                     style: TextStyle(
                       color: Color(Constant.colorTxtSecond),
                     ),
+                    textAlign: TextAlign.center
                   ),
                 ),
               ),

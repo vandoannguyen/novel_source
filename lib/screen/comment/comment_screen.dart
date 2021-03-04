@@ -95,7 +95,6 @@ class CommentScreen extends BaseWidget<CommentController> {
                     maxLines: 8,
                     controller: controllerTextEdit,
                     onChanged: (text) {
-                      controller.countWord(text.length);
                     },
                     decoration: InputDecoration(
                       hintText:
@@ -114,7 +113,7 @@ class CommentScreen extends BaseWidget<CommentController> {
                   bottom: 15,
                   child: GetBuilder<CommentController>(
                     builder: (controller) => Text(
-                      (controller.maxCount - controller.count).toString(),
+                      (controller.maxCount - controllerTextEdit.text.length).toString(),
                       style: TextStyle(fontSize: 10.0),
                     ),
                   ),

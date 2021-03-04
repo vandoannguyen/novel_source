@@ -62,7 +62,11 @@ class BuyCoinScreen extends BaseWidget<BuyCoinController> {
                   borderRadius: BorderRadius.circular(50.0),
                 ),
                 onPressed: () {
-                  showCoinPackages(context);
+                  print("======================= ${Common.listInapp}");
+                  if(Common.listInapp.length > 0) {
+                    showCoinPackages(context);
+                  }
+                  
                 },
                 color: Color(Constant.colorTxtSecond),
                 textColor: Colors.white,

@@ -4,6 +4,7 @@ import 'package:installed_apps/app_info.dart';
 
 class Common {
   static final String CHANNEL = "com.example.init_app";
+  static final String url = "https://play.google.com/store/apps/details?id=com.example.init_app";
   static final String EXTEND_ONEADX_KEY = "";
   static final String ONEADX_KEY = "gmBUYwLTV2VDu5Y8Dg5S9WpuaNDZvRaZ";
   static String pathImg = "assets/images/";
@@ -11,7 +12,7 @@ class Common {
   static String token = "";
   static UserModel user = null;
   static List<NovelModel> myBooks = null;
-  static String appName = "ĐỌc SÁCH";
+  static String appName = "Hot Novel";
   static String fanpageName = "Hotnovel";
   static String fanpageLink = "https://www.facebook.com/Hotnovel-100817905411136";
   static String email = "vandoannguyenhaui@gmail.com";

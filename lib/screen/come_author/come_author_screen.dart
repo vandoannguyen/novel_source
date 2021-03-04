@@ -93,6 +93,10 @@ class ComeAuthorScreen extends BaseWidget<ComeAuthorController> {
                                   ),
                                 ),
                                 Container(
+                                  constraints: BoxConstraints(
+                                      maxWidth:
+                                          MediaQuery.of(context).size.width -
+                                              60.0),
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 10.0, vertical: 0.0),
                                   child: Text(
@@ -102,6 +106,8 @@ class ComeAuthorScreen extends BaseWidget<ComeAuthorController> {
                                         color: Color(Constant.colorTxtSecond),
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.bold),
+                                    softWrap: true,
+                                    textAlign: TextAlign.center,
                                   ),
                                 ),
                                 Expanded(
@@ -173,6 +179,8 @@ class ComeAuthorScreen extends BaseWidget<ComeAuthorController> {
                                         color: Color(Constant.colorTxtSecond),
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.bold),
+                                    softWrap: true,
+                                    textAlign: TextAlign.center,
                                   ),
                                 ),
                                 Expanded(
