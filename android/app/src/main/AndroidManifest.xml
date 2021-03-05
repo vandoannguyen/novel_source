@@ -9,7 +9,7 @@
     <application
         android:name=".MainApplicaiton"
         android:icon="@mipmap/ic_launcher"
-        android:label="init_app">
+        android:label="TopNovel">
         <activity android:name=".ReadActivity"></activity>
         <activity
             android:name=".MainActivity"

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/screen/bookstore/detail_comic/invite_friend_widget.dart';
 
 class InviteFriend extends StatefulWidget {
@@ -29,7 +30,7 @@ class _InviteFriendState extends State<InviteFriend> with SingleTickerProviderSt
               Navigator.pop(context);
             }),
         title: Text(
-          "Invite friend",
+          AppLocalizations.of(context).translate("Invite friends"),
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,

@@ -91,7 +91,8 @@ public class InAppMetholCallHandler implements MethodChannel.MethodCallHandler, 
 
             @Override
             public void disConnected() {
-                result.error("", "", "");
+
+//                result.error("", "", "");
             }
         }, list);
     }

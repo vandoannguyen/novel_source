@@ -6,6 +6,7 @@ import 'package:init_app/common/common.dart';
 import 'package:init_app/data/network/CommentModle.dart';
 import 'package:init_app/data/network/NovalModel.dart';
 import 'package:init_app/data/repository.dart';
+import 'package:init_app/screen/bookcase/book_case_cotroller.dart';
 import 'package:init_app/screen/bookstore/detail_comic/invite_friend.dart';
 import 'package:init_app/screen/comment/comment_screen.dart';
 import 'package:init_app/screen/comment_all/comment_all_screen.dart';
@@ -123,6 +124,13 @@ class DetailComicBookController extends BaseController {
           print(value);
           Navigator.of(context).pop();
           Common.myBooks.add(NovelModel.fromJson(detail.toJson()));
+          BookCaseController bookCaseController = null;
+          try {
+            bookCaseController = Get.find();
+          } catch (err) {}
+          if (bookCaseController != null) {
+            bookCaseController.getMybook();
+          }
           update();
         }
       }).catchError((err) {

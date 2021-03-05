@@ -15,7 +15,6 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
   static const String name = 'feedback';
   final ctlTextEditContent = TextEditingController();
   final ctlTextEditEmail = TextEditingController();
-
   @override
   void dispose() {
     // super.dispose();
@@ -33,48 +32,49 @@ class FeedbackScreen extends BaseWidget<FeedbackController> {
             children: [
               appbarSecond(
                   AppLocalizations.of(context).translate(name), context),
-              Stack(
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
-                    // padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              // Stack(
+              //   children: [
+              Container(
+                margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+                // padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                child: TextField(
+                  controller: ctlTextEditContent,
+                  maxLines: 8,
+                  maxLength: controller.maxCount,
+                  maxLengthEnforced: true,
+                  onChanged: (text) {
+                  },
+                  decoration: InputDecoration(
+                 
+                    hintText: AppLocalizations.of(context)
+                            .translate('please send us your feedback') +
+                        "(${Common.fanpageName}), " +
+                        AppLocalizations.of(context).translate('thanks'),
+                    hintStyle: TextStyle(
+                      fontSize: 13.0,
+                      color: Color(Constant.colorTxtDefault).withOpacity(0.8),
                     ),
-                    child: TextField(
-                      maxLines: 8,
-                      controller: ctlTextEditContent,
-                      onChanged: (text) {
-                        controller.countWord(text.length);
-                      },
-                      decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context)
-                                .translate('please send us your feedback') +
-                            "(${Common.fanpageName}), " +
-                            AppLocalizations.of(context).translate('thanks'),
-                        hintStyle: TextStyle(
-                          fontSize: 13.0,
-                          color:
-                              Color(Constant.colorTxtDefault).withOpacity(0.8),
-                        ),
-                        contentPadding: EdgeInsets.all(10.0),
-                        border: InputBorder.none,
-                      ),
-                    ),
+                    contentPadding: EdgeInsets.all(10.0),
+                    border: InputBorder.none,
                   ),
-                  Positioned(
-                    right: 18,
-                    bottom: 0,
-                    child: GetBuilder<FeedbackController>(
-                      builder: (controller) => Text(
-                        (controller.maxCount - controller.count).toString(),
-                        style: TextStyle(fontSize: 10.0),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
+              // Positioned(
+              //   right: 18,
+              //   bottom: 0,
+              //   child: GetBuilder<FeedbackController>(
+              //     builder: (controller) => Text(
+              //       (controller.maxCount - ctlTextEditContent.text.length).toString(),
+              //       style: TextStyle(fontSize: 10.0),
+              //     ),
+              //   ),
+              // ),
+              //   ],
+              // ),
               // Container(
               //   margin: EdgeInsets.fromLTRB(15.0, 25.0, 15.0, 25.0),
               //   // padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),

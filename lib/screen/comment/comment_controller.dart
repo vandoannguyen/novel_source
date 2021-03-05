@@ -13,10 +13,7 @@ class CommentController extends BaseController {
     print(" object CommentController");
   }
 
-  void countWord(word) {
-    count = word;
-    update();
-  }
+
 
   void back() {
     Get.back();

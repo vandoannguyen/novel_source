@@ -561,6 +561,7 @@ class ApiImpl implements IApi {
     // TODO: implement getSubcryption
     Completer completer = new Completer();
     String time = _getTimeStamp();
+    print("==============================================lang lang lang lang vlang $lang");
     String token = CryptUtils.genSha256(
         "${Common.EXTEND_ONEADX_KEY}/subscriptions?language=$lang&timestamp=$time");
     Dio()

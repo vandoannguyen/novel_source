@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/repository.dart';
 import 'package:installed_apps/installed_apps.dart';
@@ -103,10 +104,10 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
   //share more
   Future<void> _shareMore(String text) async {
         await FlutterShare.share(
-            title: 'Share more app',
-            text: 'Example share link',
+            title: Common.appName,
+            text: Common.url,
             linkUrl: text,
-            chooserTitle: 'Choose app share link'
+            chooserTitle: 'Choose app share'
         );
   }
   @override
@@ -122,7 +123,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
             Container(
               margin: EdgeInsets.all(10),
               child: Text(
-                "Share for friend",
+                AppLocalizations.of(context).translate("Share for friend"),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 15.0,
@@ -132,7 +133,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
             ),
             Container(
               child: Text(
-                "Moi ban be nhan xu thuong",
+                "${AppLocalizations.of(context).translate("Invite friends to receive bonus coins")}",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 12.0, color: Colors.grey[800]),
               ),
@@ -159,7 +160,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                         ),
                       ),
                       Text(
-                        "facebook",
+                        "Facebook",
                         style: TextStyle(color: Colors.black),
                       )
                     ],
@@ -179,7 +180,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                         ),
                       ),
                       Text(
-                        "twitter",
+                        "Twitter",
                         style: TextStyle(color: Colors.black),
                       )
                     ],
@@ -199,7 +200,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                         ),
                       ),
                       Text(
-                        "more",
+                        "More",
                         style: TextStyle(color: Colors.black),
                       )
                     ],
@@ -219,7 +220,7 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                         ),
                       ),
                       Text(
-                        "copy Link",
+                        "Copy Link",
                         style: TextStyle(color: Colors.black),
                       )
                     ],
@@ -240,36 +241,36 @@ class _InviteFriendWidgetState extends State<InviteFriendWidget> {
                   Container(
                     margin: EdgeInsets.only(bottom: 10.0),
                     child: Text(
-                      "Moi ban be nhan xu thuong",
+                       "${AppLocalizations.of(context).translate("Invite friends to receive bonus coins detail")}",
                       style: TextStyle(color: Colors.black),
                     ),
                   ),
-                  Text(
-                    "1. Moi 1 ban thuong 10 xu",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  Text(
-                    "2. Moi lan ban be nap xu se duoc huong 10% xu ma ban be nap.",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 10.0),
-                    child: Text(
-                      "Remind",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  Text(
-                    "1. Mot so dien thoai chi co the moi mot lan",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  Text(
-                    "2. Ban be cua ban dang nhap thanh cong moi duoc nhan thuong xu.",
-                    style: TextStyle(color: Colors.black),
-                  ),
+                  // Text(
+                  //   "1. Moi 1 ban thuong 10 xu",
+                  //   style: TextStyle(color: Colors.black),
+                  // ),
+                  // Text(
+                  //   "2. Moi lan ban be nap xu se duoc huong 10% xu ma ban be nap.",
+                  //   style: TextStyle(color: Colors.black),
+                  // ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                  // Container(
+                  //   margin: EdgeInsets.only(bottom: 10.0),
+                  //   child: Text(
+                  //     "Remind",
+                  //     style: TextStyle(color: Colors.black),
+                  //   ),
+                  // ),
+                  // Text(
+                  //   "1. Mot so dien thoai chi co the moi mot lan",
+                  //   style: TextStyle(color: Colors.black),
+                  // ),
+                  // Text(
+                  //   "2. Ban be cua ban dang nhap thanh cong moi duoc nhan thuong xu.",
+                  //   style: TextStyle(color: Colors.black),
+                  // ),
                 ],
               ),
             ),

@@ -11,14 +11,9 @@ class FeedbackController extends BaseController {
   // ignore: must_call_super
   int maxCount = 1000;
   int count = 0;
-
   FeedbackController();
   onInit() {}
 
-  void countWord(word) {
-    count = word;
-    update();
-  }
 
   void back() {
     Get.back();
