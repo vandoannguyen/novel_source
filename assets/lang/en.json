@@ -93,8 +93,11 @@
   "How to deposit coins?": "How to deposit coins?",
   "Unfollow": "Unfollow",
   "Follow": "Follow",
-  "hotest": "HOTEST",
-  "checkin": "Checkin",
+  "hottest": "HOTTEST",
+  "checkin": "Check in",
+  "checkined": "Checked in",
+  "You have logged in today. Come back tomorrow!":"You have logged in today. Come back tomorrow!",
+  "Successful attendance! You get":"Successful attendance! You get",
   "day": "day",
   "7 consecutive days attendance will be rewarded twice as much": "7 consecutive days attendance will be rewarded twice as much",
   "tasks for new user": "TASKS FOR NEW USER",
@@ -137,5 +140,6 @@
   "NOVEL HOTTEST":"NOVEL HOTTEST",
   "NOVEL NEWEST":"NOVEL NEWEST",
   "TOTAL_COIN_BOUGHT": "Total coin bought",
-  "DATA_IS_NULL": "Data is null"
+  "DATA_IS_NULL": "Data is null",
+  "DO_YOU_WANT_TO_LOG_OUT": "Do you want to logout ?"
 }

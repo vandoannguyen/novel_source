@@ -95,6 +95,9 @@
   "Follow": "Theo dõi",
   "hotest": "Hot nhất",
   "checkin": "Điểm danh",
+  "checkined": "Điểm danh",
+  "You have logged in today. Come back tomorrow!":"Bạn đã đăng nhập hôm nay rồi. Quay trở lại vào ngày mai nhé!",
+  "Successful attendance! You get":"Điểm danh thành công! Bạn nhận được",
   "day": "ngày",
   "7 consecutive days attendance will be rewarded twice as much": "Điểm danh liên tục 7 ngày được thưởng gấp đôi",
   "tasks for new user": "NHIỆM VỤ NGƯỜI MỚI",
@@ -137,7 +140,8 @@
   "NOVEL HOTTEST":"TIỂU THUYẾT HOT NHẤT",
   "NOVEL NEWEST":"TIỂU THUYẾT MỚI NHẤT",
   "TOTAL_COIN_BOUGHT": "Tổng coin đã mua",
-  "DATA_IS_NULL": "Dữ liệu rỗng"
+  "DATA_IS_NULL": "Dữ liệu rỗng",
+  "DO_YOU_WANT_TO_LOG_OUT": "Bạn có muốn đăng xuất không?"
 
 
 }

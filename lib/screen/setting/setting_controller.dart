@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:init_app/app_localizations.dart';
 import 'package:init_app/base/base_controller.dart';
 import 'package:init_app/common/common.dart';
 import 'package:init_app/data/repository.dart';
@@ -57,7 +58,7 @@ class SettingController extends BaseController {
                   .toString(),
               data: Common.language)
           .then((value) {
-            Navigator.pop(context);
+        Navigator.pop(context);
         selectedLanguage();
         isChangedLanguage = true;
         if (isChangedLanguage) {
@@ -211,9 +212,9 @@ class SettingController extends BaseController {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Messenger'),
           content: Container(
-            child: Text("Ban co muon dang xuat khong?",
+            child: Text(
+                "${AppLocalizations.of(context).translate("DO_YOU_WANT_TO_LOG_OUT")}",
                 style: TextStyle(color: Colors.black)),
           ),
           actions: <Widget>[
@@ -222,7 +223,7 @@ class SettingController extends BaseController {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TextButton(
-                  child: Text('Co'),
+                  child: Text(AppLocalizations.of(context).translate("Yes")),
                   onPressed: () async {
                     await _handleSignOut();
                     Common.isLogedIn = false;
@@ -238,7 +239,8 @@ class SettingController extends BaseController {
                   },
                 ),
                 TextButton(
-                  child: Text('Khong'),
+                  child: Text(AppLocalizations.of(context).translate("No"),
+                      style: TextStyle(color: Colors.red)),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

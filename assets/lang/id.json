@@ -93,8 +93,11 @@
   "How to deposit coins?": "Bagaimana cara menyetor koin?",
   "Unfollow": "Berhenti mengikuti",
   "Follow": "Ikuti ikuti",
-  "hotest": "Terpanas",
-  "checkin": "Checkin",
+  "hottest": "Terpanas",
+  "checkin": "Check in",
+  "checkined": "Checked in",
+  "You have logged in today. Come back tomorrow!":"Anda masuk hari ini. Kembalilah besok!",
+  "Successful attendance! You get":"Kehadiran sukses! Anda mendapatkan",
   "day": "hari",
   "7 consecutive days attendance will be rewarded twice as much": "7 consecutive days attendance will be rewarded twice as much",
   "tasks for new user": "TUGAS UNTUK PENGGUNA BARU",
@@ -137,7 +140,6 @@
   "NOVEL HOTTEST":"NOVEL HOTTEST",
   "NOVEL NEWEST":"NOVEL TERBARU",
   "TOTAL_COIN_BOUGHT": "Total koin yang dibeli",
-  "DATA_IS_NULL": "Data tidak ada"
-
-
+  "DATA_IS_NULL": "Data tidak ada",
+  "DO_YOU_WANT_TO_LOG_OUT":"Apakah Anda ingin keluar?"
 }

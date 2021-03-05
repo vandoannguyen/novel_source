@@ -250,8 +250,9 @@ class LoadController extends BaseController {
   }
 
   void getInapp() {
+    print("langgggggnow${Common.langNow}");
     RepositoryImpl.getInstance()
-        .getSubscription(lang: Common.language)
+        .getSubscription(lang: Common.langNow)
         .then((value) {
       Common.listInapp = value;
       var list = (Common.listInapp as List)
@@ -262,6 +263,7 @@ class LoadController extends BaseController {
           method: "initInapp",
           aguments: {"data": jsonEncode(list)}).then((value) {
         value = jsonDecode(value);
+        // lọc các product id đã được duyệt
         Common.listInapp = Common.listInapp
             .where((e) =>
                 (value as List)
@@ -274,7 +276,7 @@ class LoadController extends BaseController {
         isGetInappSuccess = true;
         intentToHome(context);
       }).catchError((err) {
-        print(err);
+        print("err$err");
         print("notokok");
       });
     }).catchError((err) {

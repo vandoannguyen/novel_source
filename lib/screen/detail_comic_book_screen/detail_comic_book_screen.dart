@@ -644,7 +644,7 @@ class DetailComicBookScreen extends BaseWidget<DetailComicBookController> {
         children: [
           Container(
               padding: EdgeInsets.all(15.0),
-              child: Text(AppLocalizations.of(context).translate("hotest"))),
+              child: Text(AppLocalizations.of(context).translate("hottest"))),
           Row(
             children: (hotest as List)
                 .map((e) => Expanded(
