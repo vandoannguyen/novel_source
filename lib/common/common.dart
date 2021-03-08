@@ -15,7 +15,7 @@ class Common {
   static String appName = "Hot Novel";
   static String fanpageName = "Hotnovel";
   static String fanpageLink = "https://www.facebook.com/Hotnovel-100817905411136";
-  static String email = "vandoannguyenhaui@gmail.com";
+  static String email = "Nguyenletho65291@gmail.com";
   static var config = {};
 
   static var isLogedIn = false;

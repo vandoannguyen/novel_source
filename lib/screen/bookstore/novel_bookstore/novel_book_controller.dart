@@ -131,6 +131,7 @@ class NovelBookController extends BaseController {
 
   void reloadData() {
     print("reload data");
+    isLoadAll = false;
     page = 1;
     getHotest();
     getNewest();

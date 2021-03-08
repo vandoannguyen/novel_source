@@ -9,6 +9,7 @@ import 'package:init_app/screen/bookcase/book_case_cotroller.dart';
 import 'package:init_app/screen/detail_comic_book_screen/detail_comic_book_screen.dart';
 import 'package:init_app/utils/intent_animation.dart';
 import 'package:init_app/widgets/button_main.dart';
+import 'package:init_app/widgets/itemListLoading.dart';
 import 'package:init_app/widgets/item_book_ver.dart';
 
 class BookcaseScreen extends BaseWidget<BookCaseController> {
@@ -116,60 +117,12 @@ class BookcaseScreen extends BaseWidget<BookCaseController> {
                     ),
                   ),
           ),
-          // Shimmer.fromColors(
-          //   enabled: true,
-          //     baseColor: Colors.grey[300],
-          //     highlightColor: Colors.grey[100],
-          //     child: Padding(
-          //       padding: const EdgeInsets.only(bottom: 8.0),
-          //       child: Row(
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: <Widget>[
-          //           Container(
-          //             width: 48.0,
-          //             height: 48.0,
-          //             color: Colors.white,
-          //           ),
-          //           const Padding(
-          //             padding: EdgeInsets.symmetric(horizontal: 8.0),
-          //           ),
-          //           Expanded(
-          //             child: Column(
-          //               crossAxisAlignment: CrossAxisAlignment.start,
-          //               children: <Widget>[
-          //                 Container(
-          //                   width: double.infinity,
-          //                   height: 8.0,
-          //                   color: Colors.white,
-          //                 ),
-          //                 const Padding(
-          //                   padding: EdgeInsets.symmetric(vertical: 2.0),
-          //                 ),
-          //                 Container(
-          //                   width: double.infinity,
-          //                   height: 8.0,
-          //                   color: Colors.white,
-          //                 ),
-          //                 const Padding(
-          //                   padding: EdgeInsets.symmetric(vertical: 2.0),
-          //                 ),
-          //                 Container(
-          //                   width: 40.0,
-          //                   height: 8.0,
-          //                   color: Colors.white,
-          //                 ),
-          //               ],
-          //             ),
-          //           )
-          //         ],
-          //       ),
-          //     )),
           Expanded(
             child: GetBuilder<BookCaseController>(
               builder: (_) => _.myBooks == null || _.isLoading
-                  ? Container(
-                      alignment: Alignment.center,
-                      child: CircularProgressIndicator(),
+                  ? ListView.builder(
+                      itemBuilder: (ctx, index) => itemListLoading(),
+                      itemCount: 6,
                     )
                   : GridView.count(
                       physics: AlwaysScrollableScrollPhysics(),

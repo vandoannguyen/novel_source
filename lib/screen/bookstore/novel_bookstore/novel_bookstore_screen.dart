@@ -8,6 +8,7 @@ import 'package:init_app/data/network/NovalModel.dart';
 import 'package:init_app/screen/bookstore/novel_bookstore/novel_book_controller.dart';
 import 'package:init_app/screen/list_all_novel/list_all_novel.dart';
 import 'package:init_app/utils/intent_animation.dart';
+import 'package:init_app/widgets/itemListLoading.dart';
 import 'package:init_app/widgets/item_book_hor.dart';
 
 import '../../../common/common.dart';
@@ -50,9 +51,10 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
             return _.listBanner == null
                 ? Container(
                     height: 180,
-                    width: 180 * 9 / 16,
-                    alignment: Alignment.center,
-                    child: CircularProgressIndicator(),
+                    child: ListView.builder(
+                      itemBuilder: (_, idx) => itemListLoading(),
+                      itemCount: 3,
+                    ),
                   )
                 : Stack(
                     alignment: Alignment.center,
@@ -139,8 +141,10 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
             builder: (_) => _.listNewest == null
                 ? Container(
                     height: 180,
-                    alignment: Alignment.center,
-                    child: CircularProgressIndicator(),
+                    child: ListView.builder(
+                      itemBuilder: (_, idx) => itemListLoading(),
+                      itemCount: 3,
+                    ),
                   )
                 : GetBuilder<NovelBookController>(
                     // init: controller,
@@ -148,8 +152,11 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                       return _.listNewest == null
                           ? Container(
                               height: 180,
-                              alignment: Alignment.center,
-                              child: CircularProgressIndicator())
+                              child: ListView.builder(
+                                itemBuilder: (_, idx) => itemListLoading(),
+                                itemCount: 3,
+                              ),
+                            )
                           : Column(
                               children: [
                                 Stack(
@@ -345,8 +352,11 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
               return _.listHotest == null
                   ? Container(
                       height: 180,
-                      alignment: Alignment.center,
-                      child: CircularProgressIndicator())
+                      child: ListView.builder(
+                        itemBuilder: (_, idx) => itemListLoading(),
+                        itemCount: 3,
+                      ),
+                    )
                   : ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -355,10 +365,7 @@ class NovelBookstoreScreen extends BaseWidget<NovelBookController> {
                         return index == _.listHotest.length
                             ? _.isLoadAll
                                 ? Container()
-                                : Container(
-                                    height: 50,
-                                    child: CircularProgressIndicator(),
-                                    alignment: Alignment.center)
+                                : itemListLoading()
                             : itemBookHor(
                                 index: index,
                                 item: _.listHotest[index],

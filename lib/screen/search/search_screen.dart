@@ -180,7 +180,7 @@ class SearchScreen extends BaseWidget<SearchController> {
                                     margin: EdgeInsets.only(left: 5.0),
                                     child: Text(
                                       AppLocalizations.of(context)
-                                          .translate("hotest"),
+                                          .translate("hottest"),
                                       style: TextStyle(color: Colors.pink),
                                     ),
                                   ),
